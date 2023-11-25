@@ -1,4 +1,4 @@
-package mainpack;
+
 import java.util.Scanner;
 
 public class CLI_Input{
