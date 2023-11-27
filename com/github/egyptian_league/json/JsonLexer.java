@@ -167,7 +167,7 @@ public class JsonLexer {
             if (!tokens.isEmpty() && (lastToken.getFirstChar() == JsonToken.RIGHT_CURLY_BRACKET)) {
                 return null;
             } else {
-                throw new JsonException("Expected end-of-object token:line " + lineIndex);
+                throw new JsonException("Expected end-of-object bracket :line " + lineIndex);
             }
         }
 
