@@ -21,31 +21,11 @@ package com.github.egyptian_league.json;
 
 public class JsonToken {
 
-    public static final char LEFT_CURLY_BRACKET = '{';
-    public static final char RIGHT_CURLY_BRACKET = '}';
-    public static final char LEFT_SQUARE_BRACKET = '[';
-    public static final char RIGHT_SQUARE_BRACKET = ']';
-    public static final char COMMA = ',';
-    public static final char COLON = ':';
-    public static final char QUOTE = '"';
-    public static final String LITERAL_TRUE = "true";
-    public static final String LITERAL_FALSE = "false";
-    public static final String LITERAL_NULL = "null";
-
     public final JsonTokenType type;
     public final String value;
 
     public JsonToken(String value, JsonTokenType type) {
         this.value = value;
         this.type = type;
-    }
-
-    public char getFirstChar() {
-        return value.charAt(0);
-    }
-
-    @Override
-    public String toString() {
-        return value;
     }
 }

@@ -20,12 +20,14 @@
 package com.github.egyptian_league.json;
 
 public enum JsonTokenType {
-    NONE,
     STRING,
     NUMBER,
     BOOLEAN,
     NULL,
-    OBJECT,
-    ARRAY,
-    SEPARATOR
+    OBJECT_START,
+    OBJECT_END,
+    ARRAY_START,
+    ARRAY_END,
+    COMMA,
+    COLON,
 }

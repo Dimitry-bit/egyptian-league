@@ -23,10 +23,25 @@ import java.io.CharArrayWriter;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class JsonLexer {
+
+    public static final String LITERAL_TRUE = "true";
+    public static final String LITERAL_FALSE = "false";
+    public static final String LITERAL_NULL = "null";
+
+    private static final Hashtable<Character, JsonTokenType> charToToken = new Hashtable<>();
+    static {
+        charToToken.put('{', JsonTokenType.OBJECT_START);
+        charToToken.put('}', JsonTokenType.OBJECT_END);
+        charToToken.put('[', JsonTokenType.ARRAY_START);
+        charToToken.put(']', JsonTokenType.ARRAY_END);
+        charToToken.put(':', JsonTokenType.COLON);
+        charToToken.put(',', JsonTokenType.COMMA);
+    };
 
     private ArrayList<JsonToken> tokens;
     private int index;
@@ -45,11 +60,6 @@ public class JsonLexer {
 
     public boolean hasToken() {
         return (index < tokens.size());
-    }
-
-    public boolean hasValue() {
-        // NOTE(Tony): Find a better solution, state machine ?
-        return (index < tokens.size() - 2);
     }
 
     public ArrayList<JsonToken> getTokens() {
@@ -88,48 +98,6 @@ public class JsonLexer {
         return tokens.get(index++);
     }
 
-    public JsonToken nextValue() {
-        StringBuilder sb = new StringBuilder();
-        JsonTokenType type = JsonTokenType.NONE;
-        JsonToken token = null;
-        char c = '\0';
-
-        skipTo(JsonToken.COLON);
-
-        token = nextToken();
-        c = token.getFirstChar();
-
-        if (c == JsonToken.COMMA || c == JsonToken.COLON) {
-            throw new JsonException("Expected a value, got: '%s'".formatted(token.value));
-        }
-
-        // Construct value
-        {
-            char endSeparator = '\0';
-
-            if (c == JsonToken.LEFT_CURLY_BRACKET) {
-                endSeparator = JsonToken.RIGHT_CURLY_BRACKET;
-                type = JsonTokenType.OBJECT;
-            } else if (c == JsonToken.LEFT_SQUARE_BRACKET) {
-                endSeparator = JsonToken.RIGHT_SQUARE_BRACKET;
-                type = JsonTokenType.ARRAY;
-            } else {
-                return token;
-            }
-
-            do {
-                sb.append(token.value);
-            } while (hasToken() && ((token = nextToken()).getFirstChar() != endSeparator));
-            sb.append(endSeparator);
-        }
-
-        if ("".contentEquals(sb)) {
-            throw new JsonException("Expected a value");
-        }
-
-        return new JsonToken(sb.toString(), type);
-    }
-
     public JsonToken previousToken() {
         if (index - 2 < 0) {
             throw new NoSuchElementException("Token list contains one or none tokens");
@@ -163,24 +131,13 @@ public class JsonLexer {
 
         // Handle EOF
         if (c == -1) {
-            JsonToken lastToken = tokens.get(tokens.size() - 1);
-            if (!tokens.isEmpty() && (lastToken.getFirstChar() == JsonToken.RIGHT_CURLY_BRACKET)) {
-                return null;
-            } else {
-                throw new JsonException("Expected end-of-object bracket :line " + lineIndex);
-            }
+            return null;
         }
 
         // Extract Token
         {
-            boolean isJsonSeparator = (c == JsonToken.LEFT_CURLY_BRACKET)
-                    || (c == JsonToken.RIGHT_CURLY_BRACKET)
-                    || (c == JsonToken.LEFT_SQUARE_BRACKET)
-                    || (c == JsonToken.RIGHT_SQUARE_BRACKET)
-                    || (c == JsonToken.COLON) || (c == JsonToken.COMMA);
-
-            if (isJsonSeparator) {
-                token = new JsonToken(Character.toString(c), JsonTokenType.SEPARATOR);
+            if (charToToken.containsKey((char) c)) {
+                token = new JsonToken(Character.toString(c), charToToken.get((char) c));
             } else {
                 boolean isJsonLiteral = false;
 
@@ -221,22 +178,13 @@ public class JsonLexer {
 
     }
 
-    private void skipTo(char c) {
-        skipTo(Character.toString(c));
-    }
-
-    private void skipTo(String s) {
-        while (hasToken() && !(nextToken().value.equals(s)))
-            ;
-    }
-
     private JsonToken lexString(StringReader sr, int lineIndex) throws IOException, JsonException {
         CharArrayWriter cw = new CharArrayWriter();
         int prevChar = '\0';
         int c = '\0';
 
         sr.mark(0);
-        if ((c = sr.read()) != JsonToken.QUOTE) {
+        if ((c = sr.read()) != '"') {
             sr.reset();
             return null;
         }
@@ -245,7 +193,7 @@ public class JsonLexer {
         while ((c = sr.read()) != -1) {
             cw.append((char) c);
 
-            if (c == JsonToken.QUOTE && prevChar != '\\') {
+            if (c == '"' && prevChar != '\\') {
                 break;
             }
 
@@ -267,20 +215,20 @@ public class JsonLexer {
         while ((c = sr.read()) != -1) {
             cw.append((char) c);
 
-            if (cw.size() == JsonToken.LITERAL_TRUE.length()) {
+            if (cw.size() == LITERAL_TRUE.length()) {
                 break;
             }
         }
 
-        if (JsonToken.LITERAL_TRUE.contentEquals(cw.toString())) {
-            return new JsonToken(JsonToken.LITERAL_TRUE, JsonTokenType.BOOLEAN);
+        if (LITERAL_TRUE.contentEquals(cw.toString())) {
+            return new JsonToken(LITERAL_TRUE, JsonTokenType.BOOLEAN);
         }
 
         if ((c != -1) && ((c = sr.read()) != -1)) {
             cw.append((char) c);
 
-            if (JsonToken.LITERAL_FALSE.contentEquals(cw.toString())) {
-                return new JsonToken(JsonToken.LITERAL_FALSE, JsonTokenType.BOOLEAN);
+            if (LITERAL_FALSE.contentEquals(cw.toString())) {
+                return new JsonToken(LITERAL_FALSE, JsonTokenType.BOOLEAN);
             }
         }
 
@@ -297,8 +245,8 @@ public class JsonLexer {
             return null;
         }
 
-        if (JsonToken.LITERAL_NULL.equals(String.valueOf(charBuffer))) {
-            return new JsonToken(JsonToken.LITERAL_NULL, JsonTokenType.NULL);
+        if (LITERAL_NULL.equals(String.valueOf(charBuffer))) {
+            return new JsonToken(LITERAL_NULL, JsonTokenType.NULL);
         }
 
         sr.reset();
@@ -407,18 +355,11 @@ public class JsonLexer {
         System.out.printf("Next: '%s'%n", lexer.nextToken().value);
         System.out.printf("Prev: '%s'%n", lexer.previousToken().value);
 
-        System.out.println("\nLexer Values:");
-
-        while (lexer.hasValue()) {
-            JsonToken t = lexer.nextValue();
-            System.out.printf("%-9s : '%s'%n", t.type, t.value);
-        }
-
         System.out.println("\nLexer Tokens:");
 
         ArrayList<JsonToken> tokens = lexer.getTokens();
         for (JsonToken t : tokens) {
-            System.out.printf("%-9s : '%s'%n", t.type, t.value);
+            System.out.printf("%-12s : '%s'%n", t.type, t.value);
         }
     }
 }
