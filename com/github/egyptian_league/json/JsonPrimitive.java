@@ -68,7 +68,7 @@ public class JsonPrimitive extends JsonElement {
         return ((Number) value);
     }
 
-    public Boolean getASBoolean() {
+    public Boolean getAsBoolean() {
         return (isBoolean() ? (Boolean) value : Boolean.parseBoolean(getAsString()));
     }
 
