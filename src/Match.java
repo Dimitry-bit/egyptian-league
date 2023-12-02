@@ -1,78 +1,68 @@
-import java.sql.Ref;
 import java.util.Date;
 
 public class Match {
-   private int matchID;
-   private Date date;
-    private Team team1;
-    private Team team2;
-    private String stadiumName;
-    private Score score;
-    private Referee referee;
+    private static int matchIdGenerator = 1;
+    public final int matchID;
+    public final Date date;
+    public final Team homeTeam;
+    public final Team awayTeam;
+    public final String stadiumName;
+    public final int homeScore;
+    public final int awayScore;
+    public final Referee referee;
 
-    public Match(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score, Referee referee) {
-        this.matchID = matchID;
+    public Match(Date date, Team homeTeam, Team awayTeam, String stadiumName, Referee referee, int homeScore, int awayScore) {
+        matchID = matchIdGenerator;
         this.date = date;
-        this.team1 = team1;
-        this.team2 = team2;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
         this.stadiumName = stadiumName;
-        this.score = score;
         this.referee = referee;
-    }
-    public int getMatchID() {
-        return matchID;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        matchIdGenerator++;
     }
 
-    public void setMatchID(int matchID) {
-        this.matchID = matchID;
+    public Match() {
+        matchID=matchIdGenerator;
+        matchIdGenerator++;
+    }
+
+    public Match(Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
+        matchID=matchIdGenerator;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
+        matchIdGenerator++;
     }
 
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public Team getHomeTeam() {
+        return homeTeam;
     }
 
-    public Team getTeam1() {
-        return team1;
-    }
-
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
-    }
-
-    public Team getTeam2() {
-        return team2;
-    }
-
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
+    public Team getAwayTeam() {
+        return awayTeam;
     }
 
     public String getStadiumName() {
         return stadiumName;
     }
 
-    public void setStadiumName(String stadiumName) {
-        this.stadiumName = stadiumName;
+    public int getHomeScore() {
+        return homeScore;
     }
 
-    public Score getScore() {
-        return score;
-    }
-
-    public void setScore(Score score) {
-        this.score = score;
+    public int getAwayScore() {
+        return awayScore;
     }
 
     public Referee getReferee() {
         return referee;
     }
-
-    public void setReferee(Referee referee) {
-        this.referee = referee;
-    }
-
+    
 }
