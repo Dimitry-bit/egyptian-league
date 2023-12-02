@@ -17,15 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.egyptian_league.json;
+package com.github.egyptian_league.json.src;
 
-public class JsonToken {
+public class JsonNull extends JsonElement {
+    @Override
+    public boolean equals(Object other) {
+        return (other instanceof JsonNull);
+    }
 
-    public final JsonTokenType type;
-    public final String value;
-
-    public JsonToken(String value, JsonTokenType type) {
-        this.value = value;
-        this.type = type;
+    @Override
+    public String toString() {
+        return "null";
     }
 }

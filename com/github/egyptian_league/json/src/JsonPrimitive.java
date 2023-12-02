@@ -17,12 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.egyptian_league.json;
+package com.github.egyptian_league.json.src;
 
 import java.util.Objects;
 
 public class JsonPrimitive extends JsonElement {
-    private final Object value;
+    public final Object value;
 
     public JsonPrimitive(Character c) {
         value = Objects.requireNonNull(c);

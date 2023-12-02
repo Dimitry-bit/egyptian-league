@@ -17,17 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.egyptian_league.json;
+package com.github.egyptian_league.json.src;
 
-public enum JsonTokenType {
-    STRING,
-    NUMBER,
-    BOOLEAN,
-    NULL,
-    OBJECT_START,
-    OBJECT_END,
-    ARRAY_START,
-    ARRAY_END,
-    COMMA,
-    COLON,
+public class JsonToken {
+
+    public final JsonTokenType type;
+    public final String value;
+
+    public JsonToken(String value, JsonTokenType type) {
+        this.value = value;
+        this.type = type;
+    }
 }

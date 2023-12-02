@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.egyptian_league.json;
+package com.github.egyptian_league.json.src;
 
 public abstract class JsonElement {
     public boolean isJsonArray() {

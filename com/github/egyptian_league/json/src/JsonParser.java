@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.github.egyptian_league.json;
+package com.github.egyptian_league.json.src;
 
 class JsonParser {
     static JsonObject parseObject(JsonLexer lexer) {
@@ -59,7 +59,8 @@ class JsonParser {
                 JsonElement e = null;
 
                 if (t.type == JsonTokenType.STRING) {
-                    e = new JsonPrimitive(t.value);
+                    String s = t.value.substring(1, t.value.length() - 1);
+                    e = new JsonPrimitive(s);
                 } else if (t.type == JsonTokenType.BOOLEAN) {
                     e = new JsonPrimitive(Boolean.parseBoolean(t.value));
                 } else if (t.type == JsonTokenType.NULL) {
@@ -162,6 +163,13 @@ class JsonParser {
             return new JsonPrimitive(Double.parseDouble(token.value));
         }
 
-        return new JsonPrimitive(Long.parseLong(token.value));
+        long number = Long.parseLong(token.value);
+        if ((number <= Short.MAX_VALUE) && (number >= Short.MIN_VALUE)) {
+            return new JsonPrimitive((short) (number));
+        } else if ((number <= Integer.MAX_VALUE) && (number >= Integer.MIN_VALUE)) {
+            return new JsonPrimitive((int) (number));
+        } else {
+            return new JsonPrimitive(number);
+        }
     }
 }
