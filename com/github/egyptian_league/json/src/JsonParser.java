@@ -60,7 +60,7 @@ class JsonParser {
 
                 if (t.type == JsonTokenType.STRING) {
                     String s = t.value.substring(1, t.value.length() - 1);
-                    e = new JsonPrimitive(s);
+                    e = ((s.length() == 1) ? new JsonPrimitive(s.charAt(0)) : new JsonPrimitive(s));
                 } else if (t.type == JsonTokenType.BOOLEAN) {
                     e = new JsonPrimitive(Boolean.parseBoolean(t.value));
                 } else if (t.type == JsonTokenType.NULL) {
