@@ -1,9 +1,19 @@
-
+package CLI;
 
 import java.util.ArrayList;
 import java.util.List;
 
-class MenuItem {
+abstract class MenuItem {
+
+    static MenuItem mainMenu, backMain;
+    static MenuItem teamMenu, addTeam, updateTeam, removeTeam, backTeam,
+                              enterPlayers, enterTeamName, backAddTeam;
+    static MenuItem matchMenu, addMatch, updateMatch, removeMatch, backMatch,
+                               chooseTeams, chooseDate, backAddMatch;
+
+    static MenuItem currentMenuItem;
+
+    public static EnumMenus enumMenus = EnumMenus.mainMenu;
     private String name;
     private List<MenuItem> subMenus;
 
@@ -35,5 +45,8 @@ class MenuItem {
 
     public void addSubMenu(MenuItem subMenu) {
         subMenus.add(subMenu);
+    }
+
+    public void update() {
     }
 }
