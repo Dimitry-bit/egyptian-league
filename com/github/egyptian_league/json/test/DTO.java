@@ -8,6 +8,7 @@ import java.util.UUID;
 import com.github.egyptian_league.json.src.JsonTokenType;
 
 public class DTO {
+    public ArrayList<ArrayList<Integer>> collection;
     public String string;
     public short shortNumber;
     public int intNumber;
@@ -23,8 +24,7 @@ public class DTO {
     public WrappersDTO child;
     public WrappersDTO nullChild;
     public int[] ints;
-    public ArrayList<Integer> collection;
-    public Hashtable<String, Integer> hashtable;
+    public Hashtable<String, Hashtable<String,Integer>> hashtable;
 
     @Override
     public String toString() {
@@ -63,6 +63,19 @@ public class DTO {
             sb.append(collection.get(i));
         }
         sb.append(" ]\n");
+
+        sb.append("hashtable = { ");
+        boolean isPrintComma = false;
+        for (var e : hashtable.entrySet()) {
+            if (isPrintComma) {
+                sb.append(", ");
+            }
+            sb.append('"' + e.getKey() + '"');
+            sb.append(": ");
+            sb.append(e.getValue());
+            isPrintComma = true;
+        }
+        sb.append(" }\n");
 
         sb.append("Child: {\n");
         sb.append(child.toString().indent(4));

@@ -1,9 +1,6 @@
 package com.github.egyptian_league.json.test;
 
-import java.time.LocalDateTime;
-import java.util.Hashtable;
 import java.util.Scanner;
-import java.util.UUID;
 
 import com.github.egyptian_league.json.src.JsonSerializer;
 import com.github.egyptian_league.json.src.JsonSerializerOptions;
@@ -35,6 +32,8 @@ public class JsonSerializerTest {
             options.WriteIndented = true;
             System.out.println("WriteIndented = true:");
             System.out.println(JsonSerializer.serialize(dto, options));
+
+            System.out.println();
 
             options.WriteIndented = true;
             System.out.println("WriteIndented = true:");

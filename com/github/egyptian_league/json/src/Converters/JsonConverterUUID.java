@@ -1,0 +1,52 @@
+/*
+ *
+ * Copyright (c) 2023 Tony Medhat
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package com.github.egyptian_league.json.src.Converters;
+
+import java.lang.reflect.Type;
+import java.util.Queue;
+import java.util.UUID;
+
+import com.github.egyptian_league.json.src.*;
+
+public class JsonConverterUUID extends JsonConverter<UUID> {
+
+    @Override
+    public Type getMyType() {
+        return UUID.class;
+    }
+
+    @Override
+    public void serialize(Queue<JsonToken> tokens, UUID value, JsonSerializerOptions options) {
+        tokens.add(new JsonToken('"' + value.toString() + '"', JsonTokenType.STRING));
+    }
+
+    @Override
+    public UUID deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+        if (element.isJsonNull()) {
+            return null;
+        }
+
+        if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString()) {
+            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+        }
+
+        return UUID.fromString(element.getAsJsonPrimitive().getAsString());
+    }
+}
