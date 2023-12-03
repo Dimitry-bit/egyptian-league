@@ -24,12 +24,14 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.UUID;
 
 /*
  * Supported Types:
@@ -37,6 +39,8 @@ import java.util.Queue;
  * Type Name                    | S | D
  * _____________________________|___|___
  * Primitives                   | T | T 
+ * Date                         | T | T
+ * UUIDs                        | T | T
  * Arrays                       | T | T 
  * Enums                        | T | T 
  * Outer Classes                | T | T 
@@ -64,9 +68,11 @@ import java.util.Queue;
  * Interfaces
  * Multidimensional Arrays
  * Nested Collections
+ */
+
+/*
+ * TODO: 
  * Maps
- * Date
- * Byte
  */
 
 public class JsonSerializer {
@@ -113,7 +119,31 @@ public class JsonSerializer {
         return tokensToString(tokens, options);
     }
 
-    public static Object deserializeElement(JsonElement element, Class<?> type, int depth) {
+    private static Object deserializeElement(JsonElement element, Field field, int depth)
+            throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+
+        Object value = null;
+        Class<?> type = field.getType();
+
+        if (Collection.class.isAssignableFrom(type)) {
+            return deserializeCollection(element, field, depth + 1);
+        }
+
+        value = deserializeElement(element, type, depth);
+
+        if (element.isJsonNull()) {
+            return null;
+        }
+
+        if (value != null) {
+            return value;
+        }
+
+        throw new UnsupportedOperationException(
+                "'%s': field deserialization is not supported".formatted(type.getName()));
+    }
+
+    private static Object deserializeElement(JsonElement element, Class<?> type, int depth) {
         if (depth >= MAX_DEPTH) {
             throw new JsonException("Exceeded max depth");
         }
@@ -124,6 +154,10 @@ public class JsonSerializer {
         }
 
         try {
+            Object value = null;
+            boolean isOuterClass = !type.isMemberClass() && !type.isAnonymousClass()
+                    && !type.isLocalClass() && !type.isInterface();
+
             if (element.isJsonNull()) {
                 return null;
             }
@@ -140,12 +174,9 @@ public class JsonSerializer {
                 return deserializeArray(element, type, depth + 1);
             }
 
-            if (type.isAssignableFrom(String.class)) {
-                return deserializeString(element, type);
+            if ((value = tryDeserializeString(element, type)) != null) {
+                return value;
             }
-
-            boolean isOuterClass = !type.isMemberClass() && !type.isAnonymousClass()
-                    && !type.isLocalClass() && !type.isInterface();
 
             if (isOuterClass && element.isJsonObject()) {
                 return deserializeObject(element, type, depth + 1);
@@ -169,10 +200,6 @@ public class JsonSerializer {
 
         JsonPrimitive jsonPrimitive = element.getAsJsonPrimitive();
         type = wrapperToPrimitive(type);
-
-        if (type == Byte.TYPE) {
-            return null;
-        }
 
         if (Number.class.isInstance(jsonPrimitive.value)) {
             Number n = jsonPrimitive.getAsNumber();
@@ -203,15 +230,35 @@ public class JsonSerializer {
 
         }
 
+        if (type == Byte.TYPE) {
+            Short shortValue = jsonPrimitive.getAsNumber().shortValue();
+            return shortValue.byteValue();
+        }
+
         return null;
     }
 
-    private static Object deserializeString(JsonElement element, Class<?> type) {
-        if (!type.isAssignableFrom(String.class)) {
-            throw new IllegalArgumentException("'%s' is not assignable from string".formatted(type.getName()));
+    private static Object tryDeserializeString(JsonElement element, Class<?> type) {
+        if (!element.isJsonPrimitive()) {
+            return null;
         }
 
-        return element.getAsJsonPrimitive().getAsString();
+        String value = element.getAsJsonPrimitive().getAsString();
+
+        if (type.isAssignableFrom(LocalDateTime.class)) {
+            return LocalDateTime.parse(value);
+        }
+
+        if (type.isAssignableFrom(UUID.class)) {
+            return UUID.fromString(value);
+        }
+
+        if (type.isAssignableFrom(String.class)) {
+            return value;
+        }
+
+        throw new IllegalArgumentException(
+                "'%s' is neither parsable nor assignable from string".formatted(type.getName()));
     }
 
     private static Object deserializeEnum(JsonElement element, Class<?> type) {
@@ -261,17 +308,7 @@ public class JsonSerializer {
                 }
 
                 valueElement = jsonObject.get(key);
-
-                if (!element.isJsonNull()) {
-
-                    boolean isValidValue = ((value = deserializeElement(valueElement, field.getType(), depth)) != null)
-                            || ((value = deserializeCollection(valueElement, field, depth + 1)) != null);
-
-                    if (!isValidValue) {
-                        throw new UnsupportedOperationException("'%s': field deserialization is not supported"
-                                .formatted(field.getType().getSimpleName()));
-                    }
-                }
+                value = deserializeElement(valueElement, field, depth);
 
                 field.setAccessible(true);
                 field.set(o, value);
@@ -364,6 +401,7 @@ public class JsonSerializer {
         }
 
         Class<?> valueType = object.getClass();
+        JsonToken token = null;
 
         if (isPrimitiveOrWrapper(valueType)) {
             tokens.add(serializePrimitive(object));
@@ -371,8 +409,8 @@ public class JsonSerializer {
             return serializeArray(object);
         } else if (valueType.isEnum()) {
             tokens.add(serializeEnum(object));
-        } else if (valueType.isAssignableFrom(String.class)) {
-            tokens.add(serializeString(object));
+        } else if ((token = trySerializeToString(object)) != null) {
+            tokens.add(token);
         } else if (!valueType.isMemberClass()) {
             return serializeObject(object);
         }
@@ -385,7 +423,7 @@ public class JsonSerializer {
         Class<?> primitiveType = wrapperToPrimitive(type);
 
         if (primitiveType == Byte.TYPE) {
-            throw new UnsupportedOperationException("'%s' is unsupported".formatted(primitiveType.getSimpleName()));
+            return new JsonToken(object.toString(), JsonTokenType.NUMBER);
         }
 
         if (primitiveType == Character.TYPE) {
@@ -403,8 +441,17 @@ public class JsonSerializer {
         throw new IllegalArgumentException("'%s' is not a primitive type".formatted(type.getName()));
     }
 
-    private static JsonToken serializeString(Object object) {
-        return new JsonToken("\"" + ((String) object) + "\"", JsonTokenType.STRING);
+    private static JsonToken trySerializeToString(Object object) {
+        Class<?> type = object.getClass();
+
+        boolean isSerializable = type.isAssignableFrom(LocalDateTime.class) || type.isAssignableFrom(UUID.class)
+                || type.isAssignableFrom(String.class);
+
+        if (isSerializable) {
+            return new JsonToken("\"" + (object.toString()) + "\"", JsonTokenType.STRING);
+        }
+
+        return null;
     }
 
     private static JsonToken serializeEnum(Object object) {

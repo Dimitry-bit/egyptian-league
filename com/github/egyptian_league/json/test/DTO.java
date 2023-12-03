@@ -1,6 +1,8 @@
 package com.github.egyptian_league.json.test;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.github.egyptian_league.json.src.JsonTokenType;
 
@@ -13,6 +15,9 @@ public class DTO {
     public double doubleNumber;
     public char character;
     public boolean bool;
+    public Byte byteVar;
+    public UUID uuid;
+    public LocalDateTime date;
     public JsonTokenType tokenType;
     public WrappersDTO child;
     public WrappersDTO nullChild;
@@ -31,6 +36,9 @@ public class DTO {
         sb.append("doubleNumber = %f\n".formatted(doubleNumber));
         sb.append("character = %c\n".formatted(character));
         sb.append("bool = %s\n".formatted(bool));
+        sb.append("byteVar = %d\n".formatted(byteVar));
+        sb.append("UUID = %s\n".formatted(uuid));
+        sb.append("Date = %s\n".formatted(date));
         sb.append("tokenType = %s\n".formatted(tokenType));
         sb.append("nullChild = %s\n".formatted(nullChild));
 
