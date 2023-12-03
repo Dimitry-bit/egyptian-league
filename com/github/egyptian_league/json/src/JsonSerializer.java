@@ -24,14 +24,17 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 /*
  * Supported Types:
@@ -56,6 +59,7 @@ import java.util.UUID;
  * HashSet                      | T | T 
  * LinkedHashSet                | T | T 
  * TreeSet                      | T | T 
+ * Maps (Key strings)           | T | T
  */
 
 /*
@@ -68,11 +72,6 @@ import java.util.UUID;
  * Interfaces
  * Multidimensional Arrays
  * Nested Collections
- */
-
-/*
- * TODO: 
- * Maps
  */
 
 public class JsonSerializer {
@@ -103,10 +102,13 @@ public class JsonSerializer {
     public static String serialize(Object object, JsonSerializerOptions options) {
         Queue<JsonToken> tokens = null;
 
+        // TODO: Refactor
         if (object.getClass().isArray()) {
             tokens = serializeArray(object);
         } else if (Collection.class.isAssignableFrom(object.getClass())) {
             tokens = serializeCollection(object);
+        } else if (Map.class.isAssignableFrom(object.getClass())) {
+            tokens = serializeMap(object);
         } else if (!object.getClass().isMemberClass()) {
             tokens = serializeObject(object);
         }
@@ -127,6 +129,10 @@ public class JsonSerializer {
 
         if (Collection.class.isAssignableFrom(type)) {
             return deserializeCollection(element, field, depth + 1);
+        }
+
+        if (Map.class.isAssignableFrom(type)) {
+            return deserializeMap(element, field, depth + 1);
         }
 
         value = deserializeElement(element, type, depth);
@@ -358,7 +364,7 @@ public class JsonSerializer {
         Class<?> collectionType = field.getType();
 
         if (!Collection.class.isAssignableFrom(collectionType)) {
-            throw new IllegalAccessException("'%s' type is not a collection".formatted(collectionType.getName()));
+            throw new IllegalArgumentException("'%s' type is not a collection".formatted(collectionType.getName()));
         }
 
         if (collectionType.isInterface() && Modifier.isAbstract(collectionType.getModifiers())) {
@@ -367,7 +373,7 @@ public class JsonSerializer {
         }
 
         if (!element.isJsonArray()) {
-            throw new IllegalAccessException("JsonElement is not a JsonArray");
+            throw new IllegalArgumentException("JsonElement is not a JsonArray");
         }
 
         JsonArray j = element.getAsJsonArray();
@@ -392,6 +398,72 @@ public class JsonSerializer {
         return collection;
     }
 
+    private static Object deserializeMap(JsonElement element, Field field, int depth)
+            throws NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
+
+        Class<?> mapType = field.getType();
+
+        if (!Map.class.isAssignableFrom(mapType)) {
+            throw new IllegalArgumentException("'%s' type is not a map".formatted(mapType.getName()));
+        }
+
+        if (mapType.isInterface() && Modifier.isAbstract(mapType.getModifiers())) {
+            throw new IllegalArgumentException(
+                    "'%s': Abstract classes & Interfaced are not supported".formatted(mapType.getName()));
+        }
+
+        if (!element.isJsonObject()) {
+            throw new IllegalArgumentException("JsonElement is not a JsonObject");
+        }
+
+        JsonObject j = element.getAsJsonObject();
+        Map<Object, Object> map = (Map<Object, Object>) mapType.getConstructor().newInstance();
+
+        ParameterizedType pTypes = ((ParameterizedType) field.getGenericType());
+        if ((pTypes.getActualTypeArguments()[0] instanceof ParameterizedType)) {
+            throw new UnsupportedOperationException("Nested Collections are not supported");
+        }
+
+        Type keyActualType = pTypes.getActualTypeArguments()[0];
+        Type valueActualType = pTypes.getActualTypeArguments()[1];
+
+        if (!(keyActualType instanceof Class) || !(keyActualType instanceof Class)) {
+            throw new JsonException("Could not extract generic type");
+        }
+
+        Class<?> keyType = (Class<?>) keyActualType;
+        Class<?> valueType = (Class<?>) valueActualType;
+
+        for (String key : j.keySet()) {
+            JsonElement valueElement = j.get(key);
+            Object value = deserializeElement(valueElement, valueType, depth);
+
+            map.put(key, value);
+        }
+
+        return map;
+
+    }
+
+    private static Queue<JsonToken> serializeValueEx(Object object) {
+        // TODO: Refactor
+        if (object == null) {
+            Queue<JsonToken> tokens = new LinkedList<>();
+            tokens.add(new JsonToken("null", JsonTokenType.NULL));
+            return tokens;
+        }
+
+        Class<?> type = object.getClass();
+
+        if (Collection.class.isAssignableFrom(type)) {
+            return serializeCollection(object);
+        } else if (Map.class.isAssignableFrom(type)) {
+            return serializeMap(object);
+        }
+
+        return serializeValue(object);
+    }
+
     private static Queue<JsonToken> serializeValue(Object object) {
         Queue<JsonToken> tokens = new LinkedList<>();
 
@@ -412,6 +484,7 @@ public class JsonSerializer {
         } else if ((token = trySerializeToString(object)) != null) {
             tokens.add(token);
         } else if (!valueType.isMemberClass()) {
+            // FIXME: Allow Outer classes only
             return serializeObject(object);
         }
 
@@ -474,19 +547,12 @@ public class JsonSerializer {
                 }
 
                 Field f = fields.get(i);
-                Class<?> valueType = f.getType();
-
                 f.setAccessible(true);
                 Object value = f.get(object);
 
                 tokens.add(new JsonToken('"' + f.getName() + '"', JsonTokenType.STRING));
                 tokens.add(new JsonToken(":", JsonTokenType.COLON));
-
-                if (Collection.class.isAssignableFrom(valueType)) {
-                    tokens.addAll(serializeCollection(value));
-                } else {
-                    tokens.addAll(serializeValue(value));
-                }
+                tokens.addAll(serializeValueEx(value));
             }
             tokens.add(new JsonToken("}", JsonTokenType.OBJECT_END));
 
@@ -532,6 +598,28 @@ public class JsonSerializer {
             printComma = true;
         }
         tokens.add(new JsonToken("]", JsonTokenType.ARRAY_END));
+
+        return tokens;
+    }
+
+    private static Queue<JsonToken> serializeMap(Object object) {
+        Queue<JsonToken> tokens = new LinkedList<>();
+        Map<?, ?> map = (Map<?, ?>) object;
+        boolean printComma = false;
+
+        tokens.add(new JsonToken("{", JsonTokenType.OBJECT_START));
+        for (Entry<?, ?> e : map.entrySet()) {
+            if (printComma) {
+                tokens.add(new JsonToken(",", JsonTokenType.COMMA));
+            }
+
+            tokens.add(new JsonToken('"' + e.getKey().toString() + '"', JsonTokenType.STRING));
+            tokens.add(new JsonToken(":", JsonTokenType.COLON));
+            tokens.addAll(serializeValue(e.getValue()));
+
+            printComma = true;
+        }
+        tokens.add(new JsonToken("}", JsonTokenType.OBJECT_END));
 
         return tokens;
     }

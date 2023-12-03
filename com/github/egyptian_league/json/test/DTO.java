@@ -2,6 +2,7 @@ package com.github.egyptian_league.json.test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.UUID;
 
 import com.github.egyptian_league.json.src.JsonTokenType;
@@ -23,6 +24,7 @@ public class DTO {
     public WrappersDTO nullChild;
     public int[] ints;
     public ArrayList<Integer> collection;
+    public Hashtable<String, Integer> hashtable;
 
     @Override
     public String toString() {
