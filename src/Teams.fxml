@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.egyptain_league_demo.Teams">
+   <children>
+      <Label layoutX="30.0" layoutY="30.0" text="Teams TableView">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="639.0" layoutY="520.0" mnemonicParsing="false" text="Back to HomePage" />
+      <TableView layoutX="30.0" layoutY="80.0" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+          <TableColumn prefWidth="117.20001602172852" text="Team Name" />
+          <TableColumn prefWidth="80.39999389648438" text="ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
