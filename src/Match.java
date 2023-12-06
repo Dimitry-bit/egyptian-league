@@ -1,23 +1,22 @@
+import java.sql.Time;
 import java.util.Date;
 import java.util.HashMap;
 
 public class Match {
     private static int matchIdGenerator = 1;
     public final int matchID;
-    public final Date Date;
+    private Date date;
+    private Time time;
     public final Team HomeTeam;
     public final Team AwayTeam;
-    public final String StadiumName;
     public final Referee Referee;
     private HashMap<Integer, Integer> goalScorers;
 
-    public Match(Date date, Team homeTeam, Team awayTeam, String stadiumName, Referee referee) {
+    public Match(Team homeTeam, Team awayTeam ,Referee Referee) {
         matchID = matchIdGenerator;
-        this.Date = date;
         this.HomeTeam = homeTeam;
         this.AwayTeam = awayTeam;
-        this.StadiumName = stadiumName;
-        this.Referee = referee;
+        this.Referee = Referee;
         matchIdGenerator++;
     }
 
@@ -27,6 +26,14 @@ public class Match {
 
     public void AddGoal(int playerID, int numOfGoals) {
         goalScorers.put(playerID, numOfGoals);
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
 }
