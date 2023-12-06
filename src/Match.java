@@ -1,68 +1,32 @@
 import java.util.Date;
+import java.util.HashMap;
 
 public class Match {
     private static int matchIdGenerator = 1;
     public final int matchID;
-    public final Date date;
-    public final Team homeTeam;
-    public final Team awayTeam;
-    public final String stadiumName;
-    public final int homeScore;
-    public final int awayScore;
-    public final Referee referee;
+    public final Date Date;
+    public final Team HomeTeam;
+    public final Team AwayTeam;
+    public final String StadiumName;
+    public final Referee Referee;
+    private HashMap<Integer, Integer> goalScorers;
 
-    public Match(Date date, Team homeTeam, Team awayTeam, String stadiumName, Referee referee, int homeScore, int awayScore) {
+    public Match(Date date, Team homeTeam, Team awayTeam, String stadiumName, Referee referee) {
         matchID = matchIdGenerator;
-        this.date = date;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.stadiumName = stadiumName;
-        this.referee = referee;
-        this.homeScore = homeScore;
-        this.awayScore = awayScore;
+        this.Date = date;
+        this.HomeTeam = homeTeam;
+        this.AwayTeam = awayTeam;
+        this.StadiumName = stadiumName;
+        this.Referee = referee;
         matchIdGenerator++;
     }
 
-    public Match() {
-        matchID=matchIdGenerator;
-        matchIdGenerator++;
+    public HashMap<Integer, Integer> getGoalScorers() {
+        return goalScorers;
     }
 
-    public Match(Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
-        matchID=matchIdGenerator;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.homeScore = homeScore;
-        this.awayScore = awayScore;
-        matchIdGenerator++;
+    public void AddGoal(int playerID, int numOfGoals) {
+        goalScorers.put(playerID, numOfGoals);
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public Team getHomeTeam() {
-        return homeTeam;
-    }
-
-    public Team getAwayTeam() {
-        return awayTeam;
-    }
-
-    public String getStadiumName() {
-        return stadiumName;
-    }
-
-    public int getHomeScore() {
-        return homeScore;
-    }
-
-    public int getAwayScore() {
-        return awayScore;
-    }
-
-    public Referee getReferee() {
-        return referee;
-    }
-    
 }
