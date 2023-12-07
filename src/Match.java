@@ -1,39 +1,31 @@
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Match {
-    private static int matchIdGenerator = 1;
-    public final int matchID;
-    private Date date;
-    private Time time;
-    public final Team HomeTeam;
-    public final Team AwayTeam;
+    public final UUID matchId;
+    private LocalDateTime dateTime;
+    public final UUID HomeTeamId;
+    public final UUID AwayTeamId;
     public final Referee Referee;
-    private HashMap<Integer, Integer> goalScorers;
+    private HashMap<UUID, Integer> goalScorers;
 
-    public Match(Team homeTeam, Team awayTeam ,Referee Referee) {
-        matchID = matchIdGenerator;
-        this.HomeTeam = homeTeam;
-        this.AwayTeam = awayTeam;
+    public Match(UUID homeTeamId, UUID awayTeamId, Referee Referee) {
+        matchId = UUID.randomUUID();
+        this.HomeTeamId = homeTeamId;
+        this.AwayTeamId = awayTeamId;
         this.Referee = Referee;
-        matchIdGenerator++;
     }
 
-    public HashMap<Integer, Integer> getGoalScorers() {
+    public HashMap<UUID, Integer> getGoalScorers() {
         return goalScorers;
     }
 
-    public void AddGoal(int playerID, int numOfGoals) {
+    public void AddGoal(UUID playerID, int numOfGoals) {
         goalScorers.put(playerID, numOfGoals);
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
-
-    public void setTime(Time time) {
-        this.time = time;
-    }
-
 }
