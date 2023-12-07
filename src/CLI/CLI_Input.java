@@ -5,10 +5,6 @@ import java.util.Scanner;
 
 public class CLI_Input{
 
-    static boolean isValid = true;
-
-    static int choice;
-
     public static void start(){
         InitMenu();
         navMenu();
@@ -16,124 +12,53 @@ public class CLI_Input{
     }
     public static void InitMenu(){
 
-        //  Main Menu
-        MenuItem.mainMenu = new MainMenu("Main Menu");
+        //  Main Menu with its Sub menus
 
-        MenuItem.teamMenu = new TeamMenu("Teams");
-        MenuItem.mainMenu.addSubMenu(MenuItem.teamMenu);
+        MenuItem.currentMenuItem = new MainMenu("Main Menu", null);
 
-        MenuItem.matchMenu = new MatchMenu("Matches");
-        MenuItem.mainMenu.addSubMenu(MenuItem.matchMenu);
+        MenuItem teamMenu = new TeamMenu("Teams", MenuItem.currentMenuItem);
 
-        MenuItem.backMain = new BackMain("Exit");
-        MenuItem.mainMenu.addSubMenu(MenuItem.backMain);
+        MenuItem matchMenu = new MatchMenu("Matches", MenuItem.currentMenuItem);
+
+        MenuItem.currentMenuItem.addSubMenu(teamMenu);
+        MenuItem.currentMenuItem.addSubMenu(matchMenu);
+
 
 
         // Team Menu with Sub menus
-        MenuItem.addTeam = new AddTeam("Add Team");
-        MenuItem.teamMenu.addSubMenu(MenuItem.addTeam);
 
-        MenuItem.updateTeam = new UpdateTeam("Update Team");
-        MenuItem.teamMenu.addSubMenu(MenuItem.updateTeam);
+        MenuItem addTeam = new AddTeam("Add Team",teamMenu);
 
-        MenuItem.removeTeam = new RemoveTeam("Remove Team");
-        MenuItem.teamMenu.addSubMenu(MenuItem.removeTeam);
-
-        MenuItem.backTeam = new BackTeam("Back");
-        MenuItem.teamMenu.addSubMenu(MenuItem.backTeam);
+        teamMenu.addSubMenu(addTeam);
+        teamMenu.addSubMenu( new UpdateTeam("Update Team", teamMenu) );
+        teamMenu.addSubMenu( new RemoveTeam("Remove Team", teamMenu) );
 
         //Add team with submenus
-        MenuItem.enterTeamName = new EnterTeamName("Enter Team Name");
-        MenuItem.addTeam.addSubMenu(MenuItem.enterTeamName);
 
-        MenuItem.enterPlayers = new EnterPlayers("Enter 11 Players");
-        MenuItem.addTeam.addSubMenu(MenuItem.enterPlayers);
+        addTeam.addSubMenu(new EnterTeamName("Enter Team Name",addTeam));
+        addTeam.addSubMenu(new EnterPlayers("Enter 11 Players",addTeam));
 
-        MenuItem.backAddTeam = new BackAddTeam("Back");
-        MenuItem.addTeam.addSubMenu(MenuItem.backAddTeam);
 
 
         // Match Menu with Sub menus
 
-        MenuItem.addMatch = new AddMatch("Add Match");
-        MenuItem.matchMenu.addSubMenu(MenuItem.addMatch);
+        MenuItem addMatch = new AddMatch("Add Match", matchMenu);
 
-        MenuItem.updateMatch = new UpdateMatch("Update Match");
-        MenuItem.matchMenu.addSubMenu(MenuItem.updateMatch);
-
-        MenuItem.removeMatch = new RemoveMatch("Remove Match");
-        MenuItem.matchMenu.addSubMenu(MenuItem.removeMatch);
-
-        MenuItem.backMatch = new BackMatch("Back");
-        MenuItem.matchMenu.addSubMenu(MenuItem.backMatch);
+        matchMenu.addSubMenu(addMatch);
+        matchMenu.addSubMenu(new UpdateMatch("Update Match",matchMenu));
+        matchMenu.addSubMenu(new RemoveMatch("Remove Match",matchMenu));
 
         // Add match with submenus
 
-        MenuItem.chooseTeams = new ChooseTeams("Choose 2 Teams");
-        MenuItem.addMatch.addSubMenu(MenuItem.chooseTeams);
-
-        MenuItem.chooseDate = new ChooseDate("Date");
-        MenuItem.addMatch.addSubMenu(MenuItem.chooseDate);
-
-        MenuItem.backAddMatch = new BackAddMatch("Back");
-        MenuItem.addMatch.addSubMenu(MenuItem.backAddMatch);
-
-
-
+        addMatch.addSubMenu(new ChooseTeams("Choose 2 Teams",addMatch));
+        addMatch.addSubMenu(new ChooseDate("Date",addMatch));
 
     }
 
     public static void navMenu(){
 
-        while(true) {
-
-            switch (MenuItem.enumMenus) {
-                case mainMenu:
-                    MenuItem.mainMenu.update();
-                    break;
-
-                case teamMenu:
-                    MenuItem.teamMenu.update();
-                    break;
-
-                case backTeam:
-                    MenuItem.backTeam.update();
-                    break;
-
-                case addTeam:
-                    MenuItem.addTeam.update();
-                    break;
-
-                case backAddTeam:
-                    MenuItem.backAddTeam.update();
-                    break;
-
-                case matchMenu:
-                    MenuItem.matchMenu.update();
-                    break;
-
-                case backMatch:
-                    MenuItem.backMatch.update();
-                    break;
-
-                case addMatch:
-                    MenuItem.addMatch.update();
-                    break;
-
-                case backAddMatch:
-                    MenuItem.backAddMatch.update();
-                    break;
-
-                case backMain:
-                    MenuItem.backMain.update();
-                    return;
-
-                default:
-                    clearCli();
-                    System.out.println("no implementation");
-                    return;
-            }
-        }
+        //weird af?
+        while(MenuItem.currentMenuItem.update()) { }
 
     }
 
@@ -150,37 +75,48 @@ public class CLI_Input{
         }
     }
 
-    public static void drawCli(){
+    public static void drawCli(boolean isValid){
 
-        while (true){
+    clearCli();
 
-            clearCli();
+    if (!isValid) {
+        System.out.println("\nInvalid choice. Please enter 'x' or a number between 1 and " + MenuItem.currentMenuItem.getSubMenus().size());
+    }
 
-            if (!isValid) {
-                System.out.println("\nInvalid choice. Please enter a number between 1 and " + MenuItem.currentMenuItem.getSubMenus().size());
-                isValid = true;
-            }
+    System.out.println("\nCurrent Menu: " + MenuItem.currentMenuItem.getName());
+    MenuItem.printMenu(MenuItem.currentMenuItem);
 
-            System.out.println("\nCurrent Menu: " + MenuItem.currentMenuItem.getName());
-            MenuItem.printMenu(MenuItem.currentMenuItem);
+    String eofTerminal = "\033[9999H";
+    System.out.print(eofTerminal);
 
-            String eofTerminal = "\033[9999H";
-            System.out.print(eofTerminal);
+    System.out.println("Enter your choice: ");
+    }
 
-            System.out.println("Enter your choice: ");
+    public static int getInput() {
 
-            Scanner in = new Scanner(System.in);
-            choice = Integer.parseInt(in.nextLine());
+        Scanner in = new Scanner(System.in);
+
+        char inputChar = in.nextLine().charAt(0);
+
+        int choice;
+
+        if (Character.isDigit(inputChar)) {
+            choice = Character.getNumericValue(inputChar);
+        } else {
+            choice = inputChar;
+        }
 
 
-            if(choice < 1 || choice > MenuItem.currentMenuItem.getSubMenus().size()) {
-                isValid = false;
-                continue;
-            }
-
-            return;
+        if ((choice < 1 || choice > MenuItem.currentMenuItem.getSubMenus().size()) && choice != 'x') {
+            return 0;
+        }
+        else{
+            return choice;
         }
     }
+
+
+
 
 }
 
