@@ -19,11 +19,29 @@
 
 package com.github.egyptian_league.json.src;
 
+/**
+ * JSON token containing type and string value of token.
+ *
+ * @author Tony Medhat
+ */
 public class JsonToken {
 
+    /**
+     * Type of token.
+     */
     public final JsonTokenType type;
+
+    /**
+     * Value of token.
+     */
     public final String value;
 
+    /**
+     * Creates {@code JsonToken}.
+     *
+     * @param value value of token
+     * @param type type of token
+     */
     public JsonToken(String value, JsonTokenType type) {
         this.value = value;
         this.type = type;

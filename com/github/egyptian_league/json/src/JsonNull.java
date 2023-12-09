@@ -19,12 +19,27 @@
 
 package com.github.egyptian_league.json.src;
 
+/**
+ * Object representation of JSON's null.
+ *
+ * @author Tony Medhat
+ */
 public class JsonNull extends JsonElement {
+    /**
+     * Returns true if other object is equal to this object, otherwise false.
+     *
+     * @return true if other object is equal to this object, otherwise false
+     */
     @Override
     public boolean equals(Object other) {
         return (other instanceof JsonNull);
     }
 
+    /**
+     * Returns literal "null"
+     *
+     * @return literal "null"
+     */
     @Override
     public String toString() {
         return "null";

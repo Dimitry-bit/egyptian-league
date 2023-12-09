@@ -19,23 +19,59 @@
 
 package com.github.egyptian_league.json.src;
 
+/**
+ * JsonElement is the abstract base class for all Json elements.
+ *
+ * @author Tony Medhat
+ */
 public abstract class JsonElement {
+
+    /**
+     * Returns true if this {@code JsonElement} is an instance of {@code JsonArray}.
+     *
+     * @return true if this is an instance of {@code JsonArray}
+     */
     public boolean isJsonArray() {
         return (this instanceof JsonArray);
     }
 
+    /**
+     * Returns true if this {@code JsonElement} is an instance of
+     * {@code JsonObject}.
+     *
+     * @return true if this is an instance of {@code JsonObject}
+     */
     public boolean isJsonObject() {
         return (this instanceof JsonObject);
     }
 
+    /**
+     * Returns true if this {@code JsonElement} is an instance of
+     * {@code JsonPrimitive}.
+     *
+     * @return true if this is an instance of {@code JsonPrimitive}
+     */
     public boolean isJsonPrimitive() {
         return (this instanceof JsonPrimitive);
     }
 
+    /**
+     * Returns true if this {@code JsonElement} is an instance of
+     * {@code JsonNull}.
+     *
+     * @return true if this is an instance of {@code JsonNull}
+     */
     public boolean isJsonNull() {
         return (this instanceof JsonNull);
     }
 
+    /**
+     * Returns this object as {@code JsonObject}.
+     *
+     * @return this object as {@code JsonObject}
+     * @throws JsonException if this is not an instance of {@code JsonObject}
+     * @see #isJsonObject()
+     */
     public JsonObject getAsJsonObject() {
         if (isJsonObject()) {
             return (JsonObject) this;
@@ -44,6 +80,13 @@ public abstract class JsonElement {
         throw new JsonException("Not a Json Object");
     }
 
+    /**
+     * Returns this object as {@code JsonArray}.
+     *
+     * @return this object as {@code JsonArray}
+     * @throws JsonException if this is not an instance of {@code JsonArray}
+     * @see #isJsonArray()
+     */
     public JsonArray getAsJsonArray() {
         if (isJsonArray()) {
             return (JsonArray) this;
@@ -52,6 +95,13 @@ public abstract class JsonElement {
         throw new JsonException("Not a Json Array");
     }
 
+    /**
+     * Returns this object as {@code JsonPrimitive}.
+     *
+     * @return this object as {@code JsonPrimitive}
+     * @throws JsonException if this is not an instance of {@code JsonPrimitive}
+     * @see #isJsonPrimitive()
+     */
     public JsonPrimitive getAsJsonPrimitive() {
         if (isJsonPrimitive()) {
             return (JsonPrimitive) this;

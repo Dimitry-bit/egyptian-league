@@ -22,10 +22,28 @@ package com.github.egyptian_league.json.src;
 import java.lang.reflect.Type;
 import java.util.Queue;
 
+/**
+ * JsonConverter is the abstract base class for all json converters which allow
+ * the serialization and deserialization from JSON to POJO (Plain Old Java
+ * Objects).
+ *
+ * @author Tony Medhat
+ */
 public abstract class JsonConverter<T> {
 
+    /**
+     * Returns converter type.
+     *
+     * @return converter type
+     */
     public abstract Type getMyType();
 
+    /**
+     * Returns true if this converter can convert this type.
+     *
+     * @param typeToConvert the type whose conversion is to be tested
+     * @return true if this converter can convert this type
+     */
     public boolean canConvert(Type typeToConvert) {
         if (typeToConvert == null) {
             return false;
@@ -38,7 +56,24 @@ public abstract class JsonConverter<T> {
         return false;
     }
 
+    /**
+     * Serializes a value and adds it to the tokens queue.
+     *
+     * @param tokens  tokens queue
+     * @param value   value to serialize
+     * @param options serializer options
+     */
     public abstract void serialize(Queue<JsonToken> tokens, T value, JsonSerializerOptions options);
 
+    /**
+     * Returns a deserialized instance of {@code typeToConvert} from
+     * {@code JsonElement}.
+     *
+     * @param element       element to deserialize
+     * @param typeToConvert type to deserialize to
+     * @param options       serializer options
+     * @return Returns an instance of {@code typToConvert} populated from
+     *         {@code element}
+     */
     public abstract T deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options);
 }

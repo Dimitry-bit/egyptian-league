@@ -21,45 +21,106 @@ package com.github.egyptian_league.json.src;
 
 import java.util.Objects;
 
+/**
+ * JsonPrimitive is a container to hold JSON primitive values.
+ *
+ * @author Tony Medhat
+ */
 public class JsonPrimitive extends JsonElement {
+
+    /**
+     * Value.
+     */
     public final Object value;
 
+    /**
+     * Character JsonPrimitive constructor.
+     *
+     * @param c character
+     */
     public JsonPrimitive(Character c) {
         value = Objects.requireNonNull(c);
     }
 
+    /**
+     * String JsonPrimitive constructor.
+     *
+     * @param s string
+     */
     public JsonPrimitive(String s) {
         value = Objects.requireNonNull(s);
     }
 
+    /**
+     * Boolean JsonPrimitive constructor.
+     *
+     * @param b boolean
+     */
     public JsonPrimitive(Boolean b) {
         value = Objects.requireNonNull(b);
     }
 
+    /**
+     * Number JsonPrimitive constructor.
+     *
+     * @param n number
+     */
     public JsonPrimitive(Number n) {
         value = Objects.requireNonNull(n);
     }
 
+    /**
+     * Returns true if value is an instance of {@code Boolean}.
+     *
+     * @return true if value is an instance of {@code Boolean}
+     */
     public boolean isBoolean() {
         return (value instanceof Boolean);
     }
 
+    /**
+     * Returns true if value is an instance of {@code Number}.
+     *
+     * @return true if value is an instance of {@code Number}
+     */
     public boolean isNumber() {
         return (value instanceof Number);
     }
 
+    /**
+     * Returns true if value is an instance of {@code Character}.
+     *
+     * @return true if value is an instance of {@code Character}
+     */
     public boolean isChar() {
         return (value instanceof Character);
     }
 
+    /**
+     * Returns true if value is an instance of {@code String}.
+     *
+     * @return true if value is an instance of {@code String}
+     */
     public boolean isString() {
         return (value instanceof String);
     }
 
+    /**
+     * Returns value as a string.
+     *
+     * @return value as a string
+     */
     public String getAsString() {
         return (isString() ? (String) value : value.toString());
     }
 
+    /**
+     * Returns value as a {@code Number}.
+     *
+     * @return value as a {@code Number}
+     * @throws JsonException if value is not an instance of {@code Number}
+     * @see #isNumber()
+     */
     public Number getAsNumber() {
         if (!isNumber()) {
             throw new JsonException("Primitive is not a number");
@@ -68,10 +129,24 @@ public class JsonPrimitive extends JsonElement {
         return ((Number) value);
     }
 
+    /**
+     * Returns value as a {@code Boolean}.
+     *
+     * @return value as a {@code Boolean}
+     * @throws JsonException if value is not an instance of {@code Boolean}
+     * @see #isBoolean()
+     */
     public Boolean getAsBoolean() {
         return (isBoolean() ? (Boolean) value : Boolean.parseBoolean(getAsString()));
     }
 
+    /**
+     * Returns value as a {@code Character}.
+     *
+     * @return value as a {@code Character}
+     * @throws JsonException if value is not an instance of {@code Character}
+     * @see #isChar()
+     */
     public Character getAsCharacter() {
         if (isChar()) {
             return (Character) (value);
@@ -83,9 +158,6 @@ public class JsonPrimitive extends JsonElement {
         }
 
         throw new JsonException("String is empty");
-    }
-
-    public static void main(String[] args) {
     }
 
     @Override

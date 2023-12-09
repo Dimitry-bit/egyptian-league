@@ -28,27 +28,56 @@ import java.util.Queue;
 
 import com.github.egyptian_league.json.src.Converters.*;
 
+/**
+ * JSON serialization options to modify the default serializer behavior. Also
+ * allows for custom converters to be add.
+ *
+ * @author Tony Medhat
+ */
 public class JsonSerializerOptions {
-    public static final JsonSerializerOptions defaultOptions = new JsonSerializerOptions();
-    private static final Queue<JsonConverter> converters = generateConverters();
-    private static final Hashtable<Type, JsonConverter> mappedConverters = mapConverters();
 
+    /**
+     * Default options instance.
+     */
+    public static final JsonSerializerOptions DefaultOptions = new JsonSerializerOptions();
+
+    private static final Queue<JsonConverter> defaultConverters = generateDefaultConverters();
+    private static final Hashtable<Type, JsonConverter> mappedConverters = mapDefaultConverters();
+
+    /**
+     * Sets Max JSON recursion depth. (default: 65)
+     */
     public int MaxDepth;
-    public int tabWidth;
+
+    /**
+     * Sets JSON output tab width. (default: 2)
+     */
+    public int TabWidth;
+
+    /**
+     * Enables formatted JSON output. (default: false)
+     */
     public boolean WriteIndented;
 
+    /** Default constructor. */
     public JsonSerializerOptions() {
         MaxDepth = 65;
-        tabWidth = 2;
+        TabWidth = 2;
         WriteIndented = false;
     }
 
+    /**
+     * Returns true if a suitable converter is found
+     *
+     * @param typeToConvert type whose conversion is to be tested
+     * @return true if a suitable converter is found
+     */
     public boolean hasConverter(Type typeToConvert) {
         if (mappedConverters.containsKey(getGenericConverter(typeToConvert))) {
             return true;
         }
 
-        for (JsonConverter converter : converters) {
+        for (JsonConverter converter : defaultConverters) {
             if (converter.canConvert(typeToConvert)) {
                 return true;
             }
@@ -57,6 +86,12 @@ public class JsonSerializerOptions {
         return false;
     }
 
+    /**
+     * Returns {@code typeToConvert} converter.
+     *
+     * @param typeToConvert type whose associated converter is to be returned
+     * @return {@code typeToConvert} converter
+     */
     public JsonConverter getConverter(Type typeToConvert) {
         JsonConverter outConverter = null;
 
@@ -64,7 +99,7 @@ public class JsonSerializerOptions {
             return outConverter;
         }
 
-        for (JsonConverter converter : converters) {
+        for (JsonConverter converter : defaultConverters) {
             if (converter.canConvert(typeToConvert)) {
                 return converter;
             }
@@ -73,27 +108,42 @@ public class JsonSerializerOptions {
         throw new NoSuchElementException("No converter for '%s' is found".formatted(typeToConvert));
     }
 
+    /**
+     * Maps a specific converter to a specific type.
+     * <p>
+     * Returns true if type is not mapped; otherwise, returns false.
+     *
+     * @param converterType converter type
+     * @param converter     converter instance
+     * @return true if type is not mapped; otherwise, returns false
+     */
     public boolean addConverter(Class<?> converterType, JsonConverter converter) {
         if (hasConverter(converterType)) {
             return false;
         }
 
-        converters.add(converter);
+        defaultConverters.add(converter);
         mappedConverters.put(converterType, converter);
 
         return true;
     }
 
+    /**
+     * Removes the type and its corresponding converter. This method does nothing if
+     * the key does not exist.
+     *
+     * @param converterType the type that needs to be removed
+     */
     public void removeConverter(Class<?> converterType) {
         if (!hasConverter(converterType)) {
             return;
         }
 
-        converters.add(getConverter(converterType));
+        defaultConverters.add(getConverter(converterType));
         mappedConverters.remove(converterType);
     }
 
-    private static Queue<JsonConverter> generateConverters() {
+    private static Queue<JsonConverter> generateDefaultConverters() {
         Queue<JsonConverter> converters = new LinkedList<>();
 
         converters.add(new JsonConverterShort());
@@ -118,10 +168,10 @@ public class JsonSerializerOptions {
         return converters;
     }
 
-    private static Hashtable<Type, JsonConverter> mapConverters() {
+    private static Hashtable<Type, JsonConverter> mapDefaultConverters() {
         Hashtable<Type, JsonConverter> mappedConverters = new Hashtable<>();
 
-        for (JsonConverter converter : converters) {
+        for (JsonConverter converter : defaultConverters) {
             mappedConverters.put(converter.getMyType(), converter);
         }
 

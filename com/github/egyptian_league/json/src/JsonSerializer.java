@@ -24,7 +24,6 @@ import java.util.Queue;
 
 /*
  * Supported Types:
- *
  * Type Name                    | S | D
  * _____________________________|___|___
  * Primitives                   | T | T
@@ -55,28 +54,45 @@ import java.util.Queue;
  * LinkedHashMap                | T | T
  * TreeMap                      | T | T
  * WeakHashMap                  | T | T
- * Nested Maps
+ * Nested Maps                  | T | T
  */
 
-/*
- * NOTE(Tony): Some of these require a lot of work and will likely never be used in this project
- * Unsupported Types:
+/**
+ * High level class for serializing and deserializing JSON.
  *
+ * <p>
+ * Unsupported Types:
  * Abstract Classes
  * Inner Classes
  * Anonymous Classes
  * Interfaces
  * Multidimensional Arrays
+ * <p>
+ *
+ * NOTE: Some of these require a lot of work and will likely never be used
+ * in this project.
+ *
+ * @author Tony Medhat
  */
-
 public class JsonSerializer {
 
     private JsonSerializer() {
     }
 
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * @param <T>    type to deserialize
+     * @param source valid JSON string
+     * @param type   type to deserialize class
+     * @return instance of {@code T}
+     * @throws JsonException                 if no converter is found
+     * @throws UnsupportedOperationException if {@code T} deserialization is
+     *                                       supported
+     */
     public static <T> T deserialize(String source, Class<T> type) {
         JsonObject jsonObject = new JsonObject(source);
-        JsonSerializerOptions options = JsonSerializerOptions.defaultOptions;
+        JsonSerializerOptions options = JsonSerializerOptions.DefaultOptions;
 
         if (!options.hasConverter(Object.class)) {
             throw new JsonException("'%s' can not deserialize".formatted(type.getName()));
@@ -87,6 +103,13 @@ public class JsonSerializer {
         return type.cast(value);
     }
 
+    /**
+     * Returns a JSON string from the given {@code object}.
+     *
+     * @param object  object to serialize
+     * @param options serialization options
+     * @return JSON string
+     */
     public static String serialize(Object object, JsonSerializerOptions options) {
         Queue<JsonToken> tokens = new LinkedList<>();
 

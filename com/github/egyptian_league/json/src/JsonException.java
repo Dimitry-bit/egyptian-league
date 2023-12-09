@@ -21,19 +21,40 @@ package com.github.egyptian_league.json.src;
 
 import java.lang.RuntimeException;
 
+/**
+ * JSON runtime exception.
+ *
+ * @author Tony Medhat
+ */
+
 public class JsonException extends RuntimeException {
+
+    /**
+     * Constructs a new runtime exception with null as its detail message. The cause
+     * is not initialized.
+     */
     public JsonException() {
         super();
     }
 
-    public JsonException(Throwable cause) {
-        super(cause);
-    }
-
+    /**
+     * Constructs a new runtime exception with the specified detail message. The
+     * cause is not initialized.
+     *
+     * @param message the detail message. The detail message is saved for
+     *                later retrieval by the Throwable.getMessage() method.
+     */
     public JsonException(String message) {
         super(message);
     }
 
+    /**
+     * Constructs a new runtime exception with the specified detail message and
+     * cause.
+     *
+     * @param message the detail message
+     * @param cause   the cause
+     */
     public JsonException(String message, Throwable cause) {
         super(message, cause);
     }

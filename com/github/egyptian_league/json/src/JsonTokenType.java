@@ -19,15 +19,30 @@
 
 package com.github.egyptian_league.json.src;
 
+/**
+ * All possible JSON tokens.
+ *
+ * @author Tony Medhat
+ */
 public enum JsonTokenType {
+    /** JSON string */
     STRING,
+    /** JSON number */
     NUMBER,
+    /** [true|false] */
     BOOLEAN,
+    /** null */
     NULL,
+    /** '{' */
     OBJECT_START,
+    /** '}' */
     OBJECT_END,
+    /** '[' */
     ARRAY_START,
+    /** ']' */
     ARRAY_END,
+    /** ',' */
     COMMA,
-    COLON,
+    /** ':' */
+    COLON
 }
