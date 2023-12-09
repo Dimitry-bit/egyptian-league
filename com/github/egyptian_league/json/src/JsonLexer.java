@@ -27,7 +27,7 @@ import java.util.Hashtable;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class JsonLexer {
+class JsonLexer {
 
     public static final String LITERAL_TRUE = "true";
     public static final String LITERAL_FALSE = "false";
@@ -47,26 +47,26 @@ public class JsonLexer {
     private int index;
     private int lineIndex;
 
-    public JsonLexer() {
+    JsonLexer() {
         tokens = new ArrayList<>();
         lineIndex = 1;
         index = 0;
     }
 
-    public JsonLexer(String source) {
+    JsonLexer(String source) {
         this();
         lex(source);
     }
 
-    public boolean hasToken() {
+    boolean hasToken() {
         return (index < tokens.size());
     }
 
-    public ArrayList<JsonToken> getTokens() {
+    ArrayList<JsonToken> getTokens() {
         return tokens;
     }
 
-    public ArrayList<JsonToken> lex(String source) {
+    ArrayList<JsonToken> lex(String source) {
         tokens = new ArrayList<>();
         lineIndex = 1;
         index = 0;
@@ -90,7 +90,7 @@ public class JsonLexer {
         return tokens;
     }
 
-    public JsonToken nextToken() {
+    JsonToken nextToken() {
         if (!hasToken()) {
             throw new NoSuchElementException("Token list is empty");
         }
@@ -106,7 +106,7 @@ public class JsonLexer {
         return tokens.get(index - 2);
     }
 
-    public void ungetToken() {
+    void ungetToken() {
         if (index <= 0) {
             throw new NoSuchElementException("Token index is zero");
         }
@@ -114,7 +114,7 @@ public class JsonLexer {
         index--;
     }
 
-    public JsonToken peek() {
+    JsonToken peek() {
         if (!hasToken()) {
             throw new NoSuchElementException("Token list is empty");
         }

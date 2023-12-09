@@ -21,12 +21,12 @@ package com.github.egyptian_league.json.src;
 
 import java.util.Queue;
 
-public class JsonFormatter {
+class JsonFormatter {
 
     private JsonFormatter() {
     }
 
-    public static String formatTokens(Queue<JsonToken> tokens, JsonSerializerOptions options) {
+    static String formatTokens(Queue<JsonToken> tokens, JsonSerializerOptions options) {
         StringBuilder sb = new StringBuilder();
 
         if (!options.WriteIndented) {
@@ -40,7 +40,7 @@ public class JsonFormatter {
         // WriteIndented
         {
             int nTabs = 0;
-            int tabWidth = options.tabWidth;
+            int tabWidth = options.TabWidth;
             boolean indent = false;
 
             while (!tokens.isEmpty()) {

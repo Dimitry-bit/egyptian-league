@@ -20,6 +20,7 @@
 package com.github.egyptian_league.json.src;
 
 class JsonParser {
+
     static JsonObject parseObject(JsonLexer lexer) {
         JsonObject jsonObject = new JsonObject();
         JsonToken t = null;

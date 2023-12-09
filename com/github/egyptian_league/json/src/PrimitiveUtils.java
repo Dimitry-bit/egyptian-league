@@ -19,19 +19,19 @@
 
 package com.github.egyptian_league.json.src;
 
-public class PrimitiveUtils {
+class PrimitiveUtils {
 
     private PrimitiveUtils() {
     }
 
-    public static boolean isPrimitiveOrWrapper(Class<?> type) {
+    static boolean isPrimitiveOrWrapper(Class<?> type) {
         return (type.isPrimitive() && type != void.class)
                 || type == Double.class || type == Float.class || type == Long.class
                 || type == Integer.class || type == Short.class || type == Character.class
                 || type == Byte.class || type == Boolean.class;
     }
 
-    public static Class<?> wrap(Class<?> primitiveType) {
+    static Class<?> wrap(Class<?> primitiveType) {
         if (primitiveType == short.class) return Short.class;
         if (primitiveType == int.class) return Integer.class;
         if (primitiveType == long.class) return Long.class;
@@ -44,7 +44,7 @@ public class PrimitiveUtils {
         throw new IllegalArgumentException("'%s' is not a primitive".formatted(primitiveType));
     }
 
-    public static Class<?> unwrap(Class<?> wrapperType) {
+    static Class<?> unwrap(Class<?> wrapperType) {
         if (wrapperType == Short.class) return short.class;
         if (wrapperType == Integer.class) return int.class;
         if (wrapperType == Long.class) return long.class;
@@ -56,5 +56,4 @@ public class PrimitiveUtils {
 
         throw new IllegalArgumentException("'%s' is not a wrapper".formatted(wrapperType));
     }
-
 }
