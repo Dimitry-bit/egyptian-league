@@ -21,7 +21,6 @@ package com.github.egyptian_league.json.src;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Set;
 
 /**
