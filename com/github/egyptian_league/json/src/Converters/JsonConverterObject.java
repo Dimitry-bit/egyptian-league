@@ -19,15 +19,21 @@
 
 package com.github.egyptian_league.json.src.Converters;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
 import com.github.egyptian_league.json.src.*;
+import com.github.egyptian_league.json.src.Annotations.JsonConstructor;
 
 public class JsonConverterObject extends JsonConverter<Object> {
 
@@ -107,14 +113,15 @@ public class JsonConverterObject extends JsonConverter<Object> {
 
         try {
             Class<?> type = (Class<?>) typeToConvert;
-            type.getConstructor().setAccessible(true);
-            Object o = type.getConstructor().newInstance();
-
             JsonObject jsonObject = element.getAsJsonObject();
             Set<Field> fields = new LinkedHashSet<>();
 
             Collections.addAll(fields, type.getFields());
             Collections.addAll(fields, type.getDeclaredFields());
+
+            Object o = createInstance(jsonObject, typeToConvert, options);
+
+            // Note: Override fields set by object's constructor
 
             for (Field field : fields) {
                 String key = field.getName();
@@ -139,17 +146,84 @@ public class JsonConverterObject extends JsonConverter<Object> {
             }
 
             return o;
-        } catch (InvocationTargetException | IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             System.err.println("deserialization: " + e.getMessage());
             e.printStackTrace();
-        } catch (InstantiationException e) {
-            throw new UnsupportedOperationException(
-                    "User defined constructor instantiation is not supported, " + e.getMessage());
-        } catch (NoSuchMethodException e) {
-            throw new UnsupportedOperationException("Nested classes serialization is not supported, " + e.getMessage());
         }
 
         return null;
     }
 
+    private Constructor<?>[] getCandidateConstructors(Type typeToConstruct) {
+        Class<?> typeClass = (Class<?>) typeToConstruct;
+
+        if (typeClass.isInterface() || Modifier.isAbstract(typeClass.getModifiers())) {
+            return null;
+        }
+
+        Constructor<?>[] ctors = typeClass.getConstructors();
+        Arrays.sort(ctors, (a, b) -> {
+            return a.getParameterCount() - b.getParameterCount();
+        });
+
+        return ctors;
+    }
+
+    private Object createInstance(JsonObject jsonObject, Type typeToCreate, JsonSerializerOptions options) {
+        Constructor<?>[] ctors = getCandidateConstructors(typeToCreate);
+
+        if (ctors == null) {
+            throw new JsonException("'%s' Class is either an Interface or Abstract class");
+        }
+
+        try {
+            boolean isDefaultConstructor = ctors[0].getParameterCount() == 0;
+
+            if (isDefaultConstructor) {
+                ctors[0].setAccessible(true);
+                return ctors[0].newInstance();
+            }
+
+            for (Constructor<?> ctor : ctors) {
+                Queue<Object> q = new LinkedList<>();
+                JsonConstructor ctorAnnotation = ctor.getAnnotation(JsonConstructor.class);
+
+                // Note: Generic parameters are not supported
+                Parameter[] parameters = ctor.getParameters();
+
+                if (ctorAnnotation.paramNames().length != ctor.getParameterCount()) {
+                    throw new JsonException("'%s' Parameter names annotation length does " +
+                            "not match constructor parameters length".formatted(ctor.getName()));
+                }
+
+                for (int i = 0; i < parameters.length; ++i) {
+                    Parameter param = parameters[i];
+                    Class<?> paramType = param.getType();
+                    String paramName = ctorAnnotation.paramNames()[i];
+
+                    if (!jsonObject.containsKey(paramName) || !options.hasConverter(paramType)) {
+                        break;
+                    }
+
+                    JsonConverter converter = options.getConverter(paramType);
+                    q.add(converter.deserialize(jsonObject.get(paramName), paramType, options));
+                }
+
+                if (q.size() == parameters.length) {
+                    Object[] args = q.toArray();
+                    return ctor.newInstance(args);
+                }
+            }
+
+            throw new JsonException(
+                    "'%s' Couldn't construct, perhaps missing data".formatted(typeToCreate.getTypeName()));
+        } catch (InvocationTargetException | IllegalAccessException e) {
+            System.err.println("deserialization: " + e.getMessage());
+            e.printStackTrace();
+            throw new AssertionError(e);
+        } catch (InstantiationException e) {
+            throw new UnsupportedOperationException(
+                    "User defined constructor instantiation is not supported, " + e.getMessage());
+        }
+    }
 }
