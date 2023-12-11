@@ -106,7 +106,7 @@ public class JsonConverterMap extends JsonConverter<Map> {
         Type valueType = parameterizedType.getActualTypeArguments()[1];
 
         if (!(keyType instanceof Class) || !((Class<?>) keyType).isAssignableFrom(String.class)) {
-            throw new JsonException("'%s' key is supported".formatted(keyType.getTypeName()));
+            throw new JsonException("'%s' key is not supported".formatted(keyType.getTypeName()));
         }
 
         try {
