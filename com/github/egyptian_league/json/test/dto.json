@@ -1,5 +1,5 @@
 {
-    "string": "testString",
+    "String": "testString",
     "shortNumber": 1,
     "intNumber": 10,
     "longNumber": 100,
@@ -49,5 +49,8 @@
             "10": 20,
             "20": 30
         }
+    },
+    "uuidTable": {
+        "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": 1
     }
 }

@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.UUID;
 
 import com.github.egyptian_league.json.src.JsonTokenType;
+import com.github.egyptian_league.json.src.Annotations.JsonConstructor;
 
 public class DTO {
     public ArrayList<ArrayList<Integer>> collection;
@@ -24,7 +25,13 @@ public class DTO {
     public WrappersDTO child;
     public WrappersDTO nullChild;
     public int[] ints;
-    public Hashtable<String, Hashtable<String,Integer>> hashtable;
+    public Hashtable<String, Hashtable<String, Integer>> hashtable;
+    public Hashtable<UUID, Integer> uuidTable;
+
+    @JsonConstructor(paramNames = { "string" })
+    public DTO(String string) {
+        this.string = string;
+    }
 
     @Override
     public String toString() {
@@ -71,6 +78,19 @@ public class DTO {
                 sb.append(", ");
             }
             sb.append('"' + e.getKey() + '"');
+            sb.append(": ");
+            sb.append(e.getValue());
+            isPrintComma = true;
+        }
+        sb.append(" }\n");
+
+        sb.append("uuidTable = { ");
+        isPrintComma = false;
+        for (var e : uuidTable.entrySet()) {
+            if (isPrintComma) {
+                sb.append(", ");
+            }
+            sb.append('"' + e.getKey().toString() + '"');
             sb.append(": ");
             sb.append(e.getValue());
             isPrintComma = true;

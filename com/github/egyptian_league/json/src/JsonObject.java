@@ -118,7 +118,13 @@ public class JsonObject extends JsonElement {
      *         JSON object, as determined by the equals method; false otherwise.
      */
     public boolean containsKey(String key) {
-        return members.containsKey(key);
+        if (members.containsKey(key)) {
+            return true;
+        }
+
+        char[] str = key.toCharArray();
+        str[0] = (Character.isUpperCase(str[0])) ? Character.toLowerCase(str[0]) : Character.toUpperCase(str[0]);
+        return members.containsKey(new String(str));
     }
 
     /**
@@ -141,7 +147,13 @@ public class JsonObject extends JsonElement {
      *         object contains no mapping for the key
      */
     public JsonElement get(String key) {
-        return members.get(key);
+        if (members.containsKey(key)) {
+            return members.get(key);
+        }
+
+        char[] str = key.toCharArray();
+        str[0] = (Character.isUpperCase(str[0])) ? Character.toLowerCase(str[0]) : Character.toUpperCase(str[0]);
+        return members.get(new String(str));
     }
 
     /**
