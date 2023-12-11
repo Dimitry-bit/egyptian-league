@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.github.egyptian_league.json.src.JsonSerializer;
 import com.github.egyptian_league.json.src.JsonSerializerOptions;
+import com.github.egyptian_league.json.src.Converters.JsonConverterUUIDMap;
 
 public class JsonSerializerTest {
     public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class JsonSerializerTest {
             }
             in.close();
 
-            DTO dto = JsonSerializer.deserialize(json.toString(), DTO.class);
+            DTO dto = JsonSerializer.deserialize(json.toString(), DTO.class, options);
 
             System.out.println("DTO Instance:");
             System.out.println(dto.toString());

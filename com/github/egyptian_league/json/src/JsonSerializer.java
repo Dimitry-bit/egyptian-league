@@ -91,8 +91,23 @@ public class JsonSerializer {
      *                                       supported
      */
     public static <T> T deserialize(String source, Class<T> type) {
+        return deserialize(source, type, JsonSerializerOptions.DefaultOptions);
+    }
+
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * @param <T>     type to deserialize
+     * @param source  valid JSON string
+     * @param type    type to deserialize class
+     * @param options serializer options
+     * @return instance of {@code T}
+     * @throws JsonException                 if no converter is found
+     * @throws UnsupportedOperationException if {@code T} deserialization is
+     *                                       supported
+     */
+    public static <T> T deserialize(String source, Class<T> type, JsonSerializerOptions options) {
         JsonObject jsonObject = new JsonObject(source);
-        JsonSerializerOptions options = JsonSerializerOptions.DefaultOptions;
 
         if (!options.hasConverter(Object.class)) {
             throw new JsonException("'%s' can not deserialize".formatted(type.getName()));
