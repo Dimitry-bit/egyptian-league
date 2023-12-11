@@ -21,6 +21,7 @@ package com.github.egyptian_league.json.src;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
@@ -59,11 +60,15 @@ public class JsonSerializerOptions {
      */
     public boolean WriteIndented;
 
+    private final Hashtable<Type, ArrayList<JsonConverter>> customConverters;
+
     /** Default constructor. */
     public JsonSerializerOptions() {
         MaxDepth = 65;
         TabWidth = 2;
         WriteIndented = false;
+        customConverters = new Hashtable<>();
+        generateCustomConverters();
     }
 
     /**
@@ -73,6 +78,14 @@ public class JsonSerializerOptions {
      * @return true if a suitable converter is found
      */
     public boolean hasConverter(Type typeToConvert) {
+        for (ArrayList<JsonConverter> converters : customConverters.values()) {
+            for (JsonConverter converter : converters) {
+                if (converter.canConvert(typeToConvert)) {
+                    return true;
+                }
+            }
+        }
+
         if (mappedConverters.containsKey(getGenericConverter(typeToConvert))) {
             return true;
         }
@@ -95,6 +108,14 @@ public class JsonSerializerOptions {
     public JsonConverter getConverter(Type typeToConvert) {
         JsonConverter outConverter = null;
 
+        for (ArrayList<JsonConverter> converters : customConverters.values()) {
+            for (JsonConverter converter : converters) {
+                if (converter.canConvert(typeToConvert)) {
+                    return converter;
+                }
+            }
+        }
+
         if ((outConverter = mappedConverters.get(getGenericConverter(typeToConvert))) != null) {
             return outConverter;
         }
@@ -111,21 +132,17 @@ public class JsonSerializerOptions {
     /**
      * Maps a specific converter to a specific type.
      * <p>
-     * Returns true if type is not mapped; otherwise, returns false.
      *
-     * @param converterType converter type
-     * @param converter     converter instance
-     * @return true if type is not mapped; otherwise, returns false
+     * @param converter converter instance
      */
-    public boolean addConverter(Class<?> converterType, JsonConverter converter) {
-        if (hasConverter(converterType)) {
-            return false;
+    public void addConverter(JsonConverter converter) {
+        if (customConverters.containsKey(converter.getMyType())) {
+            customConverters.get(converter.getMyType()).add(converter);
+        } else {
+            ArrayList<JsonConverter> converterList = new ArrayList<>();
+            converterList.add(converter);
+            customConverters.put(converter.getMyType(), converterList);
         }
-
-        defaultConverters.add(converter);
-        mappedConverters.put(converterType, converter);
-
-        return true;
     }
 
     /**
@@ -191,5 +208,9 @@ public class JsonSerializerOptions {
         }
 
         return typeToConvert;
+    }
+
+    private void generateCustomConverters() {
+        addConverter(new JsonConverterUUIDMap());
     }
 }
