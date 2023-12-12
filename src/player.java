@@ -91,7 +91,7 @@ public class player {
    public void
 
 
-           (ArrayList<player> players) {
+          setPlayers (ArrayList<player> players) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("enter the player name");
         String name = scanner.nextLine();

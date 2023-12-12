@@ -1,73 +1,84 @@
 import java.util.ArrayList;
-
 import java.util.Calendar;
+import java.util.Date;
 
 public class leagues {
     public final String league_Name;
-private String name;
-    private int  year;
-    private  ArrayList<Team> teams=new ArrayList<>();
-private ArrayList<player> Players=new ArrayList<>();
+    private final String name;
+    private final int year;
+    private final ArrayList<Team> teams = new ArrayList<>();
+    private final ArrayList<player> Players = new ArrayList<>();
 
-    public leagues(String name, int year)throws sye {
+    private final ArrayList<Match> Matches = new ArrayList<Match>();
+
+    public leagues(String name, int year) throws sye {
         this.name = name;
         Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
-        if(year<currentYear){
+        if (year < currentYear) {
 
             try {
-                throw new sye(year,currentYear);
+                throw new sye(year, currentYear);
             } catch (sye e) {
                 throw new RuntimeException(e);
             }
-        }
-       else {
+        } else {
             this.year = year;
         }
-        league_Name =name+" "+year;
+        league_Name = name + " " + year;
     }
-
-
-
-
 
 
     public void getplayers() {
-        for(player x:Players){
-            int i=0;
-            System.out.println(Players.get(0).getId());
-            System.out.println(Players.get(0).getAge());
-            System.out.println(Players.get(0).getGoalScored());
-            System.out.println(Players.get(0).getName());
-            System.out.println(Players.get(0).getPosition());
-            System.out.println(Players.get(0).getTeam());
-            System.out.println(Players.get(0).getNumber());
-            System.out.println(Players.get(0).getRank());
+            int i = 0;
+        for (player x : Players) {
+            System.out.println(Players.get(i).getId());
+            System.out.println(Players.get(i).getAge());
+            System.out.println(Players.get(i).getGoalScored());
+            System.out.println(Players.get(i).getPosition());
+            System.out.println(Players.get(i).getName());
+            System.out.println(Players.get(i).getTeam());
+            System.out.println(Players.get(i).getNumber());
+            System.out.println(Players.get(i).getRank());
             i++;
         }
     }
 
-    public void setPlayers(String name, String team, String position, int id, int number, int age, int GoalScored, int Rank) {
-        Players.add(new player(name,team,position,id,number,age,GoalScored,Rank));
-    }
+
     public void getteams() {
-        for(Team x:teams){
-            int i=0;
-            System.out.println(teams.get(0).);
-            System.out.println(teams.get(0).);
-            System.out.println(teams.get(0).);
-            System.out.println(teams.get(0).);
+            int i = 0;
+        for (Team x : teams) {
+            System.out.println(teams.get(i).getTotal_Score());
+
+//            System.out.println(teams.get(0).getCaptain());[error i dont know y]
+            System.out.println(teams.get(i).getTeam_ID());
+            System.out.println(teams.get(i).getName());
 
             i++;
         }
     }
 
-    public void setTeams(String Name, int Team_ID, int Total_Score, player Captain) {
-        Players.add(new player(( Name,  Team_ID,  Total_Score,  Captain));
+    public void setMatches(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score, Referee referee) {
+        Matches.add(new Match(matchID, date, team1, team2, stadiumName, score, referee));
     }
 
+    public void getmatch() {
+            int i = 0;
+        for (Match x : Matches) {
+            System.out.println(Matches.get(i).getMatchID());
+            System.out.println(Matches.get(i).getStadiumName());
+            System.out.println(Matches.get(i).getDate());
+            System.out.println(Matches.get(i).getReferee());
+            System.out.println(Matches.get(i).getScore());
+            System.out.println(Matches.get(i).getTeam1());
+            System.out.println(Matches.get(i).getTeam2());
+            i++;
+        }
+    }
+    public void setPlayers(String name, String team, String position, int id, int number, int age, int GoalScored, int Rank) {
+        Players.add(new player(name, team, position, id, number, age, GoalScored, Rank));
+    }
+    public void setTeams(String Name, int Team_ID, int Total_Score, player Captain) {
+        teams.add(new Team(name, Team_ID, Total_Score, Captain));
+    }
 }
-
-
-
-
