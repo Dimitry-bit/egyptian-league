@@ -29,7 +29,7 @@ public class Match {
         this.dateTime = dateTime;
     }
 
-    public Boolean IsComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
+    public static Boolean IsComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
         return currentDate.isAfter(suggestedDate);
     }
 }
