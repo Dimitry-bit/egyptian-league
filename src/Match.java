@@ -28,11 +28,8 @@ public class Match {
     public void setDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
-    public Boolean IsComingDate(LocalDateTime currentDate,LocalDateTime suggestedDate){
-        if(currentDate.isAfter(suggestedDate)){
-            return false;
-        }
-        else
-            return true;
+
+    public Boolean IsComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
+        return currentDate.isAfter(suggestedDate);
     }
 }
