@@ -19,21 +19,18 @@ import java.util.Date;
 public class HelloApplication extends Application {
     private final ObservableList<player> data = FXCollections.observableArrayList(
             new player("Smith", "344", "gfgdfg", 3, 3, 30, 3, 3)
-
     );
     private final ObservableList<Match> matchesdata = FXCollections.observableArrayList(
             //error at refree
             //new Match("x", "Smith","jnj","jyjgg","jnkn",6,)
     );
     private final ObservableList<Team> teams_data = FXCollections.observableArrayList(
-//            new Team("name", 3, 4,"uon");
+            //  new Team("name", 3, 4);
 
     );
     private final TableView<player> player_t = new TableView<>();
     private final TableView<Match> tablematches = new TableView<>();
     private final TableView<Team> teams = new TableView<>();
-    public Button players_b = new Button();
-    public Button teamsView = new Button();
     TextField matchesteam1 = new TextField();
     TextField matchesteam2 = new TextField();
     TextField matchesId = new TextField();
@@ -41,8 +38,25 @@ public class HelloApplication extends Application {
     TextField matchesscore = new TextField();
     TextField matchesstad = new TextField();
     TextField matchesref = new TextField();
+    TextField pname = new TextField();
+    TextField pteam = new TextField();
+    TextField pposition = new TextField();
+    TextField pid = new TextField();
+    TextField pno = new TextField();
+    TextField p_age = new TextField();
+    TextField pgoal = new TextField();
+    TextField prank = new TextField();
+    TextField tname = new TextField();
+    TextField tid = new TextField();
+    TextField tscore = new TextField();
+    TextField tcap = new TextField();
+
+    HBox pbox=new HBox();
+    public Button players_b = new Button();
+    public Button teamsView = new Button();
     private final Button add = new Button();
     private final Button delete = new Button();
+    final Button matches = new Button();
 
     public static void main(String[] args) {
         launch(args);
@@ -83,10 +97,12 @@ public class HelloApplication extends Application {
         tablematches.getColumns().addAll(team1, team2, stadiumName, mdate,mref,score);
 
 
-        TableColumn<Team, String> TID = new TableColumn<>("ID");
+        TableColumn<Team, String> TID = new TableColumn<>("id");
         TID.setMinWidth(100);
-        TID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-
+        TID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<Team, player> tc = new TableColumn<>("captain");
+        tc.setMinWidth(100);
+        tc.setCellValueFactory(new PropertyValueFactory<>("Captain"));
 
         TableColumn<Team, String> NAME = new TableColumn<>("NAME");
         NAME.setMinWidth(100);
@@ -96,7 +112,7 @@ public class HelloApplication extends Application {
         Total_s.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
 
 
-        teams.getColumns().addAll(NAME, TID,Total_s);
+        teams.getColumns().addAll(NAME, TID,Total_s,tc);
         teams.setItems(teams_data);
 
 
@@ -105,12 +121,10 @@ public class HelloApplication extends Application {
         add.setText("add");
         add.setLayoutX(30);
         add.setLayoutY(440);
-
+        teams.setPrefWidth(400);
         Total_s.setComparator(Total_s.getComparator());
         Total_s.setSortable(true);
         TableColumn<Team, String> totalpointsc = new TableColumn<>("points");
-
-
         player_t.setPrefWidth(800);
         TableColumn<player, Integer> rankedCol = new TableColumn<>("Rank");
         rankedCol.setMinWidth(100);
@@ -138,13 +152,11 @@ public class HelloApplication extends Application {
         goals.setMinWidth(100);
         goals.setCellValueFactory(new PropertyValueFactory<>("GoalScored"));
 
-        TableColumn<player, Integer> idp = new TableColumn<>("id");
-        rankedCol.setMinWidth(100);
-        rankedCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<player, Integer> idp = new TableColumn<>("ID");
+        idp.setMinWidth(100);
+        idp.setCellValueFactory(new PropertyValueFactory<>("ID"));
         player_t.setItems(data);
-        player_t.getColumns().addAll(rankedCol, NameCol, t_c, no, goals, idp, positionp, agep);
-
-
+        player_t.getColumns().addAll( NameCol, t_c,positionp, idp, no, agep,goals,rankedCol);
         matchesteam1.setPromptText("team 1");
         matchesteam2.setPromptText(" team 2");
         matchesId.setPromptText("id");
@@ -162,12 +174,11 @@ public class HelloApplication extends Application {
         matchesId.setMaxWidth(team1.getPrefWidth());
         matchesstad.setMaxWidth(team1.getPrefWidth());
         matchesscore.setMaxWidth(team1.getPrefWidth());
-        HBox hbox = new HBox();
-        hbox.getChildren().addAll(matchesteam1, matchesteam2, matchesdate, matchesref, matchesId, matchesstad, matchesscore);
-hbox.setLayoutY(400);
         delete.setText("delete");
-        delete.setLayoutY(460);
-        delete.setLayoutX(110);
+
+        HBox hbox = new HBox();
+        hbox.getChildren().addAll(matchesteam1, matchesteam2, matchesref,matchesdate, matchesId, matchesstad, matchesscore);
+        hbox.setLayoutY(400);
 
 
         totalpointsc.setMinWidth(100);
@@ -181,6 +192,7 @@ hbox.setLayoutY(400);
                 tablematches.getItems().removeAll(tablematches.getSelectionModel().getSelectedItem());
             }
         });
+
 
 
 //        add.setOnAction(new EventHandler<ActionEvent>() {
@@ -220,56 +232,46 @@ hbox.setLayoutY(400);
         stage.setWidth(450);
         stage.setHeight(500);
         stage.setResizable(true);
-
-//        Scene scene2 = new Scene(layout2, 300, 300);
         final Label label = new Label("Ranked players");
         label.setFont(new Font("Arial", 20));
-        final Button matches = new Button();
         matches.setText("matches");
-//matches.setScaleX(200);
-//
-//matches.setScaleY(120);
         players_b.setText("players");
-        players_b.setLayoutX(100);
-        players_b.setLayoutY(450);
-        matches.setLayoutX(0);
-        matches.setLayoutY(400);
+
         players_b.autosize();
         matches.autosize();
-        matches.setOnAction(new EventHandler<>() {
-            @Override
-            public void handle(ActionEvent event) {
-
-                VBox layout3 = new VBox();
-                // Create table columns
-                ScrollPane scrollPane = new ScrollPane(tablematches); // Wrap the table in a ScrollPane
-                AnchorPane anchorPane = new AnchorPane(scrollPane, tablematches, players_b, teamsView, add, matchesteam2, matchesteam1, delete);
-                anchorPane.prefWidthProperty().bind(stage.widthProperty()); // Bind the AnchorPane's width to the stage's width
-                anchorPane.prefHeightProperty().bind(stage.heightProperty()); // Bind the AnchorPane's height to the stage's height
-                Scene scene2 = new Scene(new Group(anchorPane), 200, 400);
-                stage.setScene(scene2);
-            }
-        });
         teamsView.setText("teams");
-        teamsView.setLayoutY(400);
-        teamsView.setLayoutX(10);
 
-
-        ScrollPane scrollPane = new ScrollPane(player_t); // Wrap the table in a ScrollPane
-
-        AnchorPane AnchorPane = new AnchorPane(scrollPane, matches);
-        AnchorPane.prefWidthProperty().bind(stage.widthProperty()); // Bind the StackPane's width to the stage's width
-        AnchorPane.prefHeightProperty().bind(stage.heightProperty()); // Bind the StackPane's height to the stage's height
-
-
-        Scene scene = new Scene(new Group(AnchorPane), 200, 400); // Use the StackPane as the root node of the scene
-
-        players_b.setOnAction(event -> stage.setScene(scene));
+        pid.setPromptText("id");
+        pno.setPromptText("player number");
+        pposition.setPromptText("position");
+        pname.setPromptText("name");
+        prank.setPromptText("rank");
+        pgoal.setPromptText("goals");
+        pteam.setPromptText("team");
+        p_age.setPromptText("age");
+//        pid.setMaxWidth(NameCol.getPrefWidth());
+        pbox.setMaxWidth(player_t.getPrefWidth());
+        VBox bot=new VBox();
+        bot.getChildren().addAll(matches,players_b,teamsView);
+        bot.setLayoutY(0);
+        bot.setLayoutX(900);
+        pbox.getChildren().addAll(pname,pteam,pposition,pid,pno,p_age,pgoal,prank);
+        pbox.setLayoutY(410);
+        pbox.setLayoutX(0);
+        tid.setPromptText("team id");
+        tname.setPromptText("name");
+        tscore.setPromptText("pionts");
+        tcap.setPromptText("captain");
+        HBox tbox=new HBox();
+        tbox.getChildren().addAll(tname,tid,tscore,tcap);
+        tbox.setLayoutY(400);
+        tbox.setMaxWidth(teams.getPrefWidth());
         teamsView.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                ScrollPane scrollPane = new ScrollPane(teams);
+                AnchorPane x = new AnchorPane(scrollPane, teams,bot,tbox);
 
-                AnchorPane x = new AnchorPane(scrollPane, teams);
                 x.prefWidthProperty().bind(stage.widthProperty()); // Bind the StackPane's width to the stage's width
                 x.prefHeightProperty().bind(stage.heightProperty()); // Bind the StackPane's height to the stage's height
                 Scene scene3 = new Scene(new Group(x), 300, 300);
@@ -279,6 +281,38 @@ hbox.setLayoutY(400);
                 stage.setScene(scene3);
             }
         });
+
+        ScrollPane scrollPan = new ScrollPane(tablematches); // Wrap the table in a ScrollPane
+        AnchorPane AnchorPane = new AnchorPane(scrollPan,bot);
+        AnchorPane.prefWidthProperty().bind(stage.widthProperty()); // Bind the StackPane's width to the stage's width
+        AnchorPane.prefHeightProperty().bind(stage.heightProperty()); // Bind the StackPane's height to the stage's height
+        matches.setOnAction(new EventHandler<>() {
+            VBox layout3 = new VBox();
+            @Override
+            public void handle(ActionEvent event) {
+
+
+                ScrollPane scrollPane = new ScrollPane(tablematches); // Wrap the table in a ScrollPane
+                AnchorPane anchorPane = new AnchorPane(scrollPane, tablematches, bot,hbox);
+                anchorPane.prefWidthProperty().bind(stage.widthProperty()); // Bind the AnchorPane's width to the stage's width
+                anchorPane.prefHeightProperty().bind(stage.heightProperty()); // Bind the AnchorPane's height to the stage's height
+                Scene scene2 = new Scene(new Group(anchorPane), 200, 400);
+                stage.setScene(scene2);
+            }
+        });
+        Scene scene = new Scene(new Group(AnchorPane), 200, 400); // Use the StackPane as the root node of the scene
+        players_b.setOnAction(new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ScrollPane scrollPane = new ScrollPane(player_t); // Wrap the table in a ScrollPane
+                AnchorPane anchorP = new AnchorPane(scrollPane, player_t,bot ,pbox);
+                anchorP.prefWidthProperty().bind(stage.widthProperty()); // Bind the AnchorPane's width to the stage's width
+                anchorP.prefHeightProperty().bind(stage.heightProperty()); // Bind the AnchorPane's height to the stage's height
+                Scene scene4 = new Scene(new Group(anchorP), 200, 400);
+                stage.setScene(scene4);
+            }
+        });
+
         stage.setScene(scene);
         stage.show();
     }
