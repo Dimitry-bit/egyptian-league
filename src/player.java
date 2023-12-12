@@ -54,6 +54,16 @@ public class player {
 
 
 
+<<<<<<< HEAD
+=======
+          setPlayers (ArrayList<player> players) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter the player name");
+        String name = scanner.nextLine();
+        for (int i = 0; i < players.size(); i++) {
+            if (name.equals(players.get(i).getName())) {
+                System.out.println(players.get(i).getName() + "  " + players.get(i).getTeam() + "  " + players.get(i).getAge() + "  " + players.get(i).getGoalScored() + "  " + players.get(i).getNumber() + "  " + players.get(i).getId() + "  " + players.get(i).getRank() + "  " + players.get(i).getPosition());
+>>>>>>> c45bd4ad7b88559631b1eb0a8e5b48bc0484febf
 
 
     public static int getAge(Date dateOfBirth) {
