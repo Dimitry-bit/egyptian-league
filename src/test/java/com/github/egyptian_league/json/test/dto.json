@@ -1,0 +1,56 @@
+{
+    "String": "testString",
+    "shortNumber": 1,
+    "intNumber": 10,
+    "longNumber": 100,
+    "floatNumber": 1.5,
+    "doubleNumber": 10.5,
+    "character": "c",
+    "bool": true,
+    "byteVar": 67,
+    "uuid": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
+    "date": "2023-12-03T14:50:28.066722233",
+    "tokenType": 1,
+    "child": {
+        "string": "testString",
+        "shortNumber": 1,
+        "intNumber": 10,
+        "longNumber": 100,
+        "floatNumber": 1.5,
+        "doubleNumber": 10.5,
+        "character": "c",
+        "bool": true,
+        "tokenType": 1,
+        "ints": [
+            1,
+            2,
+            3
+        ],
+        "collection": [
+            1,
+            2,
+            3
+        ]
+    },
+    "ints": [
+        1,
+        2,
+        3
+    ],
+    "collection": [
+        [
+            1,
+            2,
+            3
+        ]
+    ],
+    "hashtable": {
+        "hashtable": {
+            "10": 20,
+            "20": 30
+        }
+    },
+    "uuidTable": {
+        "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": 1
+    }
+}
