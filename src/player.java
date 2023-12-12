@@ -1,86 +1,50 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class player {
-    private String name;
+   final private String name;
     private String team;
-    private String position;
-    private int id;
+
+   position position;
+    UUID uuid;
     private int number;
-    private int age;
-    private int GoalScored;
+    private  Date  birthday;
+
     private int Rank;
 
-    public player(String name, String team, String position, int id, int number, int age, int GoalScored, int Rank) {
+    public player(String name, String team,  position position, int number) {
 
         this.name = name;
-        this.Rank = Rank;
-        this.GoalScored = GoalScored;
         this.team = team;
-        this.age = age;
         this.position = position;
         this.number = number;
-        this.id = id;
-    }
 
-    public void setName(String name) {
-        this.name = name;
     }
-
     public void setTeam(String team) {
         this.team = team;
     }
-
     public void setRank(int rank) {
         Rank = rank;
     }
-
-    public void setGoalScored(int goalScored) {
-        GoalScored = goalScored;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public void setNumber(int number) {
         this.number = number;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setPosition(String position) {
+    public void setPosition(position position) {
         this.position = position;
     }
-
     public String getName() {
         return name;
     }
-
-    public String getPosition() {
+    public position getPosition() {
         return position;
     }
-
-    public int getId() {
-        return id;
+    public UUID getId() {
+        return uuid;
     }
-
     public int getNumber() {
         return number;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public int getRank() {
-        return Rank;
-    }
-
-    public int getGoalScored() {
-        return GoalScored;
     }
 
     public String getTeam() {
@@ -88,19 +52,52 @@ public class player {
     }
 
 
-   public void
 
 
-           (ArrayList<player> players) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("enter the player name");
-        String name = scanner.nextLine();
-        for (int i = 0; i < players.size(); i++) {
-            if (name.equals(players.get(i).getName())) {
-                System.out.println(players.get(i).getName() + "  " + players.get(i).getTeam() + "  " + players.get(i).getAge() + "  " + players.get(i).getGoalScored() + "  " + players.get(i).getNumber() + "  " + players.get(i).getId() + "  " + players.get(i).getRank() + "  " + players.get(i).getPosition());
 
 
-            }
+    public static int getAge(Date dateOfBirth) {
+
+
+        Calendar today = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+
+        int age = 0;
+
+        birthDate.setTime(dateOfBirth);
+
+        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+
+        // If birth date is greater than todays date (after 2 days adjustment of leap year) then decrement age one year
+        if ( (birthDate.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR) > 3) ||
+                (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH ))){
+            age--;
+
+            // If birth date and todays date are of same month and birth day of month is greater than todays day of month then decrement age
+        }else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH )) &&
+                (birthDate.get(Calendar.DAY_OF_MONTH) > today.get(Calendar.DAY_OF_MONTH ))){
+            age--;
         }
+
+        return age;
     }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
