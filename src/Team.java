@@ -7,7 +7,6 @@ public class Team {
     private Player Captain;
     private static int Num_of_Teams = 0;
     private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Match> Matches = new ArrayList<Match>();
 
     public Team(String Name, int Team_ID, int Total_Score, Player Captain) {
         this.Name = Name;
@@ -29,9 +28,6 @@ public class Team {
         return Team_ID;
     }
 
-    public void setTeam_ID(int team_ID) {
-        Team_ID = team_ID;
-    }
 
     public int getTotal_Score() {
         return Total_Score;
