@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class HelloApplication extends Application {
     private final ObservableList<player> data = FXCollections.observableArrayList(
-            new player("Smith", "344", "gfgdfg", 3, 3, 30, 3, 3)
+//            new player("Smith", "344", "gfgdfg", 3, 3, 30, 3, 3)
     );
     private final ObservableList<Match> matchesdata = FXCollections.observableArrayList(
             //error at refree

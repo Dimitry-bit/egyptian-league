@@ -67,12 +67,12 @@ public class Team {
     }
 
     public void Delete_Player(String Player_Name, int Player_ID) {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i) != null && players.get(i).getName().equals(Player_Name) && players.get(i).getId() == Player_ID) {
-                players.remove(i);
-                break;
-            }
-        }
+        // for (int i = 0; i < players.size(); i++) {
+        //     if (players.get(i) != null && players.get(i).getName().equals(Player_Name) && players.get(i).getId() == Player_ID) {
+        //         players.remove(i);
+        //         break;
+        //     }
+        // }
     }
 
 }
