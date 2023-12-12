@@ -9,7 +9,7 @@ public class leagues {
     private final String name;
     private final int year;
     private final ArrayList<Team> teams = new ArrayList<>();
-    private final ArrayList<player> Players = new ArrayList<>();
+    private final ArrayList<Player> Players = new ArrayList<>();
 
     private final ArrayList<Match> Matches = new ArrayList<Match>();
 
@@ -40,7 +40,7 @@ public class leagues {
     //     Players.add(new player(name, team, position, id, number, age, GoalScored, Rank));
     // }
 
-    public void setTeams(String Name, int Team_ID, int Total_Score, player Captain) {
+    public void setTeams(String Name, int Team_ID, int Total_Score, Player Captain) {
         teams.add(new Team(name, Team_ID, Total_Score, Captain));
     }
 }

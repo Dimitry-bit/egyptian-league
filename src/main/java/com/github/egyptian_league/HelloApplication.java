@@ -19,7 +19,7 @@ import java.util.Date;
 
 
 public class HelloApplication extends Application {
-    private final ObservableList<player> data = FXCollections.observableArrayList(
+    private final ObservableList<Player> data = FXCollections.observableArrayList(
 //            new player("Smith", "344", "gfgdfg", 3, 3, 30, 3, 3)
     );
     private final ObservableList<Match> matchesdata = FXCollections.observableArrayList(
@@ -30,7 +30,7 @@ public class HelloApplication extends Application {
             //  new Team("name", 3, 4);
 
     );
-    private final TableView<player> player_t = new TableView<>();
+    private final TableView<Player> player_t = new TableView<>();
     private final TableView<Match> tablematches = new TableView<>();
     private final TableView<Team> teams = new TableView<>();
     TextField matchesteam1 = new TextField();
@@ -102,7 +102,7 @@ public class HelloApplication extends Application {
         TableColumn<Team, String> TID = new TableColumn<>("id");
         TID.setMinWidth(100);
         TID.setCellValueFactory(new PropertyValueFactory<>("id"));
-        TableColumn<Team, player> tc = new TableColumn<>("captain");
+        TableColumn<Team, Player> tc = new TableColumn<>("captain");
         tc.setMinWidth(100);
         tc.setCellValueFactory(new PropertyValueFactory<>("Captain"));
 
@@ -128,33 +128,33 @@ public class HelloApplication extends Application {
         Total_s.setSortable(true);
         TableColumn<Team, String> totalpointsc = new TableColumn<>("points");
         player_t.setPrefWidth(800);
-        TableColumn<player, Integer> rankedCol = new TableColumn<>("Rank");
+        TableColumn<Player, Integer> rankedCol = new TableColumn<>("Rank");
         rankedCol.setMinWidth(100);
         rankedCol.setCellValueFactory(new PropertyValueFactory<>("Rank"));
-        TableColumn<player, String> NameCol = new TableColumn<>("name");
+        TableColumn<Player, String> NameCol = new TableColumn<>("name");
         NameCol.setMinWidth(100);
         NameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn<player, Integer> agep = new TableColumn<>("age");
+        TableColumn<Player, Integer> agep = new TableColumn<>("age");
         agep.setMinWidth(100);
         agep.setCellValueFactory(new PropertyValueFactory<>("age"));
 
-        TableColumn<player, String> positionp = new TableColumn<>("position");
+        TableColumn<Player, String> positionp = new TableColumn<>("position");
         positionp.setMinWidth(100);
         positionp.setCellValueFactory(new PropertyValueFactory<>("position"));
 
-        TableColumn<player, Integer> no = new TableColumn<>("number");
+        TableColumn<Player, Integer> no = new TableColumn<>("number");
         no.setMinWidth(100);
         no.setCellValueFactory(new PropertyValueFactory<>("number"));
 
-        TableColumn<player, String> t_c = new TableColumn<>("team");
+        TableColumn<Player, String> t_c = new TableColumn<>("team");
         t_c.setMinWidth(100);
         t_c.setCellValueFactory(new PropertyValueFactory<>("team"));
 
-        TableColumn<player, Integer> goals = new TableColumn<>("GoalScored");
+        TableColumn<Player, Integer> goals = new TableColumn<>("GoalScored");
         goals.setMinWidth(100);
         goals.setCellValueFactory(new PropertyValueFactory<>("GoalScored"));
 
-        TableColumn<player, Integer> idp = new TableColumn<>("ID");
+        TableColumn<Player, Integer> idp = new TableColumn<>("ID");
         idp.setMinWidth(100);
         idp.setCellValueFactory(new PropertyValueFactory<>("ID"));
         player_t.setItems(data);

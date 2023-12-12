@@ -6,12 +6,12 @@ public class Team {
     private String Name;
     private int Team_ID;
     private int Total_Score;
-    private player Captain;
+    private Player Captain;
     private static int Num_of_Teams = 0;
-    private ArrayList<player> players = new ArrayList<player>();
+    private ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Match> Matches = new ArrayList<Match>();
 
-    public Team(String Name, int Team_ID, int Total_Score, player Captain) {
+    public Team(String Name, int Team_ID, int Total_Score, Player Captain) {
         this.Name = Name;
         this.Team_ID = Team_ID;
         this.Total_Score = Total_Score;
@@ -43,11 +43,11 @@ public class Team {
         Total_Score = total_Score;
     }
 
-    public player getCaptain() {
+    public Player getCaptain() {
         return Captain;
     }
 
-    public void setCaptain(player captain) {
+    public void setCaptain(Player captain) {
         Captain = captain;
     }
 
@@ -55,7 +55,7 @@ public class Team {
         return Num_of_Teams;
     }
 
-    public void ADD_Player(player Input_player) {
+    public void ADD_Player(Player Input_player) {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i) == null) {
                 players.set(i, Input_player);
