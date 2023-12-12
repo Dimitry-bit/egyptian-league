@@ -1,0 +1,26 @@
+{
+  "boolean": true,
+  "color": "gold",
+  "null": null,
+  "n0": 10,
+  "n1": 10.10,
+  "n2": 10e10,
+  "n3": 10e+10,
+  "n4": 10e-10,
+  "n5": 10.10e10,
+  "n6": 10.10e+10,
+  "n7": 10.10e-10,
+  "string": "Hello World",
+  "empty_string": "",
+  "object": {
+    "a": "b",
+    "c": "d"
+  },
+  "empty_object": {},
+  "array": [
+    1,
+    2,
+    3
+  ],
+  "empty_array": []
+}
