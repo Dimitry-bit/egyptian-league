@@ -2,6 +2,7 @@ package com.github.egyptian_league;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.UUID;
 
 public class Match {
@@ -13,17 +14,10 @@ public class Match {
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> goalScorers;
 
-    // FIXME: Should be calculated
-    private UUID winnerTeam;
-
     public Match(UUID homeTeamId, UUID awayTeamId) {
         matchId = UUID.randomUUID();
         this.HomeTeamId = homeTeamId;
         this.AwayTeamId = awayTeamId;
-    }
-
-    public UUID getWinnerTeam() {
-        return winnerTeam;
     }
 
     public UUID getMatchStadium() {
@@ -47,11 +41,15 @@ public class Match {
         return goalScorers;
     }
 
-    // FIXME: Can I remove a goal? seems like a reasonable request
     public void addGoal(UUID playerId, int numOfGoals) {
         // FIXME: Validate numbOfGoals before setting
         goalScorers.put(playerId, numOfGoals);
     }
+
+    public void removeGoal(UUID playerId, int numOfGoals) {
+        goalScorers.remove(playerId, numOfGoals);
+    }
+
 
     public Referee setReferee(Referee referee) {
         if (referee.CheckRefereeAvailability(this)) {
@@ -61,43 +59,29 @@ public class Match {
         return null;
     }
 
-    // FIXME: Should return winner team instead of void
-    // FIXME: winner team shouldn't be cached
-    public void setWinnerTeam() {
+    public UUID calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
-
-        // FIXME: USE A VARIABLE !!!!!!!
-        for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().size(); i++) {
-            if (goalScorers
-                    .containsKey(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i))) {
-                homeScore += goalScorers
-                        .get(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i));
+        Iterator<UUID> playerIdIterator = ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers();
+        while (playerIdIterator.hasNext()) {
+            UUID playerUUID = playerIdIterator.next();
+            if (goalScorers.containsKey(playerUUID)) {
+                homeScore += goalScorers.get(playerUUID);
             }
         }
-
-        // FIXME: USE A VARIABLE !!!!!!!
-        for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().size(); i++) {
-            if (goalScorers
-                    .containsKey(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i))) {
-                awayScore += goalScorers
-                        .get(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i));
+        playerIdIterator = ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers();
+        while (playerIdIterator.hasNext()) {
+            UUID playerUUID = playerIdIterator.next();
+            if (goalScorers.containsKey(playerUUID)) {
+                awayScore += goalScorers.get(playerUUID);
             }
         }
 
         if (homeScore > awayScore) {
-            winnerTeam = HomeTeamId;
+            return HomeTeamId;
         } else if (homeScore < awayScore)
-            winnerTeam = AwayTeamId;
+            return AwayTeamId;
         else
-            winnerTeam = null;
+            return null;
     }
-
-    // FIXME: Why?
-    /*
-     * public static Boolean isComingDate(LocalDateTime currentDate, LocalDateTime
-     * suggestedDate) {
-     * return currentDate.isAfter(suggestedDate);
-     * }
-     */
 }
