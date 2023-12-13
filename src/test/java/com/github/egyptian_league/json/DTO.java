@@ -1,4 +1,4 @@
-package com.github.egyptian_league.json.test;
+package com.github.egyptian_league.json;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

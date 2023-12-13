@@ -1,4 +1,4 @@
-package com.github.egyptian_league.json.test;
+package com.github.egyptian_league.json;
 
 import com.github.egyptian_league.json.JsonTokenType;
 
