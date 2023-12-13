@@ -30,7 +30,9 @@ public class Match {
 
     private void setDate(LocalDateTime dateTime) {
         // FIXME: Validate before setting
-        this.dateTime = dateTime;
+        if (ApplicationRepository.getRepository().getStadiumByUUID(matchStadium).checkStadiumAvailability(this)) {
+            this.dateTime = dateTime;
+        }
     }
 
     public LocalDateTime getDateTime() {
@@ -43,11 +45,14 @@ public class Match {
 
     public void addGoal(UUID playerId, int numOfGoals) {
         // FIXME: Validate numbOfGoals before setting
-        goalScorers.put(playerId, numOfGoals);
+        if (numOfGoals >= 0) {
+            goalScorers.put(playerId, numOfGoals);
+        }
+
     }
 
     public void removeGoal(UUID playerId, int numOfGoals) {
-        goalScorers.remove(playerId, numOfGoals);
+        goalScorers.put(playerId, numOfGoals);
     }
 
 

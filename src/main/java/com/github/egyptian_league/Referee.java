@@ -17,7 +17,7 @@ public class Referee {
     }
 
     public boolean CheckRefereeAvailability(Match match) {
-        for (int i = 0; i < refereeSchedule.size(); i++)
+        for (int i = 0; i <  refereeSchedule.size(); i++)
             if (match.getDateTime().toLocalDate().equals(refereeSchedule.get(i))) {
                 return false;
             }
