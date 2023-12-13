@@ -3,19 +3,23 @@ package com.github.egyptian_league;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.Constants.ApplicationConstants;
 import com.github.egyptian_league.json.JsonSerializer;
 import com.github.egyptian_league.json.JsonSerializerOptions;
+import com.github.egyptian_league.json.Annotations.JsonIgnore;
 
 public class ApplicationRepository {
 
-    public static final ApplicationRepository defaultRepository = new ApplicationRepository();
+    @JsonIgnore
+    private static ApplicationRepository instance;
 
     private Hashtable<UUID, Player> players;
     private Hashtable<UUID, Team> teams;
@@ -31,47 +35,55 @@ public class ApplicationRepository {
         leagues = new Hashtable<>();
     }
 
-    public void serialize(String baseDir, JsonSerializerOptions options) {
-        // final String playersPath = baseDir + "players.json";
-        // final String teamsPath = baseDir + "teams.json";
-        // final String matchesPath = baseDir + "matches.json";
-        // final String stadiumsPath = baseDir + "stadiums.json";
-        // final String leaguesPath = baseDir + "leagues.json";
+    public static ApplicationRepository getRepository() {
+        if (instance == null) {
+            instance = new ApplicationRepository();
+        }
 
-        // serialize(players, options, playersPath);
-        // serialize(teams, options, teamsPath);
-        // serialize(matches, options, matchesPath);
-        // serialize(stadiums, options, stadiumsPath);
-        // serialize(leagues, options, leaguesPath);
+        return instance;
     }
 
-    public void deserialize(String baseDir, JsonSerializerOptions options) {
-        // final String playersPath = baseDir + "players.json";
-        // final String teamsPath = baseDir + "teams.json";
-        // final String matchesPath = baseDir + "matches.json";
-        // final String stadiumsPath = baseDir + "stadiums.json";
-        // final String leaguesPath = baseDir + "leagues.json";
+    public static void swapRepository(ApplicationRepository newRepository) {
+        instance = newRepository;
+    }
 
-        // try {
-        //     // FIXME: This is a hack!
+    public static void loadDb() {
+        try {
+            File f = new File(ApplicationConstants.dbFileName);
+            if (!f.exists()) {
+                return;
+            }
 
-        //     Type t = ApplicationRepository.class.getDeclaredField("players").getGenericType();
-        //     players = deserialize(t, options, playersPath);
+            if (f.isDirectory()) {
+                System.err.printf("'%s': is a directory\n", f.getAbsolutePath());
+                return;
+            }
 
-        //     t = ApplicationRepository.class.getDeclaredField("teams").getGenericType();
-        //     teams = deserialize(t, options, teamsPath);
+            if (!f.canRead()) {
+                System.err.printf("'%s': failed to read\n", f.getAbsolutePath());
+                return;
+            }
 
-        //     t = ApplicationRepository.class.getDeclaredField("matches").getGenericType();
-        //     matches = deserialize(t, options, matchesPath);
+            String jsonSource = String.join("", Files.readAllLines(f.toPath()));
+            ApplicationRepository repo = JsonSerializer.deserialize(jsonSource, ApplicationRepository.class);
 
-        //     t = ApplicationRepository.class.getDeclaredField("stadiums").getGenericType();
-        //     stadiums = deserialize(t, options, stadiumsPath);
+            swapRepository(repo);
+        } catch (IOException e) {
+            System.err.printf("'%s': failed to read\n\t%s", ApplicationConstants.dbFileName, e.getMessage());
+        }
+    }
 
-        //     t = ApplicationRepository.class.getDeclaredField("leagues").getGenericType();
-        //     leagues = deserialize(t, options, leaguesPath);
-        // } catch (Exception e) {
-        //     // Nothing
-        // }
+    public static void saveDb() {
+        try (FileWriter fw = new FileWriter(ApplicationConstants.dbFileName)) {
+            JsonSerializerOptions options = new JsonSerializerOptions();
+            options.WriteIndented = true;
+
+            String json = JsonSerializer.serialize(instance, options);
+
+            fw.write(json);
+        } catch (IOException e) {
+            System.err.printf("'%s': failed to write\n\t%s", ApplicationConstants.dbFileName, e.getMessage());
+        }
     }
 
     // #region Players
@@ -127,7 +139,10 @@ public class ApplicationRepository {
     public Iterator<Team> getTeamsIterator() {
         return teams.values().iterator();
     }
-    public int getNumberOfTeams(){return teams.size();};
+
+    public int getNumberOfTeams() {
+        return teams.size();
+    };
 
     public Team putTeam(Team team) {
         // return players.put(team.getId, team);
@@ -209,31 +224,4 @@ public class ApplicationRepository {
     }
 
     // #endregion
-
-//    private <T> void serialize(Hashtable<UUID, T> table, JsonSerializerOptions options, String filePath) {
-//        try (FileWriter writer = new FileWriter(filePath)) {
-//            String json = JsonSerializer.serialize(table, options);
-//            if (!json.isEmpty() && !json.isBlank()) {
-//                writer.write(json);
-//            }
-//        } catch (IOException e) {
-//            System.out.printf("'%s': failed to write, %s\n", filePath, e.getMessage());
-//        }
-//    }
-
-    private <T> Hashtable<UUID, T> deserialize(Type type, JsonSerializerOptions options, String filePath) {
-        File fp = new File(filePath);
-        if (!fp.exists()) {
-            return new Hashtable<UUID, T>();
-        }
-
-        try {
-            String JsonSource = String.join("\n", Files.readAllLines(Path.of(filePath)));
-            return (Hashtable<UUID, T>) JsonSerializer.deserialize(JsonSource, type, options);
-        } catch (IOException e) {
-            System.out.printf("'%s': failed to read, %s\n", filePath, e.getMessage());
-        }
-
-        return null;
-    }
 }

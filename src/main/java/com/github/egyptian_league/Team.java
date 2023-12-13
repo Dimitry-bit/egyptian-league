@@ -39,7 +39,7 @@ public class Team {
 
     public int calcTotalPoints() {
         int totalPoints = 0;
-        Iterator<Match> matchsIterator = ApplicationRepository.defaultRepository.getMatchesIterator();
+        Iterator<Match> matchsIterator = ApplicationRepository.getRepository().getMatchesIterator();
         while (matchsIterator.hasNext()) {
             Match match = matchsIterator.next();
             if (match.calcWinnerTeam().equals(teamID)) {
@@ -54,7 +54,7 @@ public class Team {
     }
 
     public static int calcNumberOfTeams() {
-        return ApplicationRepository.defaultRepository.getNumberOfTeams();
+        return ApplicationRepository.getRepository().getNumberOfTeams();
     }
 
     private boolean containsPlayer(UUID playerId) {

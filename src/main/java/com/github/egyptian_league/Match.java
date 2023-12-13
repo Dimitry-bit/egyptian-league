@@ -62,14 +62,14 @@ public class Match {
     public UUID calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
-        Iterator<UUID> playerIdIterator = ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers();
+        Iterator<UUID> playerIdIterator = ApplicationRepository.getRepository().getTeamById(HomeTeamId).getPlayers();
         while (playerIdIterator.hasNext()) {
             UUID playerUUID = playerIdIterator.next();
             if (goalScorers.containsKey(playerUUID)) {
                 homeScore += goalScorers.get(playerUUID);
             }
         }
-        playerIdIterator = ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers();
+        playerIdIterator = ApplicationRepository.getRepository().getTeamById(AwayTeamId).getPlayers();
         while (playerIdIterator.hasNext()) {
             UUID playerUUID = playerIdIterator.next();
             if (goalScorers.containsKey(playerUUID)) {
