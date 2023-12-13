@@ -31,6 +31,9 @@ public class Match {
     public void setDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
 
     public HashMap<UUID, Integer> getGoalScorers() {
         return goalScorers;

@@ -29,8 +29,13 @@ public class Stadium {
        this.stadiumNames = stadiumNames;}*/
 
     // FIXME: Loop over all matches for this stadium and determine if searchedDate is a valid datetime
-    public boolean checkStadiumAvailability(LocalDateTime dateTime)
+    public static boolean checkStadiumAvailability(LocalDateTime dateTime,Iterator<Match> matchIterator)
     {
+        while (matchIterator.hasNext()){
+            if (dateTime.equals(matchIterator.next().getDateTime())&&dateTime.isBefore(LocalDateTime.now())){
+                return false;
+            }
+        }
         return true;
     }
 }
