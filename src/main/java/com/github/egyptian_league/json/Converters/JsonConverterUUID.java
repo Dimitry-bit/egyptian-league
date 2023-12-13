@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 import java.util.UUID;
 
@@ -28,23 +27,24 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterUUID extends JsonConverter<UUID> {
 
     @Override
-    public Type getMyType() {
-        return UUID.class;
+    public TypeToken<UUID> getMyType() {
+        return TypeToken.get(UUID.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, UUID value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken('"' + value.toString() + '"', JsonTokenType.STRING));
     }
 
     @Override
-    public UUID deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (element.isJsonNull()) {
             return null;
         }
 
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return UUID.fromString(element.getAsJsonPrimitive().getAsString());

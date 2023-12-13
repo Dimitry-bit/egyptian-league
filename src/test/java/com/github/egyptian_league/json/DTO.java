@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.UUID;
 
-import com.github.egyptian_league.json.JsonTokenType;
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class DTO {
@@ -18,7 +17,7 @@ public class DTO {
     public double doubleNumber;
     public char character;
     public boolean bool;
-    public Byte byteVar;
+    public byte byteVar;
     public UUID uuid;
     public LocalDateTime date;
     public JsonTokenType tokenType;

@@ -18,6 +18,7 @@ public class JsonSerializerTest {
             Path filePath = Path.of(TestUtil.getResourceUrl("json/dto.json").toURI());
             String jsonSource = String.join("", Files.readAllLines(filePath));
             Assertions.assertDoesNotThrow(() -> JsonSerializer.deserialize(jsonSource, DTO.class));
+            System.out.println(JsonSerializer.deserialize(jsonSource, DTO.class).toString());
         } catch (IOException | URISyntaxException e) {
             Assertions.fail("'%s' failed to read".formatted("./dto.json"));
         }

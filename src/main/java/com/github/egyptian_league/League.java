@@ -53,7 +53,7 @@ public class League {
     // }
 
     // FIXME: Use an object instead of multiple parameters
-    public void setTeams(String Name, int Team_ID, int Total_Score, Player Captain) {
-        teams.add(new Team(name, Team_ID, Total_Score, Captain));
-    }
+//    public void setTeams(String Name, int Team_ID, int Total_Score, Player Captain) {
+//        teams.add(new Team(name, Team_ID, Total_Score, Captain));
+//    }
 }

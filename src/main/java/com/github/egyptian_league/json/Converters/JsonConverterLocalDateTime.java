@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.Queue;
 
@@ -28,26 +27,26 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterLocalDateTime extends JsonConverter<LocalDateTime> {
 
     @Override
-    public Type getMyType() {
-        return LocalDateTime.class;
+    public TypeToken<LocalDateTime> getMyType() {
+        return TypeToken.get(LocalDateTime.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, LocalDateTime value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken('"' + value.toString() + '"', JsonTokenType.STRING));
     }
 
     @Override
-    public LocalDateTime deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (element.isJsonNull()) {
             return null;
         }
 
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isString()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return LocalDateTime.parse(element.getAsJsonPrimitive().getAsString());
     }
-
 }

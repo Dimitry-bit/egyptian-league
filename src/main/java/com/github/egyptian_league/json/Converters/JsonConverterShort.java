@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
@@ -27,19 +26,20 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterShort extends JsonConverter<Short> {
 
     @Override
-    public Type getMyType() {
-        return Short.class;
+    public TypeToken<Short> getMyType() {
+        return TypeToken.get(Short.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, Short value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken(value.toString(), JsonTokenType.NUMBER));
     }
 
     @Override
-    public Short deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isNumber()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return element.getAsJsonPrimitive().getAsNumber().shortValue();

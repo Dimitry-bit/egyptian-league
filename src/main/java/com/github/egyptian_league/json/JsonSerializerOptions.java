@@ -19,8 +19,6 @@
 
 package com.github.egyptian_league.json;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -42,8 +40,8 @@ public class JsonSerializerOptions {
      */
     public static final JsonSerializerOptions DefaultOptions = new JsonSerializerOptions();
 
-    private static final Queue<JsonConverter> defaultConverters = generateDefaultConverters();
-    private static final Hashtable<Type, JsonConverter> mappedConverters = mapDefaultConverters();
+    private static final Queue<JsonConverter<?>> defaultConverters = generateDefaultConverters();
+    private static final Hashtable<TypeToken<?>, JsonConverter<?>> mappedConverters = mapDefaultConverters();
 
     /**
      * Sets Max JSON recursion depth. (default: 65)
@@ -60,7 +58,7 @@ public class JsonSerializerOptions {
      */
     public boolean WriteIndented;
 
-    private final Hashtable<Type, ArrayList<JsonConverter>> customConverters;
+    private final Hashtable<TypeToken<?>, ArrayList<JsonConverter<?>>> customConverters;
 
     /** Default constructor. */
     public JsonSerializerOptions() {
@@ -68,7 +66,6 @@ public class JsonSerializerOptions {
         TabWidth = 2;
         WriteIndented = false;
         customConverters = new Hashtable<>();
-        generateCustomConverters();
     }
 
     /**
@@ -77,20 +74,24 @@ public class JsonSerializerOptions {
      * @param typeToConvert type whose conversion is to be tested
      * @return true if a suitable converter is found
      */
-    public boolean hasConverter(Type typeToConvert) {
-        for (ArrayList<JsonConverter> converters : customConverters.values()) {
-            for (JsonConverter converter : converters) {
+    public boolean hasConverter(TypeToken<?> typeToConvert) {
+        if (typeToConvert.getRawType().isPrimitive()) {
+            typeToConvert = new TypeToken<>(PrimitiveUtils.wrap(typeToConvert.getRawType()));
+        }
+
+        for (ArrayList<JsonConverter<?>> converters : customConverters.values()) {
+            for (JsonConverter<?> converter : converters) {
                 if (converter.canConvert(typeToConvert)) {
                     return true;
                 }
             }
         }
 
-        if (mappedConverters.containsKey(getGenericConverter(typeToConvert))) {
+        if (mappedConverters.containsKey(typeToConvert)) {
             return true;
         }
 
-        for (JsonConverter converter : defaultConverters) {
+        for (JsonConverter<?> converter : defaultConverters) {
             if (converter.canConvert(typeToConvert)) {
                 return true;
             }
@@ -105,22 +106,26 @@ public class JsonSerializerOptions {
      * @param typeToConvert type whose associated converter is to be returned
      * @return {@code typeToConvert} converter
      */
-    public JsonConverter getConverter(Type typeToConvert) {
-        JsonConverter outConverter = null;
+    public JsonConverter<?> getConverter(TypeToken<?> typeToConvert) {
+        JsonConverter<?> outConverter = null;
 
-        for (ArrayList<JsonConverter> converters : customConverters.values()) {
-            for (JsonConverter converter : converters) {
+        if (typeToConvert.getRawType().isPrimitive()) {
+            typeToConvert = new TypeToken<>(PrimitiveUtils.wrap(typeToConvert.getRawType()));
+        }
+
+        for (ArrayList<JsonConverter<?>> converters : customConverters.values()) {
+            for (JsonConverter<?> converter : converters) {
                 if (converter.canConvert(typeToConvert)) {
                     return converter;
                 }
             }
         }
 
-        if ((outConverter = mappedConverters.get(getGenericConverter(typeToConvert))) != null) {
+        if ((outConverter = mappedConverters.get(typeToConvert)) != null) {
             return outConverter;
         }
 
-        for (JsonConverter converter : defaultConverters) {
+        for (JsonConverter<?> converter : defaultConverters) {
             if (converter.canConvert(typeToConvert)) {
                 return converter;
             }
@@ -135,11 +140,11 @@ public class JsonSerializerOptions {
      *
      * @param converter converter instance
      */
-    public void addConverter(JsonConverter converter) {
+    public void addConverter(JsonConverter<?> converter) {
         if (customConverters.containsKey(converter.getMyType())) {
             customConverters.get(converter.getMyType()).add(converter);
         } else {
-            ArrayList<JsonConverter> converterList = new ArrayList<>();
+            ArrayList<JsonConverter<?>> converterList = new ArrayList<>();
             converterList.add(converter);
             customConverters.put(converter.getMyType(), converterList);
         }
@@ -151,7 +156,7 @@ public class JsonSerializerOptions {
      *
      * @param converterType the type that needs to be removed
      */
-    public void removeConverter(Class<?> converterType) {
+    public void removeConverter(TypeToken<?> converterType) {
         if (!hasConverter(converterType)) {
             return;
         }
@@ -160,8 +165,8 @@ public class JsonSerializerOptions {
         mappedConverters.remove(converterType);
     }
 
-    private static Queue<JsonConverter> generateDefaultConverters() {
-        Queue<JsonConverter> converters = new LinkedList<>();
+    private static Queue<JsonConverter<?>> generateDefaultConverters() {
+        Queue<JsonConverter<?>> converters = new LinkedList<>();
 
         converters.add(new JsonConverterShort());
         converters.add(new JsonConverterInteger());
@@ -176,8 +181,9 @@ public class JsonSerializerOptions {
         converters.add(new JsonConverterLocalDateTime());
         converters.add(new JsonConverterUUID());
         converters.add(new JsonConverterArray());
-        converters.add(new JsonConverterCollection());
-        converters.add(new JsonConverterMap());
+
+        converters.add(new JsonConverterDefaultMap());
+        converters.add(new JsonConverterDefaultCollection());
 
         // NOTE: Object converter must be last element (Fallback converter)
         converters.add(new JsonConverterObject());
@@ -185,32 +191,13 @@ public class JsonSerializerOptions {
         return converters;
     }
 
-    private static Hashtable<Type, JsonConverter> mapDefaultConverters() {
-        Hashtable<Type, JsonConverter> mappedConverters = new Hashtable<>();
+    private static Hashtable<TypeToken<?>, JsonConverter<?>> mapDefaultConverters() {
+        Hashtable<TypeToken<?>, JsonConverter<?>> mappedConverters = new Hashtable<>();
 
-        for (JsonConverter converter : defaultConverters) {
+        for (JsonConverter<?> converter : defaultConverters) {
             mappedConverters.put(converter.getMyType(), converter);
         }
 
         return mappedConverters;
-    }
-
-    private static Type getGenericConverter(Type typeToConvert) {
-        if (typeToConvert instanceof Class) {
-            Class<?> typeClass = (Class<?>) typeToConvert;
-            if (PrimitiveUtils.isPrimitiveOrWrapper(typeClass) && typeClass.isPrimitive()) {
-                return PrimitiveUtils.wrap(typeClass);
-            }
-
-            if (typeClass.isArray()) {
-                return Array.class;
-            }
-        }
-
-        return typeToConvert;
-    }
-
-    private void generateCustomConverters() {
-        addConverter(new JsonConverterUUIDMap());
     }
 }

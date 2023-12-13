@@ -38,18 +38,18 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 public class JsonConverterObject extends JsonConverter<Object> {
 
     @Override
-    public Type getMyType() {
-        return Object.class;
+    public TypeToken<Object> getMyType() {
+        return TypeToken.get(Object.class);
     }
 
     @Override
-    public boolean canConvert(Type typeToConvert) {
+    public boolean canConvert(TypeToken<?> typeToConvert) {
         if (typeToConvert == null) {
             return false;
         }
 
-        if (typeToConvert instanceof Class<?>) {
-            Class<?> typeClass = (Class<?>) typeToConvert;
+        if (typeToConvert.getType() instanceof Class<?>) {
+            Class<?> typeClass = (Class<?>) typeToConvert.getType();
             return !typeClass.isMemberClass() && !typeClass.isAnonymousClass()
                     && !typeClass.isLocalClass() && !typeClass.isInterface();
         }
@@ -78,16 +78,17 @@ public class JsonConverterObject extends JsonConverter<Object> {
 
                 f.setAccessible(true);
                 Object v = f.get(value);
-                Type fieldType = f.getGenericType();
 
                 if (v == null) {
                     tokens.add(new JsonToken("null", JsonTokenType.NULL));
                 } else {
+                    TypeToken<?> fieldType = TypeToken.get(f.getGenericType());
+
                     if (!options.hasConverter(fieldType)) {
                         throw new JsonException("'%s' Can not serialize".formatted(v.getClass().getName()));
                     }
 
-                    JsonConverter converter = options.getConverter(fieldType);
+                    JsonConverter<?> converter = options.getConverter(fieldType);
                     converter.serialize(tokens, v, options);
                 }
 
@@ -101,7 +102,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
     }
 
     @Override
-    public Object deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (element.isJsonNull()) {
             return null;
         }
@@ -112,20 +113,20 @@ public class JsonConverterObject extends JsonConverter<Object> {
         }
 
         try {
-            Class<?> type = (Class<?>) typeToConvert;
+            Class<?> type = (Class<?>) typeToConvert.getType();
             JsonObject jsonObject = element.getAsJsonObject();
             Set<Field> fields = new LinkedHashSet<>();
 
             Collections.addAll(fields, type.getFields());
             Collections.addAll(fields, type.getDeclaredFields());
 
-            Object o = createInstance(jsonObject, typeToConvert, options);
+            Object o = createInstance(jsonObject, typeToConvert.getType(), options);
 
             // Note: Override fields set by object's constructor
 
             for (Field field : fields) {
                 String key = field.getName();
-                Type fieldType = field.getGenericType();
+                TypeToken<?> fieldType = TypeToken.get(field.getGenericType());
                 Object value = null;
                 JsonElement valueElement = null;
 
@@ -134,11 +135,11 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 }
 
                 if (!options.hasConverter(fieldType)) {
-                    throw new JsonException("'%s' can not deserialize".formatted(fieldType.getTypeName()));
+                    throw new JsonException("'%s' can not deserialize".formatted(fieldType.getType().getTypeName()));
                 }
 
                 valueElement = jsonObject.get(key);
-                JsonConverter valueConverter = options.getConverter(fieldType);
+                JsonConverter<?> valueConverter = options.getConverter(fieldType);
                 value = valueConverter.deserialize(valueElement, fieldType, options);
 
                 field.setAccessible(true);
@@ -198,14 +199,14 @@ public class JsonConverterObject extends JsonConverter<Object> {
 
                 for (int i = 0; i < parameters.length; ++i) {
                     Parameter param = parameters[i];
-                    Class<?> paramType = param.getType();
+                    TypeToken<?> paramType = TypeToken.get(param.getType());
                     String paramName = ctorAnnotation.paramNames()[i];
 
                     if (!jsonObject.containsKey(paramName) || !options.hasConverter(paramType)) {
                         break;
                     }
 
-                    JsonConverter converter = options.getConverter(paramType);
+                    JsonConverter<?> converter = options.getConverter(paramType);
                     q.add(converter.deserialize(jsonObject.get(paramName), paramType, options));
                 }
 

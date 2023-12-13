@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
@@ -27,19 +26,20 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterDouble extends JsonConverter<Double> {
 
     @Override
-    public Type getMyType() {
-        return Double.class;
+    public TypeToken<Double> getMyType() {
+        return TypeToken.get(Double.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, Double value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken(value.toString(), JsonTokenType.NUMBER));
     }
 
     @Override
-    public Double deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isNumber()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return element.getAsJsonPrimitive().getAsNumber().doubleValue();

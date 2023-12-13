@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
@@ -27,19 +26,20 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterCharacter extends JsonConverter<Character> {
 
     @Override
-    public Type getMyType() {
-        return Character.class;
+    public TypeToken<Character> getMyType() {
+        return TypeToken.get(Character.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, Character value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken('"' + value.toString() + '"', JsonTokenType.STRING));
     }
 
     @Override
-    public Character deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isChar()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return element.getAsJsonPrimitive().getAsCharacter();

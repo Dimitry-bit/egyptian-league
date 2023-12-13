@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 /**
@@ -36,7 +35,7 @@ public abstract class JsonConverter<T> {
      *
      * @return converter type
      */
-    public abstract Type getMyType();
+    public abstract TypeToken<T> getMyType();
 
     /**
      * Returns true if this converter can convert this type.
@@ -44,16 +43,12 @@ public abstract class JsonConverter<T> {
      * @param typeToConvert the type whose conversion is to be tested
      * @return true if this converter can convert this type
      */
-    public boolean canConvert(Type typeToConvert) {
+    public boolean canConvert(TypeToken<?> typeToConvert) {
         if (typeToConvert == null) {
             return false;
         }
 
-        if (typeToConvert instanceof Class<?>) {
-            return ((Class<?>) getMyType()).isAssignableFrom((Class<?>) typeToConvert);
-        }
-
-        return false;
+        return (typeToConvert.hashCode() == getMyType().hashCode());
     }
 
     /**
@@ -63,7 +58,7 @@ public abstract class JsonConverter<T> {
      * @param value   value to serialize
      * @param options serializer options
      */
-    public abstract void serialize(Queue<JsonToken> tokens, T value, JsonSerializerOptions options);
+    public abstract void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options);
 
     /**
      * Returns a deserialized instance of {@code typeToConvert} from
@@ -75,5 +70,5 @@ public abstract class JsonConverter<T> {
      * @return Returns an instance of {@code typToConvert} populated from
      *         {@code element}
      */
-    public abstract T deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options);
+    public abstract Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options);
 }

@@ -20,6 +20,7 @@
 package com.github.egyptian_league.json.Converters;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
@@ -27,49 +28,66 @@ import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
 
-public class JsonConverterCollection extends JsonConverter {
+public abstract class JsonConverterCollection<T> extends JsonConverter<Collection<T>> {
 
-    @Override
-    public Type getMyType() {
-        return Collection.class;
+    public TypeToken<T> getMyGenericType() {
+        ParameterizedType p = (ParameterizedType) getMyType().getType();
+        return (TypeToken<T>) TypeToken.get(p.getActualTypeArguments()[0]);
     }
 
     @Override
-    public boolean canConvert(Type typeToConvert) {
+    public boolean canConvert(TypeToken<?> typeToConvert) {
         if (typeToConvert == null) {
             return false;
         }
 
-        if (typeToConvert instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) typeToConvert;
-            if (parameterizedType.getRawType() instanceof Class<?>) {
-                Class<?> rawTypeClass = (Class<?>) parameterizedType.getRawType();
-                return Collection.class.isAssignableFrom(rawTypeClass);
-            }
+        Class<?> rawType = typeToConvert.getRawType();
+        Type type = typeToConvert.getType();
 
+        if (rawType.isInterface() || Modifier.isAbstract(rawType.getModifiers())) {
             return false;
-        } else if (typeToConvert instanceof Class<?>) {
-            return Collection.class.isAssignableFrom((Class<?>) typeToConvert);
+        }
+
+        if (!Collection.class.isAssignableFrom(rawType)) {
+            return false;
+        }
+
+        if (type instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+
+            Type value = parameterizedType.getActualTypeArguments()[0];
+
+            Class<?> testedValueType = TypeToken.getRawType(value);
+            Class<?> valueType = getMyGenericType().getRawType();
+
+            return (valueType.isAssignableFrom(testedValueType));
+        }
+
+        if (type instanceof Class<?>) {
+            return (Collection.class.isAssignableFrom((Class<?>) type));
         }
 
         return false;
     }
 
     @Override
-    public void serialize(Queue tokens, Object value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         boolean printComma = false;
-        tokens.add(new JsonToken("[", JsonTokenType.ARRAY_START));
         Collection<?> c = (Collection<?>) value;
+
+        tokens.add(new JsonToken("[", JsonTokenType.ARRAY_START));
         for (Object v : c) {
             if (printComma) {
                 tokens.add(new JsonToken(",", JsonTokenType.COMMA));
             }
 
-            if (!options.hasConverter((Type) v.getClass())) {
-                throw new JsonException("'%s' can not serialize".formatted(v.getClass().getName()));
+            TypeToken<?> valueType = TypeToken.get(v.getClass());
+
+            if (!options.hasConverter(valueType)) {
+                throw new JsonException("'%s' can not serialize".formatted(valueType.getType().getTypeName()));
             }
 
-            JsonConverter converter = options.getConverter((Type) v.getClass());
+            JsonConverter<?> converter = options.getConverter(valueType);
             converter.serialize(tokens, v, options);
             printComma = true;
         }
@@ -77,9 +95,10 @@ public class JsonConverterCollection extends JsonConverter {
     }
 
     @Override
-    public Object deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!canConvert(typeToConvert)) {
-            throw new IllegalArgumentException("'%s' type is not a collection".formatted(typeToConvert.getTypeName()));
+            throw new IllegalArgumentException(
+                    "'%s' type is not a collection".formatted(typeToConvert.getType().getTypeName()));
         }
 
         if (element.isJsonNull()) {
@@ -91,10 +110,10 @@ public class JsonConverterCollection extends JsonConverter {
                     "'%s' JsonElement is not a JsonArray".formatted(element.getClass().getName()));
         }
 
-        ParameterizedType parameterizedType = (ParameterizedType) typeToConvert;
-        Class<?> collectionType = (Class<?>) parameterizedType.getRawType();
+        ParameterizedType parameterizedType = (ParameterizedType) typeToConvert.getType();
+        Class<?> collectionType = (Class<?>) typeToConvert.getRawType();
         JsonArray j = element.getAsJsonArray();
-        Type componentType = parameterizedType.getActualTypeArguments()[0];
+        TypeToken<?> componentType = TypeToken.get(parameterizedType.getActualTypeArguments()[0]);
 
         try {
             Collection<Object> collection = (Collection<Object>) collectionType.getConstructor().newInstance();
@@ -104,20 +123,17 @@ public class JsonConverterCollection extends JsonConverter {
                 Object v = null;
 
                 if (!options.hasConverter(componentType)) {
-                    throw new JsonException("'%s' can not deserialize".formatted(componentType.getTypeName()));
+                    throw new JsonException(
+                            "'%s' can not deserialize".formatted(componentType.getType().getTypeName()));
                 }
 
-                if (componentType instanceof ParameterizedType) {
-                    if (!options.hasConverter(((ParameterizedType) componentType).getActualTypeArguments()[0])) {
-                        throw new JsonException("'%s' can not deserialize".formatted(componentType.getTypeName()));
-                    }
-
-                    JsonConverter converter = options.getConverter(componentType);
-                    v = converter.deserialize(valueElement, ((ParameterizedType) componentType), options);
-                } else if (componentType instanceof Class) {
-                    JsonConverter converter = options.getConverter(componentType);
-                    v = converter.deserialize(valueElement, componentType, options);
+                if (!options.hasConverter(componentType)) {
+                    throw new JsonException(
+                            "'%s' can not deserialize".formatted(componentType.getType().getTypeName()));
                 }
+
+                JsonConverter<?> converter = options.getConverter(componentType);
+                v = converter.deserialize(valueElement, componentType, options);
 
                 collection.add(v);
             }

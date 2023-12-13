@@ -19,7 +19,6 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
@@ -27,19 +26,20 @@ import com.github.egyptian_league.json.*;
 public class JsonConverterBoolean extends JsonConverter<Boolean> {
 
     @Override
-    public Type getMyType() {
-        return Boolean.class;
+    public TypeToken<Boolean> getMyType() {
+        return TypeToken.get(Boolean.class);
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, Boolean value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         tokens.add(new JsonToken(value.toString(), JsonTokenType.BOOLEAN));
     }
 
     @Override
-    public Boolean deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isBoolean()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
         return element.getAsJsonPrimitive().getAsBoolean();

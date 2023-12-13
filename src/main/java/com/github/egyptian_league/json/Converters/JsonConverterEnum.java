@@ -19,30 +19,36 @@
 
 package com.github.egyptian_league.json.Converters;
 
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
 
-public class JsonConverterEnum extends JsonConverter<Enum> {
+public class JsonConverterEnum extends JsonConverter<Enum<?>> {
 
     @Override
-    public Type getMyType() {
-        return Enum.class;
+    public TypeToken<Enum<?>> getMyType() {
+        return new TypeToken<Enum<?>>() {
+        };
     }
 
     @Override
-    public void serialize(Queue<JsonToken> tokens, Enum value, JsonSerializerOptions options) {
-        tokens.add(new JsonToken(((Integer) value.ordinal()).toString(), JsonTokenType.NUMBER));
+    public boolean canConvert(TypeToken<?> typeToConvert) {
+        return typeToConvert.getRawType().isEnum();
     }
 
     @Override
-    public Enum deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
+        tokens.add(new JsonToken(((Integer) ((Enum<?>) value).ordinal()).toString(), JsonTokenType.NUMBER));
+    }
+
+    @Override
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!element.isJsonPrimitive() || !element.getAsJsonPrimitive().isNumber()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getType().getTypeName()));
         }
 
-        Class<?> typeClass = (Class<?>) typeToConvert;
-        return (Enum) typeClass.getEnumConstants()[element.getAsJsonPrimitive().getAsNumber().intValue()];
+        Class<?> typeClass = (Class<?>) typeToConvert.getType();
+        return (Enum<?>) typeClass.getEnumConstants()[element.getAsJsonPrimitive().getAsNumber().intValue()];
     }
 }

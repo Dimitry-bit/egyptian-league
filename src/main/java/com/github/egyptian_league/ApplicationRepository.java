@@ -210,16 +210,16 @@ public class ApplicationRepository {
 
     // #endregion
 
-    private <T> void serialize(Hashtable<UUID, T> table, JsonSerializerOptions options, String filePath) {
-        try (FileWriter writer = new FileWriter(filePath)) {
-            String json = JsonSerializer.serialize(table, options);
-            if (!json.isEmpty() && !json.isBlank()) {
-                writer.write(json);
-            }
-        } catch (IOException e) {
-            System.out.printf("'%s': failed to write, %s\n", filePath, e.getMessage());
-        }
-    }
+//    private <T> void serialize(Hashtable<UUID, T> table, JsonSerializerOptions options, String filePath) {
+//        try (FileWriter writer = new FileWriter(filePath)) {
+//            String json = JsonSerializer.serialize(table, options);
+//            if (!json.isEmpty() && !json.isBlank()) {
+//                writer.write(json);
+//            }
+//        } catch (IOException e) {
+//            System.out.printf("'%s': failed to write, %s\n", filePath, e.getMessage());
+//        }
+//    }
 
     private <T> Hashtable<UUID, T> deserialize(Type type, JsonSerializerOptions options, String filePath) {
         File fp = new File(filePath);

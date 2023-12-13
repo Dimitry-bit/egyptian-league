@@ -92,7 +92,55 @@ public class JsonSerializer {
      *                                       supported
      */
     public static <T> T deserialize(String source, Type type) {
-        return deserialize(source, type, JsonSerializerOptions.DefaultOptions);
+        return deserialize(source, (TypeToken<T>) TypeToken.get(type), JsonSerializerOptions.DefaultOptions);
+    }
+
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * @param <T>    type to deserialize
+     * @param source valid JSON string
+     * @param type   type to deserialize class
+     * @return instance of {@code T}
+     * @throws JsonException                 if no converter is found
+     * @throws UnsupportedOperationException if {@code T} deserialization is
+     *                                       supported
+     */
+    public static <T> T deserialize(String source, Class<T> type) {
+        return deserialize(source, (TypeToken<T>) TypeToken.get(type), JsonSerializerOptions.DefaultOptions);
+    }
+
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * @param <T>    type to deserialize
+     * @param source valid JSON string
+     * @param type   type to deserialize class
+     * @return instance of {@code T}
+     * @throws JsonException                 if no converter is found
+     * @throws UnsupportedOperationException if {@code T} deserialization is
+     *                                       supported
+     */
+    public static <T> T deserialize(String source, TypeToken<T> type) {
+        return deserialize(source, (TypeToken<T>) type, JsonSerializerOptions.DefaultOptions);
+    }
+
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * {@link JsonSerializer#deserialize(String, TypeToken, JsonSerializerOptions)}
+     */
+    public static <T> T deserialize(String source, Type type, JsonSerializerOptions option) {
+        return deserialize(source, (TypeToken<T>) TypeToken.get(type), option);
+    }
+
+    /**
+     * Returns an instance of {@code T} populated from the given JSON string.
+     *
+     * {@link JsonSerializer#deserialize(String, TypeToken, JsonSerializerOptions)}
+     */
+    public static <T> T deserialize(String source, Class<T> type, JsonSerializerOptions option) {
+        return deserialize(source, TypeToken.get(type), option);
     }
 
     /**
@@ -107,14 +155,14 @@ public class JsonSerializer {
      * @throws UnsupportedOperationException if {@code T} deserialization is
      *                                       supported
      */
-    public static <T> T deserialize(String source, Type type, JsonSerializerOptions options) {
+    public static <T> T deserialize(String source, TypeToken<T> type, JsonSerializerOptions options) {
         JsonObject jsonObject = new JsonObject(source);
 
-        if (!options.hasConverter(Object.class)) {
-            throw new JsonException("'%s' can not deserialize".formatted(type.getTypeName()));
+        if (!options.hasConverter(type)) {
+            throw new JsonException("'%s' can not deserialize".formatted(type.getType().getTypeName()));
         }
 
-        JsonConverter converter = options.getConverter(type);
+        JsonConverter<?> converter = options.getConverter(type);
         Object value = converter.deserialize(jsonObject, type, options);
         return (T) value;
     }
@@ -128,18 +176,14 @@ public class JsonSerializer {
      */
     public static String serialize(Object object, JsonSerializerOptions options) {
         Queue<JsonToken> tokens = new LinkedList<>();
+        TypeToken<?> type = TypeToken.get(object.getClass());
 
-        if (!options.hasConverter(object.getClass())) {
+        if (!options.hasConverter(type)) {
             throw new JsonException("'%s' can not deserialize".formatted(object.getClass().getName()));
         }
 
-        JsonConverter converter = options.getConverter(object.getClass());
+        JsonConverter<?> converter = options.getConverter(type);
         converter.serialize(tokens, object, options);
-
-        // FIXME: Unreachable
-        if (tokens.isEmpty()) {
-            throw new UnsupportedOperationException("'%s' serialization is not supported".formatted(object.getClass()));
-        }
 
         return JsonFormatter.formatTokens(tokens, options);
     }

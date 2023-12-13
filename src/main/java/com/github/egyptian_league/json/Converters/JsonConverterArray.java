@@ -20,34 +20,30 @@
 package com.github.egyptian_league.json.Converters;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.Queue;
 
 import com.github.egyptian_league.json.*;
 
-public class JsonConverterArray extends JsonConverter {
+public class JsonConverterArray extends JsonConverter<Array> {
 
     @Override
-    public Type getMyType() {
-        return Object[].class;
+    public TypeToken<Array> getMyType() {
+        return TypeToken.get(Array.class);
     }
 
     @Override
-    public boolean canConvert(Type typeToConvert) {
+    public boolean canConvert(TypeToken<?> typeToConvert) {
         if (typeToConvert == null) {
             return false;
         }
 
-        if (typeToConvert instanceof Class<?>) {
-            return ((Class<?>) typeToConvert).isArray();
-        }
-
-        return false;
+        return (typeToConvert.getRawType().isArray());
     }
 
     @Override
-    public void serialize(Queue tokens, Object value, JsonSerializerOptions options) {
+    public void serialize(Queue<JsonToken> tokens, Object value, JsonSerializerOptions options) {
         int length = Array.getLength(value);
+
         tokens.add(new JsonToken("[", JsonTokenType.ARRAY_START));
         for (int i = 0; i < length; ++i) {
             if (i != 0) {
@@ -55,47 +51,45 @@ public class JsonConverterArray extends JsonConverter {
             }
 
             Object v = Array.get(value, i);
+            TypeToken<?> vType = TypeToken.get(v.getClass());
 
-            if (v == null) {
-                continue;
-            }
-
-            if (!options.hasConverter(v.getClass())) {
+            if (!options.hasConverter(vType)) {
                 throw new JsonException("'%s' can not serialize".formatted(v.getClass().getName()));
             }
 
-            JsonConverter converter = options.getConverter(v.getClass());
+            JsonConverter<?> converter = options.getConverter(vType);
             converter.serialize(tokens, v, options);
         }
         tokens.add(new JsonToken("]", JsonTokenType.ARRAY_END));
     }
 
     @Override
-    public Object deserialize(JsonElement element, Type typeToConvert, JsonSerializerOptions options) {
-        Class<?> typeClass = (Class<?>) typeToConvert;
+    public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
+        Class<?> typeClass = typeToConvert.getRawType();
 
         if (!typeClass.isArray()) {
             throw new IllegalArgumentException("'%s' type is not an array".formatted(typeClass.getName()));
         }
 
         if (!element.isJsonArray()) {
-            throw new IllegalArgumentException("JsonElement is not a '%s'".formatted(getMyType().getTypeName()));
+            throw new IllegalArgumentException(
+                    "JsonElement is not a '%s'".formatted(getMyType().getRawType().getTypeName()));
         }
 
         JsonArray jsonArray = element.getAsJsonArray();
         Object array = Array.newInstance(typeClass.getComponentType(), jsonArray.size());
         int length = Array.getLength(array);
-        Class<?> componentType = typeClass.getComponentType();
+        TypeToken<?> componentType = TypeToken.get(typeClass.getComponentType());
 
         for (int i = 0; i < length; ++i) {
             JsonElement valueElement = jsonArray.get(i);
             Object v = null;
 
             if (!options.hasConverter(componentType)) {
-                throw new JsonException("'%s' can not deserialize".formatted(componentType.getName()));
+                throw new JsonException("'%s' can not deserialize".formatted(componentType.getType().getTypeName()));
             }
 
-            JsonConverter converter = options.getConverter(componentType);
+            JsonConverter<?> converter = options.getConverter(componentType);
             v = converter.deserialize(valueElement, componentType, options);
             Array.set(array, i, v);
         }
