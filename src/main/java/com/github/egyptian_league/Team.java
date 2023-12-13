@@ -1,13 +1,12 @@
 package com.github.egyptian_league;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 public class Team {
 
     // FIXME: Where does it get decremented? Can it be calculated?
-    private static int numberOfTeams = 0;
-
     private final String name;
     private final UUID teamID;
 
@@ -17,13 +16,15 @@ public class Team {
     private UUID captain;
     private ArrayList<UUID> players = new ArrayList<>();
 
+    public ArrayList<UUID> getPlayers() {
+        return players;
+    }
+
     public Team(String name, UUID captain) {
         this.name = name;
         this.teamID = UUID.randomUUID();
-
         // FIXME: Why are you generating random UUID for captain? Do you own it? Is it a part of Team?
-        this.captain = UUID.randomUUID();
-        numberOfTeams++;
+        this.captain = captain;
     }
 
     public String getName() {
@@ -47,35 +48,19 @@ public class Team {
     }
 
     // FIXME: Bad solution and most likely will get missed
-    public static void DeleteTeam(UUID TeamId) {
-        numberOfTeams--;
-    }
 
     // FIXME: Should ACTUALLY calculate number of teams !!
-    public int calcNumberOfTeams() {
-        return numberOfTeams;
+    public static int calcNumberOfTeams() {
+       return ApplicationRepository.defaultRepository.getNumberOfTeams();
     }
-
-    // NOTE: Could simplify expression
-    // return player.contains(playerId);
     private boolean IsExistPlayer(UUID playerId) {
-        if (players.contains(playerId)) {
-            return true;
-        } else {
-            return false;
-        }
+       return players.contains(playerId);
+    }
+    public boolean AddPlayer(UUID playerId) {
+           return players.add(playerId);
     }
 
-    // NOTE: What happens if playerId does exist? How should I know if playerId did in fact get added to the list?
-    public void AddPlayer(UUID playerId) {
-        if (!IsExistPlayer(playerId)) {
-            players.add(playerId);
-        }
-    }
-
-    public void RemovePlayer(UUID playerId) {
-        if (IsExistPlayer(playerId)) {
-            players.remove(playerId);
-        }
+    public boolean RemovePlayer(UUID playerId) {
+            return players.remove(playerId);
     }
 }

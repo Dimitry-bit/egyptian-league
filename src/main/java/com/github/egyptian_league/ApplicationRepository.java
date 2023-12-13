@@ -127,6 +127,7 @@ public class ApplicationRepository {
     public Iterator<Team> getTeamsIterator() {
         return teams.values().iterator();
     }
+    public int getNumberOfTeams(){return teams.size();};
 
     public Team putTeam(Team team) {
         // return players.put(team.getId, team);
