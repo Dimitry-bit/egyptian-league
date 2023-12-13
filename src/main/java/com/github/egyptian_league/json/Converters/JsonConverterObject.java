@@ -34,6 +34,7 @@ import java.util.Set;
 
 import com.github.egyptian_league.json.*;
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
+import com.github.egyptian_league.json.Annotations.JsonIgnore;
 
 public class JsonConverterObject extends JsonConverter<Object> {
 
@@ -69,6 +70,10 @@ public class JsonConverterObject extends JsonConverter<Object> {
             boolean isPrintComma = false;
             tokens.add(new JsonToken("{", JsonTokenType.OBJECT_START));
             for (Field f : fields) {
+                if (f.isAnnotationPresent(JsonIgnore.class)) {
+                    continue;
+                }
+
                 if (isPrintComma) {
                     tokens.add(new JsonToken(",", JsonTokenType.COMMA));
                 }
@@ -130,7 +135,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 Object value = null;
                 JsonElement valueElement = null;
 
-                if (!jsonObject.containsKey(key)) {
+                if (!jsonObject.containsKey(key) || field.isAnnotationPresent(JsonIgnore.class)) {
                     continue;
                 }
 

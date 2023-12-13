@@ -6,6 +6,7 @@ import java.util.Hashtable;
 import java.util.UUID;
 
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
+import com.github.egyptian_league.json.Annotations.JsonIgnore;
 
 public class DTO {
     public ArrayList<ArrayList<Integer>> collection;
@@ -26,6 +27,9 @@ public class DTO {
     public int[] ints;
     public Hashtable<String, Hashtable<String, Integer>> hashtable;
     public Hashtable<UUID, Integer> uuidTable;
+
+    @JsonIgnore
+    public int ignored = 0;
 
     @JsonConstructor(paramNames = { "string" })
     public DTO(String string) {
@@ -49,6 +53,7 @@ public class DTO {
         sb.append("Date = %s\n".formatted(date));
         sb.append("tokenType = %s\n".formatted(tokenType));
         sb.append("nullChild = %s\n".formatted(nullChild));
+        sb.append("ignored = %d\n".formatted(ignored));
 
         sb.append("ints = [ ");
         for (int i = 0; i < ints.length; ++i) {

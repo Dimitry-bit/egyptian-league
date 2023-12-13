@@ -11,6 +11,7 @@
     "uuid": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
     "date": "2023-12-03T14:50:28.066722233",
     "tokenType": 1,
+    "ignored": 9999,
     "child": {
         "string": "testString",
         "shortNumber": 1,
