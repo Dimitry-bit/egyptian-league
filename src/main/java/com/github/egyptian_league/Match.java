@@ -1,79 +1,38 @@
 package com.github.egyptian_league;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class Match {
-   private int matchID;
-   private Date date;
-    private Team team1;
-    private Team team2;
-    private String stadiumName;
-    private Score score;
-    private Referee referee;
+    public final UUID matchId;
+    public final UUID HomeTeamId;
+    public final UUID AwayTeamId;
+    public final Referee Referee; // FIXME: Can it change?
+    private LocalDateTime dateTime;
+    private HashMap<UUID, Integer> goalScorers;
 
-    public Match(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score, Referee referee) {
-        this.matchID = matchID;
-        this.date = date;
-        this.team1 = team1;
-        this.team2 = team2;
-        this.stadiumName = stadiumName;
-        this.score = score;
-        this.referee = referee;
-    }
-    public int getMatchID() {
-        return matchID;
+    public Match(UUID homeTeamId, UUID awayTeamId, Referee Referee) {
+        matchId = UUID.randomUUID();
+        this.HomeTeamId = homeTeamId;
+        this.AwayTeamId = awayTeamId;
+        this.Referee = Referee;
     }
 
-    public void setMatchID(int matchID) {
-        this.matchID = matchID;
+    public HashMap<UUID, Integer> getGoalScorers() {
+        return goalScorers;
     }
 
-    public Date getDate() {
-        return date;
+    public void addGoal(UUID playerID, int numOfGoals) {
+        goalScorers.put(playerID, numOfGoals);
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public Team getTeam1() {
-        return team1;
+    // FIXME: Why?
+    public static Boolean isComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
+        return currentDate.isAfter(suggestedDate);
     }
-
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
-    }
-
-    public Team getTeam2() {
-        return team2;
-    }
-
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
-    }
-
-    public String getStadiumName() {
-        return stadiumName;
-    }
-
-    public void setStadiumName(String stadiumName) {
-        this.stadiumName = stadiumName;
-    }
-
-    public Score getScore() {
-        return score;
-    }
-
-    public void setScore(Score score) {
-        this.score = score;
-    }
-
-    public Referee getReferee() {
-        return referee;
-    }
-
-    public void setReferee(Referee referee) {
-        this.referee = referee;
-    }
-
 }

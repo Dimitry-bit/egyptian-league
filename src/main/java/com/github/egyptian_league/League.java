@@ -39,10 +39,10 @@ public class League {
     }
 
     // FIXME: Use an object instead of multiple parameters
-    public void setMatches(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score,
-            Referee referee) {
-        matches.add(new Match(matchID, date, team1, team2, stadiumName, score, referee));
-    }
+    // public void setMatches(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score,
+    //         Referee referee) {
+    //     matches.add(new Match(matchID, date, team1, team2, stadiumName, score, referee));
+    // }
 
     // FIXME: Use an object instead of multiple parameters
     // public void setPlayers(String name, String team, String position, int id, int
