@@ -8,10 +8,12 @@ public class Match {
     public final UUID matchId;
     public final UUID HomeTeamId;
     public final UUID AwayTeamId;
-    private UUID matchStadium; // FIXME: Use a UUID
-    public Referee Referee; // FIXME: Can it change?
+    private UUID matchStadium;
+    public Referee Referee;
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> goalScorers;
+
+    // FIXME: Should be calculated
     private UUID winnerTeam;
 
     public Match(UUID homeTeamId, UUID awayTeamId) {
@@ -32,7 +34,7 @@ public class Match {
         this.matchStadium = matchStadium;
     }
 
-    private void SetDate(LocalDateTime dateTime) {
+    private void setDate(LocalDateTime dateTime) {
         // FIXME: Validate before setting
         this.dateTime = dateTime;
     }
@@ -41,11 +43,13 @@ public class Match {
         return dateTime;
     }
 
-    public HashMap<UUID, Integer> GetGoalScorers() {
+    public HashMap<UUID, Integer> getGoalScorers() {
         return goalScorers;
     }
 
-    public void AddGoal(UUID playerId, int numOfGoals) {
+    // FIXME: Can I remove a goal? seems like a reasonable request
+    public void addGoal(UUID playerId, int numOfGoals) {
+        // FIXME: Validate numbOfGoals before setting
         goalScorers.put(playerId, numOfGoals);
     }
 
@@ -57,19 +61,30 @@ public class Match {
         return null;
     }
 
+    // FIXME: Should return winner team instead of void
+    // FIXME: winner team shouldn't be cached
     public void setWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
+
+        // FIXME: USE A VARIABLE !!!!!!!
         for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().size(); i++) {
-            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i))) {
-                homeScore += goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i));
+            if (goalScorers
+                    .containsKey(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i))) {
+                homeScore += goalScorers
+                        .get(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i));
             }
         }
+
+        // FIXME: USE A VARIABLE !!!!!!!
         for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().size(); i++) {
-            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i))) {
-                awayScore += goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i));
+            if (goalScorers
+                    .containsKey(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i))) {
+                awayScore += goalScorers
+                        .get(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i));
             }
         }
+
         if (homeScore > awayScore) {
             winnerTeam = HomeTeamId;
         } else if (homeScore < awayScore)

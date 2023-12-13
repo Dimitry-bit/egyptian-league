@@ -64,16 +64,9 @@ public class Player {
         return team;
     }
 
-
-    public class AgeCalculator {
-        public static int getAge(LocalDate dateOfBirth) {
-            LocalDate today = LocalDate.now();
-
-            int age = Period.between(dateOfBirth, today).getYears();
-
-            return age;
-        }
-
-
+    public static int calcAge(LocalDate dateOfBirth) {
+        LocalDate now = LocalDate.now();
+        int age = Period.between(dateOfBirth, now).getYears();
+        return age;
     }
 }
