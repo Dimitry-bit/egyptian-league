@@ -28,7 +28,7 @@ public class Match {
         this.matchStadium = matchStadium;
     }
 
-    public void setDate(LocalDateTime dateTime) {
+    private void setDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
     public LocalDateTime getDateTime() {
@@ -42,6 +42,7 @@ public class Match {
     public void addGoal(UUID playerID, int numOfGoals) {
         goalScorers.put(playerID, numOfGoals);
     }
+    
 
     // FIXME: Why?
    /* public static Boolean isComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
