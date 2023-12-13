@@ -15,15 +15,15 @@ public class SceneController {
     private Parent root;
 
     public void SwitchToTeamsPage(ActionEvent event) throws IOException {
-         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
+         root = FXMLLoader.load(getClass().getResource("/TeamsPage.fxml"));
          stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
          scene = new Scene(root);
          stage.setScene(scene);
          stage.show();
-
     }
+
     public void SwitchToHomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("TeamsPage.fxml"));
+        root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
