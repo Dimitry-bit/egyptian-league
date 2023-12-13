@@ -1,6 +1,8 @@
 package com.github.egyptian_league;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.UUID;
 
 public class Player {
@@ -62,31 +64,17 @@ public class Player {
         return team;
     }
 
-    // public static int getAge(Date dateOfBirth) {
 
-    // Calendar today = Calendar.getInstance();
-    // Calendar birthDate = Calendar.getInstance();
 
-    // int age = 0;
+    public class AgeCalculator {
+        public static int getAge(LocalDate dateOfBirth) {
+            LocalDate today = LocalDate.now();
 
-    // birthDate.setTime(dateOfBirth);
+            int age = Period.between(dateOfBirth, today).getYears();
 
-    // age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+            return age;
+        }
 
-    // // If birth date is greater than todays date (after 2 days adjustment of leap
-    // // year) then decrement age one year
-    // if ((birthDate.get(Calendar.DAY_OF_YEAR) - today.get(Calendar.DAY_OF_YEAR) >
-    // 3) ||
-    // (birthDate.get(Calendar.MONTH) > today.get(Calendar.MONTH))) {
-    // age--;
 
-    // // If birth date and todays date are of same month and birth day of month is
-    // // greater than todays day of month then decrement age
-    // } else if ((birthDate.get(Calendar.MONTH) == today.get(Calendar.MONTH)) &&
-    // (birthDate.get(Calendar.DAY_OF_MONTH) > today.get(Calendar.DAY_OF_MONTH))) {
-    // age--;
-    // }
-
-    // return age;
-    // }
+    }
 }
