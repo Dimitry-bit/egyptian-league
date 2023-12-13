@@ -48,9 +48,11 @@ public class TeamsController implements Initializable {
 
     @FXML
     public void btnInsert(ActionEvent event){
-        InsertTeams newData = new InsertTeams(textTeamName.getText(),textTeamId.getText());
+        int teamId= Integer.parseInt(textTeamId.getText());
+        InsertTeams newData = new InsertTeams(textTeamName.getText(),teamId);
         TeamsTable.getItems().add(newData);
         textTeamName.clear();
+        textTeamId.clear();
 
     }
     public void SwitchToHomePage(ActionEvent event) throws IOException {
