@@ -7,10 +7,15 @@ public class Player {
 
     private final UUID playerId;
     private final String name;
-    private UUID team; // FIXME: Datatype should be a UUID
+    private UUID team;
     private Position position;
     private int shirtNumber;
-    private LocalDateTime birthday; // FIXME: Switch to LocalDate
+
+    // FIXME: Is time really that important?
+    // FIXME: Does it change?
+    private LocalDateTime birthday;
+
+    // FIXME: Can it be calculated?
     private int Rank;
 
     public Player(String name, UUID team, Position position, int number) {

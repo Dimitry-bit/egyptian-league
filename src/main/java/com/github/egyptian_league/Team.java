@@ -1,7 +1,6 @@
 package com.github.egyptian_league;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.UUID;
 
 public class Team {
@@ -9,22 +8,20 @@ public class Team {
     // FIXME: Where does it get decremented? Can it be calculated?
     private static int numberOfTeams = 0;
 
-    // FIXME: Why isn't it final? Does it change?
     private final String name;
     private final UUID teamID;
 
     // FIXME: Shouldn't it be calculated?
     private int totalPoints;
 
-    // FIXME: Switch to UUIDs
     private UUID captain;
-
-    // FIXME: Switch to UUIDs instead
     private ArrayList<UUID> players = new ArrayList<>();
 
     public Team(String name, UUID captain) {
         this.name = name;
         this.teamID = UUID.randomUUID();
+
+        // FIXME: Why are you generating random UUID for captain? Do you own it? Is it a part of Team?
         this.captain = UUID.randomUUID();
         numberOfTeams++;
     }
@@ -49,17 +46,18 @@ public class Team {
         this.captain = captain;
     }
 
-    // FIXME: Should ACTUALLY calculate number of teams !!
-    public static void DeleteTeam(UUID TeamId)
-    {
+    // FIXME: Bad solution and most likely will get missed
+    public static void DeleteTeam(UUID TeamId) {
         numberOfTeams--;
     }
 
+    // FIXME: Should ACTUALLY calculate number of teams !!
     public int calcNumberOfTeams() {
         return numberOfTeams;
     }
 
-    // FIXME: Research ArrayList (Lecture 7)
+    // NOTE: Could simplify expression
+    // return player.contains(playerId);
     private boolean IsExistPlayer(UUID playerId) {
         if (players.contains(playerId)) {
             return true;
@@ -67,17 +65,17 @@ public class Team {
             return false;
         }
     }
+
+    // NOTE: What happens if playerId does exist? How should I know if playerId did in fact get added to the list?
     public void AddPlayer(UUID playerId) {
         if (!IsExistPlayer(playerId)) {
             players.add(playerId);
         }
     }
 
-    // FIXME: Research ArrayList (Lecture 7)
     public void RemovePlayer(UUID playerId) {
-         if (IsExistPlayer(playerId))
-         {
-             players.remove(playerId);
-         }
+        if (IsExistPlayer(playerId)) {
+            players.remove(playerId);
+        }
     }
 }

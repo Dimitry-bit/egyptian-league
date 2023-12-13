@@ -8,7 +8,7 @@ public class Match {
     public final UUID matchId;
     public final UUID HomeTeamId;
     public final UUID AwayTeamId;
-    private Stadium matchStadium;
+    private Stadium matchStadium; // FIXME: Use a UUID
     public final Referee Referee; // FIXME: Can it change?
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> goalScorers;
@@ -29,8 +29,10 @@ public class Match {
     }
 
     private void setDate(LocalDateTime dateTime) {
+        // FIXME: Validate before setting
         this.dateTime = dateTime;
     }
+
     public LocalDateTime getDateTime() {
         return dateTime;
     }
@@ -42,10 +44,12 @@ public class Match {
     public void addGoal(UUID playerID, int numOfGoals) {
         goalScorers.put(playerID, numOfGoals);
     }
-    
 
     // FIXME: Why?
-   /* public static Boolean isComingDate(LocalDateTime currentDate, LocalDateTime suggestedDate) {
-        return currentDate.isAfter(suggestedDate);
-    }*/
+    /*
+     * public static Boolean isComingDate(LocalDateTime currentDate, LocalDateTime
+     * suggestedDate) {
+     * return currentDate.isAfter(suggestedDate);
+     * }
+     */
 }
