@@ -3,76 +3,84 @@ package com.github.egyptian_league;
 import java.util.ArrayList;
 
 public class Team {
-    private String Name;
-    private int Team_ID;
-    private int Total_Score;
-    private Player Captain;
-    private static int Num_of_Teams = 0;
-    private ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Match> Matches = new ArrayList<Match>();
 
-    public Team(String Name, int Team_ID, int Total_Score, Player Captain) {
-        this.Name = Name;
-        this.Team_ID = Team_ID;
-        this.Total_Score = Total_Score;
-        this.Captain = Captain;
-        Num_of_Teams++;
+    // FIXME: Where does it get decremented? Can it be calculated?
+    private static int numberOfTeams = 0;
+
+    // FIXME: Why isn't it final? Does it change?
+    private String name;
+    private int uuid;
+
+    // FIXME: Shouldn't it be calculated?
+    private int totalScore;
+
+    // FIXME: Switch to UUIDs
+    private Player captain;
+
+    // FIXME: Switch to UUIDs instead
+    private ArrayList<Player> players = new ArrayList<>();
+
+    public Team(String name, int teamId, int totalScore, Player captain) {
+        this.name = name;
+        this.uuid = teamId;
+        this.totalScore = totalScore;
+        this.captain = captain;
+        numberOfTeams++;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
-    public int getTeam_ID() {
-        return Team_ID;
+    public int getUuid() {
+        return uuid;
     }
 
-    public void setTeam_ID(int team_ID) {
-        Team_ID = team_ID;
+    public int getTotalScore() {
+        return totalScore;
     }
 
-    public int getTotal_Score() {
-        return Total_Score;
-    }
-
-    public void setTotal_Score(int total_Score) {
-        Total_Score = total_Score;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
 
     public Player getCaptain() {
-        return Captain;
+        return captain;
     }
 
     public void setCaptain(Player captain) {
-        Captain = captain;
+        this.captain = captain;
     }
 
-    public int Calculate_numberOfTeams() {
-        return Num_of_Teams;
+    // FIXME: Should ACTUALLY calculate number of teams !!
+    public int calcNumberOfTeams() {
+        return numberOfTeams;
     }
 
-    public void ADD_Player(Player Input_player) {
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i) == null) {
-                players.set(i, Input_player);
-                return;
-            }
-
-        }
-        players.add(Input_player);
-    }
-
-    public void Delete_Player(String Player_Name, int Player_ID) {
+    // FIXME: Research ArrayList (Lecture 7)
+    public void addPlayer(Player Input_player) {
         // for (int i = 0; i < players.size(); i++) {
-        //     if (players.get(i) != null && players.get(i).getName().equals(Player_Name) && players.get(i).getId() == Player_ID) {
+        //     if (players.get(i) == null) {
+        //         players.set(i, Input_player);
+        //         return;
+        //     }
+
+        // }
+        // players.add(Input_player);
+    }
+
+    // FIXME: Research ArrayList (Lecture 7)
+    public void removePlayer(String Player_Name, int Player_ID) {
+        // for (int i = 0; i < players.size(); i++) {
+        //     if (players.get(i) != null && players.get(i).getName().equals(Player_Name)
+        //             && players.get(i).getPlayer_Id() == Player_ID) {
         //         players.remove(i);
         //         break;
         //     }
         // }
     }
-
 }
