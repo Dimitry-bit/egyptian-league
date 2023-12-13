@@ -19,6 +19,7 @@
 
 package com.github.egyptian_league.json;
 
+import java.lang.reflect.Type;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -90,7 +91,7 @@ public class JsonSerializer {
      * @throws UnsupportedOperationException if {@code T} deserialization is
      *                                       supported
      */
-    public static <T> T deserialize(String source, Class<T> type) {
+    public static <T> T deserialize(String source, Type type) {
         return deserialize(source, type, JsonSerializerOptions.DefaultOptions);
     }
 
@@ -106,16 +107,16 @@ public class JsonSerializer {
      * @throws UnsupportedOperationException if {@code T} deserialization is
      *                                       supported
      */
-    public static <T> T deserialize(String source, Class<T> type, JsonSerializerOptions options) {
+    public static <T> T deserialize(String source, Type type, JsonSerializerOptions options) {
         JsonObject jsonObject = new JsonObject(source);
 
         if (!options.hasConverter(Object.class)) {
-            throw new JsonException("'%s' can not deserialize".formatted(type.getName()));
+            throw new JsonException("'%s' can not deserialize".formatted(type.getTypeName()));
         }
 
         JsonConverter converter = options.getConverter(type);
         Object value = converter.deserialize(jsonObject, type, options);
-        return type.cast(value);
+        return (T) value;
     }
 
     /**
