@@ -1,27 +1,27 @@
 package com.github.egyptian_league;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Player {
 
-    private final UUID uuid;
+    private final UUID playerId;
     private final String name;
-    private String team; // FIXME: Datatype should be a UUID
+    private UUID team; // FIXME: Datatype should be a UUID
     private Position position;
-    private int number;
-    // private Date birthday; // FIXME: Switch to LocalDate
+    private int shirtNumber;
+    private LocalDateTime birthday; // FIXME: Switch to LocalDate
     private int Rank;
 
-    public Player(String name, String team, Position position, int number) {
-        this.uuid = UUID.randomUUID();
+    public Player(String name, UUID team, Position position, int number) {
+        this.playerId = UUID.randomUUID();
         this.name = name;
-        this.team = team;
+        this.team = UUID.randomUUID();
         this.position = position;
-        this.number = number;
+        this.shirtNumber = number;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(UUID team) {
         this.team = team;
     }
 
@@ -29,8 +29,8 @@ public class Player {
         Rank = rank;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setShirtNumber(int shirtNumber) {
+        this.shirtNumber = shirtNumber;
     }
 
     public void setPosition(Position position) {
@@ -46,14 +46,14 @@ public class Player {
     }
 
     public UUID getId() {
-        return uuid;
+        return playerId;
     }
 
-    public int getNumber() {
-        return number;
+    public int getShirtNumber() {
+        return shirtNumber;
     }
 
-    public String getTeam() {
+    public UUID getTeam() {
         return team;
     }
 

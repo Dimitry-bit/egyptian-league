@@ -1,6 +1,8 @@
 package com.github.egyptian_league;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.UUID;
 
 public class Team {
 
@@ -8,23 +10,22 @@ public class Team {
     private static int numberOfTeams = 0;
 
     // FIXME: Why isn't it final? Does it change?
-    private String name;
-    private int uuid;
+    private final String name;
+    private final UUID teamID;
 
     // FIXME: Shouldn't it be calculated?
-    private int totalScore;
+    private int totalPoints;
 
     // FIXME: Switch to UUIDs
-    private Player captain;
+    private UUID captain;
 
     // FIXME: Switch to UUIDs instead
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<UUID> players = new ArrayList<>();
 
-    public Team(String name, int teamId, int totalScore, Player captain) {
+    public Team(String name, UUID captain) {
         this.name = name;
-        this.uuid = teamId;
-        this.totalScore = totalScore;
-        this.captain = captain;
+        this.teamID = UUID.randomUUID();
+        this.captain = UUID.randomUUID();
         numberOfTeams++;
     }
 
@@ -32,55 +33,51 @@ public class Team {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public UUID getUuid() {
+        return teamID;
     }
 
-    public int getUuid() {
-        return uuid;
+    public int getTotalPoints() {
+        return totalPoints;
     }
 
-    public int getTotalScore() {
-        return totalScore;
-    }
-
-    public void setTotalScore(int totalScore) {
-        this.totalScore = totalScore;
-    }
-
-    public Player getCaptain() {
+    public UUID getCaptain() {
         return captain;
     }
 
-    public void setCaptain(Player captain) {
+    public void setCaptain(UUID captain) {
         this.captain = captain;
     }
 
     // FIXME: Should ACTUALLY calculate number of teams !!
+    public static void DeleteTeam(UUID TeamId)
+    {
+        numberOfTeams--;
+    }
+
     public int calcNumberOfTeams() {
         return numberOfTeams;
     }
 
     // FIXME: Research ArrayList (Lecture 7)
-    public void addPlayer(Player Input_player) {
-        // for (int i = 0; i < players.size(); i++) {
-        //     if (players.get(i) == null) {
-        //         players.set(i, Input_player);
-        //         return;
-        //     }
-
-        // }
-        // players.add(Input_player);
+    private boolean IsExistPlayer(UUID playerId) {
+        if (players.contains(playerId)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void AddPlayer(UUID playerId) {
+        if (!IsExistPlayer(playerId)) {
+            players.add(playerId);
+        }
     }
 
     // FIXME: Research ArrayList (Lecture 7)
-    public void removePlayer(String Player_Name, int Player_ID) {
-        // for (int i = 0; i < players.size(); i++) {
-        //     if (players.get(i) != null && players.get(i).getName().equals(Player_Name)
-        //             && players.get(i).getPlayer_Id() == Player_ID) {
-        //         players.remove(i);
-        //         break;
-        //     }
-        // }
+    public void RemovePlayer(UUID playerId) {
+         if (IsExistPlayer(playerId))
+         {
+             players.remove(playerId);
+         }
     }
 }
