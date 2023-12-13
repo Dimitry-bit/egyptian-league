@@ -9,14 +9,16 @@ import java.util.UUID;
 public class Referee {
     private final String name;
     private final UUID refereeId;
-    private ArrayList<LocalDate> refereeSchedule=new ArrayList<>();
-    Referee(String name){
-        this.name=name;
-        refereeId=UUID.randomUUID();
+    private ArrayList<LocalDate> refereeSchedule = new ArrayList<>();
+
+    Referee(String name) {
+        this.name = name;
+        refereeId = UUID.randomUUID();
     }
-    public boolean CheckRefereeAvailability(Match match){
-            for (int i =0; i<refereeSchedule.size();i++)
-            if (match.getDateTime().toLocalDate().equals(refereeSchedule.get(i))){
+
+    public boolean CheckRefereeAvailability(Match match) {
+        for (int i = 0; i < refereeSchedule.size(); i++)
+            if (match.getDateTime().toLocalDate().equals(refereeSchedule.get(i))) {
                 return false;
             }
         return true;

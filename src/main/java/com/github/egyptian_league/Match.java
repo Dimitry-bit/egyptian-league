@@ -20,6 +20,10 @@ public class Match {
         this.AwayTeamId = awayTeamId;
     }
 
+    public UUID getWinnerTeam() {
+        return winnerTeam;
+    }
+
     public UUID getMatchStadium() {
         return matchStadium;
     }
@@ -45,33 +49,33 @@ public class Match {
         goalScorers.put(playerId, numOfGoals);
     }
 
-    public Referee setReferee(Referee referee){
-        if (referee.CheckRefereeAvailability(this)){
-            this.Referee=referee;
+    public Referee setReferee(Referee referee) {
+        if (referee.CheckRefereeAvailability(this)) {
+            this.Referee = referee;
             return referee;
         }
         return null;
     }
-    public void setWinnerTeam(){
-        int homeScore=0;
-        int awayScore=0;
-        for (int i=0;i<ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().size();i++){
-            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i))){
-                homeScore+=goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i));
+
+    public void setWinnerTeam() {
+        int homeScore = 0;
+        int awayScore = 0;
+        for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().size(); i++) {
+            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i))) {
+                homeScore += goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(HomeTeamId).getPlayers().get(i));
             }
         }
-        for (int i=0;i<ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().size();i++){
-            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i))){
-                awayScore+=goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i));
+        for (int i = 0; i < ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().size(); i++) {
+            if (goalScorers.containsKey(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i))) {
+                awayScore += goalScorers.get(ApplicationRepository.defaultRepository.getTeamById(AwayTeamId).getPlayers().get(i));
             }
         }
-        if (homeScore>awayScore){
-            winnerTeam= HomeTeamId;
-        }
-        else if(homeScore<awayScore)
-            winnerTeam= AwayTeamId;
+        if (homeScore > awayScore) {
+            winnerTeam = HomeTeamId;
+        } else if (homeScore < awayScore)
+            winnerTeam = AwayTeamId;
         else
-            winnerTeam= null;
+            winnerTeam = null;
     }
 
     // FIXME: Why?
