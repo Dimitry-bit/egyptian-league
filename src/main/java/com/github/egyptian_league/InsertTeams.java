@@ -4,16 +4,29 @@ public class InsertTeams {
     private String TeamName;
     private Integer TeamId;
 
-    public InsertTeams(String teamName, Integer teamId) {
+    private String TeamCaptain;
+    private Integer TotalScore;
+
+    public InsertTeams(String teamName, Integer teamId, String teamCaptain, Integer totalScore) {
         TeamName = teamName;
         TeamId = teamId;
+        TeamCaptain = teamCaptain;
+        TotalScore = totalScore;
     }
 
     public String getTeamName() {
         return TeamName;
     }
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return TeamId;
+    }
+
+    public String getTeamCaptain() {
+        return TeamCaptain;
+    }
+
+    public Integer getTotalScore() {
+        return TotalScore;
     }
 }

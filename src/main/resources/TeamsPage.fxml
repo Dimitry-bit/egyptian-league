@@ -17,10 +17,12 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TableView fx:id="TeamsTable" layoutX="199.0" layoutY="64.0" prefHeight="200.0" prefWidth="290.0">
+      <TableView fx:id="TeamsTable" layoutX="170.0" layoutY="64.0" prefHeight="200.0" prefWidth="359.0">
         <columns>
-          <TableColumn fx:id="TeamName" prefWidth="146.3999481201172" text="Team Name" />
-          <TableColumn fx:id="TeamId" prefWidth="143.20001220703125" text="ID" />
+          <TableColumn fx:id="TeamName" prefWidth="95.19999694824219" text="Team Name" />
+          <TableColumn fx:id="TeamId" prefWidth="67.20001220703125" text="ID" />
+            <TableColumn fx:id="TeamCaptain" prefWidth="123.20001220703125" text="Captain " />
+            <TableColumn fx:id="TeamTotalScore" prefWidth="71.199951171875" text="Total Score" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -32,6 +34,8 @@
                <children>
                   <TextField fx:id="textTeamName" promptText="TeamName" />
                   <TextField fx:id="textTeamId" promptText="ID" />
+                  <TextField fx:id="textTeamCaptain" promptText="TeamCaptain" />
+                  <TextField fx:id="textTotalScore" promptText="TotalScore" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#btnInsert" text="Insert Team">
