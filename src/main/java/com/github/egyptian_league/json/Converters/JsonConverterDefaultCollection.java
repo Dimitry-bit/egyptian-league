@@ -8,7 +8,7 @@ public class JsonConverterDefaultCollection extends JsonConverterCollection<Obje
 
     @Override
     public TypeToken<Collection<Object>> getMyType() {
-        return new TypeToken<Collection<Object>>() {
+        return new TypeToken<>() {
         };
     }
 }

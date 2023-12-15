@@ -31,11 +31,13 @@ import com.github.egyptian_league.json.*;
 
 public abstract class JsonConverterMap<K, V> extends JsonConverter<Map<K, V>> {
 
+    @SuppressWarnings("unchecked")
     public TypeToken<K> getMyKeyType() {
         ParameterizedType p = (ParameterizedType) getMyType().getType();
         return (TypeToken<K>) TypeToken.get(p.getActualTypeArguments()[0]);
     }
 
+    @SuppressWarnings("unchecked")
     public TypeToken<V> getMyValueType() {
         ParameterizedType p = (ParameterizedType) getMyType().getType();
         return (TypeToken<V>) TypeToken.get(p.getActualTypeArguments()[1]);
@@ -108,6 +110,7 @@ public abstract class JsonConverterMap<K, V> extends JsonConverter<Map<K, V>> {
         tokens.add(new JsonToken("}", JsonTokenType.OBJECT_END));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
 

@@ -25,7 +25,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 class JsonLexer {
 
@@ -41,7 +40,7 @@ class JsonLexer {
         charToToken.put(']', JsonTokenType.ARRAY_END);
         charToToken.put(':', JsonTokenType.COLON);
         charToToken.put(',', JsonTokenType.COMMA);
-    };
+    }
 
     private ArrayList<JsonToken> tokens;
     private int index;
@@ -80,8 +79,6 @@ class JsonLexer {
                 }
                 tokens.add(token);
             }
-
-            sr.close();
         } catch (IOException io) {
             System.err.println("lexer: " + io.getMessage());
             io.printStackTrace();
@@ -332,34 +329,5 @@ class JsonLexer {
         return null;
     }
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        StringBuilder json = new StringBuilder();
-        JsonLexer lexer = new JsonLexer();
 
-        while (in.hasNextLine()) {
-            json.append(in.nextLine());
-            json.append(System.lineSeparator());
-        }
-        in.close();
-
-        lexer.lex(json.toString());
-
-        System.out.println("\nLexer Operations:");
-
-        System.out.printf("Next: '%s'%n", lexer.nextToken().value);
-        System.out.printf("Peek: '%s'%n", lexer.peek().value);
-        System.out.printf("Call: 'ungetToken()'%n");
-        lexer.ungetToken();
-        System.out.printf("Next: '%s'%n", lexer.nextToken().value);
-        System.out.printf("Next: '%s'%n", lexer.nextToken().value);
-        System.out.printf("Prev: '%s'%n", lexer.previousToken().value);
-
-        System.out.println("\nLexer Tokens:");
-
-        ArrayList<JsonToken> tokens = lexer.getTokens();
-        for (JsonToken t : tokens) {
-            System.out.printf("%-12s : '%s'%n", t.type, t.value);
-        }
-    }
 }

@@ -27,7 +27,7 @@ public class JsonConverterEnum extends JsonConverter<Enum<?>> {
 
     @Override
     public TypeToken<Enum<?>> getMyType() {
-        return new TypeToken<Enum<?>>() {
+        return new TypeToken<>() {
         };
     }
 
@@ -49,6 +49,6 @@ public class JsonConverterEnum extends JsonConverter<Enum<?>> {
         }
 
         Class<?> typeClass = (Class<?>) typeToConvert.getType();
-        return (Enum<?>) typeClass.getEnumConstants()[element.getAsJsonPrimitive().getAsNumber().intValue()];
+        return typeClass.getEnumConstants()[element.getAsJsonPrimitive().getAsNumber().intValue()];
     }
 }

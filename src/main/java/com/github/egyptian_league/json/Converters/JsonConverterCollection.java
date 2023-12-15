@@ -30,10 +30,12 @@ import com.github.egyptian_league.json.*;
 
 public abstract class JsonConverterCollection<T> extends JsonConverter<Collection<T>> {
 
+    @SuppressWarnings("unchecked")
     public TypeToken<T> getMyGenericType() {
         ParameterizedType p = (ParameterizedType) getMyType().getType();
         return (TypeToken<T>) TypeToken.get(p.getActualTypeArguments()[0]);
     }
+
 
     @Override
     public boolean canConvert(TypeToken<?> typeToConvert) {
@@ -52,9 +54,7 @@ public abstract class JsonConverterCollection<T> extends JsonConverter<Collectio
             return false;
         }
 
-        if (type instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) type;
-
+        if (type instanceof ParameterizedType parameterizedType) {
             Type value = parameterizedType.getActualTypeArguments()[0];
 
             Class<?> testedValueType = TypeToken.getRawType(value);
@@ -94,6 +94,7 @@ public abstract class JsonConverterCollection<T> extends JsonConverter<Collectio
         tokens.add(new JsonToken("]", JsonTokenType.ARRAY_END));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Object deserialize(JsonElement element, TypeToken<?> typeToConvert, JsonSerializerOptions options) {
         if (!canConvert(typeToConvert)) {
@@ -111,7 +112,7 @@ public abstract class JsonConverterCollection<T> extends JsonConverter<Collectio
         }
 
         ParameterizedType parameterizedType = (ParameterizedType) typeToConvert.getType();
-        Class<?> collectionType = (Class<?>) typeToConvert.getRawType();
+        Class<?> collectionType = typeToConvert.getRawType();
         JsonArray j = element.getAsJsonArray();
         TypeToken<?> componentType = TypeToken.get(parameterizedType.getActualTypeArguments()[0]);
 

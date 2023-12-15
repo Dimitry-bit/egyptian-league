@@ -9,7 +9,7 @@ public class JsonConverterUUIDMap extends JsonConverterMap<UUID, Object> {
 
     @Override
     public TypeToken<Map<UUID, Object>> getMyType() {
-        return new TypeToken<Map<UUID, Object>>() {
+        return new TypeToken<>() {
         };
     }
 }

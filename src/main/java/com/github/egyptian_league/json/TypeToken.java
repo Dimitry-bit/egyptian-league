@@ -7,11 +7,13 @@ public class TypeToken<T> {
     private final Class<? super T> rawType;
     private final Type type;
 
+    @SuppressWarnings("unchecked")
     public TypeToken() {
         this.type = getTypeTokenTypeArgument();
         this.rawType = (Class<? super T>) getRawType(type);
     }
 
+    @SuppressWarnings("unchecked")
     public TypeToken(Type type) {
         if (!isValidType(type)) {
             throw new UnsupportedOperationException("'%s' type is not supported".formatted(type.getTypeName()));
@@ -39,8 +41,7 @@ public class TypeToken<T> {
 
     private Type getTypeTokenTypeArgument() {
         Type superclass = getClass().getGenericSuperclass();
-        if (superclass instanceof ParameterizedType) {
-            ParameterizedType p = (ParameterizedType) superclass;
+        if (superclass instanceof ParameterizedType p) {
             if (p.getRawType() == TypeToken.class) {
                 Type typeArg = p.getActualTypeArguments()[0];
                 if (isValidType(typeArg)) {
@@ -55,8 +56,7 @@ public class TypeToken<T> {
     public static Class<?> getRawType(Type type) {
         if (type instanceof Class<?>) {
             return (Class<?>) type;
-        } else if (type instanceof ParameterizedType) {
-            ParameterizedType p = (ParameterizedType) type;
+        } else if (type instanceof ParameterizedType p) {
             return (Class<?>) p.getRawType();
         }
 
@@ -66,11 +66,9 @@ public class TypeToken<T> {
     private boolean isValidType(Type type) {
         if (type instanceof Class) {
             return true;
-        } else if (type instanceof ParameterizedType) {
-            return true;
         }
 
-        return false;
+        return type instanceof ParameterizedType;
     }
 
     @Override

@@ -208,7 +208,7 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
             } else if (element.isJsonPrimitive()) {
                 sb.append(element.getAsJsonPrimitive().getAsString());
             } else {
-                sb.append(element.toString());
+                sb.append(element);
             }
         }
         sb.append(" ]");

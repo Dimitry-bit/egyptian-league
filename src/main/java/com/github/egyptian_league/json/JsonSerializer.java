@@ -91,6 +91,7 @@ public class JsonSerializer {
      * @throws UnsupportedOperationException if {@code T} deserialization is
      *                                       supported
      */
+    @SuppressWarnings("unchecked")
     public static <T> T deserialize(String source, Type type) {
         return deserialize(source, (TypeToken<T>) TypeToken.get(type), JsonSerializerOptions.DefaultOptions);
     }
@@ -107,7 +108,7 @@ public class JsonSerializer {
      *                                       supported
      */
     public static <T> T deserialize(String source, Class<T> type) {
-        return deserialize(source, (TypeToken<T>) TypeToken.get(type), JsonSerializerOptions.DefaultOptions);
+        return deserialize(source, TypeToken.get(type), JsonSerializerOptions.DefaultOptions);
     }
 
     /**
@@ -122,21 +123,22 @@ public class JsonSerializer {
      *                                       supported
      */
     public static <T> T deserialize(String source, TypeToken<T> type) {
-        return deserialize(source, (TypeToken<T>) type, JsonSerializerOptions.DefaultOptions);
+        return deserialize(source, type, JsonSerializerOptions.DefaultOptions);
     }
 
     /**
      * Returns an instance of {@code T} populated from the given JSON string.
-     *
+     * <p>
      * {@link JsonSerializer#deserialize(String, TypeToken, JsonSerializerOptions)}
      */
+    @SuppressWarnings("unchecked")
     public static <T> T deserialize(String source, Type type, JsonSerializerOptions option) {
         return deserialize(source, (TypeToken<T>) TypeToken.get(type), option);
     }
 
     /**
      * Returns an instance of {@code T} populated from the given JSON string.
-     *
+     * <p>
      * {@link JsonSerializer#deserialize(String, TypeToken, JsonSerializerOptions)}
      */
     public static <T> T deserialize(String source, Class<T> type, JsonSerializerOptions option) {
@@ -155,6 +157,7 @@ public class JsonSerializer {
      * @throws UnsupportedOperationException if {@code T} deserialization is
      *                                       supported
      */
+    @SuppressWarnings("unchecked")
     public static <T> T deserialize(String source, TypeToken<T> type, JsonSerializerOptions options) {
         JsonObject jsonObject = new JsonObject(source);
 

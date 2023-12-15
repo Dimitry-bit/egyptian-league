@@ -65,10 +65,6 @@ public class JsonObject extends JsonElement {
         members.clear();
     }
 
-    public Object clone() {
-        return members.clone();
-    }
-
     /**
      * Returns true if this JSON object contains no members.
      *
@@ -158,12 +154,11 @@ public class JsonObject extends JsonElement {
 
     /**
      * Maps the specified key to the specified element in this JSON object. Neither
-     * the
-     * key nor the element can be null.
+     * the key nor the element can be null.
      *
      * @param key     the key
      * @param element the element
-     * @return true if this collection changed as a result of the call
+     * @return the previous value of the specified key in this hashtable, or null if it did not have one
      */
     public JsonElement put(String key, JsonElement element) {
         return members.put(key, element);
@@ -231,7 +226,7 @@ public class JsonObject extends JsonElement {
             } else if (element.isJsonPrimitive()) {
                 sb.append(element.getAsJsonPrimitive().getAsString());
             } else {
-                sb.append(element.toString());
+                sb.append(element);
             }
 
             i++;
