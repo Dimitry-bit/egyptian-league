@@ -29,7 +29,7 @@ import com.github.egyptian_league.json.Converters.*;
 
 /**
  * JSON serialization options to modify the default serializer behavior. Also
- * allows for custom converters to be add.
+ * allows for custom converters to be added.
  *
  * @author Tony Medhat
  */

@@ -190,8 +190,8 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 Parameter[] parameters = ctor.getParameters();
 
                 if (ctorAnnotation.paramNames().length != ctor.getParameterCount()) {
-                    throw new JsonException("'%s' Parameter names annotation length does " +
-                            "not match constructor parameters length".formatted(ctor.getName()));
+                    throw new JsonException("'%s' Parameter names annotation length does ".formatted(ctor.getName()) +
+                            "not match constructor parameters length");
                 }
 
                 for (int i = 0; i < parameters.length; ++i) {

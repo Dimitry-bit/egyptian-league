@@ -57,7 +57,7 @@ public class JsonObject extends JsonElement {
     }
 
     /**
-     * Removes all of the members from this JSON object. The JSON object will be
+     * Removes all the members from this JSON object. The JSON object will be
      * empty after this
      * call returns.
      */
@@ -80,8 +80,7 @@ public class JsonObject extends JsonElement {
      * the JSON object, so changes to the JSON object are reflected in the set, and
      * vice-versa. If
      * the JSON object is modified while an iteration over the set is in progress
-     * (except
-     * through the iterator's own remove operation), the results of the iteration
+     * (except through the iterator's own remove operation), the results of the iteration
      * are undefined.
      *
      * @return a set view of the keys contained in this JSON object

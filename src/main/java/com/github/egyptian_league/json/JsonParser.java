@@ -19,6 +19,8 @@
 
 package com.github.egyptian_league.json;
 
+import java.util.Objects;
+
 class JsonParser {
 
     static JsonObject parseObject(JsonLexer lexer) {
@@ -86,7 +88,7 @@ class JsonParser {
             }
         }
 
-        if (t.type != JsonTokenType.OBJECT_END) {
+        if (Objects.requireNonNull(t).type != JsonTokenType.OBJECT_END) {
             throw new JsonException("Expected end-of-object bracket");
         }
 
@@ -143,7 +145,7 @@ class JsonParser {
             }
         }
 
-        if (t.type != JsonTokenType.ARRAY_END) {
+        if (Objects.requireNonNull(t).type != JsonTokenType.ARRAY_END) {
             throw new JsonException("Expected end-of-object bracket");
         }
 

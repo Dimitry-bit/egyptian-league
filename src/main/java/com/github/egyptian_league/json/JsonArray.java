@@ -68,7 +68,7 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
     }
 
     /**
-     * Removes all of the elements from this JSON array. The JSON array will be
+     * Removes all the elements from this JSON array. The JSON array will be
      * empty after this
      * call returns.
      */
@@ -87,7 +87,7 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
     }
 
     /**
-     * Appends all of the elements in the specified collection to the end of this
+     * Appends all the elements in the specified collection to the end of this
      * JSON array, in the order that they are returned by the specified collection's
      * Iterator.
      *
@@ -109,14 +109,13 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
     }
 
     /**
-     * Returns true if this JSON array contains all of the elements in the specified
+     * Returns true if this JSON array contains all the elements in the specified
      * collection.
      *
      * @param elements elements to be checked for containment in this collection
-     * @return true if this collection contains all of the elements in this JSONin
-     *         this JSON array
+     * @return true if this collection contains all the elements in this JSON array
      */
-    public boolean containsAll(Collection<?> elements) {
+    public boolean containsAll(Collection<JsonElement> elements) {
         return this.elements.containsAll(elements);
     }
 
@@ -158,12 +157,12 @@ public class JsonArray extends JsonElement implements Iterable<JsonElement> {
      * @param elements - collection containing elements to be removed from this list
      * @return true if this JSON array changed as a result of the call
      */
-    public boolean removeAll(Collection<?> elements) {
+    public boolean removeAll(Collection<JsonElement> elements) {
         return this.elements.removeAll(elements);
     }
 
     /**
-     * Removes all of the elements of this JSON array that satisfy the given
+     * Removes all the elements of this JSON array that satisfy the given
      * predicate.
      *
      * @param filter a predicate which returns true for elements to be removed

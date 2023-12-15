@@ -20,7 +20,7 @@
 package com.github.egyptian_league.json;
 
 /**
- * Object representation of JSON's null.
+ * Object representation of JSON null.
  *
  * @author Tony Medhat
  */
