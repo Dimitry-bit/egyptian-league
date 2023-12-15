@@ -62,12 +62,16 @@ class JsonFormatter {
                 sb.append(token.value);
 
                 if (isTokenStartOrComma || isNextTokenEnd) {
-                    sb.append("\n");
-                    indent = true;
+                    if (!(isTokenStart && isNextTokenEnd)) {
+                        sb.append("\n");
+                        indent = true;
+                    }
 
                     if (isTokenStart) {
                         nTabs++;
-                    } else if (isNextTokenEnd) {
+                    }
+
+                    if (isNextTokenEnd) {
                         nTabs--;
                     }
                 } else if (token.type == JsonTokenType.COLON) {
