@@ -167,6 +167,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
         return ctors;
     }
 
+    // Note: Generic parameters are not supported
     private Object createInstance(JsonObject jsonObject, Type typeToCreate, JsonSerializerOptions options) {
         Constructor<?>[] ctors = getCandidateConstructors(typeToCreate);
 
@@ -175,7 +176,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
         }
 
         try {
-            boolean isDefaultConstructor = ctors[0].getParameterCount() == 0;
+            boolean isDefaultConstructor = (ctors[0].getParameterCount() == 0);
 
             if (isDefaultConstructor) {
                 ctors[0].setAccessible(true);
@@ -183,10 +184,12 @@ public class JsonConverterObject extends JsonConverter<Object> {
             }
 
             for (Constructor<?> ctor : ctors) {
+                if (!ctor.isAnnotationPresent(JsonConstructor.class)) {
+                    continue;
+                }
+
                 Queue<Object> q = new LinkedList<>();
                 JsonConstructor ctorAnnotation = ctor.getAnnotation(JsonConstructor.class);
-
-                // Note: Generic parameters are not supported
                 Parameter[] parameters = ctor.getParameters();
 
                 if (ctorAnnotation.paramNames().length != ctor.getParameterCount()) {
@@ -213,8 +216,8 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 }
             }
 
-            throw new JsonException(
-                    "'%s' Couldn't construct, perhaps missing data".formatted(typeToCreate.getTypeName()));
+            throw new JsonException("'%s': no suitable constructor is found, likely cause: missing data or annotation"
+                    .formatted(typeToCreate.getTypeName()));
         } catch (InvocationTargetException | IllegalAccessException e) {
             System.err.println("deserialization: " + e.getMessage());
             e.printStackTrace();
