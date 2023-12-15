@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.UUID;
 
 import com.github.egyptian_league.Constants.ApplicationConstants;
+import com.github.egyptian_league.json.JsonException;
 import com.github.egyptian_league.json.JsonSerializer;
 import com.github.egyptian_league.json.JsonSerializerOptions;
 import com.github.egyptian_league.json.Annotations.JsonIgnore;
@@ -71,12 +72,21 @@ public class ApplicationRepository {
     }
 
     public static void saveDb(String path) {
-        try (FileWriter fw = new FileWriter(path)) {
+        String json = null;
+
+        try {
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.WriteIndented = true;
+            json = JsonSerializer.serialize(instance, options);
+        } catch (JsonException e) {
+            System.err.println("'%s': failed to serialize application repository, %s".formatted(path, e.getMessage()));
+        }
 
-            String json = JsonSerializer.serialize(instance, options);
+        if (json == null) {
+            return;
+        }
 
+        try (FileWriter fw = new FileWriter(path)) {
             fw.write(json);
         } catch (IOException e) {
             System.err.printf("'%s': failed to write\n\t%s", ApplicationConstants.dbFileName, e.getMessage());
