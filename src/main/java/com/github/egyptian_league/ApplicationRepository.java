@@ -3,10 +3,7 @@ package com.github.egyptian_league;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.UUID;
@@ -47,9 +44,9 @@ public class ApplicationRepository {
         instance = newRepository;
     }
 
-    public static void loadDb() {
+    public static void loadDb(String path) {
         try {
-            File f = new File(ApplicationConstants.dbFileName);
+            File f = new File(path);
             if (!f.exists()) {
                 return;
             }
@@ -73,8 +70,8 @@ public class ApplicationRepository {
         }
     }
 
-    public static void saveDb() {
-        try (FileWriter fw = new FileWriter(ApplicationConstants.dbFileName)) {
+    public static void saveDb(String path) {
+        try (FileWriter fw = new FileWriter(path)) {
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.WriteIndented = true;
 
