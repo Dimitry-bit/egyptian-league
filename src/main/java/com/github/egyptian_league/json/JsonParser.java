@@ -59,21 +59,7 @@ class JsonParser {
                 JsonArray j = parseArray(lexer);
                 jsonObject.put(key, j);
             } else {
-                JsonElement e = null;
-
-                if (t.type == JsonTokenType.STRING) {
-                    String s = t.value.substring(1, t.value.length() - 1);
-                    e = ((s.length() == 1) ? new JsonPrimitive(s.charAt(0)) : new JsonPrimitive(s));
-                } else if (t.type == JsonTokenType.BOOLEAN) {
-                    e = new JsonPrimitive(Boolean.parseBoolean(t.value));
-                } else if (t.type == JsonTokenType.NULL) {
-                    e = new JsonNull();
-                } else if (t.type == JsonTokenType.NUMBER) {
-                    e = parseNumber(t);
-                } else {
-                    throw new JsonException("Expected value, got: '\"%s\" : %s".formatted(key, t.value));
-                }
-
+                JsonElement e = parseElement(t);
                 jsonObject.put(key, e);
             }
 
@@ -117,20 +103,7 @@ class JsonParser {
                 JsonArray j = parseArray(lexer);
                 jsonArray.add(j);
             } else {
-                JsonElement e = null;
-
-                if (t.type == JsonTokenType.STRING) {
-                    e = new JsonPrimitive(t.value);
-                } else if (t.type == JsonTokenType.BOOLEAN) {
-                    e = new JsonPrimitive(Boolean.parseBoolean(t.value));
-                } else if (t.type == JsonTokenType.NULL) {
-                    e = new JsonNull();
-                } else if (t.type == JsonTokenType.NUMBER) {
-                    e = parseNumber(t);
-                } else {
-                    throw new JsonException("Expected value, got: '%s'".formatted(t.value));
-                }
-
+                JsonElement e = parseElement(t);
                 jsonArray.add(e);
             }
 
@@ -174,5 +147,24 @@ class JsonParser {
         } else {
             return new JsonPrimitive(number);
         }
+    }
+
+    private static JsonElement parseElement(JsonToken token) {
+        JsonElement e = null;
+
+        if (token.type == JsonTokenType.STRING) {
+            String s = token.value.substring(1, token.value.length() - 1);
+            e = ((s.length() == 1) ? new JsonPrimitive(s.charAt(0)) : new JsonPrimitive(s));
+        } else if (token.type == JsonTokenType.BOOLEAN) {
+            e = new JsonPrimitive(Boolean.parseBoolean(token.value));
+        } else if (token.type == JsonTokenType.NULL) {
+            e = new JsonNull();
+        } else if (token.type == JsonTokenType.NUMBER) {
+            e = parseNumber(token);
+        } else {
+            throw new JsonException("Expected value, got: '%s'".formatted(token.value));
+        }
+
+        return e;
     }
 }
