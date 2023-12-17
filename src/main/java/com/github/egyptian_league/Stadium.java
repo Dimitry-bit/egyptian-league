@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
 import java.util.Iterator;
 
 public class Stadium {
@@ -16,6 +19,7 @@ public class Stadium {
 
     private ArrayList<LocalDate> stadiumSchedule = new ArrayList<>();
 
+    @JsonConstructor(parameters = { "StadiumName", "StadiumAddress" })
     public Stadium(String StadiumName, String StadiumAddress) {
         this.StadiumName = StadiumName;
         this.StadiumAddress = StadiumAddress;

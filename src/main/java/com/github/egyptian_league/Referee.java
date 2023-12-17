@@ -6,11 +6,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
 public class Referee {
     private final String name;
     private final UUID refereeId;
     private ArrayList<LocalDate> refereeSchedule = new ArrayList<>();
 
+    @JsonConstructor(parameters = { "name" })
     Referee(String name) {
         this.name = name;
         refereeId = UUID.randomUUID();

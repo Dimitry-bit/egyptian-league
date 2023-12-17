@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
 public class Match {
     public final UUID matchId;
     public final UUID HomeTeamId;
@@ -14,6 +16,7 @@ public class Match {
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> goalScorers;
 
+    @JsonConstructor(parameters = { "homeTeamId", "awayTeamId" })
     public Match(UUID homeTeamId, UUID awayTeamId) {
         matchId = UUID.randomUUID();
         this.HomeTeamId = homeTeamId;
@@ -54,7 +57,6 @@ public class Match {
     public void removeGoal(UUID playerId, int numOfGoals) {
         goalScorers.put(playerId, numOfGoals);
     }
-
 
     public Referee setReferee(Referee referee) {
         if (referee.CheckRefereeAvailability(this)) {

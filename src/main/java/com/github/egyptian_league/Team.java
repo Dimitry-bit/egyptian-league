@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
 public class Team {
 
     private final String name;
@@ -11,6 +13,7 @@ public class Team {
     private UUID captain;
     private ArrayList<UUID> players = new ArrayList<>();
 
+    @JsonConstructor(parameters = { "name", "captain" })
     public Team(String name, UUID captain) {
         this.name = name;
         this.teamID = UUID.randomUUID();

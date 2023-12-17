@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.UUID;
 
+import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
 public class Player {
 
     private final UUID playerId;
@@ -20,6 +22,7 @@ public class Player {
     // FIXME: Can it be calculated?
     private int Rank;
 
+    @JsonConstructor(parameters = { "name", "team", "position", "shirtNumber" })
     public Player(String name, UUID team, Position position, int number) {
         this.playerId = UUID.randomUUID();
         this.name = name;
