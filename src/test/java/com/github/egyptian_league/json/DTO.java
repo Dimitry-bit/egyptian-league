@@ -31,7 +31,7 @@ public class DTO {
     @JsonIgnore
     public int ignored = 0;
 
-    @JsonConstructor(paramNames = { "string" })
+    @JsonConstructor(parameters = { "string" })
     public DTO(String string) {
         this.string = string;
     }

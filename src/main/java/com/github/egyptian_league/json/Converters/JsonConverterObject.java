@@ -192,7 +192,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 JsonConstructor ctorAnnotation = ctor.getAnnotation(JsonConstructor.class);
                 Parameter[] parameters = ctor.getParameters();
 
-                if (ctorAnnotation.paramNames().length != ctor.getParameterCount()) {
+                if (ctorAnnotation.parameters().length != ctor.getParameterCount()) {
                     throw new JsonException("'%s' Parameter names annotation length does ".formatted(ctor.getName()) +
                             "not match constructor parameters length");
                 }
@@ -200,7 +200,7 @@ public class JsonConverterObject extends JsonConverter<Object> {
                 for (int i = 0; i < parameters.length; ++i) {
                     Parameter param = parameters[i];
                     TypeToken<?> paramType = TypeToken.get(param.getType());
-                    String paramName = ctorAnnotation.paramNames()[i];
+                    String paramName = ctorAnnotation.parameters()[i];
 
                     if (!jsonObject.containsKey(paramName) || !options.hasConverter(paramType)) {
                         break;
