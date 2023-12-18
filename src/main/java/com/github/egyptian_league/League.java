@@ -81,7 +81,6 @@ public class League {
         }
         return players;
     }
-
         public Iterator<UUID> getMatches () {
             return matches.iterator();
         }
