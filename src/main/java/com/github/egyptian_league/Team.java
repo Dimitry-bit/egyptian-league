@@ -8,20 +8,37 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Team {
 
-    private final String name;
-    private final UUID teamID;
+    public final UUID ID;
+
+    private String name;
     private UUID captain;
     private ArrayList<UUID> players = new ArrayList<>();
 
-    @JsonConstructor(parameters = { "name", "captain" })
-    public Team(String name, UUID captain) {
+    @JsonConstructor(parameters = { "name", "captainId" })
+    public Team(String name, UUID captainId) {
+        this.ID = UUID.randomUUID();
         this.name = name;
-        this.teamID = UUID.randomUUID();
-        this.captain = captain;
+        this.captain = captainId;
+    }
+
+    public static int calcNumberOfTeams() {
+        return ApplicationRepository.getRepository().getNumberOfTeams();
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Player getCaptain() {
+        return ApplicationRepository.getRepository().getPlayerByUUID(captain);
+    }
+
+    public void setCaptain(UUID captain) {
+        this.captain = captain;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -39,39 +56,7 @@ public class Team {
         return players;
     }
 
-    public UUID getUuid() {
-        return teamID;
-    }
-
-    public Player getCaptain() {
-        return ApplicationRepository.getRepository().getPlayerByUUID(captain);
-    }
-
-    public void setCaptain(UUID captain) {
-        this.captain = captain;
-    }
-
-    public int calcTotalPoints() {
-        int totalPoints = 0;
-        Iterator<Match> matchsIterator = ApplicationRepository.getRepository().getMatchesIterator();
-        while (matchsIterator.hasNext()) {
-            Match match = matchsIterator.next();
-            if (match.calcWinnerTeam().equals(teamID)) {
-                totalPoints += 3;
-            } else if (match.calcWinnerTeam().equals(null)) {
-                totalPoints += 1;
-            }
-
-        }
-        return totalPoints;
-
-    }
-
-    public static int calcNumberOfTeams() {
-        return ApplicationRepository.getRepository().getNumberOfTeams();
-    }
-
-    private boolean containsPlayer(UUID playerId) {
+    public boolean containsPlayer(UUID playerId) {
         return players.contains(playerId);
     }
 
@@ -81,5 +66,21 @@ public class Team {
 
     public boolean removePlayer(UUID playerId) {
         return players.remove(playerId);
+    }
+
+    public int calcTotalPoints() {
+        int totalPoints = 0;
+        Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
+
+        while (matchesIterator.hasNext()) {
+            Match match = matchesIterator.next();
+            if (match.calcWinnerTeam().equals(ID)) {
+                totalPoints += 3;
+            } else if (match.calcWinnerTeam().equals(null)) {
+                totalPoints += 1;
+            }
+        }
+
+        return totalPoints;
     }
 }
