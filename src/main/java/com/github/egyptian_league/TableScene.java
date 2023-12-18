@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -42,7 +41,7 @@ abstract class TableScene<T> {
         horizontalButtons.add(button);
     }
 
-    void addTextfield(String textIn) {
+    void addTextField(String textIn) {
         TextField text = new TextField();
 
         text.setPromptText(textIn);
@@ -77,14 +76,16 @@ abstract class TableScene<T> {
     }
 
     void addDate(String label) {
-        Label l = new Label(label);
         date = new DatePicker();
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                LocalDate i = date.getValue();
-                l.setText("Date :" + i);
-            }
-        };
+        hBox.getChildren().add(date);
+
+//        Label l = new Label(label);
+//        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+//            public void handle(ActionEvent e) {
+//                LocalDate i = date.getValue();
+//                l.setText("Date :" + i);
+//            }
+//        };
     }
 
     void clearInput() {

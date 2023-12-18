@@ -6,11 +6,11 @@ import java.util.UUID;
 public class MatchTableScene extends TableScene<Match> {
 
     public MatchTableScene() {
-        addTextfield("Team1");
-        addTextfield("Team2");
-        addTextfield("referee");
-        addTextfield("Stadium");
-        addTextfield("score");
+        addTextField("Team1");
+        addTextField("Team2");
+        addTextField("referee");
+        addTextField("Stadium");
+        addTextField("score");
 
         addDate("Scene1 Date");
 

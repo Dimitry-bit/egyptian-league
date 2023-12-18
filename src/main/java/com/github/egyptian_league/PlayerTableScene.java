@@ -3,10 +3,10 @@ package com.github.egyptian_league;
 public class PlayerTableScene extends TableScene<PlayerPojo> {
 
     public PlayerTableScene() {
-        addTextfield("name");
-        addTextfield("team");
-        addTextfield("position");
-        addTextfield("number");
+        addTextField("name");
+        addTextField("team");
+        addTextField("position");
+        addTextField("number");
 
         addInsertButton("Insert");
         addDeleteButton("Delete");
