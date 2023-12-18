@@ -103,14 +103,19 @@ public class ApplicationRepository {
         return players.containsValue(player);
     }
 
+    public boolean containsPlayerName(String name) {
+        String lName = name.toLowerCase();
+        return players.values().stream().anyMatch(player -> lName.equals(player.getName().toLowerCase()));
+    }
+
     public Player getPlayerByUUID(UUID uuid) {
         return players.get(uuid);
     }
 
     public Player[] getPlayersByName(String name) {
         String lName = name.toLowerCase();
-        return (Player[]) players.values().stream()
-                .filter(player -> lName.equals(player.getName().toLowerCase())).toArray();
+        return players.values().stream()
+                .filter(player -> lName.equals(player.getName().toLowerCase())).toArray(Player[]::new);
     }
 
     public Player putPlayer(Player player) {
@@ -133,14 +138,19 @@ public class ApplicationRepository {
         return teams.containsValue(team);
     }
 
+    public boolean containsTeamName(String name) {
+        String lName = name.toLowerCase();
+        return teams.values().stream().anyMatch(team -> lName.equals(team.getName().toLowerCase()));
+    }
+
     public Team getTeamById(UUID uuid) {
         return teams.get(uuid);
     }
 
     public Team[] getTeamsByName(String name) {
         String lName = name.toLowerCase();
-        return (Team[]) teams.values().stream()
-                .filter(team -> lName.equals(team.getName().toLowerCase())).toArray();
+        return teams.values().stream()
+                .filter(team -> lName.equals(team.getName().toLowerCase())).toArray(Team[]::new);
     }
 
     public Iterator<Team> getTeamsIterator() {
