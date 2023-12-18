@@ -24,16 +24,27 @@ public class Team {
         return name;
     }
 
-    public Iterator<UUID> getPlayers() {
-        return players.iterator();
+    public ArrayList<Player> getPlayers() {
+        ArrayList<Player> players = new ArrayList<>();
+
+        for (UUID playerUUID : this.players) {
+            if (!ApplicationRepository.getRepository().containsPlayerUUID(playerUUID)) {
+                continue;
+            }
+
+            Player player = ApplicationRepository.getRepository().getPlayerByUUID(playerUUID);
+            players.add(player);
+        }
+
+        return players;
     }
 
     public UUID getUuid() {
         return teamID;
     }
 
-    public UUID getCaptain() {
-        return captain;
+    public Player getCaptain() {
+        return ApplicationRepository.getRepository().getPlayerByUUID(captain);
     }
 
     public void setCaptain(UUID captain) {
