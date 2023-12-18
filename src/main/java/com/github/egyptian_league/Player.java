@@ -1,7 +1,6 @@
 package com.github.egyptian_league;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.UUID;
 
@@ -15,9 +14,8 @@ public class Player {
     private Position position;
     private int shirtNumber;
 
-    // FIXME: Is time really that important?
     // FIXME: Does it change?
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
     // FIXME: Can it be calculated?
     private int Rank;
@@ -26,7 +24,7 @@ public class Player {
     public Player(String name, UUID team, Position position, int number) {
         this.playerId = UUID.randomUUID();
         this.name = name;
-        this.team = UUID.randomUUID();
+        this.team = team;
         this.position = position;
         this.shirtNumber = number;
     }
@@ -67,9 +65,16 @@ public class Player {
         return team;
     }
 
-    public static int calcAge(LocalDate dateOfBirth) {
-        LocalDate now = LocalDate.now();
-        int age = Period.between(dateOfBirth, now).getYears();
-        return age;
+    // FIXME: Actually calculate rank
+    public int calcRank() {
+        return Rank;
+    }
+
+    public int calcAge() {
+        if (birthday == null) {
+            return -1;
+        }
+
+        return Period.between(birthday, LocalDate.now()).getYears();
     }
 }
