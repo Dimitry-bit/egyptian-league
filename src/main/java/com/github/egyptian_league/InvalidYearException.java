@@ -1,10 +1,7 @@
 package com.github.egyptian_league;
 
-public class InvalidYearException extends Exception {
-
-    // FIXME: Take a message string instead of x, and y
-    public InvalidYearException(int x, int y) {
-        // FIXME: What is the purpose of x, and y ?
-        super("the year is less than current year");
+public class InvalidYearException extends RuntimeException {
+    public InvalidYearException(String message) {
+        super(message);
     }
 }
