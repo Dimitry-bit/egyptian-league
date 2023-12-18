@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -25,7 +26,7 @@ public class TeamsController implements Initializable {
     private Parent root;
 
     @FXML
-    private TableColumn<InsertTeams, Integer> TeamId;
+    private TableColumn<InsertTeams, String> TeamId;
 
     @FXML
     private TableColumn<InsertTeams, String> TeamName;
@@ -34,7 +35,7 @@ public class TeamsController implements Initializable {
     private TableColumn<InsertTeams, String> TeamCaptain;
 
     @FXML
-    private TableColumn<InsertTeams, Integer> TeamTotalScore;
+    private TableColumn<InsertTeams, String> TeamTotalScore;
     @FXML
     private TableView<InsertTeams> TeamsTable;
 
@@ -43,8 +44,10 @@ public class TeamsController implements Initializable {
     @FXML
     private TextField textTeamId;
 
+    @FXML
     private TextField textTeamCaptain;
 
+    @FXML
     private TextField textTotalScore;
 
     ObservableList<InsertTeams> initialData() {
@@ -79,11 +82,35 @@ public class TeamsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TeamName.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamName"));
-        TeamId.setCellValueFactory(new PropertyValueFactory<InsertTeams, Integer>("TeamId"));
+        TeamId.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamId"));
         TeamCaptain.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamCaptain"));
-        TeamTotalScore.setCellValueFactory(new PropertyValueFactory<InsertTeams, Integer>("TotalScore"));
+        TeamTotalScore.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TotalScore"));
 
 
         TeamsTable.setItems(initialData());
+        EditData();
+    }
+
+    private void EditData(){
+        TeamName.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
+        TeamName.setOnEditCommit(event ->{
+            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
+            updatedTeams.setTeamName(event.getNewValue());
+        });
+        TeamId.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
+        TeamId.setOnEditCommit(event ->{
+            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
+            updatedTeams.setTeamId(Integer.valueOf(event.getNewValue()));
+        });
+        TeamCaptain.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
+        TeamCaptain.setOnEditCommit(event ->{
+            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
+            updatedTeams.setTeamCaptain(event.getNewValue());
+        });
+        TeamTotalScore.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
+        TeamTotalScore.setOnEditCommit(event ->{
+            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
+            updatedTeams.setTotalScore(Integer.valueOf(event.getNewValue()));
+        });
     }
 }

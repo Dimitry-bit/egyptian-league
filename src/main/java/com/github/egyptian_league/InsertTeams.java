@@ -14,6 +14,22 @@ public class InsertTeams {
         TotalScore = totalScore;
     }
 
+    public void setTeamName(String teamName) {
+        TeamName = teamName;
+    }
+
+    public void setTeamId(Integer teamId) {
+        TeamId = teamId;
+    }
+
+    public void setTeamCaptain(String teamCaptain) {
+        TeamCaptain = teamCaptain;
+    }
+
+    public void setTotalScore(Integer totalScore) {
+        TotalScore = totalScore;
+    }
+
     public String getTeamName() {
         return TeamName;
     }

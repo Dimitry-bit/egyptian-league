@@ -17,7 +17,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <TableView fx:id="TeamsTable" layoutX="170.0" layoutY="64.0" prefHeight="200.0" prefWidth="359.0">
+      <TableView fx:id="TeamsTable" editable="true" layoutX="170.0" layoutY="64.0" prefHeight="200.0" prefWidth="359.0">
         <columns>
           <TableColumn fx:id="TeamName" prefWidth="95.19999694824219" text="Team Name" />
           <TableColumn fx:id="TeamId" prefWidth="67.20001220703125" text="ID" />
