@@ -18,7 +18,7 @@ public class Match {
 
     @JsonConstructor(parameters = { "homeTeamId", "awayTeamId" })
     public Match(UUID homeTeamId, UUID awayTeamId) {
-        matchId = UUID.randomUUID();
+            matchId = UUID.randomUUID();
         this.HomeTeamId = homeTeamId;
         this.AwayTeamId = awayTeamId;
     }

@@ -1,0 +1,14 @@
+{
+  "players": {},
+  "teams": {
+    "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": {
+      "name": "Test Team",
+      "teamID": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
+      "captain": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+      "players": []
+    }
+  },
+  "matches": {},
+  "stadiums": {},
+  "leagues": {}
+}
