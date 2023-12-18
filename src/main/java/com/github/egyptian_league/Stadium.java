@@ -1,6 +1,6 @@
 package com.github.egyptian_league;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -11,7 +11,7 @@ public class Stadium {
     private final UUID stadiumId;
     private String stadiumName;
     private String stadiumAddress;
-    private ArrayList<LocalDate> stadiumSchedule = new ArrayList<>();
+    private ArrayList<LocalDateTime> stadiumSchedule = new ArrayList<>();
 
     @JsonConstructor(parameters = { "StadiumName", "StadiumAddress" })
     public Stadium(String StadiumName, String StadiumAddress) {
@@ -40,9 +40,9 @@ public class Stadium {
         this.stadiumAddress = stadiumAddress;
     }
 
-    public boolean checkStadiumAvailability(LocalDate date) {
-        for (LocalDate reservedDate : stadiumSchedule) {
-            if (date.equals(reservedDate)) {
+    public boolean checkStadiumAvailability(LocalDateTime date) {
+        for (LocalDateTime reservedDate : stadiumSchedule) {
+            if (date.equals(reservedDate) || date.isBefore(reservedDate.plusMinutes(90))) {
                 return false;
             }
         }

@@ -3,9 +3,12 @@ package com.github.egyptian_league;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.UUID;
 
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
+
+import javafx.application.Application;
 
 public class Match {
     public final UUID matchId;
@@ -18,7 +21,7 @@ public class Match {
 
     @JsonConstructor(parameters = { "homeTeamId", "awayTeamId" })
     public Match(UUID homeTeamId, UUID awayTeamId) {
-            matchId = UUID.randomUUID();
+        matchId = UUID.randomUUID();
         this.HomeTeamId = homeTeamId;
         this.AwayTeamId = awayTeamId;
     }
@@ -32,8 +35,8 @@ public class Match {
     }
 
     private void setDate(LocalDateTime dateTime) {
-        // FIXME: Validate before setting
-        if (ApplicationRepository.getRepository().getStadiumByUUID(matchStadium).checkStadiumAvailability(this)) {
+        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(matchStadium);
+        if (stadium != null && stadium.checkStadiumAvailability(dateTime)) {
             this.dateTime = dateTime;
         }
     }
