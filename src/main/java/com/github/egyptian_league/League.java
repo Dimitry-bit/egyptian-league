@@ -1,59 +1,88 @@
 package com.github.egyptian_league;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.Iterator;
+import java.util.UUID;
 
 public class League {
 
-    // FIXME: name, and leagueName does not make any sense
-    public final String LeagueName;
-    private final String name;
+    private  String LeagueName;
 
-    // FIXME: Datatype should be LocalDate?
-    private final int year;
+    private int year;
 
-    // FIXME: Switch to using UUIDs instead
-    // FIXME: teams, player, and matches could and will change through the lifetime
-    // of the program, so they shouldn't be final
-    private final ArrayList<Team> teams = new ArrayList<>();
-    private final ArrayList<Player> players = new ArrayList<>();
-    private final ArrayList<Match> matches = new ArrayList<>();
 
-    // FIXME: Does it really have to throw a checked exception?
-    public League(String name, int year) throws InvalidYearException {
-        this.name = name;
-        Calendar calendar = Calendar.getInstance();
-        int currentYear = calendar.get(Calendar.YEAR);
-        // FIXME: Move to the beginning of the current block
-        if (year < currentYear) {
-            try {
-                throw new InvalidYearException(year, currentYear);
-            } catch (InvalidYearException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            this.year = year;
-        }
-        LeagueName = name + " " + year;
+
+    private final ArrayList<UUID> teams = new ArrayList<>();
+//    private final ArrayList<UUID> players = new ArrayList<>();
+    private final ArrayList<UUID> matches = new ArrayList<>();
+
+    public League(String LeagueName, int year) {
+        setYear(year);
+        this.LeagueName = LeagueName;
     }
 
-    // FIXME: Use an object instead of multiple parameters
-    // public void setMatches(int matchID, Date date, Team team1, Team team2, String stadiumName, Score score,
-    //         Referee referee) {
-    //     matches.add(new Match(matchID, date, team1, team2, stadiumName, score, referee));
-    // }
+    public void addMatches(UUID matchId) {
+        matches.add(matchId);
+    }
 
-    // FIXME: Use an object instead of multiple parameters
-    // public void setPlayers(String name, String team, String position, int id, int
-    // number, int age, int GoalScored,
-    // int Rank) {
-    // Players.add(new player(name, team, position, id, number, age, GoalScored,
-    // Rank));
-    // }
-
-    // FIXME: Use an object instead of multiple parameters
-//    public void setTeams(String Name, int Team_ID, int Total_Score, Player Captain) {
-//        teams.add(new Team(name, Team_ID, Total_Score, Captain));
+//    public void addPlayers(UUID playerId) {
+//        players.add(playerId);
 //    }
-}
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        int Year = LocalDate.now().getYear();
+
+        if (year < Year) {
+            throw new InvalidYearException("the year " + year + " is less than current year " + Year);
+        }
+
+        this.year = year;
+    }
+
+    public void addTeams(UUID teamID) {
+        teams.add(teamID);
+    }
+
+//    public void deletePlayer(UUID playerId) {
+//        players.remove(playerId);
+//    }
+
+    public void setLeagueName(String leagueName) {
+        LeagueName = leagueName;
+    }
+
+    public String getLeagueName() {
+        return LeagueName;
+    }
+
+    public void deleteMatch(UUID matchId) {
+        matches.remove(matchId);
+    }
+
+    public void deleteTeam(UUID teamID) {
+        teams.remove(teamID);
+    }
+    public Iterator<UUID> getTeams(){
+        return teams.iterator();
+    }
+
+    public ArrayList<UUID> getPlayers() {
+        ArrayList<UUID> players = new ArrayList<>();
+        for (UUID team : teams) {
+            Team obj = ApplicationRepository.getRepository().getTeamById(team);
+            Iterator<UUID> iterator = obj.getPlayers();
+            while (iterator.hasNext()) {
+                players.add(iterator.next());
+            }
+        }
+        return players;
+    }
+
+        public Iterator<UUID> getMatches () {
+            return matches.iterator();
+        }
+    }
