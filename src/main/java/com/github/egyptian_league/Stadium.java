@@ -8,40 +8,36 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Stadium {
 
-    private final UUID stadiumId;
-    private String stadiumName;
-    private String stadiumAddress;
-    private ArrayList<LocalDateTime> stadiumSchedule = new ArrayList<>();
+    public final UUID id;
+    private String name;
+    private String address;
+    private ArrayList<LocalDateTime> schedule = new ArrayList<>();
 
-    @JsonConstructor(parameters = { "StadiumName", "StadiumAddress" })
-    public Stadium(String StadiumName, String StadiumAddress) {
-        this.stadiumName = StadiumName;
-        this.stadiumAddress = StadiumAddress;
-        stadiumId = UUID.randomUUID();
+    @JsonConstructor(parameters = { "name", "address" })
+    public Stadium(String name, String address) {
+        id = UUID.randomUUID();
+        this.name = name;
+        this.address = address;
     }
 
-    public UUID getStadiumUUID() {
-        return stadiumId;
+    public String getName() {
+        return name;
     }
 
-    public String getStadiumName() {
-        return stadiumName;
+    public void setName(String stadiumName) {
+        this.name = stadiumName;
     }
 
-    public void setStadiumName(String stadiumName) {
-        this.stadiumName = stadiumName;
+    public String getAddress() {
+        return address;
     }
 
-    public String getStadiumAddress() {
-        return stadiumAddress;
-    }
-
-    public void setStadiumAddress(String stadiumAddress) {
-        this.stadiumAddress = stadiumAddress;
+    public void setAddress(String stadiumAddress) {
+        this.address = stadiumAddress;
     }
 
     public boolean checkStadiumAvailability(LocalDateTime date) {
-        for (LocalDateTime reservedDate : stadiumSchedule) {
+        for (LocalDateTime reservedDate : schedule) {
             if (date.equals(reservedDate) || date.isBefore(reservedDate.plusMinutes(90))) {
                 return false;
             }
