@@ -74,9 +74,11 @@ public class Team {
 
         while (matchesIterator.hasNext()) {
             Match match = matchesIterator.next();
-            if (match.calcWinnerTeam().equals(ID)) {
+            UUID winnerTeam = match.calcWinnerTeam();
+
+            if (winnerTeam.equals(ID)) {
                 totalPoints += 3;
-            } else if (match.calcWinnerTeam().equals(null)) {
+            } else if (winnerTeam == null) {
                 totalPoints += 1;
             }
         }
