@@ -1,7 +1,5 @@
 package com.github.egyptian_league;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,14 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 public class TeamsController implements Initializable {
     private Stage stage;
@@ -27,49 +26,55 @@ public class TeamsController implements Initializable {
     private Parent root;
 
     @FXML
-    private TableColumn<InsertTeams, Integer> TeamId;
+    private TableColumn<TeamPojo, String> TeamName;
 
     @FXML
-    private TableColumn<InsertTeams, String> TeamName;
+    private TableColumn<TeamPojo, String> TeamCaptain;
 
     @FXML
-    private TableColumn<InsertTeams, String> TeamCaptain;
+    private TableColumn<TeamPojo, Integer> TeamTotalScore;
 
     @FXML
-    private TableColumn<InsertTeams, Integer> TeamTotalScore;
-
-    @FXML
-    private TableView<InsertTeams> TeamsTable;
+    private TableView<TeamPojo> TeamsTable;
 
     @FXML
     private TextField textTeamName;
 
     @FXML
-    private TextField textTeamId;
-
-    @FXML
     private TextField textTeamCaptain;
 
-    @FXML
-    private TextField textTotalScore;
-
-    ObservableList<InsertTeams> initialData() {
-        InsertTeams team1 = new InsertTeams("Zamalek", 1000, "Shikabala", 25);
-        InsertTeams team2 = new InsertTeams("Pyramids Fc", 2000, "Ramadan Sobhi", 15);
-        return FXCollections.observableArrayList(team1, team2);
+    public void seedTable() {
+        Iterator<Team> teamsIterator = ApplicationRepository.getRepository().getTeamsIterator();
+        while (teamsIterator.hasNext()) {
+            TeamPojo pojo = new TeamPojo(teamsIterator.next());
+            TeamsTable.getItems().add(pojo);
+        }
     }
 
     @FXML
     public void btnInsert(ActionEvent event) {
-        int teamId = Integer.parseInt(textTeamId.getText());
-        int totalScore = Integer.parseInt(textTotalScore.getText());
-        InsertTeams newData = new InsertTeams(textTeamName.getText(), teamId, textTeamCaptain.getText(), totalScore);
-        TeamsTable.getItems().add(newData);
-        textTeamName.clear();
-        textTeamId.clear();
-        textTeamCaptain.clear();
-        textTotalScore.clear();
+        try {
+            if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
+                // TODO: Show error
+                return;
+            }
 
+            Player captain = ApplicationRepository.getRepository().getPlayersByName(textTeamCaptain.getText())[0];
+
+            Team team = new Team(textTeamName.getText(), captain.getId());
+            TeamPojo teamPojo = new TeamPojo(team);
+
+            // TODO: Add to repository
+            ApplicationRepository.getRepository().putTeam(team);
+
+            TeamsTable.getItems().add(teamPojo);
+
+            clearInput();
+        } catch (Exception e) {
+            // TODO: handle exception
+            System.err.printf("Invalid data, %s", e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void SwitchToHomePage(ActionEvent event) throws IOException {
@@ -83,18 +88,20 @@ public class TeamsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TeamName.setCellValueFactory(new PropertyValueFactory<>("TeamName"));
-        TeamId.setCellValueFactory(new PropertyValueFactory<>("TeamId"));
         TeamCaptain.setCellValueFactory(new PropertyValueFactory<>("TeamCaptain"));
         TeamTotalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
 
-        TeamsTable.setItems(initialData());
-        EditData();
+        TeamName.setCellFactory(TextFieldTableCell.forTableColumn());
+        TeamName.setOnEditCommit(event -> {
+           event.getRowValue().getTeam().setName(event.getNewValue());;
+        });
+        TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
+        
+        seedTable();
     }
 
-    private void EditData() {
-        TeamName.setCellFactory(TextFieldTableCell.forTableColumn());
-        TeamId.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-        TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
-        TeamTotalScore.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    private void clearInput() {
+        textTeamName.clear();
+        textTeamCaptain.clear();
     }
 }

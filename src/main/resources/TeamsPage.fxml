@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.egyptian_league.TeamsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="682.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.egyptian_league.TeamsController">
    <children>
       <Button layoutX="507.0" layoutY="408.0" mnemonicParsing="false" onAction="#SwitchToHomePage" text="Back to Homepage">
          <font>
@@ -20,7 +15,6 @@
       <TableView fx:id="TeamsTable" editable="true" layoutX="170.0" layoutY="64.0" prefHeight="200.0" prefWidth="359.0">
         <columns>
           <TableColumn fx:id="TeamName" prefWidth="95.19999694824219" text="Team Name" />
-          <TableColumn fx:id="TeamId" prefWidth="67.20001220703125" text="ID" />
             <TableColumn fx:id="TeamCaptain" prefWidth="123.20001220703125" text="Captain " />
             <TableColumn fx:id="TeamTotalScore" prefWidth="71.199951171875" text="Total Score" />
         </columns>
@@ -33,9 +27,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
                   <TextField fx:id="textTeamName" promptText="TeamName" />
-                  <TextField fx:id="textTeamId" promptText="ID" />
                   <TextField fx:id="textTeamCaptain" promptText="TeamCaptain" />
-                  <TextField fx:id="textTotalScore" promptText="TotalScore" />
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#btnInsert" text="Insert Team">

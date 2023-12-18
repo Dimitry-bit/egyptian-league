@@ -8,7 +8,7 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Team {
 
-    private final String name;
+    private String name;
     private final UUID teamID;
     private UUID captain;
     private ArrayList<UUID> players = new ArrayList<>();
@@ -22,6 +22,10 @@ public class Team {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Iterator<UUID> getPlayers() {
