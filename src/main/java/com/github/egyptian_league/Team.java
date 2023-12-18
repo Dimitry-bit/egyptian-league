@@ -8,17 +8,17 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Team {
 
-    public final UUID ID;
+    public final UUID Id;
 
     private String name;
-    private UUID captain;
+    private UUID captainId;
     private ArrayList<UUID> players = new ArrayList<>();
 
     @JsonConstructor(parameters = { "name", "captainId" })
     public Team(String name, UUID captainId) {
-        this.ID = UUID.randomUUID();
+        this.Id = UUID.randomUUID();
         this.name = name;
-        this.captain = captainId;
+        this.captainId = captainId;
     }
 
     public static int calcNumberOfTeams() {
@@ -33,12 +33,17 @@ public class Team {
         this.name = name;
     }
 
-    public Player getCaptain() {
-        return ApplicationRepository.getRepository().getPlayerByUUID(captain);
+    public Player getCaptainId() {
+        return ApplicationRepository.getRepository().getPlayerByUUID(captainId);
     }
 
-    public void setCaptain(UUID captain) {
-        this.captain = captain;
+    public boolean setCaptainId(UUID captainId) {
+        if (!ApplicationRepository.getRepository().containsPlayerUUID(captainId)) {
+            return false;
+        }
+
+        this.captainId = captainId;
+        return true;
     }
 
     public ArrayList<Player> getPlayers() {
@@ -76,7 +81,7 @@ public class Team {
             Match match = matchesIterator.next();
             UUID winnerTeam = match.calcWinnerTeam();
 
-            if (winnerTeam.equals(ID)) {
+            if (winnerTeam.equals(Id)) {
                 totalPoints += 3;
             } else if (winnerTeam == null) {
                 totalPoints += 1;
