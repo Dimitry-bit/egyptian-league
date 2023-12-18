@@ -26,13 +26,13 @@ public class Stadium {
         stadiumId = UUID.randomUUID();
     }
 
-    // FIXME: Do you have to take in the matchIterator?
-    public boolean checkStadiumAvailability(Match match) {
-        for (int i = 0; i <  stadiumSchedule.size(); i++)
-            if (match.getDateTime().toLocalDate().equals(stadiumSchedule.get(i)) && match.getDateTime().toLocalDate().isBefore(LocalDate.now())) {
+    public boolean checkStadiumAvailability(LocalDate date) {
+        for (LocalDate reservedDate : stadiumSchedule) {
+            if (date.equals(reservedDate)) {
                 return false;
             }
+        }
+
         return true;
     }
-
 }
