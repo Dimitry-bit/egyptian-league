@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
@@ -17,7 +19,7 @@ public class Match {
     private UUID homeTeamId;
     private UUID awayTeamId;
     private UUID stadiumId;
-    private Referee referee;
+    private UUID referee;
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> scorers;
 
@@ -32,44 +34,50 @@ public class Match {
         return stadiumId;
     }
 
-    public void setStadiumId(UUID stadiumId) {
+    public boolean setStadiumId(UUID stadiumId) {
+        if (!ApplicationRepository.getRepository().containsStadiumUUID(stadiumId)) {
+            return false;
+        }
+
         this.stadiumId = stadiumId;
+        return true;
     }
 
-    private void setDate(LocalDateTime dateTime) {
+    public boolean setDate(LocalDateTime newDateTime) {
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
-        if (stadium != null && stadium.checkStadiumAvailability(dateTime)) {
-            this.dateTime = dateTime;
+        if ((stadium == null) || !stadium.checkStadiumAvailability(newDateTime)) {
+            return false;
         }
+
+        this.dateTime = newDateTime;
+        return true;
     }
 
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
-    public HashMap<UUID, Integer> getScorers() {
-        return scorers;
+    public Set<Entry<UUID, Integer>> getScorers() {
+        return scorers.entrySet();
     }
 
-    public void addGoal(UUID playerId, int numOfGoals) {
-        // FIXME: Validate numbOfGoals before setting
-        if (numOfGoals >= 0) {
-            scorers.put(playerId, numOfGoals);
+    public boolean putGoals(UUID playerId, int numOfGoals) {
+        if (numOfGoals <= 0) {
+            return false;
         }
 
-    }
-
-    public void removeGoal(UUID playerId, int numOfGoals) {
         scorers.put(playerId, numOfGoals);
+        return true;
     }
 
-    public Referee setReferee(Referee referee) {
-        if (referee.CheckRefereeAvailability(this)) {
-            this.referee = referee;
-            return referee;
-        }
-        return null;
-    }
+    // public Referee setReferee(Referee referee) {
+    //     if (referee.CheckRefereeAvailability(this)) {
+    //         this.referee = referee;
+    //         return referee;
+    //     }
+
+    //     return null;
+    // }
 
     public UUID calcWinnerTeam() {
         int homeScore = 0;
