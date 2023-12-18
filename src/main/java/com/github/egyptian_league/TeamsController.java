@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,7 +27,7 @@ public class TeamsController implements Initializable {
     private Parent root;
 
     @FXML
-    private TableColumn<InsertTeams, String> TeamId;
+    private TableColumn<InsertTeams, Integer> TeamId;
 
     @FXML
     private TableColumn<InsertTeams, String> TeamName;
@@ -35,12 +36,14 @@ public class TeamsController implements Initializable {
     private TableColumn<InsertTeams, String> TeamCaptain;
 
     @FXML
-    private TableColumn<InsertTeams, String> TeamTotalScore;
+    private TableColumn<InsertTeams, Integer> TeamTotalScore;
+
     @FXML
     private TableView<InsertTeams> TeamsTable;
 
     @FXML
     private TextField textTeamName;
+
     @FXML
     private TextField textTeamId;
 
@@ -54,7 +57,6 @@ public class TeamsController implements Initializable {
         InsertTeams team1 = new InsertTeams("Zamalek", 1000, "Shikabala", 25);
         InsertTeams team2 = new InsertTeams("Pyramids Fc", 2000, "Ramadan Sobhi", 15);
         return FXCollections.observableArrayList(team1, team2);
-
     }
 
     @FXML
@@ -78,39 +80,21 @@ public class TeamsController implements Initializable {
         stage.show();
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TeamName.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamName"));
-        TeamId.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamId"));
-        TeamCaptain.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TeamCaptain"));
-        TeamTotalScore.setCellValueFactory(new PropertyValueFactory<InsertTeams, String>("TotalScore"));
-
+        TeamName.setCellValueFactory(new PropertyValueFactory<>("TeamName"));
+        TeamId.setCellValueFactory(new PropertyValueFactory<>("TeamId"));
+        TeamCaptain.setCellValueFactory(new PropertyValueFactory<>("TeamCaptain"));
+        TeamTotalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
 
         TeamsTable.setItems(initialData());
         EditData();
     }
 
-    private void EditData(){
-        TeamName.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
-        TeamName.setOnEditCommit(event ->{
-            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
-            updatedTeams.setTeamName(event.getNewValue());
-        });
-        TeamId.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
-        TeamId.setOnEditCommit(event ->{
-            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
-            updatedTeams.setTeamId(Integer.valueOf(event.getNewValue()));
-        });
-        TeamCaptain.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
-        TeamCaptain.setOnEditCommit(event ->{
-            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
-            updatedTeams.setTeamCaptain(event.getNewValue());
-        });
-        TeamTotalScore.setCellFactory(TextFieldTableCell.<InsertTeams>forTableColumn());
-        TeamTotalScore.setOnEditCommit(event ->{
-            InsertTeams updatedTeams =event.getTableView().getItems().get(event.getTablePosition().getRow());
-            updatedTeams.setTotalScore(Integer.valueOf(event.getNewValue()));
-        });
+    private void EditData() {
+        TeamName.setCellFactory(TextFieldTableCell.forTableColumn());
+        TeamId.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
+        TeamTotalScore.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 }
