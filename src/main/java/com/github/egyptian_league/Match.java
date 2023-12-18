@@ -1,16 +1,13 @@
 package com.github.egyptian_league;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.Map.Entry;
 
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
-
-import javafx.application.Application;
 
 public class Match {
 
@@ -30,6 +27,32 @@ public class Match {
         this.awayTeamId = awayTeamId;
         this.stadiumId = stadiumId;
         this.refereeId = refereeId;
+    }
+
+    public Team getHomeTeam() {
+        return ApplicationRepository.getRepository().getTeamById(homeTeamId);
+    }
+
+    public boolean setHomeTeam(UUID homeTeamId) {
+        if (!ApplicationRepository.getRepository().containsTeamUUID(homeTeamId)) {
+            return false;
+        }
+
+        this.homeTeamId = homeTeamId;
+        return true;
+    }
+
+    public Team getAwayTeam() {
+        return ApplicationRepository.getRepository().getTeamById(awayTeamId);
+    }
+
+    public boolean setAwayTeam(UUID awayTeamId) {
+        if (!ApplicationRepository.getRepository().containsTeamUUID(awayTeamId)) {
+            return false;
+        }
+
+        this.awayTeamId = awayTeamId;
+        return true;
     }
 
     public UUID getStadiumId() {
@@ -84,26 +107,25 @@ public class Match {
     public UUID calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
-        Iterator<UUID> playerIdIterator = ApplicationRepository.getRepository().getTeamById(homeTeamId).getPlayers();
-        while (playerIdIterator.hasNext()) {
-            UUID playerUUID = playerIdIterator.next();
-            if (scorers.containsKey(playerUUID)) {
-                homeScore += scorers.get(playerUUID);
-            }
-        }
-        playerIdIterator = ApplicationRepository.getRepository().getTeamById(awayTeamId).getPlayers();
-        while (playerIdIterator.hasNext()) {
-            UUID playerUUID = playerIdIterator.next();
-            if (scorers.containsKey(playerUUID)) {
-                awayScore += scorers.get(playerUUID);
+        ArrayList<Player> homeTeamPlayers = getHomeTeam().getPlayers();
+        ArrayList<Player> awayTeamPlayers = getAwayTeam().getPlayers();
+
+        for (Player p : homeTeamPlayers) {
+            if (scorers.containsKey(p.getId())) {
+                homeScore += scorers.get(p.getId());
             }
         }
 
-        if (homeScore > awayScore) {
-            return homeTeamId;
-        } else if (homeScore < awayScore)
-            return awayTeamId;
-        else
+        for (Player p : awayTeamPlayers) {
+            if (scorers.containsKey(p.getId())) {
+                awayScore += scorers.get(p.getId());
+            }
+        }
+
+        if (homeScore == awayScore) {
             return null;
+        }
+
+        return (homeScore > awayScore) ? homeTeamId : awayTeamId;
     }
 }
