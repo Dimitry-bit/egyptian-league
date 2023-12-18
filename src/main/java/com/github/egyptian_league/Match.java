@@ -19,15 +19,17 @@ public class Match {
     private UUID homeTeamId;
     private UUID awayTeamId;
     private UUID stadiumId;
-    private UUID referee;
+    private UUID refereeId;
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> scorers;
 
-    @JsonConstructor(parameters = { "homeTeamId", "awayTeamId" })
-    public Match(UUID homeTeamId, UUID awayTeamId) {
-        id = UUID.randomUUID();
+    @JsonConstructor(parameters = { "homeTeamId", "awayTeamId", "stadiumId", "refereeId" })
+    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId) {
+        this.id = UUID.randomUUID();
         this.homeTeamId = homeTeamId;
         this.awayTeamId = awayTeamId;
+        this.stadiumId = stadiumId;
+        this.refereeId = refereeId;
     }
 
     public UUID getStadiumId() {
@@ -71,12 +73,12 @@ public class Match {
     }
 
     // public Referee setReferee(Referee referee) {
-    //     if (referee.CheckRefereeAvailability(this)) {
-    //         this.referee = referee;
-    //         return referee;
-    //     }
+    // if (referee.CheckRefereeAvailability(this)) {
+    // this.referee = referee;
+    // return referee;
+    // }
 
-    //     return null;
+    // return null;
     // }
 
     public UUID calcWinnerTeam() {
