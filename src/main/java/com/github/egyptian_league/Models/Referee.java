@@ -15,7 +15,7 @@ public class Referee {
     private ArrayList<LocalDate> schedule = new ArrayList<>();
 
     @JsonConstructor(parameters = { "name" })
-    Referee(String name) {
+    public Referee(String name) {
         Id = UUID.randomUUID();
         this.name = name;
     }

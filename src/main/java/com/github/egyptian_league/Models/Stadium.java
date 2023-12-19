@@ -55,7 +55,6 @@ public class Stadium {
                 return false;
             }
         }
-
         return true;
     }
 }
