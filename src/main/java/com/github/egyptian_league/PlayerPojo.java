@@ -14,7 +14,7 @@ public class PlayerPojo {
         shirtNumber = player.getShirtNumber();
         age = player.calcAge();
         rank = player.calcRank();
-        teamName = ApplicationRepository.getRepository().getTeamById(player.getTeam()).getName();
+        teamName = (player.getTeam() != null) ? player.getTeam().getName() : "";
     }
 
     public String getName() {
