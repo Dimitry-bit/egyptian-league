@@ -1,4 +1,4 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +18,7 @@ abstract class TableScene<T> {
     HBox hBox = new HBox();
     VBox vBox = new VBox();
     Hashtable<String, TextField> textFields = new Hashtable<>();
+    Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     ArrayList<Button> horizontalButtons = new ArrayList<>();
     ArrayList<Button> verticalButtons = new ArrayList<>();
 
@@ -77,15 +78,16 @@ abstract class TableScene<T> {
 
     void addDate(String label) {
         date = new DatePicker();
+        datePickers.put(label, date);
         hBox.getChildren().add(date);
 
-//        Label l = new Label(label);
-//        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-//            public void handle(ActionEvent e) {
-//                LocalDate i = date.getValue();
-//                l.setText("Date :" + i);
-//            }
-//        };
+        // Label l = new Label(label);
+        // EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        // public void handle(ActionEvent e) {
+        // LocalDate i = date.getValue();
+        // l.setText("Date :" + i);
+        // }
+        // };
     }
 
     void clearInput() {

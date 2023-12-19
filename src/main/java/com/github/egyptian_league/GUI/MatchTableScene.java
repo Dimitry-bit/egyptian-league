@@ -1,7 +1,11 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.GUI;
 
 import java.util.Date;
 import java.util.UUID;
+
+import com.github.egyptian_league.Models.Match;
+import com.github.egyptian_league.Models.Referee;
+import com.github.egyptian_league.Models.Stadium;
 
 public class MatchTableScene extends TableScene<Match> {
 
@@ -34,9 +38,9 @@ public class MatchTableScene extends TableScene<Match> {
             UUID team1UUID = UUID.fromString(team1UUIDStr);
             UUID team2UUID = UUID.fromString(team2UUIDStr);
 
-            Match match = new Match(team1UUID, team2UUID);
+//            Match match = new Match(team1UUID, team2UUID);
 
-            table.getItems().add(match);
+//            table.getItems().add(match);
         } catch (Exception e) {
             // TODO: handle exception
             System.err.printf("Invalid data, %s", e.getMessage());
