@@ -14,7 +14,7 @@ public class CLI_Input{
 
         //  com.github.egyptian_league.Main Menu with its Sub menus
 
-        MenuItem.currentMenuItem = new MainMenu("com.github.egyptian_league.Main Menu", null);
+        MenuItem.currentMenuItem = new MainMenu("Main Menu", null);
 
         MenuItem teamMenu = new TeamMenu("Teams", MenuItem.currentMenuItem);
 
@@ -27,31 +27,31 @@ public class CLI_Input{
 
         // com.github.egyptian_league.Team Menu with Sub menus
 
-        MenuItem addTeam = new AddTeam("Add com.github.egyptian_league.Team",teamMenu);
+        MenuItem addTeam = new AddTeam("Add Team",teamMenu);
 
         teamMenu.addSubMenu(addTeam);
-        teamMenu.addSubMenu( new UpdateTeam("Update com.github.egyptian_league.Team", teamMenu) );
-        teamMenu.addSubMenu( new RemoveTeam("Remove com.github.egyptian_league.Team", teamMenu) );
+        teamMenu.addSubMenu( new UpdateTeam("Update Team", teamMenu) );
+        teamMenu.addSubMenu( new RemoveTeam("Remove Team", teamMenu) );
 
         //Add team with submenus
-
-        addTeam.addSubMenu(new EnterTeamName("Enter com.github.egyptian_league.Team Name",addTeam));
+/*
+        addTeam.addSubMenu(new EnterTeamName("Enter Team Name",addTeam));
         addTeam.addSubMenu(new EnterPlayers("Enter 11 Players",addTeam));
-
+*/
 
 
         // com.github.egyptian_league.Match Menu with Sub menus
 
-        MenuItem addMatch = new AddMatch("Add com.github.egyptian_league.Match", matchMenu);
+        MenuItem addMatch = new AddMatch("Add Match", matchMenu);
 
         matchMenu.addSubMenu(addMatch);
-        matchMenu.addSubMenu(new UpdateMatch("Update com.github.egyptian_league.Match",matchMenu));
-        matchMenu.addSubMenu(new RemoveMatch("Remove com.github.egyptian_league.Match",matchMenu));
+        matchMenu.addSubMenu(new UpdateMatch("Update Match",matchMenu));
+        matchMenu.addSubMenu(new RemoveMatch("Remove Match",matchMenu));
 
         // Add match with submenus
 
         addMatch.addSubMenu(new ChooseTeams("Choose 2 Teams",addMatch));
-        addMatch.addSubMenu(new ChooseDate("com.github.egyptian_league.Date",addMatch));
+        addMatch.addSubMenu(new ChooseDate("Date",addMatch));
 
     }
 

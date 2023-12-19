@@ -17,6 +17,10 @@ public class Team {
         this.captain = captain;
     }
 
+    public Team(String name) {
+        this.name = name;
+        this.teamID = UUID.randomUUID();
+    }
     public String getName() {
         return name;
     }

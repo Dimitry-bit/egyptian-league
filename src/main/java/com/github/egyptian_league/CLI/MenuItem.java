@@ -84,6 +84,9 @@ abstract class MenuItem {
     if (choice == 0){
         isValid = false;
     }
+    else{
+        isValid = true;
+    }
 
     }while(!isValid);
 
