@@ -1,4 +1,4 @@
-package com.github.egyptian_league.POJOs;
+package com.github.egyptian_league;
 
 import com.github.egyptian_league.Models.*;
 
