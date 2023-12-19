@@ -1,4 +1,6 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.Models;
+
+import com.github.egyptian_league.ApplicationRepository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
