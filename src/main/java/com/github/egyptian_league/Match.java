@@ -111,14 +111,14 @@ public class Match {
         ArrayList<Player> awayTeamPlayers = getAwayTeam().getPlayers();
 
         for (Player p : homeTeamPlayers) {
-            if (scorers.containsKey(p.getId())) {
-                homeScore += scorers.get(p.getId());
+            if (scorers.containsKey(p.Id)) {
+                homeScore += scorers.get(p.Id);
             }
         }
 
         for (Player p : awayTeamPlayers) {
-            if (scorers.containsKey(p.getId())) {
-                awayScore += scorers.get(p.getId());
+            if (scorers.containsKey(p.Id)) {
+                awayScore += scorers.get(p.Id);
             }
         }
 

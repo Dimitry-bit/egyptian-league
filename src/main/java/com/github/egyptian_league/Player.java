@@ -8,71 +8,81 @@ import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Player {
 
-    private final UUID playerId;
-    private final String name;
-    private UUID team;
+    public final UUID Id;
+
+    private String name;
+    private UUID teamId;
+    private LocalDate birthday;
     private Position position;
     private int shirtNumber;
 
-    // FIXME: Does it change?
-    private LocalDate birthday;
-
-    // FIXME: Can it be calculated?
-    private int Rank;
-
-    @JsonConstructor(parameters = { "name", "team", "position", "shirtNumber" })
-    public Player(String name, UUID team, Position position, int number) {
-        this.playerId = UUID.randomUUID();
+    @JsonConstructor(parameters = { "name", "team", "birthday", "position", "shirtNumber" })
+    public Player(String name, UUID teamId, LocalDate birthday, Position position, int shirtNumber) {
+        this.Id = UUID.randomUUID();
         this.name = name;
-        this.team = team;
+        this.teamId = teamId;
         this.position = position;
-        this.shirtNumber = number;
-    }
-
-    public void setTeam(UUID team) {
-        this.team = team;
-    }
-
-    public void setRank(int rank) {
-        Rank = rank;
-    }
-
-    public void setShirtNumber(int shirtNumber) {
+        this.birthday = birthday;
         this.shirtNumber = shirtNumber;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 
     public String getName() {
         return name;
     }
 
-    public Position getPosition() {
-        return position;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public UUID getId() {
-        return playerId;
+    public Team getTeam() {
+        return ApplicationRepository.getRepository().getTeamById(teamId);
+    }
+
+    public boolean setTeamId(UUID teamId) {
+        if (!ApplicationRepository.getRepository().containsTeamUUID(teamId)) {
+            return false;
+        }
+
+        this.teamId = teamId;
+        return true;
     }
 
     public int getShirtNumber() {
         return shirtNumber;
     }
 
-    public UUID getTeam() {
-        return team;
+    public boolean setShirtNumber(int shirtNumber) {
+        if (shirtNumber <= 0) {
+            return false;
+        }
+
+        this.shirtNumber = shirtNumber;
+        return true;
     }
 
-    // FIXME: Actually calculate rank
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthDay(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public int calcRank() {
-        return Rank;
+        throw new UnsupportedOperationException();
     }
 
     public int calcAge() {
         if (birthday == null) {
-            return -1;
+            return 0;
         }
 
         return Period.between(birthday, LocalDate.now()).getYears();
