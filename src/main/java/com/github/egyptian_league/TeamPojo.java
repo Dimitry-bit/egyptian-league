@@ -1,5 +1,7 @@
 package com.github.egyptian_league;
 
+import com.github.egyptian_league.Models.Team;
+
 public class TeamPojo {
 
     private Team team;
@@ -14,8 +16,8 @@ public class TeamPojo {
         TeamCaptain = "";
         TotalScore = team.calcTotalPoints();
 
-        if (ApplicationRepository.getRepository().containsPlayerUUID(team.getCaptain())) {
-            TeamCaptain = ApplicationRepository.getRepository().getPlayerByUUID(team.getCaptain()).getName();
+        if (team.getCaptainId() != null) {
+            TeamCaptain = team.getCaptainId().getName();
         }
     }
 

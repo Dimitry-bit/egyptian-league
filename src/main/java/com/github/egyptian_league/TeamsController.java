@@ -1,5 +1,7 @@
 package com.github.egyptian_league;
 
+import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Team;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -64,7 +66,7 @@ public class TeamsController implements Initializable {
 
             Player captain = ApplicationRepository.getRepository().getPlayersByName(textTeamCaptain.getText())[0];
 
-            Team team = new Team(textTeamName.getText(), captain.getId());
+            Team team = new Team(textTeamName.getText(), captain.Id);
             TeamPojo teamPojo = new TeamPojo(team);
 
             // TODO: Add to repository
