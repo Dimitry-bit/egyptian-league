@@ -1,12 +1,10 @@
 package com.github.egyptian_league.Models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.github.egyptian_league.json.Annotations.JsonConstructor;
+import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Referee {
     private final String name;

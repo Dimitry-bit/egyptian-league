@@ -18,8 +18,8 @@ public class GameWeek {
             while (teamIterator2.hasNext()) {
                 Team team2=teamIterator2.next();
                 if (!team1.equals(team2) && !choosenTeam(team1) && !choosenTeam(team2)){
-                    Match match = new Match(team1.Id,team2.Id);
-                    matches.add(match);
+                    // Match match = new Match(team1.Id,team2.Id);
+                    // matches.add(match);
                     selectedTeams.add(team1);
                     selectedTeams.add(team2);
                     break;

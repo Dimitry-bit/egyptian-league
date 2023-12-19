@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import com.github.egyptian_league.json.Annotations.JsonConstructor;
+import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Stadium {
 
