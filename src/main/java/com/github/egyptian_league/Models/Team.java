@@ -82,10 +82,11 @@ public class Team {
             Match match = matchesIterator.next();
             UUID winnerTeam = match.calcWinnerTeam();
 
-            if (winnerTeam.equals(Id)) {
-                totalPoints += 3;
-            } else if (winnerTeam == null) {
+            // NOTE: equals() returns false if obj is null, so null check must be done first
+            if (winnerTeam == null) {
                 totalPoints += 1;
+            } else if (winnerTeam.equals(Id)) {
+                totalPoints += 3;
             }
         }
 
