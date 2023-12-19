@@ -119,7 +119,7 @@ public class ApplicationRepository {
     }
 
     public Player putPlayer(Player player) {
-        return players.put(player.getId(), player);
+        return players.put(player.Id, player);
     }
 
     public Iterator<Player> getPlayersIterator() {
@@ -162,8 +162,7 @@ public class ApplicationRepository {
     };
 
     public Team putTeam(Team team) {
-        // return players.put(team.getId, team);
-        throw new UnsupportedOperationException();
+        return teams.put(team.Id, team);
     }
 
     // #endregion
@@ -187,7 +186,7 @@ public class ApplicationRepository {
     }
 
     public Match putMatch(Match match) {
-        return matches.put(match.matchId, match);
+        return matches.put(match.id, match);
     }
 
     // #endregion
@@ -211,8 +210,7 @@ public class ApplicationRepository {
     }
 
     public Stadium putStadium(Stadium stadium) {
-        // return stadiums.put(, stadium);
-        throw new UnsupportedOperationException();
+        return stadiums.put(stadium.id, stadium);
     }
 
     // #endregion
@@ -236,7 +234,6 @@ public class ApplicationRepository {
     }
 
     public League putLeague(League league) {
-        // return stadiums.put(, stadium);
         throw new UnsupportedOperationException();
     }
 
