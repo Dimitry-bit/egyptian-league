@@ -1,6 +1,6 @@
 package com.github.egyptian_league.json;
 
-import com.github.egyptian_league.json.JsonTokenType;
+import java.util.ArrayList;
 
 public class WrappersDTO {
     private String string;
@@ -14,7 +14,7 @@ public class WrappersDTO {
     private JsonTokenType tokenType;
     private WrappersDTO nullChild;
     private Integer[] ints;
-    // private ArrayList<Integer> collection;
+    private ArrayList<Integer> collection;
 
     @Override
     public String toString() {
@@ -41,15 +41,15 @@ public class WrappersDTO {
         }
         sb.append(" ]\n");
 
-        // sb.append("collection = [ ");
-        // for (int i = 0; i < collection.size(); ++i) {
-        // if (i != 0) {
-        // sb.append(", ");
-        // }
+        sb.append("collection = [ ");
+        for (int i = 0; i < collection.size(); ++i) {
+            if (i != 0) {
+                sb.append(", ");
+            }
 
-        // sb.append(collection.get(i));
-        // }
-        // sb.append(" ]\n");
+            sb.append(collection.get(i));
+        }
+        sb.append(" ]\n");
 
         return sb.toString();
     }
