@@ -6,17 +6,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -54,7 +53,11 @@ public class TeamsController implements Initializable {
     @FXML
     public void btnInsert(ActionEvent event) {
         try {
+            if (textTeamName.getText().isBlank() || textTeamCaptain.getText().isBlank()){
+                return;
+            }
             if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
+                ShowError(event);
                 // TODO: Show error
                 return;
             }
@@ -103,5 +106,13 @@ public class TeamsController implements Initializable {
     private void clearInput() {
         textTeamName.clear();
         textTeamCaptain.clear();
+    }
+
+    @FXML
+    public void ShowError(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Alert!");
+        alert.setContentText("Invalid Data");
+        Optional<ButtonType> result = alert.showAndWait();
     }
 }
