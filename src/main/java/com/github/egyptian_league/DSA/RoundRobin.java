@@ -30,16 +30,16 @@ public class RoundRobin {
     }
 
     public static int rounds(int teams) {
-        return (teams % 2 == 1) ? teams : teams - 1;
+        return (teams % 2 == 0) ? teams - 1 : -1;
     }
 
     public static int matchPerRound(int teams) {
-        int rounds = (teams % 2 == 1) ? teams : teams - 1;
+        int rounds = rounds(teams);
         return ((rounds + 1) / 2);
     }
 
     public static List<ArrayList<Pair<Integer, Integer>>> circle(int teams) {
-        int rounds = (teams % 2 == 1) ? teams : teams - 1;
+        int rounds = rounds(teams);
         int mpr = (rounds + 1) / 2;
 
         ArrayList<Integer> t = new ArrayList<>();
