@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GameWeek {
+
     ArrayList<Match> matches = new ArrayList<>();
     ArrayList<Team> selectedTeams = new ArrayList<>();
 
@@ -17,7 +18,7 @@ public class GameWeek {
             while (teamIterator2.hasNext()) {
                 Team team2=teamIterator2.next();
                 if (!team1.equals(team2) && !choosenTeam(team1) && !choosenTeam(team2)){
-                    Match match = new Match(team1.getUuid(),team2.getUuid());
+                    Match match = new Match(team1.Id,team2.Id);
                     matches.add(match);
                     selectedTeams.add(team1);
                     selectedTeams.add(team2);
