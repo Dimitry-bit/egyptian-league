@@ -33,6 +33,19 @@ public class Create {
         Player tau = new Player("Tau", ahly.Id, LocalDate.of(1994, 5, 13), Position.FORWARD, 10);
         Player shahat = new Player("Shahat", ahly.Id, LocalDate.of(1992, 6, 21), Position.FORWARD, 14);
         Player kahraba = new Player("Kahraba", ahly.Id, LocalDate.of(1994, 4, 13), Position.FORWARD, 7);
+        Team pyramids=new Team("Pyramids",null);
+        Player ekramy=new Player("Ekramy",pyramids.Id,LocalDate.of(1983,7,10),Position.GOALKEEPER,22);
+        Player samy=new Player("Samy",pyramids.Id,LocalDate.of(1992,5,31),Position.DEFENDER,4);
+        Player gabr=new Player("Gabr",pyramids.Id,LocalDate.of(1989,1,9),Position.DEFENDER,5);
+        Player chibi =new Player("Chibi",pyramids.Id,LocalDate.of(1993,1,21),Position.DEFENDER,15);
+        Player hamdy=new Player("Hamdy",pyramids.Id,LocalDate.of(1995,3,15),Position.DEFENDER,21);
+        Player toure=new Player("Toure",pyramids.Id,LocalDate.of(1994,8,4),Position.MIDFIELD,7);
+        Player karti=new Player("Karti",pyramids.Id,LocalDate.of(1997,7,23),Position.MIDFIELD,18);
+        Player abdullah=new Player("Abdullah",pyramids.Id,LocalDate.of(1985,7,13),Position.MIDFIELD,19);
+        Player ramadan=new Player("Ramadan",pyramids.Id,LocalDate.of(1997,1,23),Position.FORWARD,10);
+        Player adel=new Player("Adel",pyramids.Id,LocalDate.of(2001,5,1),Position.FORWARD,30);
+        Player mayele=new Player("Mayele",pyramids.Id,LocalDate.of(1994,6,24),Position.FORWARD,9);
+        pyramids.setCaptainId(abdullah.Id);
 
         Stadium cairo = new Stadium("Cairo Stadium", "Nasr City");
         Stadium borgArab = new Stadium("Borg El Arab Stadium", "Borg El Arab");
