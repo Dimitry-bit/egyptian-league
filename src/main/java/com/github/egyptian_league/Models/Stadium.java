@@ -51,7 +51,8 @@ public class Stadium {
 
     public boolean checkStadiumAvailability(LocalDateTime date) {
         for (LocalDateTime reservedDate : schedule) {
-            if (date.equals(reservedDate) || date.isBefore(reservedDate.plusMinutes(90))) {
+            if (date.equals(reservedDate)
+                    || (date.isAfter(reservedDate) && date.isBefore(reservedDate.plusMinutes(90)))) {
                 return false;
             }
         }
