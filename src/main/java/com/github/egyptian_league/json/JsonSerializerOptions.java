@@ -178,6 +178,7 @@ public class JsonSerializerOptions {
         converters.add(new JsonConverterString());
         converters.add(new JsonConverterByte());
         converters.add(new JsonConverterEnum());
+        converters.add(new JsonConverterLocalDate());
         converters.add(new JsonConverterLocalDateTime());
         converters.add(new JsonConverterUUID());
         converters.add(new JsonConverterArray());
