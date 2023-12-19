@@ -24,14 +24,19 @@ public class Match {
         this.id = UUID.randomUUID();
         this.dateTime = dateTime;
 
+        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
+        Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
         boolean isValidMatch = setHomeTeam(homeTeamId)
                 && setHomeTeam(awayTeamId)
-                && setStadiumId(stadiumId)
-                && setReferee(refereeId);
+                && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
+                && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
 
         if (!isValidMatch) {
             throw new IllegalArgumentException("Match invalid arguments");
         }
+
+        setReferee(refereeId);
+        setStadiumId(stadiumId);
     }
 
     public Team getHomeTeam() {
@@ -60,8 +65,8 @@ public class Match {
         return true;
     }
 
-    public UUID getStadiumId() {
-        return stadiumId;
+    public Stadium getStadium() {
+        return ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
     }
 
     public boolean setStadiumId(UUID stadiumId) {
@@ -70,7 +75,13 @@ public class Match {
             return false;
         }
 
+        Stadium olStadium = getStadium();
+        if (olStadium != null) {
+            getStadium().removeDateTimeFromSchedule(dateTime);
+        }
+
         this.stadiumId = stadiumId;
+        stadium.addDateTimeToSchedule(dateTime);
         return true;
     }
 
@@ -84,18 +95,31 @@ public class Match {
             return false;
         }
 
+        Referee oldReferee = getReferee();
+        if (oldReferee != null) {
+            oldReferee.removeDateFromSchedule(dateTime.toLocalDate());
+        }
+
         this.refereeId = refereeId;
         referee.addDateToSchedule(dateTime.toLocalDate());
         return true;
     }
 
     public boolean setDate(LocalDateTime newDateTime) {
-        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
+        Stadium stadium = getStadium();
         if ((stadium == null) || !stadium.checkStadiumAvailability(newDateTime)) {
             return false;
         }
 
+        Referee referee = getReferee();
+        if ((referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
+            referee.removeDateFromSchedule(dateTime.toLocalDate());
+            referee.addDateToSchedule(newDateTime.toLocalDate());
+        }
+
+        stadium.removeDateTimeFromSchedule(dateTime);
         this.dateTime = newDateTime;
+        stadium.addDateTimeToSchedule(newDateTime);
         return true;
     }
 

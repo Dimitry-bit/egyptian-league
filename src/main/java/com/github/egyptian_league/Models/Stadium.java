@@ -2,6 +2,7 @@ package com.github.egyptian_league.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 import com.github.egyptian_league.Json.Annotations.JsonConstructor;
@@ -34,6 +35,18 @@ public class Stadium {
 
     public void setAddress(String stadiumAddress) {
         this.address = stadiumAddress;
+    }
+
+    public Iterator<LocalDateTime> getSchedule() {
+        return schedule.iterator();
+    }
+
+    public void addDateTimeToSchedule(LocalDateTime dateTime) {
+        schedule.add(dateTime);
+    }
+
+    public void removeDateTimeFromSchedule(LocalDateTime dateTime) {
+        schedule.removeIf(dt -> dt.equals(dateTime));
     }
 
     public boolean checkStadiumAvailability(LocalDateTime date) {
