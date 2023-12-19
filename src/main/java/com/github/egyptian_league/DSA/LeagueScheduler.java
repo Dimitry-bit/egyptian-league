@@ -49,7 +49,7 @@ public class LeagueScheduler {
             throw new IllegalArgumentException("Team count is an odd number (%d)".formatted(teams.size()));
         }
 
-        this.teams = teams;
+        this.teams = new ArrayList<Team>(teams);
         this.stadiums = stadiums;
         this.referees = referees;
         this.timeSlots = timeSlots;
@@ -63,7 +63,6 @@ public class LeagueScheduler {
                     "Time slots count (%d) is less than matches count (%d)".formatted(timeSlotsCount, mpr * round));
         }
 
-        // Collections.copy(this.teams, teams);
         Collections.shuffle(this.teams, rnd);
     }
 
