@@ -83,8 +83,8 @@ public class Match {
         return dateTime;
     }
 
-    public Set<Entry<UUID, Integer>> getScorers() {
-        return scorers.entrySet();
+    public HashMap<UUID, Integer> getScorers() {
+        return scorers;
     }
 
     public boolean putGoals(UUID playerId, int numOfGoals) {
