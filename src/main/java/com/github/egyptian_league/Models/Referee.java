@@ -2,26 +2,50 @@ package com.github.egyptian_league.Models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Referee {
-    private final String name;
-    private final UUID refereeId;
-    private ArrayList<LocalDate> refereeSchedule = new ArrayList<>();
+
+    public final UUID Id;
+
+    private String name;
+    private ArrayList<LocalDate> schedule = new ArrayList<>();
 
     @JsonConstructor(parameters = { "name" })
     Referee(String name) {
+        Id = UUID.randomUUID();
         this.name = name;
-        refereeId = UUID.randomUUID();
     }
 
-    public boolean CheckRefereeAvailability(Match match) {
-        for (int i = 0; i <  refereeSchedule.size(); i++)
-            if (match.getDateTime().toLocalDate().equals(refereeSchedule.get(i))) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Iterator<LocalDate> getSchedule() {
+        return schedule.iterator();
+    }
+
+    public void addDateToSchedule(LocalDate date) {
+        schedule.add(date);
+    }
+
+    public void removeDateFromSchedule(LocalDate date) {
+        schedule.removeIf(dt -> dt.equals(date));
+    }
+
+    public boolean CheckRefereeAvailability(LocalDate date) {
+        for (int i = 0; i < schedule.size(); i++) {
+            if (date.equals(schedule.get(i))) {
                 return false;
             }
+        }
         return true;
     }
 }

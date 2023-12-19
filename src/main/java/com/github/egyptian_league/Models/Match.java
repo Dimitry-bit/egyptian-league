@@ -24,9 +24,12 @@ public class Match {
         this.id = UUID.randomUUID();
         this.dateTime = dateTime;
 
-        boolean isValid = setHomeTeam(homeTeamId) && setHomeTeam(awayTeamId) && setStadiumId(stadiumId);
+        boolean isValidMatch = setHomeTeam(homeTeamId)
+                && setHomeTeam(awayTeamId)
+                && setStadiumId(stadiumId)
+                && setReferee(refereeId);
 
-        if (!isValid) {
+        if (!isValidMatch) {
             throw new IllegalArgumentException("Match invalid arguments");
         }
     }
@@ -62,16 +65,27 @@ public class Match {
     }
 
     public boolean setStadiumId(UUID stadiumId) {
-        if (!ApplicationRepository.getRepository().containsStadiumUUID(stadiumId)) {
-            return false;
-        }
-
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
-        if (!stadium.checkStadiumAvailability(dateTime)) {
+        if ((stadium == null) || !stadium.checkStadiumAvailability(dateTime)) {
             return false;
         }
 
         this.stadiumId = stadiumId;
+        return true;
+    }
+
+    public Referee getReferee() {
+        return ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
+    }
+
+    public boolean setReferee(UUID refereeId) {
+        Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
+        if ((referee == null) || !referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
+            return false;
+        }
+
+        this.refereeId = refereeId;
+        referee.addDateToSchedule(dateTime.toLocalDate());
         return true;
     }
 

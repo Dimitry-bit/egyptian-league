@@ -16,6 +16,7 @@ import com.github.egyptian_league.Json.Annotations.JsonIgnore;
 import com.github.egyptian_league.Models.League;
 import com.github.egyptian_league.Models.Match;
 import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Referee;
 import com.github.egyptian_league.Models.Stadium;
 import com.github.egyptian_league.Models.Team;
 
@@ -29,6 +30,7 @@ public class ApplicationRepository {
     private Hashtable<UUID, Match> matches;
     private Hashtable<UUID, Stadium> stadiums;
     private Hashtable<UUID, League> leagues;
+    private Hashtable<UUID, Referee> referees;
 
     public ApplicationRepository() {
         players = new Hashtable<>();
@@ -36,6 +38,7 @@ public class ApplicationRepository {
         matches = new Hashtable<>();
         stadiums = new Hashtable<>();
         leagues = new Hashtable<>();
+        referees = new Hashtable<>();
     }
 
     public static ApplicationRepository getRepository() {
@@ -242,5 +245,39 @@ public class ApplicationRepository {
         throw new UnsupportedOperationException();
     }
 
+    // #endregion
+
+    // #region Referees
+
+    public boolean containsRefereeUUID(UUID uuid) {
+        return referees.containsKey(uuid);
+    }
+
+    public boolean containsReferee(Referee referee) {
+        return referees.containsValue(referee);
+    }
+
+    public boolean containsRefereeName(String name) {
+        String lName = name.toLowerCase();
+        return referees.values().stream().anyMatch(referee -> lName.equals(referee.getName().toLowerCase()));
+    }
+
+    public Referee getRefereeByUUID(UUID uuid) {
+        return referees.get(uuid);
+    }
+
+    public Referee[] getRefereesByName(String name) {
+        String lName = name.toLowerCase();
+        return referees.values().stream()
+                .filter(referee -> lName.equals(referee.getName().toLowerCase())).toArray(Referee[]::new);
+    }
+
+    public Referee putReferee(Referee referee) {
+        return referees.put(referee.Id, referee);
+    }
+
+    public Iterator<Referee> getRefereesIterator() {
+        return referees.values().iterator();
+    }
     // #endregion
 }
