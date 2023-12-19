@@ -1,9 +1,10 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.Models;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Team {

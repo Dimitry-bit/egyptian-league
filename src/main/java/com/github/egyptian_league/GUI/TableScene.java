@@ -1,4 +1,4 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

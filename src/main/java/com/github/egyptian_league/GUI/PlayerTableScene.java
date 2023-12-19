@@ -1,4 +1,10 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.GUI;
+
+import com.github.egyptian_league.ApplicationRepository;
+import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Position;
+import com.github.egyptian_league.Models.Team;
+import com.github.egyptian_league.POJOs.PlayerPojo;
 
 public class PlayerTableScene extends TableScene<PlayerPojo> {
 
@@ -38,9 +44,9 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
 
             // TODO: Add to repository
             Team[] teams = ApplicationRepository.getRepository().getTeamsByName(teamName);
-            Player player = new Player(name, teams[0].getUuid(), p, n);
+//            Player player = new Player(name, teams[0].Id, p, n);
 
-            table.getItems().add(new PlayerPojo(player));
+//            table.getItems().add(new PlayerPojo(player));
         } catch (Exception e) {
             // TODO: Recover from exceptions
             System.err.printf("Invalid data, %s", e.getMessage());

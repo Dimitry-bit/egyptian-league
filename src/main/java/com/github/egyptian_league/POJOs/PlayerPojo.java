@@ -1,4 +1,7 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.POJOs;
+
+import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Position;
 
 public class PlayerPojo {
     private final String name;

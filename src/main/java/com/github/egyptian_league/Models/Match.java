@@ -1,4 +1,4 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.Models;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.Map.Entry;
 
+import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.json.Annotations.JsonConstructor;
 
 public class Match {

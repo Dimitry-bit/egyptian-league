@@ -1,8 +1,10 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.Models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
+
+import com.github.egyptian_league.ApplicationRepository;
 
 public class League {
 

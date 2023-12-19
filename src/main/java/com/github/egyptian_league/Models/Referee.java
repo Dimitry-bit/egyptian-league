@@ -1,4 +1,4 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.Models;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

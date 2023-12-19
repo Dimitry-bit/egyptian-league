@@ -1,7 +1,9 @@
 package com.github.egyptian_league;
 
+import com.github.egyptian_league.Arguments.Arguments;
 import com.github.egyptian_league.CLI.CLI_Input;
 import com.github.egyptian_league.Constants.ApplicationConstants;
+import com.github.egyptian_league.GUI.HelloApplication;
 
 public class Main {
     public static void main(String[] args) {
