@@ -27,7 +27,7 @@ public class Match {
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
         Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
         boolean isValidMatch = setHomeTeam(homeTeamId)
-                && setHomeTeam(awayTeamId)
+                && setAwayTeam(awayTeamId)
                 && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
                 && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
 
@@ -75,9 +75,11 @@ public class Match {
             return false;
         }
 
-        Stadium olStadium = getStadium();
-        if (olStadium != null) {
-            getStadium().removeDateTimeFromSchedule(dateTime);
+        if (this.stadiumId != null) {
+            Stadium olStadium = getStadium();
+            if (olStadium != null) {
+                getStadium().removeDateTimeFromSchedule(dateTime);
+            }
         }
 
         this.stadiumId = stadiumId;
@@ -95,9 +97,11 @@ public class Match {
             return false;
         }
 
-        Referee oldReferee = getReferee();
-        if (oldReferee != null) {
-            oldReferee.removeDateFromSchedule(dateTime.toLocalDate());
+        if (this.refereeId != null) {
+            Referee oldReferee = getReferee();
+            if (oldReferee != null) {
+                oldReferee.removeDateFromSchedule(dateTime.toLocalDate());
+            }
         }
 
         this.refereeId = refereeId;
