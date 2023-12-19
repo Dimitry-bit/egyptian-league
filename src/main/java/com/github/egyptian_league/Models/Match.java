@@ -20,12 +20,15 @@ public class Match {
     private HashMap<UUID, Integer> scorers;
 
     @JsonConstructor(parameters = { "homeTeamId", "awayTeamId", "stadiumId", "refereeId" })
-    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId) {
+    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
         this.id = UUID.randomUUID();
-        this.homeTeamId = homeTeamId;
-        this.awayTeamId = awayTeamId;
-        this.stadiumId = stadiumId;
-        this.refereeId = refereeId;
+        this.dateTime = dateTime;
+
+        boolean isValid = setHomeTeam(homeTeamId) && setHomeTeam(awayTeamId) && setStadiumId(stadiumId);
+
+        if (!isValid) {
+            throw new IllegalArgumentException("Match invalid arguments");
+        }
     }
 
     public Team getHomeTeam() {
@@ -60,6 +63,11 @@ public class Match {
 
     public boolean setStadiumId(UUID stadiumId) {
         if (!ApplicationRepository.getRepository().containsStadiumUUID(stadiumId)) {
+            return false;
+        }
+
+        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
+        if (!stadium.checkStadiumAvailability(dateTime)) {
             return false;
         }
 
