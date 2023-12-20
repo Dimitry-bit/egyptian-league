@@ -202,7 +202,7 @@ public class ApplicationRepository {
     }
 
     public Match putMatch(Match match) {
-        return matches.put(match.id, match);
+        return matches.put(match.Id, match);
     }
 
     public void removeMatch(UUID matchId) {
@@ -221,6 +221,11 @@ public class ApplicationRepository {
         return stadiums.containsValue(stadium);
     }
 
+    public boolean containsStadiumName(String name) {
+        String lName = name.toLowerCase();
+        return stadiums.values().stream().anyMatch(stadium -> lName.equals(stadium.getName().toLowerCase()));
+    }
+
     public Stadium[] getStadiumsByName(String name) {
         String lName = name.toLowerCase();
         return stadiums.values().stream()
@@ -236,7 +241,7 @@ public class ApplicationRepository {
     }
 
     public Stadium putStadium(Stadium stadium) {
-        return stadiums.put(stadium.id, stadium);
+        return stadiums.put(stadium.Id, stadium);
     }
 
     public void removeStadium(UUID stadiumId) {

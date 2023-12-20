@@ -1,6 +1,7 @@
 package com.github.egyptian_league.GUI;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,12 +10,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public abstract class TableScene<T> implements Initializable {
 
@@ -25,11 +29,12 @@ public abstract class TableScene<T> implements Initializable {
     @FXML
     VBox switchVBox;
 
+    @FXML
+    Button backButton;
+
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     Hashtable<String, ComboBox<?>> comboBoxes = new Hashtable<>();
-
-    abstract void addRow();
 
     Button createButton(String name, int width, int height, HBox hBox, VBox vBox, EventHandler<ActionEvent> event) {
         Button button = new Button();
@@ -99,6 +104,13 @@ public abstract class TableScene<T> implements Initializable {
         return column;
     }
 
+    <C> void assignColumnOnEditCommit(TableColumn<T, C> column, Callback<TableColumn<T, C>, TableCell<T, C>> callback,
+            EventHandler<CellEditEvent<T, C>> event) {
+
+        column.setCellFactory(callback);
+        column.setOnEditCommit(event);
+    }
+
     <V> ComboBox<V> createComboBox(String label, V[] values, int width, int height, HBox hBox, VBox vBox) {
         ComboBox<V> comboBox = new ComboBox<>();
 
@@ -123,20 +135,34 @@ public abstract class TableScene<T> implements Initializable {
         return comboBox;
     }
 
-    Button addInsertButton(String label) {
-        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                addRow();
-            }
-        });
-    }
+    <V> ComboBox<V> createComboBox(String label, List<V> values, int width, int height, HBox hBox, VBox vBox) {
+        ComboBox<V> comboBox = new ComboBox<>();
 
-    Button addDeleteButton(String label) {
-        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
-            }
+        comboBox.setPromptText(label);
+        comboBox.setMaxWidth(width);
+        comboBox.setMaxHeight(height);
+
+        for (V v : values) {
+            comboBox.getItems().add(v);
+        }
+
+        comboBoxes.put(label, comboBox);
+
+        if (hBox != null) {
+            hBox.getChildren().add(comboBox);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(comboBox);
+        }
+
+        return comboBox;
+    }
+    
+
+    void addBackButton() {
+        backButton.setOnAction(event -> {
+            HomePageController.s_switchToHomePage(event);
         });
     }
 }

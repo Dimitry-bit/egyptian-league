@@ -2,11 +2,8 @@ package com.github.egyptian_league.Models;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import java.util.Map.Entry;
 
@@ -87,7 +84,6 @@ public class Player {
         this.position = position;
     }
 
-    // TODO: Test!
     public int calcRank() {
         Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
         Iterator<Player> players = ApplicationRepository.getRepository().getPlayersIterator();
@@ -105,18 +101,7 @@ public class Player {
             }
         }
 
-        List<Map.Entry<UUID, Integer>> sortedScorers = scorers.entrySet().stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue())).toList();
-
-        int rank = 1;
-        int i = 0;
-        for (; i < sortedScorers.size(); ++i) {
-            if (sortedScorers.get(i).getKey().equals(Id)) {
-                rank = i + 1;
-            }
-        }
-
-        return rank;
+        return scorers.get(Id);
     }
 
     public int calcAge() {

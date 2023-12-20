@@ -9,14 +9,14 @@ import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Stadium {
 
-    public final UUID id;
+    public final UUID Id;
     private String name;
     private String address;
     private ArrayList<LocalDateTime> schedule = new ArrayList<>();
 
     @JsonConstructor(parameters = { "name", "address" })
     public Stadium(String name, String address) {
-        id = UUID.randomUUID();
+        Id = UUID.randomUUID();
         this.name = name;
         this.address = address;
     }

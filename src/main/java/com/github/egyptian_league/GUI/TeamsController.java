@@ -16,18 +16,13 @@ import com.github.egyptian_league.POJOs.PlayerPojo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
 
 public class TeamsController implements Initializable {
 
@@ -68,7 +63,7 @@ public class TeamsController implements Initializable {
             }
 
             if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
-                showError(event);
+                GuiUtils.showAlert("Input Error", "Captain does not exist.", AlertType.ERROR);
                 return;
             }
 
@@ -81,19 +76,15 @@ public class TeamsController implements Initializable {
 
             clearInput();
         } catch (Exception e) {
-            // TODO: handle exception
-            System.err.printf("Invalid data, %s", e.getMessage());
+            System.err.printf("Error, %s", e.getMessage());
+            GuiUtils.showAlert("Error", e.getMessage(), AlertType.ERROR);
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void switchToHomePage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToHomePage(ActionEvent event) {
+        HomePageController.s_switchToHomePage(event);
     }
 
     @Override
@@ -140,13 +131,6 @@ public class TeamsController implements Initializable {
         PlayerPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
         PlayerRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
         PlayerShirtNumber.setCellValueFactory(new PropertyValueFactory<>("shirtNumber"));
-    }
-
-    private void showError(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Alert!");
-        alert.setContentText("Invalid Data");
-        alert.showAndWait();
     }
 
     private void clearInput() {

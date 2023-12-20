@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import com.github.egyptian_league.ApplicationRepository;
-import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Match {
 
-    public final UUID id;
+    public final UUID Id;
 
     private UUID homeTeamId;
     private UUID awayTeamId;
@@ -19,10 +18,15 @@ public class Match {
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> scorers;
 
-    @JsonConstructor(parameters = { "homeTeamId", "awayTeamId", "stadiumId", "refereeId" })
+    // Needed for Json construction
+    private Match() {
+        Id = null;
+    }
+
     public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
-        this.id = UUID.randomUUID();
+        this.Id = UUID.randomUUID();
         this.dateTime = dateTime;
+        scorers = new HashMap<>();
 
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
         Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
@@ -37,6 +41,16 @@ public class Match {
 
         setReferee(refereeId);
         setStadiumId(stadiumId);
+    }
+
+    public void deleteMatch() {
+        getStadium().removeDateTimeFromSchedule(dateTime);
+        getReferee().removeDateFromSchedule(dateTime.toLocalDate());
+        ApplicationRepository.getRepository().removeMatch(Id);
+    }
+
+    public boolean containsTeam(Team team) {
+        return homeTeamId.equals(team.Id) || awayTeamId.equals(team.Id);
     }
 
     public Team getHomeTeam() {
@@ -153,7 +167,7 @@ public class Match {
     // return null;
     // }
 
-    public UUID calcWinnerTeam() {
+    public Team calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
         ArrayList<Player> homeTeamPlayers = getHomeTeam().getPlayers();
@@ -175,6 +189,6 @@ public class Match {
             return null;
         }
 
-        return (homeScore > awayScore) ? homeTeamId : awayTeamId;
+        return (homeScore > awayScore) ? getHomeTeam() : getAwayTeam();
     }
 }

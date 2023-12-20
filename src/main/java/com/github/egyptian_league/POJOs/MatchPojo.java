@@ -1,50 +1,48 @@
 package com.github.egyptian_league.POJOs;
 
 import com.github.egyptian_league.Models.Match;
-import com.github.egyptian_league.Models.Referee;
-import com.github.egyptian_league.Models.Stadium;
 import com.github.egyptian_league.Models.Team;
+
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.UUID;
 
 public class MatchPojo {
-    Team homeTeam;
-    Team awayTeam;
-    Stadium stadium;
-    Referee referee;
-    LocalDateTime date;
-    HashMap<UUID, Integer> score;
+
+    Match match;
 
     public MatchPojo(Match match) {
-
-        homeTeam = match.getHomeTeam();
-        awayTeam = match.getAwayTeam();
-        stadium = match.getStadium();
-        referee = match.getReferee();
-        date = match.getDateTime();
-//        score=match.getScorers();
+        this.match = match;
     }
 
-    public Team getHomeTeam() {
-        return homeTeam;
+    public Match getMatch() {
+        return match;
     }
 
-    public Team getAwayTeam() {
-        return awayTeam;
+    public String getHomeTeam() {
+        return match.getHomeTeam().getName();
     }
 
-    public Stadium getStadium() {
-        return stadium;
+    public String getAwayTeam() {
+        return match.getAwayTeam().getName();
     }
-    public Referee getReferee() {
-        return referee;
+
+    public String getStadium() {
+        return match.getStadium().getName();
+    }
+
+    public String getReferee() {
+        return match.getReferee().getName();
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return match.getDateTime();
     }
-    public HashMap<UUID, Integer> getScore() {
-        return score;
+
+    public String getWinner() {
+        Team winnerTeam = match.calcWinnerTeam();
+        if (winnerTeam == null) {
+            return "Tie";
+        }
+        
+        return winnerTeam.getName();
     }
 }
