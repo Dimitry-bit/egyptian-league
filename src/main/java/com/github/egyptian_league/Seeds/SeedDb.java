@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class SeedDb {
-
+    
     public static void seed() {
         ArrayList<Team> teams = new ArrayList<>();
         Player[] players = new Player[11];
@@ -140,73 +140,129 @@ public class SeedDb {
         Referee elbana = new Referee("El Bana");
         Referee nagy = new Referee("nagy");
         Referee maarouf = new Referee("Maarouf");
-
-        Match []matches=new Match[14*4];
-        matches[0]=new Match(teams.get(0).Id,teams.get(2).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,12,21,20,0));
-        matches[1]=new Match(teams.get(1).Id,teams.get(4).Id,borgArab.id,ghandour.Id, LocalDateTime.of(2023,12,22,18,0));
-        matches[2]=new Match(teams.get(5).Id,teams.get(3).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,12,23,14,0));
-        matches[3]=new Match(teams.get(6).Id,teams.get(7).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,12,24,21,0));
-        matches[4]=new Match(teams.get(0).Id,teams.get(1).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,12,31,20,0));
-        matches[5]=new Match(teams.get(2).Id,teams.get(4).Id,petrosport.id,ibrahim.Id, LocalDateTime.of(2023,1,1,20,0));
-        matches[6]=new Match(teams.get(5).Id,teams.get(7).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,1,2,19,0));
-        matches[7]=new Match(teams.get(3).Id,teams.get(6).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,1,3,20,0));
-        matches[8]=new Match(teams.get(0).Id,teams.get(4).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,1,10,20,0));
-        matches[9]=new Match(teams.get(1).Id,teams.get(2).Id,borgArab.id,ibrahim.Id, LocalDateTime.of(2023,1,11,21,0));
-        matches[10]=new Match(teams.get(5).Id,teams.get(6).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,1,11,20,0));
-        matches[11]=new Match(teams.get(3).Id,teams.get(7).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,1,12,20,0));
-        matches[12]=new Match(teams.get(0).Id,teams.get(6).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,1,18,20,0));
-        matches[13]=new Match(teams.get(1).Id,teams.get(3).Id,petrosport.id,ibrahim.Id, LocalDateTime.of(2023,1,20,21,0));
-        matches[14]=new Match(teams.get(2).Id,teams.get(5).Id,elSalam.id,maarouf.Id, LocalDateTime.of(2023,1,20,20,0));
-        matches[15]=new Match(teams.get(0).Id,teams.get(7).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,1,27,20,0));
-        matches[16]=new Match(teams.get(1).Id,teams.get(6).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,1,28,20,0));
-        matches[17]=new Match(teams.get(2).Id,teams.get(3).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,1,28,20,0));
-        matches[18]=new Match(teams.get(4).Id,teams.get(5).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,1,29,20,0));
-        matches[19]=new Match(teams.get(0).Id,teams.get(3).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,1,30,20,0));
-        matches[20]=new Match(teams.get(0).Id,teams.get(5).Id,borgArab.id,nagy.Id, LocalDateTime.of(2023,2,4,20,0));
-        matches[21]=new Match(teams.get(1).Id,teams.get(5).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,2,5,20,0));
-        matches[22]=new Match(teams.get(1).Id,teams.get(7).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,2,14,20,0));
-        matches[23]=new Match(teams.get(2).Id,teams.get(6).Id,elSalam.id,nagy.Id, LocalDateTime.of(2023,2,3,20,0));
-        matches[24]=new Match(teams.get(2).Id,teams.get(7).Id,petrosport.id,elbana.Id, LocalDateTime.of(2023,2,10,18,0));
-        matches[25]=new Match(teams.get(3).Id,teams.get(4).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,2,5,20,0));
-        matches[26]=new Match(teams.get(4).Id,teams.get(6).Id,borgArab.id,nagy.Id, LocalDateTime.of(2023,2,14,20,0));
-        matches[27]=new Match(teams.get(4).Id,teams.get(7).Id,elSalam.id,maarouf.Id, LocalDateTime.of(2023,2,22,20,0));
-        matches[28]=new Match(teams.get(2).Id,teams.get(0).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,3,1,20,0));
-        matches[29]=new Match(teams.get(4).Id,teams.get(1).Id,borgArab.id,ghandour.Id, LocalDateTime.of(2023,3,2,18,0));
-        matches[30]=new Match(teams.get(3).Id,teams.get(5).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,3,3,14,0));
-        matches[31]=new Match(teams.get(7).Id,teams.get(6).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,3,4,21,0));
-        matches[32]=new Match(teams.get(1).Id,teams.get(0).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,3,5,20,0));
-        matches[33]=new Match(teams.get(4).Id,teams.get(2).Id,petrosport.id,ibrahim.Id, LocalDateTime.of(2023,3,11,20,0));
-        matches[34]=new Match(teams.get(7).Id,teams.get(5).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,3,12,19,0));
-        matches[35]=new Match(teams.get(6).Id,teams.get(3).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,3,13,20,0));
-        matches[36]=new Match(teams.get(4).Id,teams.get(0).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,3,14,20,0));
-        matches[37]=new Match(teams.get(2).Id,teams.get(1).Id,borgArab.id,ibrahim.Id, LocalDateTime.of(2023,3,21,21,0));
-        matches[38]=new Match(teams.get(6).Id,teams.get(5).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,3,21,20,0));
-        matches[39]=new Match(teams.get(7).Id,teams.get(3).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,3,22,22,0));
-        matches[40]=new Match(teams.get(6).Id,teams.get(0).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,3,23,20,0));
-        matches[41]=new Match(teams.get(3).Id,teams.get(1).Id,petrosport.id,ibrahim.Id, LocalDateTime.of(2023,3,31,21,0));
-        matches[42]=new Match(teams.get(5).Id,teams.get(2).Id,elSalam.id,maarouf.Id, LocalDateTime.of(2023,4,2,20,0));
-        matches[43]=new Match(teams.get(7).Id,teams.get(0).Id,cairo.id,nagy.Id, LocalDateTime.of(2023,4,3,20,0));
-        matches[44]=new Match(teams.get(6).Id,teams.get(1).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,4,9,20,0));
-        matches[45]=new Match(teams.get(3).Id,teams.get(2).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,4,10,20,0));
-        matches[46]=new Match(teams.get(5).Id,teams.get(4).Id,elSalam.id,elbana.Id, LocalDateTime.of(2023,4,11,20,0));
-        matches[47]=new Match(teams.get(3).Id,teams.get(0).Id,petrosport.id,maarouf.Id, LocalDateTime.of(2023,4,12,20,0));
-        matches[48]=new Match(teams.get(5).Id,teams.get(0).Id,borgArab.id,nagy.Id, LocalDateTime.of(2023,4,19,20,0));
-        matches[49]=new Match(teams.get(5).Id,teams.get(1).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,4,20,20,0));
-        matches[50]=new Match(teams.get(7).Id,teams.get(1).Id,borgArab.id,maarouf.Id, LocalDateTime.of(2023,4,21,20,0));
-        matches[51]=new Match(teams.get(6).Id,teams.get(2).Id,elSalam.id,nagy.Id, LocalDateTime.of(2023,4,22,22,0));
-        matches[52]=new Match(teams.get(7).Id,teams.get(2).Id,petrosport.id,elbana.Id, LocalDateTime.of(2023,5,1,18,0));
-        matches[53]=new Match(teams.get(4).Id,teams.get(3).Id,cairo.id,ibrahim.Id, LocalDateTime.of(2023,5,2,20,0));
-        matches[54]=new Match(teams.get(6).Id,teams.get(4).Id,borgArab.id,nagy.Id, LocalDateTime.of(2023,5,3,20,0));
-        matches[55]=new Match(teams.get(7).Id,teams.get(4).Id,elSalam.id,maarouf.Id, LocalDateTime.of(2023,5,4,20,0));
-
-
-
+        
         ApplicationRepository.getRepository().putReferee(ibrahim);
         ApplicationRepository.getRepository().putReferee(ghandour);
         ApplicationRepository.getRepository().putReferee(elbana);
         ApplicationRepository.getRepository().putReferee(nagy);
         ApplicationRepository.getRepository().putReferee(maarouf);
 
+        Match[] matches = new Match[14 * 4];
+
+        matches[0] = new Match(teams.get(0).Id, teams.get(2).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 12, 21, 20, 0));
+        matches[1] = new Match(teams.get(1).Id, teams.get(4).Id, borgArab.Id, ghandour.Id,
+                LocalDateTime.of(2023, 12, 22, 18, 0));
+        matches[2] = new Match(teams.get(5).Id, teams.get(3).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 12, 23, 14, 0));
+        matches[3] = new Match(teams.get(6).Id, teams.get(7).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 12, 24, 21, 0));
+        matches[4] = new Match(teams.get(0).Id, teams.get(1).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 12, 31, 20, 0));
+        matches[5] = new Match(teams.get(2).Id, teams.get(4).Id, petrosport.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 1, 1, 20, 0));
+        matches[6] = new Match(teams.get(5).Id, teams.get(7).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 1, 2, 19, 0));
+        matches[7] = new Match(teams.get(3).Id, teams.get(6).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 1, 3, 20, 0));
+        matches[8] = new Match(teams.get(0).Id, teams.get(4).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 1, 10, 20, 0));
+        matches[9] = new Match(teams.get(1).Id, teams.get(2).Id, borgArab.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 1, 11, 21, 0));
+        matches[10] = new Match(teams.get(5).Id, teams.get(6).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 1, 11, 20, 0));
+        matches[11] = new Match(teams.get(3).Id, teams.get(7).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 1, 12, 20, 0));
+        matches[12] = new Match(teams.get(0).Id, teams.get(6).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 1, 18, 20, 0));
+        matches[13] = new Match(teams.get(1).Id, teams.get(3).Id, petrosport.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 1, 20, 21, 0));
+        matches[14] = new Match(teams.get(2).Id, teams.get(5).Id, elSalam.Id, maarouf.Id,
+                LocalDateTime.of(2023, 1, 20, 20, 0));
+        matches[15] = new Match(teams.get(0).Id, teams.get(7).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 1, 27, 20, 0));
+        matches[16] = new Match(teams.get(1).Id, teams.get(6).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 1, 28, 20, 0));
+        matches[17] = new Match(teams.get(2).Id, teams.get(3).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 1, 28, 20, 0));
+        matches[18] = new Match(teams.get(4).Id, teams.get(5).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 1, 29, 20, 0));
+        matches[19] = new Match(teams.get(0).Id, teams.get(3).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 1, 30, 20, 0));
+        matches[20] = new Match(teams.get(0).Id, teams.get(5).Id, borgArab.Id, nagy.Id,
+                LocalDateTime.of(2023, 2, 4, 20, 0));
+        matches[21] = new Match(teams.get(1).Id, teams.get(5).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 2, 5, 20, 0));
+        matches[22] = new Match(teams.get(1).Id, teams.get(7).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 2, 14, 20, 0));
+        matches[23] = new Match(teams.get(2).Id, teams.get(6).Id, elSalam.Id, nagy.Id,
+                LocalDateTime.of(2023, 2, 3, 20, 0));
+        matches[24] = new Match(teams.get(2).Id, teams.get(7).Id, petrosport.Id, elbana.Id,
+                LocalDateTime.of(2023, 2, 10, 18, 0));
+        matches[25] = new Match(teams.get(3).Id, teams.get(4).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 2, 20, 20, 0));
+        matches[26] = new Match(teams.get(4).Id, teams.get(6).Id, borgArab.Id, nagy.Id,
+                LocalDateTime.of(2023, 2, 15, 20, 0));
+        matches[27] = new Match(teams.get(4).Id, teams.get(7).Id, elSalam.Id, maarouf.Id,
+                LocalDateTime.of(2023, 2, 22, 20, 0));
+        matches[28] = new Match(teams.get(2).Id, teams.get(0).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 3, 1, 20, 0));
+        matches[29] = new Match(teams.get(4).Id, teams.get(1).Id, borgArab.Id, ghandour.Id,
+                LocalDateTime.of(2023, 3, 2, 18, 0));
+        matches[30] = new Match(teams.get(3).Id, teams.get(5).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 3, 3, 14, 0));
+        matches[31] = new Match(teams.get(7).Id, teams.get(6).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 3, 4, 21, 0));
+        matches[32] = new Match(teams.get(1).Id, teams.get(0).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 3, 5, 20, 0));
+        matches[33] = new Match(teams.get(4).Id, teams.get(2).Id, petrosport.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 3, 11, 20, 0));
+        matches[34] = new Match(teams.get(7).Id, teams.get(5).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 3, 12, 19, 0));
+        matches[35] = new Match(teams.get(6).Id, teams.get(3).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 3, 13, 20, 0));
+        matches[36] = new Match(teams.get(4).Id, teams.get(0).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 3, 14, 20, 0));
+        matches[37] = new Match(teams.get(2).Id, teams.get(1).Id, borgArab.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 3, 21, 21, 0));
+        matches[38] = new Match(teams.get(6).Id, teams.get(5).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 3, 21, 20, 0));
+        matches[39] = new Match(teams.get(7).Id, teams.get(3).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 3, 22, 22, 0));
+        matches[40] = new Match(teams.get(6).Id, teams.get(0).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 3, 23, 20, 0));
+        matches[41] = new Match(teams.get(3).Id, teams.get(1).Id, petrosport.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 3, 31, 21, 0));
+        matches[42] = new Match(teams.get(5).Id, teams.get(2).Id, elSalam.Id, maarouf.Id,
+                LocalDateTime.of(2023, 4, 2, 20, 0));
+        matches[43] = new Match(teams.get(7).Id, teams.get(0).Id, cairo.Id, nagy.Id,
+                LocalDateTime.of(2023, 4, 3, 20, 0));
+        matches[44] = new Match(teams.get(6).Id, teams.get(1).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 4, 9, 20, 0));
+        matches[45] = new Match(teams.get(3).Id, teams.get(2).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 4, 10, 20, 0));
+        matches[46] = new Match(teams.get(5).Id, teams.get(4).Id, elSalam.Id, elbana.Id,
+                LocalDateTime.of(2023, 4, 11, 20, 0));
+        matches[47] = new Match(teams.get(3).Id, teams.get(0).Id, petrosport.Id, maarouf.Id,
+                LocalDateTime.of(2023, 4, 12, 20, 0));
+        matches[48] = new Match(teams.get(5).Id, teams.get(0).Id, borgArab.Id, nagy.Id,
+                LocalDateTime.of(2023, 4, 19, 20, 0));
+        matches[49] = new Match(teams.get(5).Id, teams.get(1).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 4, 20, 20, 0));
+        matches[50] = new Match(teams.get(7).Id, teams.get(1).Id, borgArab.Id, maarouf.Id,
+                LocalDateTime.of(2023, 4, 21, 20, 0));
+        matches[51] = new Match(teams.get(6).Id, teams.get(2).Id, elSalam.Id, nagy.Id,
+                LocalDateTime.of(2023, 4, 22, 22, 0));
+        matches[52] = new Match(teams.get(7).Id, teams.get(2).Id, petrosport.Id, elbana.Id,
+                LocalDateTime.of(2023, 5, 1, 18, 0));
+        matches[53] = new Match(teams.get(4).Id, teams.get(3).Id, cairo.Id, ibrahim.Id,
+                LocalDateTime.of(2023, 5, 2, 20, 0));
+        matches[54] = new Match(teams.get(6).Id, teams.get(4).Id, borgArab.Id, nagy.Id,
+                LocalDateTime.of(2023, 5, 3, 20, 0));
+        matches[55] = new Match(teams.get(7).Id, teams.get(4).Id, elSalam.Id, maarouf.Id,
+                LocalDateTime.of(2023, 5, 4, 20, 0));
+        
+        insetMatches(matches);
     }
 
     private static Team insertTeam(String teamName, Player[] players, int captainIndex) {
@@ -221,5 +277,11 @@ public class SeedDb {
 
         team.setCaptain(players[captainIndex]);
         return team;
+    }
+
+    private static void insetMatches(Match[] matches) {
+        for (Match m : matches) {
+            ApplicationRepository.getRepository().putMatch(m);
+        }
     }
 }
