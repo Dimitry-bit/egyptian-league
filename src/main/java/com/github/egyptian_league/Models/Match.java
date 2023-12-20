@@ -49,6 +49,10 @@ public class Match {
         ApplicationRepository.getRepository().removeMatch(id);
     }
 
+    public boolean containsTeam(Team team) {
+        return homeTeamId.equals(team.Id) || awayTeamId.equals(team.Id);
+    }
+
     public Team getHomeTeam() {
         return ApplicationRepository.getRepository().getTeamById(homeTeamId);
     }

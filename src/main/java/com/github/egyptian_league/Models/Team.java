@@ -80,12 +80,17 @@ public class Team {
 
         while (matchesIterator.hasNext()) {
             Match match = matchesIterator.next();
+
+            if (!match.containsTeam(this)) {
+                continue;
+            }
+
             Team winnerTeam = match.calcWinnerTeam();
 
             // NOTE: equals() returns false if obj is null, so null check must be done first
             if (winnerTeam == null) {
                 totalPoints += 1;
-            } else if (winnerTeam.equals(Id)) {
+            } else if (winnerTeam.Id.equals(Id)) {
                 totalPoints += 3;
             }
         }
