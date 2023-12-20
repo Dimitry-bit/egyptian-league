@@ -33,6 +33,19 @@ public class Team {
         for (Player p : players) {
             p.setTeam(null);
         }
+
+        Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
+        ArrayList<Match> markedForRemoval = new ArrayList<>();
+        while (matchesIterator.hasNext()) {
+            Match match = matchesIterator.next();
+            if (match.containsTeam(this)) {
+                markedForRemoval.add(match);
+            }
+        }
+
+        for (Match m : markedForRemoval) {
+            ApplicationRepository.getRepository().removeMatch(m);
+        }
     }
 
     public static int calcNumberOfTeams() {

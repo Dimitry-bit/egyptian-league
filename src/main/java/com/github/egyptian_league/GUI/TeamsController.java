@@ -82,6 +82,18 @@ public class TeamsController implements Initializable {
         }
     }
 
+    public void btnDelete(ActionEvent event) {
+        TeamPojo teamPojo = TeamsTable.getSelectionModel().getSelectedItem();
+
+        if (teamPojo == null) {
+            return;
+        }
+
+        ApplicationRepository.getRepository().removeTeam(teamPojo.getTeam());
+        TeamsTable.getItems().remove(teamPojo);
+        TeamsTable.refresh();
+    }
+
     @FXML
     public void switchToHomePage(ActionEvent event) {
         HomePageController.s_switchToHomePage(event);

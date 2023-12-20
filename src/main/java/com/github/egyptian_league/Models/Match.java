@@ -197,8 +197,24 @@ public class Match {
     public Team calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
-        ArrayList<Player> homeTeamPlayers = getHomeTeam().getPlayers();
-        ArrayList<Player> awayTeamPlayers = getAwayTeam().getPlayers();
+
+        Team homeTeam = getHomeTeam();
+        Team awayTeam = getAwayTeam();
+
+        if ((homeTeam == null) && (awayTeam == null)) {
+            return null;
+        }
+
+        if (homeTeam == null) {
+            return awayTeam;
+        }
+
+        if (awayTeam == null) {
+            return homeTeam;
+        }
+
+        ArrayList<Player> homeTeamPlayers = homeTeam.getPlayers();
+        ArrayList<Player> awayTeamPlayers = awayTeam.getPlayers();
 
         for (Player p : homeTeamPlayers) {
             if (scorers.containsKey(p.Id)) {
@@ -216,6 +232,6 @@ public class Match {
             return null;
         }
 
-        return (homeScore > awayScore) ? getHomeTeam() : getAwayTeam();
+        return (homeScore > awayScore) ? homeTeam : awayTeam; 
     }
 }
