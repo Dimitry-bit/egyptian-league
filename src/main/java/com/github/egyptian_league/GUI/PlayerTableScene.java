@@ -5,9 +5,12 @@ import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
+import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+
 import java.time.LocalDate;
-public class PlayerTableScene extends TableScene<PlayerPojo>
+public class PlayerTableScene extends TableScene<PlayerPojo>{
     private static final PlayerTableScene player_Table_Scene = new PlayerTableScene();
     ComboBox comboBox = new ComboBox();
 
@@ -33,7 +36,7 @@ public class PlayerTableScene extends TableScene<PlayerPojo>
         addswitchButtontoTeams("Teams tables");
         addswitchButtontoHomePAge("home page");
         addswitchButtontoLeague("leagues");
-    }
+            }
 
     public static PlayerTableScene getplayer_table_scene() {
         return player_Table_Scene;
@@ -68,7 +71,99 @@ public class PlayerTableScene extends TableScene<PlayerPojo>
             e.printStackTrace();
         }
     }
-
+//    void edit() {
+//        tableColumns.get(0).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(0).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(0).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(1).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(2).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(3).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(4).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(5).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, String>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, String> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue());
+//                    }
+//                }
+//        );
+//        tableColumns.get(6).setOnEditCommit(
+//                new EventHandler<TableColumn.CellEditEvent<PlayerPojo, Integer>>() {
+//                    @Override
+//                    public void handle(TableColumn.CellEditEvent<PlayerPojo, Integer> t) {
+//                        ((PlayerPojo) t.getTableView().getItems().get(
+//                                t.getTablePosition().getRow())
+//                        ).getName(t.getNewValue().toString());
+//                    }
+//                }
+//        );
+//
+//    }
 
     }
 
