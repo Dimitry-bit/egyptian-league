@@ -41,68 +41,32 @@ public class HomePageController {
     }
 
     public static void s_switchToTeamsPage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/TeamsPage.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.err.printf("Error: %s\n", e.getMessage());
-        }
+        switchPage("/TeamsPage.fxml", event);
     }
 
     public static void s_switchToHomePage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/HomePage.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.err.printf("Error: %s\n", e.getMessage());
-        }
+        switchPage("/HomePage.fxml", event);
     }
 
     public static void s_switchToPlayerPage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/PlayersPage.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.err.printf("Error: %s\n", e.getMessage());
-        }
+        switchPage("/PlayersPage.fxml", event);
     }
 
     public static void s_switchToMatchPage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/MatchesPage.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.err.printf("Error: %s\n", e.getMessage());
-        }
+        switchPage("/MatchesPage.fxml", event);
     }
 
     public static void s_switchToStadiumPage(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/StadiumPage.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (Exception e) {
-            System.err.printf("Error: %s\n", e.getMessage());
-        }
+        switchPage("/StadiumPage.fxml", event);
     }
 
     public static void s_switchToRefereePage(ActionEvent event) {
+        switchPage("/RefereePage.fxml", event);
+    }
+
+    private static void switchPage(String pagePath, ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(HomePageController.class.getResource("/RefereePage.fxml"));
+            Parent root = FXMLLoader.load(HomePageController.class.getResource(pagePath));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
