@@ -11,6 +11,8 @@ import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 
+import javafx.scene.control.Alert.AlertType;
+
 public class PlayerTableScene extends TableScene<PlayerPojo> {
 
     @Override
@@ -28,8 +30,13 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
             Position position = (Position) comboBoxes.get("Position").getSelectionModel().getSelectedItem();
             int shirtNumber = Integer.parseInt(shirtNumberStr);
 
+            if (position == null) {
+                GuiUtils.showAlert("Incomplete Data", "Select position.", AlertType.WARNING);
+                return;
+            }
+
             if (!ApplicationRepository.getRepository().containsTeamName(teamName)) {
-                // TODO: Show error
+                GuiUtils.showAlert("Input Error", "Team does not exist.", AlertType.ERROR);
                 return;
             }
 
@@ -43,9 +50,13 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
             tableView.getItems().add(new PlayerPojo(player));
 
             clearInput();
+        } catch (NumberFormatException e) {
+            GuiUtils.showAlert("Input Error", "Invalid shirt number.", AlertType.ERROR);
+        } catch (ClassCastException e) {
+            GuiUtils.showAlert("Input Error", "Invalid position.", AlertType.ERROR);
         } catch (Exception e) {
-            // TODO: Recover from exceptions
-            System.err.printf("Invalid data, %s", e.getMessage());
+            System.err.printf("Error, %s", e.getMessage());
+            GuiUtils.showAlert("Error", e.getMessage(), AlertType.ERROR);
             e.printStackTrace();
         }
     }
