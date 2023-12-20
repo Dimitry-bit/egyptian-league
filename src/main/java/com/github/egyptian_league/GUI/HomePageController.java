@@ -35,10 +35,12 @@ public class HomePageController {
         stage.show();
     }
     @FXML
-    public void switchToLeaguesPage(ActionEvent event) {
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(LeagueTableScene.getLeage_table_scene().showScene());
-//        stage.show();
+    public void switchToLeaguesPage(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/Leagues.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
