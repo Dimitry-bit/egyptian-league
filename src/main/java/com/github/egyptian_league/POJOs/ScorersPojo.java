@@ -2,10 +2,11 @@ package com.github.egyptian_league.POJOs;
 
 import com.github.egyptian_league.Models.Match;
 import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Team;
 
 public class ScorersPojo {
-    Player player;
-    Match match;
+    private Player player;
+    private Match match;
 
     public ScorersPojo(Player player, Match match) {
         this.player = player;
@@ -25,7 +26,8 @@ public class ScorersPojo {
     }
 
     public String getTeamName() {
-        return player.getTeam().getName();
+        Team team = player.getTeam();
+        return (team != null) ? team.getName() : "";
     }
 
     public Integer getPlayerScore() {

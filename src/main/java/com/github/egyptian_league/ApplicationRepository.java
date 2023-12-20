@@ -117,7 +117,7 @@ public class ApplicationRepository {
     }
 
     public Player getPlayerByUUID(UUID uuid) {
-        return players.get(uuid);
+        return uuid == null ? null : players.get(uuid);
     }
 
     public Player[] getPlayersByName(String name) {
@@ -157,7 +157,7 @@ public class ApplicationRepository {
     }
 
     public Team getTeamById(UUID uuid) {
-        return teams.get(uuid);
+        return uuid == null ? null : teams.get(uuid);
     }
 
     public Team[] getTeamsByName(String name) {
@@ -196,7 +196,7 @@ public class ApplicationRepository {
     }
 
     public Match getMatchByUUID(UUID uuid) {
-        return matches.get(uuid);
+        return uuid == null ? null : matches.get(uuid);
     }
 
     public Iterator<Match> getMatchesIterator() {
@@ -236,7 +236,7 @@ public class ApplicationRepository {
     }
 
     public Stadium getStadiumByUUID(UUID uuid) {
-        return stadiums.get(uuid);
+        return uuid == null ? null : stadiums.get(uuid);
     }
 
     public Iterator<Stadium> getStadiumsIterator() {
@@ -265,7 +265,7 @@ public class ApplicationRepository {
     }
 
     public League getLeagueByUUID(UUID uuid) {
-        return leagues.get(uuid);
+        return uuid == null ? null : leagues.get(uuid);
     }
 
     public Iterator<League> getLeaguesIterator() {
@@ -298,7 +298,7 @@ public class ApplicationRepository {
     }
 
     public Referee getRefereeByUUID(UUID uuid) {
-        return referees.get(uuid);
+        return uuid == null ? null : referees.get(uuid);
     }
 
     public Referee[] getRefereesByName(String name) {

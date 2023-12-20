@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
+import com.github.egyptian_league.Models.Team;
 
 public class PlayerPojo {
 
@@ -22,7 +23,8 @@ public class PlayerPojo {
     }
 
     public String getTeamName() {
-        return (player.getTeam() != null) ? player.getTeam().getName() : "";
+        Team team = player.getTeam();
+        return (team != null) ? team.getName() : "";
     }
 
     public LocalDate getBirthday() {

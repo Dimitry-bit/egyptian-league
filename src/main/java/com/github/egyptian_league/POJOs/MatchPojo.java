@@ -1,13 +1,15 @@
 package com.github.egyptian_league.POJOs;
 
 import com.github.egyptian_league.Models.Match;
+import com.github.egyptian_league.Models.Referee;
+import com.github.egyptian_league.Models.Stadium;
 import com.github.egyptian_league.Models.Team;
 
 import java.time.LocalDateTime;
 
 public class MatchPojo {
 
-    Match match;
+    private Match match;
 
     public MatchPojo(Match match) {
         this.match = match;
@@ -18,19 +20,23 @@ public class MatchPojo {
     }
 
     public String getHomeTeam() {
-        return match.getHomeTeam().getName();
+        Team homeTeam = match.getHomeTeam();
+        return (homeTeam != null) ? homeTeam.getName() : "";
     }
 
     public String getAwayTeam() {
-        return match.getAwayTeam().getName();
+        Team awayTeam = match.getHomeTeam();
+        return (awayTeam != null) ? awayTeam.getName() : "";
     }
 
     public String getStadium() {
-        return match.getStadium().getName();
+        Stadium stadium = match.getStadium();
+        return (stadium != null) ? stadium.getName() : "";
     }
 
     public String getReferee() {
-        return match.getReferee().getName();
+        Referee referee = match.getReferee();
+        return (referee != null) ? referee.getName() : "";
     }
 
     public LocalDateTime getDate() {
@@ -42,7 +48,7 @@ public class MatchPojo {
         if (winnerTeam == null) {
             return "Tie";
         }
-        
+
         return winnerTeam.getName();
     }
 }
