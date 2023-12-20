@@ -25,7 +25,7 @@ public class MatchPojo {
     }
 
     public String getAwayTeam() {
-        Team awayTeam = match.getHomeTeam();
+        Team awayTeam = match.getAwayTeam();
         return (awayTeam != null) ? awayTeam.getName() : "";
     }
 

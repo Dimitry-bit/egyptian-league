@@ -237,9 +237,9 @@ public class MatchTableScene extends TableScene<MatchPojo> {
     }
 
     private void seedMatchTableView() {
-        Iterator<Match> MatchIter = ApplicationRepository.getRepository().getMatchesIterator();
-        while (MatchIter.hasNext()) {
-            tableView.getItems().add(new MatchPojo(MatchIter.next()));
+        Iterator<Match> MatchIterator = ApplicationRepository.getRepository().getMatchesIterator();
+        while (MatchIterator.hasNext()) {
+            tableView.getItems().add(new MatchPojo(MatchIterator.next()));
         }
     }
 }
