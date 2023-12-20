@@ -9,10 +9,16 @@ import java.util.Iterator;
 import java.util.UUID;
 
 import com.github.egyptian_league.Constants.ApplicationConstants;
-import com.github.egyptian_league.json.JsonException;
-import com.github.egyptian_league.json.JsonSerializer;
-import com.github.egyptian_league.json.JsonSerializerOptions;
-import com.github.egyptian_league.json.Annotations.JsonIgnore;
+import com.github.egyptian_league.Json.JsonException;
+import com.github.egyptian_league.Json.JsonSerializer;
+import com.github.egyptian_league.Json.JsonSerializerOptions;
+import com.github.egyptian_league.Json.Annotations.JsonIgnore;
+import com.github.egyptian_league.Models.League;
+import com.github.egyptian_league.Models.Match;
+import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Referee;
+import com.github.egyptian_league.Models.Stadium;
+import com.github.egyptian_league.Models.Team;
 
 public class ApplicationRepository {
 
@@ -24,6 +30,7 @@ public class ApplicationRepository {
     private Hashtable<UUID, Match> matches;
     private Hashtable<UUID, Stadium> stadiums;
     private Hashtable<UUID, League> leagues;
+    private Hashtable<UUID, Referee> referees;
 
     public ApplicationRepository() {
         players = new Hashtable<>();
@@ -31,6 +38,7 @@ public class ApplicationRepository {
         matches = new Hashtable<>();
         stadiums = new Hashtable<>();
         leagues = new Hashtable<>();
+        referees = new Hashtable<>();
     }
 
     public static ApplicationRepository getRepository() {
@@ -103,22 +111,31 @@ public class ApplicationRepository {
         return players.containsValue(player);
     }
 
+    public boolean containsPlayerName(String name) {
+        String lName = name.toLowerCase();
+        return players.values().stream().anyMatch(player -> lName.equals(player.getName().toLowerCase()));
+    }
+
     public Player getPlayerByUUID(UUID uuid) {
         return players.get(uuid);
     }
 
     public Player[] getPlayersByName(String name) {
         String lName = name.toLowerCase();
-        return (Player[]) players.values().stream()
-                .filter(player -> lName.equals(player.getName().toLowerCase())).toArray();
+        return players.values().stream()
+                .filter(player -> lName.equals(player.getName().toLowerCase())).toArray(Player[]::new);
     }
 
     public Player putPlayer(Player player) {
-        return players.put(player.getId(), player);
+        return players.put(player.Id, player);
     }
 
     public Iterator<Player> getPlayersIterator() {
         return players.values().iterator();
+    }
+
+    public void removePlayer(UUID playerId) {
+        players.remove(playerId);
     }
 
     // #endregion
@@ -133,14 +150,19 @@ public class ApplicationRepository {
         return teams.containsValue(team);
     }
 
+    public boolean containsTeamName(String name) {
+        String lName = name.toLowerCase();
+        return teams.values().stream().anyMatch(team -> lName.equals(team.getName().toLowerCase()));
+    }
+
     public Team getTeamById(UUID uuid) {
         return teams.get(uuid);
     }
 
     public Team[] getTeamsByName(String name) {
         String lName = name.toLowerCase();
-        return (Team[]) teams.values().stream()
-                .filter(team -> lName.equals(team.getName().toLowerCase())).toArray();
+        return teams.values().stream()
+                .filter(team -> lName.equals(team.getName().toLowerCase())).toArray(Team[]::new);
     }
 
     public Iterator<Team> getTeamsIterator() {
@@ -152,8 +174,11 @@ public class ApplicationRepository {
     };
 
     public Team putTeam(Team team) {
-        // return players.put(team.getId, team);
-        throw new UnsupportedOperationException();
+        return teams.put(team.Id, team);
+    }
+
+    public void removeTeam(UUID teamId) {
+        teams.remove(teamId);
     }
 
     // #endregion
@@ -177,7 +202,11 @@ public class ApplicationRepository {
     }
 
     public Match putMatch(Match match) {
-        return matches.put(match.matchId, match);
+        return matches.put(match.id, match);
+    }
+
+    public void removeMatch(UUID matchId) {
+        matches.remove(matchId);
     }
 
     // #endregion
@@ -192,6 +221,12 @@ public class ApplicationRepository {
         return stadiums.containsValue(stadium);
     }
 
+    public Stadium[] getStadiumsByName(String name) {
+        String lName = name.toLowerCase();
+        return stadiums.values().stream()
+                .filter(stadium -> lName.equals(stadium.getName().toLowerCase())).toArray(Stadium[]::new);
+    }
+
     public Stadium getStadiumByUUID(UUID uuid) {
         return stadiums.get(uuid);
     }
@@ -201,8 +236,11 @@ public class ApplicationRepository {
     }
 
     public Stadium putStadium(Stadium stadium) {
-        // return stadiums.put(, stadium);
-        throw new UnsupportedOperationException();
+        return stadiums.put(stadium.id, stadium);
+    }
+
+    public void removeStadium(UUID stadiumId) {
+        stadiums.remove(stadiumId);
     }
 
     // #endregion
@@ -226,8 +264,50 @@ public class ApplicationRepository {
     }
 
     public League putLeague(League league) {
-        // return stadiums.put(, stadium);
         throw new UnsupportedOperationException();
+    }
+
+    public void removeLeague(UUID leagueId) {
+        leagues.remove(leagueId);
+    }
+
+    // #endregion
+
+    // #region Referees
+
+    public boolean containsRefereeUUID(UUID uuid) {
+        return referees.containsKey(uuid);
+    }
+
+    public boolean containsReferee(Referee referee) {
+        return referees.containsValue(referee);
+    }
+
+    public boolean containsRefereeName(String name) {
+        String lName = name.toLowerCase();
+        return referees.values().stream().anyMatch(referee -> lName.equals(referee.getName().toLowerCase()));
+    }
+
+    public Referee getRefereeByUUID(UUID uuid) {
+        return referees.get(uuid);
+    }
+
+    public Referee[] getRefereesByName(String name) {
+        String lName = name.toLowerCase();
+        return referees.values().stream()
+                .filter(referee -> lName.equals(referee.getName().toLowerCase())).toArray(Referee[]::new);
+    }
+
+    public Referee putReferee(Referee referee) {
+        return referees.put(referee.Id, referee);
+    }
+
+    public void removeReferee(UUID refereeId) {
+        referees.remove(refereeId);
+    }
+
+    public Iterator<Referee> getRefereesIterator() {
+        return referees.values().iterator();
     }
 
     // #endregion
