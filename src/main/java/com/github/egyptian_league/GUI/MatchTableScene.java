@@ -33,16 +33,24 @@ public class MatchTableScene extends TableScene<MatchPojo> {
         String homeTeamText = textFields.get("Home Team").getText();
         String awayTeamText = textFields.get("Away Team").getText();
         LocalDate date = datePickers.get("Date").getValue();
+        String timeStr = textFields.get("Time").getText();
 
         try {
             String stadiumText = (String) comboBoxes.get("Stadium").getValue();
             String refereeText = (String) comboBoxes.get("Referee").getValue();
-            LocalTime time = LocalTime.parse(textFields.get("Time").getText());
 
-            if (stadiumText.isBlank() || refereeText.isBlank()
-                    || homeTeamText.isBlank() || awayTeamText.isBlank() || (date == null)) {
+            boolean isMissingData = (stadiumText == null)
+                    || (refereeText == null)
+                    || homeTeamText.isBlank()
+                    || awayTeamText.isBlank()
+                    || timeStr.isBlank()
+                    || (date == null);
+
+            if (isMissingData) {
                 return;
             }
+
+            LocalTime time = LocalTime.parse(timeStr);
 
             if (!ApplicationRepository.getRepository().containsTeamName(homeTeamText)
                     || !ApplicationRepository.getRepository().containsTeamName(awayTeamText)) {
@@ -86,7 +94,7 @@ public class MatchTableScene extends TableScene<MatchPojo> {
             String goalsText = textFields.get("Goals").getText();
             MatchPojo matchPojo = tableView.getSelectionModel().getSelectedItem();
 
-            if (playerName.isBlank() || goalsText.isBlank() || (matchPojo == null)) {
+            if ((playerName == null) || goalsText.isBlank() || (matchPojo == null)) {
                 return;
             }
 
@@ -195,6 +203,11 @@ public class MatchTableScene extends TableScene<MatchPojo> {
 
         createButton("Delete", 100, 30, goalsInputHBox, null, event -> {
             ScorersPojo scorersPojo = goalsTableView.getSelectionModel().getSelectedItem();
+
+            if (scorersPojo == null) {
+                return;
+            }
+
             scorersPojo.getMatch().getScorers().remove(scorersPojo.getPlayer().Id);
             goalsTableView.getItems().remove(scorersPojo);
             goalsTableView.refresh();
