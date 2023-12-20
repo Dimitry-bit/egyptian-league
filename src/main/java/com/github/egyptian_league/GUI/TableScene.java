@@ -35,8 +35,6 @@ public abstract class TableScene<T> implements Initializable {
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     Hashtable<String, ComboBox<?>> comboBoxes = new Hashtable<>();
 
-    abstract void addRow();
-
     Button createButton(String name, int width, int height, HBox hBox, VBox vBox, EventHandler<ActionEvent> event) {
         Button button = new Button();
 
@@ -102,11 +100,6 @@ public abstract class TableScene<T> implements Initializable {
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
         tableView.getColumns().add(column);
 
-        for (int i = 0; i < tableView.getColumns().size(); ++i) {
-            tableView.getColumns().get(i).setVisible(false);
-            tableView.getColumns().get(i).setVisible(true);
-        }
-
         return column;
     }
 
@@ -139,22 +132,5 @@ public abstract class TableScene<T> implements Initializable {
         }
 
         return comboBox;
-    }
-
-    Button addInsertButton(String label) {
-        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                addRow();
-            }
-        });
-    }
-
-    Button addDeleteButton(String label) {
-        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
-            }
-        });
     }
 }

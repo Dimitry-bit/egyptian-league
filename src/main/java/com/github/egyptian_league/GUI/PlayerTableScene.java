@@ -19,7 +19,6 @@ import javafx.util.converter.LocalDateStringConverter;
 
 public class PlayerTableScene extends TableScene<PlayerPojo> {
 
-    @Override
     public void addRow() {
         String name = textFields.get("Name").getText();
         String teamName = textFields.get("Team Name").getText();
@@ -75,14 +74,31 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
 
         createDatePicker("Birthday", 100, 30, inputHBox, null);
 
-        addInsertButton("Insert");
-        addDeleteButton("Delete");
+        createButton("Insert", 100, 30, inputHBox, null, event -> {
+            addRow();
+        });
+
+        createButton("Delete", 100, 30, inputHBox, null, event -> {
+            PlayerPojo pojo = tableView.getSelectionModel().getSelectedItem();
+
+            if (pojo == null) {
+                return;
+            }
+
+            Player player = pojo.getPlayer();
+            ApplicationRepository.getRepository().removePlayer(player.Id);
+            player.getTeam().removePlayer(player.Id);
+
+            tableView.getItems().remove(pojo);
+            tableView.getSelectionModel().clearSelection();
+            tableView.refresh();
+        });
 
         TableColumn<PlayerPojo, String> nameColumn = createTableColumn("Name", String.class, tableView);
         assignColumnOnEditCommit(nameColumn, TextFieldTableCell.forTableColumn(), event -> {
             Player player = event.getRowValue().getPlayer();
             player.setName(event.getNewValue());
-            
+
             tableView.refresh();
         });
 
@@ -128,7 +144,7 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
                     if (!event.getRowValue().getPlayer().setShirtNumber(event.getNewValue())) {
                         GuiUtils.showAlert("Input Error", "Invalid shirt number.", AlertType.ERROR);
                     }
-                    
+
                     tableView.refresh();
                 });
 
