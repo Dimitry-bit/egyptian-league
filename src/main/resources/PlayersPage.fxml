@@ -8,7 +8,7 @@
    <children>
       <HBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="80.0">
          <children>
-            <TableView fx:id="tableView" prefHeight="300.0" prefWidth="800.0">
+            <TableView fx:id="tableView" editable="true" prefHeight="300.0" prefWidth="800.0">
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy></TableView>

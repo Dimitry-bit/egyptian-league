@@ -11,7 +11,11 @@ import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.LocalDateStringConverter;
 
 public class PlayerTableScene extends TableScene<PlayerPojo> {
 
@@ -74,12 +78,60 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
         addInsertButton("Insert");
         addDeleteButton("Delete");
 
-        createTableColumn("Name", String.class, tableView);
-        createTableColumn("TeamName", String.class, tableView);
-        createTableColumn("Birthday", LocalDate.class, tableView);
+        TableColumn<PlayerPojo, String> nameColumn = createTableColumn("Name", String.class, tableView);
+        assignColumnOnEditCommit(nameColumn, TextFieldTableCell.forTableColumn(), event -> {
+            Player player = event.getRowValue().getPlayer();
+            player.setName(event.getNewValue());
+            
+            tableView.refresh();
+        });
+
+        TableColumn<PlayerPojo, String> teamColumn = createTableColumn("TeamName", String.class, tableView);
+        assignColumnOnEditCommit(teamColumn, TextFieldTableCell.forTableColumn(), event -> {
+            Player player = event.getRowValue().getPlayer();
+
+            if (ApplicationRepository.getRepository().containsTeamName(event.getNewValue())) {
+                Team team = ApplicationRepository.getRepository().getTeamsByName(event.getNewValue())[0];
+
+                if (!player.setTeamId(team.Id)) {
+                    GuiUtils.showAlert("Error", "Failed to set team", AlertType.ERROR);
+                }
+            } else {
+                GuiUtils.showAlert("Input Error", "Team does not exist.", AlertType.ERROR);
+            }
+
+            tableView.refresh();
+        });
+
+        TableColumn<PlayerPojo, LocalDate> birthdayColumn = createTableColumn("Birthday", LocalDate.class, tableView);
+        assignColumnOnEditCommit(birthdayColumn, TextFieldTableCell.forTableColumn(new LocalDateStringConverter()),
+                event -> {
+                    event.getRowValue().getPlayer().setBirthDay(event.getNewValue());
+                    tableView.refresh();
+                });
+
         createTableColumn("Age", Integer.class, tableView);
-        createTableColumn("Position", Position.class, tableView);
-        createTableColumn("ShirtNumber", Integer.class, tableView);
+        TableColumn<PlayerPojo, Position> positionColumn = createTableColumn("Position", Position.class, tableView);
+        assignColumnOnEditCommit(positionColumn, TextFieldTableCell.forTableColumn(new PositionConverter()), event -> {
+            if (event.getNewValue() != null) {
+                event.getRowValue().getPlayer().setPosition(event.getNewValue());
+            } else {
+                GuiUtils.showAlert("Input Error", "Invalid position.", AlertType.ERROR);
+            }
+
+            tableView.refresh();
+        });
+
+        TableColumn<PlayerPojo, Integer> shirtNumberColumn = createTableColumn("ShirtNumber", Integer.class, tableView);
+        assignColumnOnEditCommit(shirtNumberColumn, TextFieldTableCell.forTableColumn(new IntegerStringConverter()),
+                event -> {
+                    if (!event.getRowValue().getPlayer().setShirtNumber(event.getNewValue())) {
+                        GuiUtils.showAlert("Input Error", "Invalid shirt number.", AlertType.ERROR);
+                    }
+                    
+                    tableView.refresh();
+                });
+
         createTableColumn("Rank", Integer.class, tableView);
 
         backButton.setOnAction(event -> {

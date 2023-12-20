@@ -6,50 +6,42 @@ import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 
 public class PlayerPojo {
-    private final String name;
-    private final String teamName;
-    private final LocalDate birthday;
-    private final Position position;
-    private final Integer shirtNumber;
-    private final Integer age;
-    private final Integer rank;
+
+    private Player player;
 
     public PlayerPojo(Player player) {
-        name = player.getName();
-        teamName = (player.getTeam() != null) ? player.getTeam().getName() : "";
-        birthday = player.getBirthday();
-        position = player.getPosition();
-        shirtNumber = player.getShirtNumber();
+        this.player = player;
+    }
 
-        age = player.calcAge();
-        rank = player.calcRank();
+    public Player getPlayer() {
+        return player;
     }
 
     public String getName() {
-        return name;
+        return player.getName();
     }
 
     public String getTeamName() {
-        return teamName;
+        return (player.getTeam() != null) ? player.getTeam().getName() : "";
     }
 
     public LocalDate getBirthday() {
-        return birthday;
+        return player.getBirthday();
     }
 
     public Position getPosition() {
-        return position;
+        return player.getPosition();
     }
 
     public Integer getShirtNumber() {
-        return shirtNumber;
+        return player.getShirtNumber();
     }
 
     public Integer getAge() {
-        return age;
+        return player.calcAge();
     }
 
     public Integer getRank() {
-        return rank;
+        return player.calcRank();
     }
 }

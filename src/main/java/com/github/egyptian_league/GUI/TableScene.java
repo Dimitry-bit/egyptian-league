@@ -9,12 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
 public abstract class TableScene<T> implements Initializable {
 
@@ -99,7 +102,19 @@ public abstract class TableScene<T> implements Initializable {
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
         tableView.getColumns().add(column);
 
+        for (int i = 0; i < tableView.getColumns().size(); ++i) {
+            tableView.getColumns().get(i).setVisible(false);
+            tableView.getColumns().get(i).setVisible(true);
+        }
+
         return column;
+    }
+
+    <C> void assignColumnOnEditCommit(TableColumn<T, C> column, Callback<TableColumn<T, C>, TableCell<T, C>> callback,
+            EventHandler<CellEditEvent<T, C>> event) {
+
+        column.setCellFactory(callback);
+        column.setOnEditCommit(event);
     }
 
     <V> ComboBox<V> createComboBox(String label, V[] values, int width, int height, HBox hBox, VBox vBox) {
