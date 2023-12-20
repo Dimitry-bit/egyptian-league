@@ -1,46 +1,54 @@
 package com.github.egyptian_league.GUI;
 
-import java.util.Date;
-import java.util.UUID;
-
+import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.Models.Match;
 import com.github.egyptian_league.Models.Referee;
 import com.github.egyptian_league.Models.Stadium;
+import com.github.egyptian_league.Models.Team;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MatchTableScene extends TableScene<Match> {
-
-    public MatchTableScene() {
-        addTextField("Team1");
-        addTextField("Team2");
-        addTextField("referee");
+    private static final MatchTableScene MATCH_TABLE_SCENE = new MatchTableScene();
+    private MatchTableScene() {
+        addTextField("HomeTeam1");
+        addTextField("AwayTeam2");
         addTextField("Stadium");
-        addTextField("score");
-
-        addDate("Scene1 Date");
-
+        addTextField("Referee");
+        addDate("Date");
+        addTextField("Score");
         addInsertButton("Insert");
         addDeleteButton("Delete");
-
-        addColumn("Team1", UUID.class);
-        addColumn("Team2", UUID.class);
-        addColumn("referee", Referee.class);
-        addColumn("stadium", Stadium.class);
-        addColumn("date", Date.class);
-        addColumn("goalScorers", String.class);
+        addInsertButton("players");
+        addswitchButtontoplayer("players");
+        addColumn("HomeTeam", Team.class);
+        addColumn("AwayTeam", Team.class);
+        addColumn("Stadium", Stadium.class);
+        addColumn("Referee", Referee.class);
+        addColumn("Date", LocalDateTime.class);
+        addColumn("Score", Integer.class);
     }
-
-    @Override
+    public static MatchTableScene getInstance() {
+        return MATCH_TABLE_SCENE;
+    }
+        @Override
     public void addRow() {
-        String team1UUIDStr = textFields.get("Team1").getText();
-        String team2UUIDStr = textFields.get("Team2").getText();
-
+        String homeTeamText = textFields.get("homeTeam").getText();
+        String AwayTeamText = textFields.get("AwayTeam").getText();
+        String StadiumText = textFields.get("Stadium").getText();
+        String RefereeText = textFields.get("Referee").getText();
+        LocalDate DateText = datePickers.get("Date").getValue();
+        String ScoreText = textFields.get("Score").getText();
         try {
-            UUID team1UUID = UUID.fromString(team1UUIDStr);
-            UUID team2UUID = UUID.fromString(team2UUIDStr);
+            int scoreText = Integer.parseInt(ScoreText);
+            Team[] HOME = ApplicationRepository.getRepository().getTeamsByName(homeTeamText);
+            Team[] AWAY = ApplicationRepository.getRepository().getTeamsByName(AwayTeamText);
+//            Stadium stadium=ApplicationRepository
 
-//            Match match = new Match(team1UUID, team2UUID);
 
-//            table.getItems().add(match);
+//            Match match = new Match(HOME[0], AWAY[0],);
+
         } catch (Exception e) {
             // TODO: handle exception
             System.err.printf("Invalid data, %s", e.getMessage());

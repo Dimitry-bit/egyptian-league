@@ -32,16 +32,14 @@ public class HomePageController {
     @FXML
     public void switchToPlayerPage(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        PlayerTableScene scene = new PlayerTableScene();
-        stage.setScene(scene.showScene());
+        stage.setScene(PlayerTableScene.getplayer_table_scene().showScene());
         stage.show();
     }
 
     @FXML
     public void switchToMatchPage(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        MatchTableScene scene = new MatchTableScene();
-        stage.setScene(scene.showScene());
+        stage.setScene(MatchTableScene.getInstance().switchSceneToMatch());
         stage.show();
     }
 }

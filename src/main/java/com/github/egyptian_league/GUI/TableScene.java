@@ -3,27 +3,34 @@ package com.github.egyptian_league.GUI;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import javafx.stage.FileChooser;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+//import static com.github.egyptian_league.GUI.HelloApplication.stage;
 
 abstract class TableScene<T> {
+
     DatePicker date;
     HBox hBox = new HBox();
     VBox vBox = new VBox();
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     ArrayList<Button> horizontalButtons = new ArrayList<>();
+
     ArrayList<Button> verticalButtons = new ArrayList<>();
 
     final TableView<T> table = new TableView<>();
-
+    StackPane stackPane = new StackPane(table);
     abstract void addRow();
 
     void addButtonToHBox(String name, EventHandler<ActionEvent> event) {
@@ -31,6 +38,7 @@ abstract class TableScene<T> {
     }
 
     void addButtonToHBox(String name, int width, int height, EventHandler<ActionEvent> event) {
+
         Button button = new Button();
 
         button.setText(name);
@@ -66,9 +74,10 @@ abstract class TableScene<T> {
         hBox.setMaxWidth(table.getPrefWidth());
         hBox.setLayoutY(400);
         hBox.setLayoutX(0);
+        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         ScrollPane scrollPane = new ScrollPane(table);
-        AnchorPane anchorP = new AnchorPane(scrollPane, table, vBox, hBox);
+        AnchorPane anchorP = new AnchorPane(scrollPane, stackPane, vBox, hBox);
 
         anchorP.setPrefWidth(450);
         anchorP.setPrefHeight(500);
@@ -112,4 +121,35 @@ abstract class TableScene<T> {
             }
         });
     }
+
+    void addswitchButtontomatch(String buttonLabel) {
+        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+                stage.setScene(switchSceneToMatch());
+            }
+        });
+    }
+    void addswitchButtontoplayer(String buttonLabel) {
+        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+           Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(switchSceneToPlayer());
+
+            }
+        });
+    }
+
+
+    Scene switchSceneToMatch() {
+
+     return   MatchTableScene.getInstance().showScene();
+
+    }
+    Scene switchSceneToPlayer() {
+        return PlayerTableScene.getplayer_table_scene().showScene();
+    }
+
 }
