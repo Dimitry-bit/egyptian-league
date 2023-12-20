@@ -134,8 +134,9 @@ public class ApplicationRepository {
         return players.values().iterator();
     }
 
-    public void removePlayer(UUID playerId) {
-        players.remove(playerId);
+    public void removePlayer(Player player) {
+        player.delete();
+        players.remove(player.Id);
     }
 
     // #endregion
@@ -177,8 +178,9 @@ public class ApplicationRepository {
         return teams.put(team.Id, team);
     }
 
-    public void removeTeam(UUID teamId) {
-        teams.remove(teamId);
+    public void removeTeam(Team team) {
+        team.delete();
+        teams.remove(team.Id);
     }
 
     // #endregion
@@ -205,8 +207,9 @@ public class ApplicationRepository {
         return matches.put(match.Id, match);
     }
 
-    public void removeMatch(UUID matchId) {
-        matches.remove(matchId);
+    public void removeMatch(Match match) {
+        match.delete();
+        matches.remove(match.Id);
     }
 
     // #endregion
@@ -244,8 +247,9 @@ public class ApplicationRepository {
         return stadiums.put(stadium.Id, stadium);
     }
 
-    public void removeStadium(UUID stadiumId) {
-        stadiums.remove(stadiumId);
+    public void removeStadium(Stadium stadium) {
+        stadium.delete();
+        stadiums.remove(stadium.Id);
     }
 
     // #endregion
@@ -307,8 +311,9 @@ public class ApplicationRepository {
         return referees.put(referee.Id, referee);
     }
 
-    public void removeReferee(UUID refereeId) {
-        referees.remove(refereeId);
+    public void removeReferee(Referee referee) {
+        referee.delete();
+        referees.remove(referee.Id);
     }
 
     public Iterator<Referee> getRefereesIterator() {

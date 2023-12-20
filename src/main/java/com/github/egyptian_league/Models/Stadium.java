@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Stadium {
@@ -19,6 +20,17 @@ public class Stadium {
         Id = UUID.randomUUID();
         this.name = name;
         this.address = address;
+    }
+
+    public void delete() {
+        Iterator<Match> matchIterator = ApplicationRepository.getRepository().getMatchesIterator();
+        
+        while (matchIterator.hasNext()) {
+            Match match = matchIterator.next();
+            if (match.getStadium().Id.equals(Id)) {
+                match.setStadiumId(null);
+            }
+        }
     }
 
     public String getName() {
@@ -51,7 +63,8 @@ public class Stadium {
 
     public boolean checkStadiumAvailability(LocalDateTime date) {
         for (LocalDateTime reservedDate : schedule) {
-            if (date.equals(reservedDate) || (date.isAfter(reservedDate) && date.isBefore(reservedDate.plusMinutes(90)))) {
+            if (date.equals(reservedDate)
+                    || (date.isAfter(reservedDate) && date.isBefore(reservedDate.plusMinutes(90)))) {
                 return false;
             }
         }

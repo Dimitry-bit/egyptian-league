@@ -22,6 +22,19 @@ public class Team {
         this.captainId = captainId;
     }
 
+    public void delete() {
+        Player captain = getCaptain();
+        ArrayList<Player> players = getPlayers();
+
+        if (captain != null) {
+            captain.setTeamId(null);
+        }
+
+        for (Player p : players) {
+            p.setTeamId(null);
+        }
+    }
+
     public static int calcNumberOfTeams() {
         return ApplicationRepository.getRepository().getNumberOfTeams();
     }

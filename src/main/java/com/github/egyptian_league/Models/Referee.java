@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.UUID;
 
+import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Referee {
@@ -18,6 +19,17 @@ public class Referee {
     public Referee(String name) {
         Id = UUID.randomUUID();
         this.name = name;
+    }
+
+    public void delete() {
+        Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
+
+        while (matchesIterator.hasNext()) {
+            Match match = matchesIterator.next();
+            if (match.getReferee().Id.equals(Id)) {
+                match.setReferee(null);
+            }
+        }
     }
 
     public String getName() {

@@ -43,10 +43,17 @@ public class Match {
         setStadiumId(stadiumId);
     }
 
-    public void deleteMatch() {
-        getStadium().removeDateTimeFromSchedule(dateTime);
-        getReferee().removeDateFromSchedule(dateTime.toLocalDate());
-        ApplicationRepository.getRepository().removeMatch(Id);
+    public void delete() {
+        Stadium stadium = getStadium();
+        Referee referee = getReferee();
+
+        if (stadium != null) {
+            stadium.removeDateTimeFromSchedule(dateTime);
+        }
+
+        if (referee != null) {
+            referee.removeDateFromSchedule(dateTime.toLocalDate());
+        }
     }
 
     public boolean containsTeam(Team team) {

@@ -86,8 +86,7 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
             }
 
             Player player = pojo.getPlayer();
-            ApplicationRepository.getRepository().removePlayer(player.Id);
-            player.getTeam().removePlayer(player.Id);
+            ApplicationRepository.getRepository().removePlayer(player);
 
             tableView.getItems().remove(pojo);
             tableView.getSelectionModel().clearSelection();

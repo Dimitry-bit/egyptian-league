@@ -168,7 +168,8 @@ public class MatchTableScene extends TableScene<MatchPojo> {
                 return;
             }
 
-            pojo.getMatch().deleteMatch();
+            ApplicationRepository.getRepository().removeMatch(pojo.getMatch());
+
             tableView.getItems().remove(pojo);
             tableView.getSelectionModel().clearSelection();
             tableView.refresh();
@@ -187,7 +188,6 @@ public class MatchTableScene extends TableScene<MatchPojo> {
 
         createComboBox("Player", new String[0], 100, 30, goalsInputHBox, null);
         createTextField("Goals", 100, 30, goalsInputHBox, null);
-
 
         createButton("Insert", 100, 30, goalsInputHBox, null, event -> {
             onScorerInsertion();

@@ -30,6 +30,20 @@ public class Player {
         this.shirtNumber = shirtNumber;
     }
 
+    public void delete() {
+        Team team = getTeam();
+
+        if (team != null) {
+            team.removePlayer(Id);
+        }
+
+        Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
+        while (matchesIterator.hasNext()) {
+            Match match = matchesIterator.next();
+            match.getScorers().remove(Id);
+        }
+    }
+
     public String getName() {
         return name;
     }
