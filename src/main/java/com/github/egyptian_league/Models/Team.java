@@ -80,7 +80,7 @@ public class Team {
 
         while (matchesIterator.hasNext()) {
             Match match = matchesIterator.next();
-            UUID winnerTeam = match.calcWinnerTeam();
+            Team winnerTeam = match.calcWinnerTeam();
 
             // NOTE: equals() returns false if obj is null, so null check must be done first
             if (winnerTeam == null) {
