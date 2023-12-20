@@ -9,7 +9,7 @@ import com.github.egyptian_league.ApplicationRepository;
 
 public class Match {
 
-    public final UUID id;
+    public final UUID Id;
 
     private UUID homeTeamId;
     private UUID awayTeamId;
@@ -20,11 +20,11 @@ public class Match {
 
     // Needed for Json construction
     private Match() {
-        id = null;
+        Id = null;
     }
 
     public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
-        this.id = UUID.randomUUID();
+        this.Id = UUID.randomUUID();
         this.dateTime = dateTime;
         scorers = new HashMap<>();
 
@@ -46,7 +46,7 @@ public class Match {
     public void deleteMatch() {
         getStadium().removeDateTimeFromSchedule(dateTime);
         getReferee().removeDateFromSchedule(dateTime.toLocalDate());
-        ApplicationRepository.getRepository().removeMatch(id);
+        ApplicationRepository.getRepository().removeMatch(Id);
     }
 
     public boolean containsTeam(Team team) {

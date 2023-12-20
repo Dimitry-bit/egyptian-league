@@ -202,7 +202,7 @@ public class ApplicationRepository {
     }
 
     public Match putMatch(Match match) {
-        return matches.put(match.id, match);
+        return matches.put(match.Id, match);
     }
 
     public void removeMatch(UUID matchId) {
