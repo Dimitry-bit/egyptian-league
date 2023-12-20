@@ -35,7 +35,6 @@ public class League {
 
     public void setYear(int year) {
         int Year = LocalDate.now().getYear();
-
         if (year < Year) {
             throw new InvalidYearException("the year " + year + " is less than current year " + Year);
         }
@@ -64,7 +63,6 @@ public class League {
 
     public ArrayList<Team> getTeams() {
         ArrayList<Team> teams = new ArrayList<>();
-
         for (UUID teamId : this.teams) {
             Team team = ApplicationRepository.getRepository().getTeamById(teamId);
             teams.add(team);
