@@ -28,17 +28,25 @@ public class Match {
         this.dateTime = dateTime;
         scorers = new HashMap<>();
 
+        if (homeTeamId == awayTeamId) {
+            throw new IllegalArgumentException("Home team, and away team are the same");
+        }
+
         Team homeTeam = ApplicationRepository.getRepository().getTeamById(homeTeamId);
         Team awayTeam = ApplicationRepository.getRepository().getTeamById(awayTeamId);
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
         Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        boolean isValidMatch = setHomeTeam(homeTeam)
-                && setAwayTeam(awayTeam)
-                && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
-                && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
 
-        if (!isValidMatch) {
-            throw new IllegalArgumentException("Match invalid arguments");
+        if (!setHomeTeam(homeTeam) || !setAwayTeam(awayTeam)) {
+            throw new IllegalArgumentException("Invalid home, or away team");
+        }
+
+        if ((stadium == null) || !stadium.checkStadiumAvailability(dateTime)) {
+            throw new IllegalArgumentException("Invalid stadium");
+        }
+
+        if ((referee == null) || !referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
+            throw new IllegalArgumentException("Invalid referee");
         }
 
         setReferee(referee);
@@ -232,6 +240,6 @@ public class Match {
             return null;
         }
 
-        return (homeScore > awayScore) ? homeTeam : awayTeam; 
+        return (homeScore > awayScore) ? homeTeam : awayTeam;
     }
 }
