@@ -122,6 +122,9 @@ public class MatchTableScene extends TableScene<MatchPojo> {
 
     public void onMatchSelection(MatchPojo selectedMatch) {
         goalsTableView.getItems().clear();
+        ComboBox<String> playersComboBox = (ComboBox<String>) comboBoxes.get("Player");
+        playersComboBox.getItems().clear();
+
         if (selectedMatch == null) {
             return;
         }
@@ -134,7 +137,6 @@ public class MatchTableScene extends TableScene<MatchPojo> {
             playerNames[i] = players.get(i).getName();
         }
 
-        ComboBox<String> playersComboBox = (ComboBox<String>) comboBoxes.get("Player");
         playersComboBox.getItems().addAll(playerNames);
 
         for (Entry<UUID, Integer> e : selectedMatch.getMatch().getScorers().entrySet()) {
