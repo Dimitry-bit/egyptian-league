@@ -9,11 +9,11 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import com.github.egyptian_league.ApplicationRepository;
-import com.github.egyptian_league.TeamPojo;
 import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
+import com.github.egyptian_league.POJOs.TeamPojo;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
