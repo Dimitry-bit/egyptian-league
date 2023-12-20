@@ -161,10 +161,22 @@ public class JsonConverterObject extends JsonConverter<Object> {
             return null;
         }
 
-        Constructor<?>[] ctors = typeClass.getConstructors();
-        Arrays.sort(ctors, Comparator.comparingInt(Constructor::getParameterCount));
+        List<Constructor<?>> ctors = new ArrayList<>();
 
-        return ctors;
+        for (Constructor<?> ctor : typeClass.getConstructors()) {
+            ctors.add(ctor);
+        }
+
+        for (Constructor<?> ctor : typeClass.getDeclaredConstructors()) {
+            ctors.add(ctor);
+        }
+
+        typeClass.getConstructors();
+
+        Constructor<?>[] ctorsArray = ctors.toArray(Constructor<?>[]::new);
+        Arrays.sort(ctorsArray, Comparator.comparingInt(Constructor::getParameterCount));
+
+        return ctorsArray;
     }
 
     // Note: Generic parameters are not supported
