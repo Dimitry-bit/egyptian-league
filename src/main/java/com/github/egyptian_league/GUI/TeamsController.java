@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.TeamPojo;
@@ -58,22 +59,28 @@ public class TeamsController implements Initializable {
     @FXML
     public void btnInsert(ActionEvent event) {
         try {
-            if (textTeamName.getText().isBlank() || textTeamCaptain.getText().isBlank()) {
+            if (textTeamName.getText().isBlank()) {
                 return;
             }
 
-            if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
-                GuiUtils.showAlert("Input Error", "Captain does not exist.", AlertType.ERROR);
-                return;
+            UUID captainId = null;
+
+            if (!textTeamCaptain.getText().isBlank()) {
+                if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
+                    GuiUtils.showAlert("Input Error", "Captain does not exist.", AlertType.ERROR);
+                    return;
+                }
+
+                captainId = ApplicationRepository.getRepository().getPlayersByName(textTeamCaptain.getText())[0].Id;
             }
 
-            Player captain = ApplicationRepository.getRepository().getPlayersByName(textTeamCaptain.getText())[0];
-            Team team = new Team(textTeamName.getText(), captain.Id);
+            Team team = new Team(textTeamName.getText(), captainId);
             TeamPojo teamPojo = new TeamPojo(team);
 
             ApplicationRepository.getRepository().putTeam(team);
             TeamsTable.getItems().add(teamPojo);
 
+            TeamsTable.refresh();
             clearInput();
         } catch (Exception e) {
             System.err.printf("Error, %s", e.getMessage());
@@ -115,11 +122,22 @@ public class TeamsController implements Initializable {
         TeamName.setCellFactory(TextFieldTableCell.forTableColumn());
         TeamName.setOnEditCommit(event -> {
             event.getRowValue().getTeam().setName(event.getNewValue());
+            event.getTableView().refresh();
         });
 
         TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
         TeamCaptain.setOnEditCommit(event -> {
-            event.getRowValue().getTeam().getCaptain().setName(event.getNewValue());
+            if (!event.getNewValue().isBlank()) {
+                if (!ApplicationRepository.getRepository().containsPlayerName(event.getNewValue())) {
+                    GuiUtils.showAlert("Input Error", "Captain does not exist.", AlertType.ERROR);
+                    return;
+                }
+
+                Player captain = ApplicationRepository.getRepository().getPlayersByName(event.getNewValue())[0];
+                event.getRowValue().getTeam().setCaptain(captain);
+            }
+
+            event.getTableView().refresh();
         });
     }
 
