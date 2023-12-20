@@ -1,4 +1,4 @@
-package com.github.egyptian_league;
+package com.github.egyptian_league.GUI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.github.egyptian_league.ApplicationRepository;
+import com.github.egyptian_league.TeamPojo;
 import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
