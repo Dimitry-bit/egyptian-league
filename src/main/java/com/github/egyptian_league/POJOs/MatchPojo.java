@@ -23,7 +23,7 @@ public class MatchPojo {
         stadium = match.getStadium();
         referee = match.getReferee();
         date = match.getDateTime();
-        score=match.getScorers();
+//        score=match.getScorers();
     }
 
     public Team getHomeTeam() {
