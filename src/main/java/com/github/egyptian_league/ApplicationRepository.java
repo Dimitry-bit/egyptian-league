@@ -241,7 +241,7 @@ public class ApplicationRepository {
     }
 
     public Stadium putStadium(Stadium stadium) {
-        return stadiums.put(stadium.id, stadium);
+        return stadiums.put(stadium.Id, stadium);
     }
 
     public void removeStadium(UUID stadiumId) {

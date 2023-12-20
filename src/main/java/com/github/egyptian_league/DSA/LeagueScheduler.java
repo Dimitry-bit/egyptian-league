@@ -79,7 +79,7 @@ public class LeagueScheduler {
                 Stadium stadium = stadiums.get(i % stadiums.size());
                 Referee referee = referees.get(i % referees.size());
 
-                Match match = new Match(homeTeam.Id, awayTeam.Id, stadium.id, referee.Id,
+                Match match = new Match(homeTeam.Id, awayTeam.Id, stadium.Id, referee.Id,
                         timeSlots.get((i * (rawMatches.size() - 1)) + k));
 
                 populatedMatches.add(match);

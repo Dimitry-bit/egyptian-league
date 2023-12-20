@@ -66,7 +66,7 @@ public class MatchTableScene extends TableScene<MatchPojo> {
             Stadium stadium = ApplicationRepository.getRepository().getStadiumsByName(stadiumText)[0];
             Referee referee = ApplicationRepository.getRepository().getRefereesByName(refereeText)[0];
 
-            Match match = new Match(homeTeam.Id, awayTeam.Id, stadium.id, referee.Id, dateTime);
+            Match match = new Match(homeTeam.Id, awayTeam.Id, stadium.Id, referee.Id, dateTime);
 
             ApplicationRepository.getRepository().putMatch(match);
 
