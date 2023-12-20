@@ -15,6 +15,13 @@ public class Team {
     private UUID captainId;
     private ArrayList<UUID> players = new ArrayList<>();
 
+    @JsonConstructor(parameters = { "name" })
+    public Team(String name) {
+        this.Id = UUID.randomUUID();
+        this.name = name;
+        this.captainId = null;
+    }
+
     @JsonConstructor(parameters = { "name", "captainId" })
     public Team(String name, UUID captainId) {
         this.Id = UUID.randomUUID();

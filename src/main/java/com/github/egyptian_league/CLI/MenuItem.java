@@ -11,6 +11,7 @@ abstract class MenuItem {
     MenuItem Back;
 
     public EnumMenus enumMenus;
+
     private String name;
     private List<MenuItem> subMenus;
 
@@ -43,7 +44,7 @@ abstract class MenuItem {
         return name;
     }
 
-
+    public void setName(String name) {this.name = name;}
 
     public List<MenuItem> getSubMenus() {
         return subMenus;
@@ -66,35 +67,30 @@ abstract class MenuItem {
     //false indicates no further update i.e. exit the program
     public boolean update() {
 
-    //temporary condition will be removed later
-    if (!currentMenuItem.hasSubMenus())
-    {
-        clearCli();
-        System.out.println("implementation of \"" + currentMenuItem.name + "\" here");
-        return false;
-    }
+        boolean isValid = true;
+        int choice;
+        do {
 
-    boolean isValid = true;
-    int choice;
-    do {
+            drawCli(isValid);
+            choice = getInput();
 
-    drawCli(isValid);
-    choice = getInput();
+            if (choice == 0){
+                isValid = false;
+            }
+            else{
+                isValid = true;
+            }
 
-    if (choice == 0){
-        isValid = false;
-    }
-
-    }while(!isValid);
+        }while(!isValid);
 
 
-    if (choice == 'x') {
-        return back(); //goes back, and the boolean indicates whether the program updates or not
-    }
-    else {
-        currentMenuItem = MenuItem.currentMenuItem.getSubMenus().get(choice - 1);
-    }
-    return true;
+        if (choice == 'x') {
+            return back(); //goes back, and the boolean indicates whether the program updates or not
+        }
+        else {
+            currentMenuItem = MenuItem.currentMenuItem.getSubMenus().get(choice - 1);
+        }
+        return true;
 
     }
 
