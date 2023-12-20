@@ -134,6 +134,10 @@ public class ApplicationRepository {
         return players.values().iterator();
     }
 
+    public void removePlayer(UUID playerId) {
+        players.remove(playerId);
+    }
+
     // #endregion
 
     // #region Teams
@@ -173,6 +177,10 @@ public class ApplicationRepository {
         return teams.put(team.Id, team);
     }
 
+    public void removeTeam(UUID teamId) {
+        teams.remove(teamId);
+    }
+
     // #endregion
 
     // #region Matches
@@ -197,6 +205,10 @@ public class ApplicationRepository {
         return matches.put(match.id, match);
     }
 
+    public void removeMatch(UUID matchId) {
+        matches.remove(matchId);
+    }
+
     // #endregion
 
     // #region Stadiums
@@ -209,6 +221,12 @@ public class ApplicationRepository {
         return stadiums.containsValue(stadium);
     }
 
+    public Stadium[] getStadiumsByName(String name) {
+        String lName = name.toLowerCase();
+        return stadiums.values().stream()
+                .filter(stadium -> lName.equals(stadium.getName().toLowerCase())).toArray(Stadium[]::new);
+    }
+
     public Stadium getStadiumByUUID(UUID uuid) {
         return stadiums.get(uuid);
     }
@@ -219,6 +237,10 @@ public class ApplicationRepository {
 
     public Stadium putStadium(Stadium stadium) {
         return stadiums.put(stadium.id, stadium);
+    }
+
+    public void removeStadium(UUID stadiumId) {
+        stadiums.remove(stadiumId);
     }
 
     // #endregion
@@ -243,6 +265,10 @@ public class ApplicationRepository {
 
     public League putLeague(League league) {
         throw new UnsupportedOperationException();
+    }
+
+    public void removeLeague(UUID leagueId) {
+        leagues.remove(leagueId);
     }
 
     // #endregion
@@ -276,8 +302,13 @@ public class ApplicationRepository {
         return referees.put(referee.Id, referee);
     }
 
+    public void removeReferee(UUID refereeId) {
+        referees.remove(refereeId);
+    }
+
     public Iterator<Referee> getRefereesIterator() {
         return referees.values().iterator();
     }
+
     // #endregion
 }

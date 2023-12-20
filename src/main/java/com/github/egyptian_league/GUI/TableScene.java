@@ -1,36 +1,53 @@
 package com.github.egyptian_league.GUI;
 
+import com.github.egyptian_league.POJOs.PlayerPojo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import javafx.stage.FileChooser;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+//import static com.github.egyptian_league.GUI.HelloApplication.stage;
 
 abstract class TableScene<T> {
+
     DatePicker date;
     HBox hBox = new HBox();
     VBox vBox = new VBox();
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     ArrayList<Button> horizontalButtons = new ArrayList<>();
+
     ArrayList<Button> verticalButtons = new ArrayList<>();
+    ArrayList<TableColumn> tableColumns = new ArrayList<>();
 
     final TableView<T> table = new TableView<>();
-
+    StackPane stackPane = new StackPane(table);
     abstract void addRow();
 
     void addButtonToHBox(String name, EventHandler<ActionEvent> event) {
         addButtonToHBox(name, 100, 50, event);
     }
 
+
     void addButtonToHBox(String name, int width, int height, EventHandler<ActionEvent> event) {
+
+       table.setEditable(true);
         Button button = new Button();
 
         button.setText(name);
@@ -40,6 +57,20 @@ abstract class TableScene<T> {
 
         hBox.getChildren().add(button);
         horizontalButtons.add(button);
+    }
+    void addButtonToVBox(String name, EventHandler<ActionEvent> event) {
+        addButtonToVBox(name, 100, 50, event);
+    }
+    void addButtonToVBox(String name, int width, int height, EventHandler<ActionEvent> event) {
+
+        Button button = new Button();
+
+        button.setText(name);
+        button.setMaxWidth(width);
+        button.setMaxHeight(height);
+        button.setOnAction(event);
+        vBox.getChildren().add(button);
+        verticalButtons.add(button);
     }
 
     void addTextField(String textIn) {
@@ -56,9 +87,11 @@ abstract class TableScene<T> {
 
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
+        column.setEditable(true);
+        tableColumns.get(0).setCellFactory(TextFieldTableCell.<PlayerPojo>forTableColumn());
         table.getColumns().add(column);
+        tableColumns.add(column);
     }
-
     Scene showScene() {
         table.setLayoutX(100);
 
@@ -66,14 +99,17 @@ abstract class TableScene<T> {
         hBox.setMaxWidth(table.getPrefWidth());
         hBox.setLayoutY(400);
         hBox.setLayoutX(0);
+        vBox.setLayoutX(800);
+        vBox.setLayoutY(0);
+        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
 
         ScrollPane scrollPane = new ScrollPane(table);
-        AnchorPane anchorP = new AnchorPane(scrollPane, table, vBox, hBox);
+        AnchorPane anchorP = new AnchorPane(scrollPane, stackPane, vBox, hBox);
 
         anchorP.setPrefWidth(450);
         anchorP.setPrefHeight(500);
 
-        return new Scene(new Group(anchorP), 1000, 1000);
+        return new Scene(new Group(anchorP), 1000, 1000,Color.GREEN);
     }
 
     void addDate(String label) {
@@ -112,4 +148,77 @@ abstract class TableScene<T> {
             }
         });
     }
+
+    void addswitchButtontomatch(String buttonLabel) {
+        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+                stage.setScene(switchSceneToMatch());
+            }
+        });
+    }
+    void addswitchButtontoplayer(String buttonLabel) {
+        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+           Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(switchSceneToPlayer());
+
+            }
+        });
+    }
+    void addswitchButtontoLeague(String buttonLabel) {
+        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(switchSceneToLeague());
+
+            }
+        });
+    }
+    void addswitchButtontoTeams(String buttonLabel) {
+        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Parent root= null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/TeamsPage.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                Scene scene=new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
+    }
+    void addswitchButtontoHomePAge(String buttonLabel) {
+        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                Parent root= null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                Scene scene=new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
+    }
+    Scene switchSceneToMatch() {
+     return   MatchTableScene.getInstance().showScene();
+
+    }
+    Scene switchSceneToPlayer() {
+        return PlayerTableScene.getplayer_table_scene().showScene();
+    }
+    Scene switchSceneToLeague() {
+        return LeagueTableScene.getLeage_table_scene().showScene();
+    }
+
 }

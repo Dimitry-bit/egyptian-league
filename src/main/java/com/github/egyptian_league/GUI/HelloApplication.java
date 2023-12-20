@@ -1,24 +1,18 @@
 package com.github.egyptian_league.GUI;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
-
 public class HelloApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
-
-    @Override
+//    public static final Stage stage=new Stage();
+@Override
     public void start(Stage stage) {
         stage.setTitle("Egyptian League");
-
-        MatchTableScene matchScene = new MatchTableScene();
-        PlayerTableScene playerScene = new PlayerTableScene();
-
         stage.setHeight(500);
         stage.setResizable(true);
-        stage.setScene(playerScene.showScene());
+        stage.setScene(PlayerTableScene.getplayer_table_scene().showScene());
         stage.show();
     }
 }
