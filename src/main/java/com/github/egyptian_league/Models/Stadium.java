@@ -28,7 +28,7 @@ public class Stadium {
         while (matchIterator.hasNext()) {
             Match match = matchIterator.next();
             if (match.getStadium().Id.equals(Id)) {
-                match.setStadiumId(null);
+                match.setStadium(null);
             }
         }
     }

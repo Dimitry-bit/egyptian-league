@@ -28,10 +28,12 @@ public class Match {
         this.dateTime = dateTime;
         scorers = new HashMap<>();
 
+        Team homeTeam = ApplicationRepository.getRepository().getTeamById(homeTeamId);
+        Team awayTeam = ApplicationRepository.getRepository().getTeamById(awayTeamId);
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
         Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        boolean isValidMatch = setHomeTeam(homeTeamId)
-                && setAwayTeam(awayTeamId)
+        boolean isValidMatch = setHomeTeam(homeTeam)
+                && setAwayTeam(awayTeam)
                 && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
                 && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
 
@@ -39,8 +41,8 @@ public class Match {
             throw new IllegalArgumentException("Match invalid arguments");
         }
 
-        setReferee(refereeId);
-        setStadiumId(stadiumId);
+        setReferee(referee);
+        setStadium(stadium);
     }
 
     public void delete() {
@@ -64,12 +66,17 @@ public class Match {
         return ApplicationRepository.getRepository().getTeamById(homeTeamId);
     }
 
-    public boolean setHomeTeam(UUID homeTeamId) {
-        if (!ApplicationRepository.getRepository().containsTeamUUID(homeTeamId)) {
+    public boolean setHomeTeam(Team team) {
+        if (team == null) {
+            this.homeTeamId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsTeam(team)) {
             return false;
         }
 
-        this.homeTeamId = homeTeamId;
+        this.homeTeamId = team.Id;
         return true;
     }
 
@@ -77,12 +84,17 @@ public class Match {
         return ApplicationRepository.getRepository().getTeamById(awayTeamId);
     }
 
-    public boolean setAwayTeam(UUID awayTeamId) {
-        if (!ApplicationRepository.getRepository().containsTeamUUID(awayTeamId)) {
+    public boolean setAwayTeam(Team team) {
+        if (team == null) {
+            this.homeTeamId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsTeam(team)) {
             return false;
         }
 
-        this.awayTeamId = awayTeamId;
+        this.awayTeamId = team.Id;
         return true;
     }
 
@@ -90,9 +102,13 @@ public class Match {
         return ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
     }
 
-    public boolean setStadiumId(UUID stadiumId) {
-        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
-        if ((stadium == null) || !stadium.checkStadiumAvailability(dateTime)) {
+    public boolean setStadium(Stadium stadium) {
+        if (stadium == null) {
+            this.stadiumId = null;
+            return true;
+        }
+
+        if (!stadium.checkStadiumAvailability(dateTime)) {
             return false;
         }
 
@@ -103,7 +119,7 @@ public class Match {
             }
         }
 
-        this.stadiumId = stadiumId;
+        this.stadiumId = stadium.Id;
         stadium.addDateTimeToSchedule(dateTime);
         return true;
     }
@@ -112,9 +128,13 @@ public class Match {
         return ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
     }
 
-    public boolean setReferee(UUID refereeId) {
-        Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        if ((referee == null) || !referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
+    public boolean setReferee(Referee referee) {
+        if (referee == null) {
+            this.refereeId = null;
+            return true;
+        }
+
+        if (!referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
             return false;
         }
 
@@ -125,7 +145,7 @@ public class Match {
             }
         }
 
-        this.refereeId = refereeId;
+        this.refereeId = referee.Id;
         referee.addDateToSchedule(dateTime.toLocalDate());
         return true;
     }

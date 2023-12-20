@@ -27,11 +27,11 @@ public class Team {
         ArrayList<Player> players = getPlayers();
 
         if (captain != null) {
-            captain.setTeamId(null);
+            captain.setTeam(null);
         }
 
         for (Player p : players) {
-            p.setTeamId(null);
+            p.setTeam(null);
         }
     }
 
@@ -51,12 +51,17 @@ public class Team {
         return ApplicationRepository.getRepository().getPlayerByUUID(captainId);
     }
 
-    public boolean setCaptainId(UUID captainId) {
-        if (!ApplicationRepository.getRepository().containsPlayerUUID(captainId)) {
+    public boolean setCaptain(Player captain) {
+        if (captain == null) {
+            this.captainId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsPlayer(captain)) {
             return false;
         }
 
-        this.captainId = captainId;
+        this.captainId = captain.Id;
         return true;
     }
 

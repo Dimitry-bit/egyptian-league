@@ -108,7 +108,7 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
             if (ApplicationRepository.getRepository().containsTeamName(event.getNewValue())) {
                 Team team = ApplicationRepository.getRepository().getTeamsByName(event.getNewValue())[0];
 
-                if (!player.setTeamId(team.Id)) {
+                if (!player.setTeam(team)) {
                     GuiUtils.showAlert("Error", "Failed to set team", AlertType.ERROR);
                 }
             } else {

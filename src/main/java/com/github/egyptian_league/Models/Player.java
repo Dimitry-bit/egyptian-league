@@ -53,19 +53,20 @@ public class Player {
     }
 
     public Team getTeam() {
-        if (teamId == null) {
-            return null;
-        }
-
         return ApplicationRepository.getRepository().getTeamById(teamId);
     }
 
-    public boolean setTeamId(UUID teamId) {
-        if (!ApplicationRepository.getRepository().containsTeamUUID(teamId)) {
+    public boolean setTeam(Team team) {
+        if (team == null){
+            this.teamId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsTeam(team)) {
             return false;
         }
 
-        this.teamId = teamId;
+        this.teamId = team.Id;
         return true;
     }
 

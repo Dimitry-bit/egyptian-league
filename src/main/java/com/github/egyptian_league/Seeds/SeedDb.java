@@ -155,10 +155,10 @@ public class SeedDb {
         for (Player p : players) {
             ApplicationRepository.getRepository().putPlayer(p);
             team.addPlayer(p.Id);
-            p.setTeamId(team.Id);
+            p.setTeam(team);
         }
 
-        team.setCaptainId(players[captainIndex].Id);
+        team.setCaptain(players[captainIndex]);
         return team;
     }
 }
