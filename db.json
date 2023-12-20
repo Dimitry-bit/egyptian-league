@@ -1,54 +1,915 @@
 {
   "players": {
-    "f063f2d8-4f7c-4771-b024-60bc4fd6fa54": {
-      "Id": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
-      "name": "Test Captain 2",
-      "teamId": "081424e9-ab77-4439-877c-3ee13fdbbadb",
-      "birthday": "2004-01-08",
+    "f0fee7ce-ba09-403b-a8a4-8a1c7bfeb2ad": {
+      "Id": "f0fee7ce-ba09-403b-a8a4-8a1c7bfeb2ad",
+      "name": "Desoky",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1997-12-18",
+      "position": 1,
+      "shirtNumber": 3
+    },
+    "8f8aed4d-249a-4332-8694-f96323c55a00": {
+      "Id": "8f8aed4d-249a-4332-8694-f96323c55a00",
+      "name": "Afsha",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1996-03-06",
+      "position": 2,
+      "shirtNumber": 19
+    },
+    "29b7490f-c1aa-428e-b6a0-2264353514de": {
+      "Id": "29b7490f-c1aa-428e-b6a0-2264353514de",
+      "name": "Genish",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1987-07-09",
+      "position": 0,
+      "shirtNumber": 16
+    },
+    "8c149a39-0ca9-4660-8330-3fab0ac00d1c": {
+      "Id": "8c149a39-0ca9-4660-8330-3fab0ac00d1c",
+      "name": "Shakshak",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "2000-04-06",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "774effe4-c2b5-4608-ab0a-2df5eddf5db1": {
+      "Id": "774effe4-c2b5-4608-ab0a-2df5eddf5db1",
+      "name": "Taha",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1991-09-04",
+      "position": 1,
+      "shirtNumber": 11
+    },
+    "122702b2-14ac-40dd-89ac-29ba47674844": {
+      "Id": "122702b2-14ac-40dd-89ac-29ba47674844",
+      "name": "Abdullah",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1985-07-13",
+      "position": 2,
+      "shirtNumber": 19
+    },
+    "c6b648e5-9331-40a1-b9b3-1c87743ebb3e": {
+      "Id": "c6b648e5-9331-40a1-b9b3-1c87743ebb3e",
+      "name": "Eraki",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1996-10-09",
+      "position": 1,
+      "shirtNumber": 7
+    },
+    "fe02f0bd-f64a-4e50-ae97-46ca4d2ae168": {
+      "Id": "fe02f0bd-f64a-4e50-ae97-46ca4d2ae168",
+      "name": "Othman",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "2004-01-04",
+      "position": 1,
+      "shirtNumber": 46
+    },
+    "76494f6e-aca3-43fa-9972-5e360a1fb5d5": {
+      "Id": "76494f6e-aca3-43fa-9972-5e360a1fb5d5",
+      "name": "Zaazaa",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "2001-06-23",
+      "position": 2,
+      "shirtNumber": 37
+    },
+    "644cf1d2-0ef7-4c4c-b5b6-c09f7de6e911": {
+      "Id": "644cf1d2-0ef7-4c4c-b5b6-c09f7de6e911",
+      "name": "Rizk",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1990-01-01",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "a104ce0f-2309-4e92-b1e3-3ad9353f09d9": {
+      "Id": "a104ce0f-2309-4e92-b1e3-3ad9353f09d9",
+      "name": "Dowidar",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1999-02-07",
+      "position": 1,
+      "shirtNumber": 30
+    },
+    "7aee3be8-188e-4ed2-bc9a-456be097349f": {
+      "Id": "7aee3be8-188e-4ed2-bc9a-456be097349f",
+      "name": "Elsayed",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1992-03-01",
+      "position": 0,
+      "shirtNumber": 29
+    },
+    "c664ed0f-89b2-4fc4-9bf1-6cd6270883bd": {
+      "Id": "c664ed0f-89b2-4fc4-9bf1-6cd6270883bd",
+      "name": "Gaber",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1996-01-05",
+      "position": 2,
+      "shirtNumber": 37
+    },
+    "6d2de810-2c48-4192-a9ca-fe8c81f44994": {
+      "Id": "6d2de810-2c48-4192-a9ca-fe8c81f44994",
+      "name": "Tau",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1994-05-13",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "e9fa08a6-565d-4b0e-abd4-5c33bde2b5e9": {
+      "Id": "e9fa08a6-565d-4b0e-abd4-5c33bde2b5e9",
+      "name": "Elagouz",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1993-05-04",
+      "position": 2,
+      "shirtNumber": 22
+    },
+    "8433c0bd-c6c3-4a95-8fef-93795035272a": {
+      "Id": "8433c0bd-c6c3-4a95-8fef-93795035272a",
+      "name": "Toure",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1994-08-04",
+      "position": 2,
+      "shirtNumber": 7
+    },
+    "912235a6-fa86-4169-9b33-30048bd6711e": {
+      "Id": "912235a6-fa86-4169-9b33-30048bd6711e",
+      "name": "Nasser",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1997-02-08",
+      "position": 2,
+      "shirtNumber": 10
+    },
+    "e09155ac-dc20-4d7d-b7d5-6062438977d0": {
+      "Id": "e09155ac-dc20-4d7d-b7d5-6062438977d0",
+      "name": "Ghanam",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1997-03-12",
+      "position": 2,
+      "shirtNumber": 27
+    },
+    "a4d9f678-498d-421f-8bf5-4bdc7d69a9bc": {
+      "Id": "a4d9f678-498d-421f-8bf5-4bdc7d69a9bc",
+      "name": "Gabr",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1989-01-09",
+      "position": 1,
+      "shirtNumber": 5
+    },
+    "a26f21f2-55d3-4d81-915b-364671d3fe40": {
+      "Id": "a26f21f2-55d3-4d81-915b-364671d3fe40",
+      "name": "Makrona",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "2002-09-06",
+      "position": 3,
+      "shirtNumber": 38
+    },
+    "508cc883-6d4f-4708-9a5d-a4df8b25f2e7": {
+      "Id": "508cc883-6d4f-4708-9a5d-a4df8b25f2e7",
+      "name": "Samy",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1992-05-31",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "dcf92181-dace-484e-a93e-2e75898e4c4b": {
+      "Id": "dcf92181-dace-484e-a93e-2e75898e4c4b",
+      "name": "Kahraba",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1994-04-13",
+      "position": 3,
+      "shirtNumber": 7
+    },
+    "d9ddb262-c564-4cba-bd64-9923e4f69232": {
+      "Id": "d9ddb262-c564-4cba-bd64-9923e4f69232",
+      "name": "barry",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1991-09-27",
+      "position": 3,
+      "shirtNumber": 3
+    },
+    "d7ca1771-70dd-4342-ab3f-2b7ce826645f": {
+      "Id": "d7ca1771-70dd-4342-ab3f-2b7ce826645f",
+      "name": "Ngom",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "2003-12-04",
+      "position": 2,
+      "shirtNumber": 31
+    },
+    "cc00667d-dbf7-4ff5-a6ef-66aa266a12d1": {
+      "Id": "cc00667d-dbf7-4ff5-a6ef-66aa266a12d1",
+      "name": "Donga",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1996-04-06",
+      "position": 2,
+      "shirtNumber": 8
+    },
+    "940ef1aa-551b-4d72-b955-33e5ddf92b84": {
+      "Id": "940ef1aa-551b-4d72-b955-33e5ddf92b84",
+      "name": "Kalosha",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1998-12-07",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "63b4027b-04b0-4a9b-a8f8-c6617078303f": {
+      "Id": "63b4027b-04b0-4a9b-a8f8-c6617078303f",
+      "name": "Etouga",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "2001-09-18",
+      "position": 3,
+      "shirtNumber": 37
+    },
+    "20288658-dcf6-4a12-9be2-fdf4e759830e": {
+      "Id": "20288658-dcf6-4a12-9be2-fdf4e759830e",
+      "name": "Roka",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1993-07-10",
+      "position": 2,
+      "shirtNumber": 12
+    },
+    "2545c9d6-3c03-4e9e-a20e-f49fa9c0c2cb": {
+      "Id": "2545c9d6-3c03-4e9e-a20e-f49fa9c0c2cb",
+      "name": "Ashour",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1998-02-20",
+      "position": 2,
+      "shirtNumber": 22
+    },
+    "78c9f2c0-b9e8-4f61-9b3f-8c58cd01eabd": {
+      "Id": "78c9f2c0-b9e8-4f61-9b3f-8c58cd01eabd",
+      "name": "Shabrawy",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1994-12-15",
+      "position": 3,
+      "shirtNumber": 7
+    },
+    "33e54367-89ef-435d-b0f2-a68bcaa2db8c": {
+      "Id": "33e54367-89ef-435d-b0f2-a68bcaa2db8c",
+      "name": "Dabash",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1990-11-25",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "9383581b-0da9-40b9-b38c-697dbd4abcf7": {
+      "Id": "9383581b-0da9-40b9-b38c-697dbd4abcf7",
+      "name": "Wagdy",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "2002-03-04",
+      "position": 3,
+      "shirtNumber": 23
+    },
+    "cff2b32a-1db3-481e-b5ce-55039bb57e01": {
+      "Id": "cff2b32a-1db3-481e-b5ce-55039bb57e01",
+      "name": "Gad",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1997-05-22",
+      "position": 0,
+      "shirtNumber": 27
+    },
+    "5b454b71-cdd3-4a74-a33a-2327d80ec79d": {
+      "Id": "5b454b71-cdd3-4a74-a33a-2327d80ec79d",
+      "name": "Fatouh",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1998-03-21",
+      "position": 1,
+      "shirtNumber": 13
+    },
+    "24a16b3a-901f-4cab-85aa-9a09b831c306": {
+      "Id": "24a16b3a-901f-4cab-85aa-9a09b831c306",
+      "name": "Moussa",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1988-04-11",
+      "position": 1,
+      "shirtNumber": 8
+    },
+    "28d91e75-03ed-440f-9de0-26224a03e052": {
+      "Id": "28d91e75-03ed-440f-9de0-26224a03e052",
+      "name": "Maleg",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1994-10-01",
+      "position": 3,
+      "shirtNumber": 15
+    },
+    "66f1d318-01fb-4f5c-a87d-89f8cf575c10": {
+      "Id": "66f1d318-01fb-4f5c-a87d-89f8cf575c10",
+      "name": "Mathlouthi",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1992-07-25",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "37aad370-576f-4a65-b158-a9eb91be0330": {
+      "Id": "37aad370-576f-4a65-b158-a9eb91be0330",
+      "name": "Basem",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1988-10-27",
+      "position": 1,
+      "shirtNumber": 2
+    },
+    "5176d412-2342-4417-8bbe-feedb647df14": {
+      "Id": "5176d412-2342-4417-8bbe-feedb647df14",
+      "name": "Atef",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1998-03-21",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "8259d1e7-9b1f-4ac7-9fb0-833fc3ac1aac": {
+      "Id": "8259d1e7-9b1f-4ac7-9fb0-833fc3ac1aac",
+      "name": "Faisal",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1999-03-04",
+      "position": 2,
+      "shirtNumber": 32
+    },
+    "9b77a4b3-046c-49f1-8d9c-c45928ce57bc": {
+      "Id": "9b77a4b3-046c-49f1-8d9c-c45928ce57bc",
+      "name": "Lhezeuo",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "2001-11-28",
+      "position": 3,
+      "shirtNumber": 42
+    },
+    "97c0ce0f-0132-488c-8759-0b913f47fffd": {
+      "Id": "97c0ce0f-0132-488c-8759-0b913f47fffd",
+      "name": "Jaziri",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1993-02-12",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "05a672be-d56b-4f4c-83c5-aca0c4aef942": {
+      "Id": "05a672be-d56b-4f4c-83c5-aca0c4aef942",
+      "name": "rafik",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1992-10-28",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "2227b2ea-2d1e-4339-85ec-7a0d54c985ac": {
+      "Id": "2227b2ea-2d1e-4339-85ec-7a0d54c985ac",
+      "name": "Adel",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "2001-05-01",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "a8324e02-18d6-4eb8-8a2f-87def7537f74": {
+      "Id": "a8324e02-18d6-4eb8-8a2f-87def7537f74",
+      "name": "Chibi",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1993-01-21",
+      "position": 1,
+      "shirtNumber": 15
+    },
+    "15d075d9-8ce1-49e6-a1ba-c220a6e52e69": {
+      "Id": "15d075d9-8ce1-49e6-a1ba-c220a6e52e69",
+      "name": "Mido",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1993-11-30",
+      "position": 1,
+      "shirtNumber": 34
+    },
+    "622cfde6-8607-4580-81ee-169c921fe153": {
+      "Id": "622cfde6-8607-4580-81ee-169c921fe153",
+      "name": "Ekramy",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1983-07-10",
+      "position": 0,
+      "shirtNumber": 22
+    },
+    "f1975e71-8c68-49ea-b8d8-a7e58edb1a9c": {
+      "Id": "f1975e71-8c68-49ea-b8d8-a7e58edb1a9c",
+      "name": "Ramadan",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1997-01-23",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "e7456ce6-783b-47ff-bd19-fa43a1e18838": {
+      "Id": "e7456ce6-783b-47ff-bd19-fa43a1e18838",
+      "name": "Shenawy",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1988-12-18",
       "position": 0,
       "shirtNumber": 1
     },
-    "a8c35c67-e453-4c0b-8a74-89ceedba2ea5": {
-      "Id": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
-      "name": "Test Captain",
-      "teamId": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
-      "birthday": "2004-01-08",
+    "dd58ab3b-12cf-4c95-94c7-4d6a5edbc35d": {
+      "Id": "dd58ab3b-12cf-4c95-94c7-4d6a5edbc35d",
+      "name": "Bayoumi",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "2000-04-07",
+      "position": 2,
+      "shirtNumber": 8
+    },
+    "88e4b602-7243-4e8a-a7ba-fe0ac4750953": {
+      "Id": "88e4b602-7243-4e8a-a7ba-fe0ac4750953",
+      "name": "Wensh",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1995-06-01",
+      "position": 1,
+      "shirtNumber": 28
+    },
+    "436b2407-6b5d-4e4f-8652-51da9954ea92": {
+      "Id": "436b2407-6b5d-4e4f-8652-51da9954ea92",
+      "name": "Shifo",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1985-07-01",
+      "position": 1,
+      "shirtNumber": 29
+    },
+    "e891f333-39df-45d2-a88a-25ee9e9923c1": {
+      "Id": "e891f333-39df-45d2-a88a-25ee9e9923c1",
+      "name": "Guenaoui",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1998-08-02",
+      "position": 3,
+      "shirtNumber": 23
+    },
+    "ee42d789-9a6e-4e49-8656-be3dc291c2ad": {
+      "Id": "ee42d789-9a6e-4e49-8656-be3dc291c2ad",
+      "name": "Ajayi",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1996-01-25",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "1d746e78-e39e-4b02-9aea-409ea50c08ed": {
+      "Id": "1d746e78-e39e-4b02-9aea-409ea50c08ed",
+      "name": "Attia",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1998-12-03",
+      "position": 2,
+      "shirtNumber": 15
+    },
+    "c5c143ab-cc8e-4f67-b958-42e7c575c834": {
+      "Id": "c5c143ab-cc8e-4f67-b958-42e7c575c834",
+      "name": "fawzi",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1993-07-10",
       "position": 0,
       "shirtNumber": 1
+    },
+    "ec86dbdb-983d-4259-9541-f46ee10d9d5e": {
+      "Id": "ec86dbdb-983d-4259-9541-f46ee10d9d5e",
+      "name": "Shahat",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1992-06-21",
+      "position": 3,
+      "shirtNumber": 14
+    },
+    "5cfe570f-d4b9-4f18-8d47-e92eb3dd2457": {
+      "Id": "5cfe570f-d4b9-4f18-8d47-e92eb3dd2457",
+      "name": "Wahid",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1994-06-19",
+      "position": 1,
+      "shirtNumber": 33
+    },
+    "105c6b94-70a0-4759-b0e9-0fa6db8d8c23": {
+      "Id": "105c6b94-70a0-4759-b0e9-0fa6db8d8c23",
+      "name": "Karti",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1997-07-23",
+      "position": 2,
+      "shirtNumber": 18
+    },
+    "07621f19-3e58-4495-bcd9-d05c28234fe2": {
+      "Id": "07621f19-3e58-4495-bcd9-d05c28234fe2",
+      "name": "Nahas",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "2002-02-21",
+      "position": 3,
+      "shirtNumber": 42
+    },
+    "c03aa46d-30b9-4025-a85f-2d38bba1a1c7": {
+      "Id": "c03aa46d-30b9-4025-a85f-2d38bba1a1c7",
+      "name": "Tawfik",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1997-11-08",
+      "position": 1,
+      "shirtNumber": 8
+    },
+    "0685f4ad-58ed-4286-bd3e-48bf1c132d41": {
+      "Id": "0685f4ad-58ed-4286-bd3e-48bf1c132d41",
+      "name": "Mijahed",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "2001-08-20",
+      "position": 1,
+      "shirtNumber": 31
+    },
+    "bbffbc4b-9c48-4bab-862d-bc9669eec762": {
+      "Id": "bbffbc4b-9c48-4bab-862d-bc9669eec762",
+      "name": "Hany",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1996-01-25",
+      "position": 1,
+      "shirtNumber": 30
+    },
+    "882e5b0e-c929-4bb6-ac4e-e0a64030a3f8": {
+      "Id": "882e5b0e-c929-4bb6-ac4e-e0a64030a3f8",
+      "name": "Khashab",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1998-07-26",
+      "position": 1,
+      "shirtNumber": 26
+    },
+    "10bd295b-1cdf-4e3d-b29f-64482dbb5d3a": {
+      "Id": "10bd295b-1cdf-4e3d-b29f-64482dbb5d3a",
+      "name": "Shikabala",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1986-03-05",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "33bb7d9a-b025-46e1-bcef-e07f778ea48b": {
+      "Id": "33bb7d9a-b025-46e1-bcef-e07f778ea48b",
+      "name": "Gomaa",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1993-08-01",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "e5611398-0568-45c9-a9f4-06db419e7846": {
+      "Id": "e5611398-0568-45c9-a9f4-06db419e7846",
+      "name": "Arafat",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1993-05-26",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "9b98ae15-81f8-48ad-915c-d2250dd7443c": {
+      "Id": "9b98ae15-81f8-48ad-915c-d2250dd7443c",
+      "name": "Maaloul",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1990-01-01",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "7ba1fce1-51f7-4b26-94be-60eff7ec2151": {
+      "Id": "7ba1fce1-51f7-4b26-94be-60eff7ec2151",
+      "name": "Zizo",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1996-01-10",
+      "position": 3,
+      "shirtNumber": 25
+    },
+    "62d00542-7f6d-4209-ae4c-906dd336b6b8": {
+      "Id": "62d00542-7f6d-4209-ae4c-906dd336b6b8",
+      "name": "Soliman",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1984-07-08",
+      "position": 0,
+      "shirtNumber": 1
+    },
+    "b66e54fc-18f9-48d4-bba4-0de3cf9af81d": {
+      "Id": "b66e54fc-18f9-48d4-bba4-0de3cf9af81d",
+      "name": "Makhlof",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1998-01-01",
+      "position": 2,
+      "shirtNumber": 6
+    },
+    "d82b372c-748d-47cf-8cbd-5e3f09bb4f1e": {
+      "Id": "d82b372c-748d-47cf-8cbd-5e3f09bb4f1e",
+      "name": "Hamdy",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1995-03-15",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "2f9c114b-c249-42a9-8234-a4e53780e818": {
+      "Id": "2f9c114b-c249-42a9-8234-a4e53780e818",
+      "name": "Mayele",
+      "teamId": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "birthday": "1994-06-24",
+      "position": 3,
+      "shirtNumber": 9
+    },
+    "59db8a66-c3eb-485a-8d21-3a02f5b6a27d": {
+      "Id": "59db8a66-c3eb-485a-8d21-3a02f5b6a27d",
+      "name": "Dieng",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1997-10-16",
+      "position": 2,
+      "shirtNumber": 23
+    },
+    "a836423a-7943-459a-ba70-12422e625978": {
+      "Id": "a836423a-7943-459a-ba70-12422e625978",
+      "name": "Haggag",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1997-10-01",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "7b8ae294-af26-4650-942c-7008e68f2cae": {
+      "Id": "7b8ae294-af26-4650-942c-7008e68f2cae",
+      "name": "Nagguez",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1992-10-28",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "31cba0f4-7e27-4e41-a778-753248723190": {
+      "Id": "31cba0f4-7e27-4e41-a778-753248723190",
+      "name": "Fil",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1992-12-13",
+      "position": 1,
+      "shirtNumber": 6
+    },
+    "1e5a0eac-a7a1-43d8-9f4f-9c32e14a4513": {
+      "Id": "1e5a0eac-a7a1-43d8-9f4f-9c32e14a4513",
+      "name": "Jelassi",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1994-02-07",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "d6712353-07f9-4efc-8028-24482f679621": {
+      "Id": "d6712353-07f9-4efc-8028-24482f679621",
+      "name": "Obama",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1995-05-26",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "3fc9c854-c60a-4b96-823d-e7185e35b2f7": {
+      "Id": "3fc9c854-c60a-4b96-823d-e7185e35b2f7",
+      "name": "Awad",
+      "teamId": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "birthday": "1991-09-30",
+      "position": 0,
+      "shirtNumber": 1
+    },
+    "f4cb9472-9f8a-47db-badc-bd2404f61088": {
+      "Id": "f4cb9472-9f8a-47db-badc-bd2404f61088",
+      "name": "Balaha",
+      "teamId": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "birthday": "1996-06-21",
+      "position": 3,
+      "shirtNumber": 8
+    },
+    "e78d07ea-41a4-484f-a56b-0fac5ce553ba": {
+      "Id": "e78d07ea-41a4-484f-a56b-0fac5ce553ba",
+      "name": "Mohammed",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "2002-09-01",
+      "position": 1,
+      "shirtNumber": 26
+    },
+    "6eee1f5b-b9e7-40fd-961c-794da6f80faf": {
+      "Id": "6eee1f5b-b9e7-40fd-961c-794da6f80faf",
+      "name": "Greisha",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1997-01-01",
+      "position": 3,
+      "shirtNumber": 26
+    },
+    "38597fc7-dd1f-4755-876e-0f7b81d396f2": {
+      "Id": "38597fc7-dd1f-4755-876e-0f7b81d396f2",
+      "name": "Deghmowm",
+      "teamId": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "birthday": "1998-12-02",
+      "position": 2,
+      "shirtNumber": 18
+    },
+    "6056982f-264b-44ef-acdb-35a11b91d49e": {
+      "Id": "6056982f-264b-44ef-acdb-35a11b91d49e",
+      "name": "Morsi",
+      "teamId": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "birthday": "1992-01-01",
+      "position": 3,
+      "shirtNumber": 17
+    },
+    "71c66b38-cfd1-469c-b561-e4dae56a9dae": {
+      "Id": "71c66b38-cfd1-469c-b561-e4dae56a9dae",
+      "name": "AbdelHalim",
+      "teamId": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "birthday": "1995-01-01",
+      "position": 2,
+      "shirtNumber": 17
+    },
+    "75e2f9b5-1300-4201-8f51-6aaddb9a1511": {
+      "Id": "75e2f9b5-1300-4201-8f51-6aaddb9a1511",
+      "name": "Yasser",
+      "teamId": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "birthday": "1993-02-10",
+      "position": 1,
+      "shirtNumber": 6
+    },
+    "09bb69cc-42a2-4ebc-ae24-c62ddb8c0407": {
+      "Id": "09bb69cc-42a2-4ebc-ae24-c62ddb8c0407",
+      "name": "Sabeha",
+      "teamId": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "birthday": "1999-09-09",
+      "position": 1,
+      "shirtNumber": 13
     }
   },
   "teams": {
-    "5ed1aa05-a960-4226-b82a-4eed6dd17add": {
-      "Id": "5ed1aa05-a960-4226-b82a-4eed6dd17add",
-      "name": "Test Team 4",
-      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
-      "players": []
-    },
-    "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": {
-      "Id": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
-      "name": "Test Team",
-      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+    "6411f76b-bf05-45db-80a5-361086acee0b": {
+      "Id": "6411f76b-bf05-45db-80a5-361086acee0b",
+      "name": "Enppi",
+      "captainId": "28d91e75-03ed-440f-9de0-26224a03e052",
       "players": [
-        "a8c35c67-e453-4c0b-8a74-89ceedba2ea5"
+        "7aee3be8-188e-4ed2-bc9a-456be097349f",
+        "09bb69cc-42a2-4ebc-ae24-c62ddb8c0407",
+        "940ef1aa-551b-4d72-b955-33e5ddf92b84",
+        "a104ce0f-2309-4e92-b1e3-3ad9353f09d9",
+        "882e5b0e-c929-4bb6-ac4e-e0a64030a3f8",
+        "8c149a39-0ca9-4660-8330-3fab0ac00d1c",
+        "d7ca1771-70dd-4342-ab3f-2b7ce826645f",
+        "e9fa08a6-565d-4b0e-abd4-5c33bde2b5e9",
+        "05a672be-d56b-4f4c-83c5-aca0c4aef942",
+        "07621f19-3e58-4495-bcd9-d05c28234fe2",
+        "28d91e75-03ed-440f-9de0-26224a03e052"
       ]
     },
-    "081424e9-ab77-4439-877c-3ee13fdbbadb": {
-      "Id": "081424e9-ab77-4439-877c-3ee13fdbbadb",
-      "name": "Test Team 2",
-      "captainId": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
+    "43afece5-b9f7-4d62-b75b-4e54a8cd0182": {
+      "Id": "43afece5-b9f7-4d62-b75b-4e54a8cd0182",
+      "name": "Ahly",
+      "captainId": "e7456ce6-783b-47ff-bd19-fa43a1e18838",
       "players": [
-        "f063f2d8-4f7c-4771-b024-60bc4fd6fa54"
+        "9b98ae15-81f8-48ad-915c-d2250dd7443c",
+        "c03aa46d-30b9-4025-a85f-2d38bba1a1c7",
+        "bbffbc4b-9c48-4bab-862d-bc9669eec762",
+        "75e2f9b5-1300-4201-8f51-6aaddb9a1511",
+        "2545c9d6-3c03-4e9e-a20e-f49fa9c0c2cb",
+        "8f8aed4d-249a-4332-8694-f96323c55a00",
+        "59db8a66-c3eb-485a-8d21-3a02f5b6a27d",
+        "6d2de810-2c48-4192-a9ca-fe8c81f44994",
+        "ec86dbdb-983d-4259-9541-f46ee10d9d5e",
+        "dcf92181-dace-484e-a93e-2e75898e4c4b",
+        "e7456ce6-783b-47ff-bd19-fa43a1e18838"
       ]
     },
-    "0c2e5ed6-86a0-4172-b508-77a5d696d83b": {
-      "Id": "0c2e5ed6-86a0-4172-b508-77a5d696d83b",
-      "name": "Test Team 3",
-      "captainId": "fa66b09e-1627-4ebb-8b20-63d42c02fd56",
+    "d70fb4a7-dcb7-4044-8b24-7190312aa0fe": {
+      "Id": "d70fb4a7-dcb7-4044-8b24-7190312aa0fe",
+      "name": "Future",
+      "captainId": "f4cb9472-9f8a-47db-badc-bd2404f61088",
+      "players": [
+        "29b7490f-c1aa-428e-b6a0-2264353514de",
+        "37aad370-576f-4a65-b158-a9eb91be0330",
+        "644cf1d2-0ef7-4c4c-b5b6-c09f7de6e911",
+        "31cba0f4-7e27-4e41-a778-753248723190",
+        "774effe4-c2b5-4608-ab0a-2df5eddf5db1",
+        "912235a6-fa86-4169-9b33-30048bd6711e",
+        "e09155ac-dc20-4d7d-b7d5-6062438977d0",
+        "76494f6e-aca3-43fa-9972-5e360a1fb5d5",
+        "d9ddb262-c564-4cba-bd64-9923e4f69232",
+        "5176d412-2342-4417-8bbe-feedb647df14",
+        "f4cb9472-9f8a-47db-badc-bd2404f61088"
+      ]
+    },
+    "b9c82ec5-08bb-435b-a024-5e016fce5283": {
+      "Id": "b9c82ec5-08bb-435b-a024-5e016fce5283",
+      "name": "Zamalek",
+      "captainId": "10bd295b-1cdf-4e3d-b29f-64482dbb5d3a",
+      "players": [
+        "7ba1fce1-51f7-4b26-94be-60eff7ec2151",
+        "97c0ce0f-0132-488c-8759-0b913f47fffd",
+        "d6712353-07f9-4efc-8028-24482f679621",
+        "cc00667d-dbf7-4ff5-a6ef-66aa266a12d1",
+        "20288658-dcf6-4a12-9be2-fdf4e759830e",
+        "436b2407-6b5d-4e4f-8652-51da9954ea92",
+        "88e4b602-7243-4e8a-a7ba-fe0ac4750953",
+        "66f1d318-01fb-4f5c-a87d-89f8cf575c10",
+        "5b454b71-cdd3-4a74-a33a-2327d80ec79d",
+        "3fc9c854-c60a-4b96-823d-e7185e35b2f7",
+        "10bd295b-1cdf-4e3d-b29f-64482dbb5d3a"
+      ]
+    },
+    "7d44a18d-3cac-48b9-8a79-4482f683b33c": {
+      "Id": "7d44a18d-3cac-48b9-8a79-4482f683b33c",
+      "name": "Ismaily",
+      "captainId": "9383581b-0da9-40b9-b38c-697dbd4abcf7",
+      "players": [
+        "c5c143ab-cc8e-4f67-b958-42e7c575c834",
+        "7b8ae294-af26-4650-942c-7008e68f2cae",
+        "e5611398-0568-45c9-a9f4-06db419e7846",
+        "e78d07ea-41a4-484f-a56b-0fac5ce553ba",
+        "f0fee7ce-ba09-403b-a8a4-8a1c7bfeb2ad",
+        "33bb7d9a-b025-46e1-bcef-e07f778ea48b",
+        "dd58ab3b-12cf-4c95-94c7-4d6a5edbc35d",
+        "b66e54fc-18f9-48d4-bba4-0de3cf9af81d",
+        "78c9f2c0-b9e8-4f61-9b3f-8c58cd01eabd",
+        "6056982f-264b-44ef-acdb-35a11b91d49e",
+        "9383581b-0da9-40b9-b38c-697dbd4abcf7"
+      ]
+    },
+    "3b6a9275-b677-4826-bb9b-84223cc8cce1": {
+      "Id": "3b6a9275-b677-4826-bb9b-84223cc8cce1",
+      "name": "Potato Team",
+      "captainId": "2f9c114b-c249-42a9-8234-a4e53780e818",
       "players": []
+    },
+    "5f931258-ddd1-4fee-b2bb-d2ae4e375252": {
+      "Id": "5f931258-ddd1-4fee-b2bb-d2ae4e375252",
+      "name": "Pyramids",
+      "captainId": "2f9c114b-c249-42a9-8234-a4e53780e818",
+      "players": [
+        "622cfde6-8607-4580-81ee-169c921fe153",
+        "508cc883-6d4f-4708-9a5d-a4df8b25f2e7",
+        "a4d9f678-498d-421f-8bf5-4bdc7d69a9bc",
+        "a8324e02-18d6-4eb8-8a2f-87def7537f74",
+        "d82b372c-748d-47cf-8cbd-5e3f09bb4f1e",
+        "8433c0bd-c6c3-4a95-8fef-93795035272a",
+        "105c6b94-70a0-4759-b0e9-0fa6db8d8c23",
+        "122702b2-14ac-40dd-89ac-29ba47674844",
+        "f1975e71-8c68-49ea-b8d8-a7e58edb1a9c",
+        "2227b2ea-2d1e-4339-85ec-7a0d54c985ac",
+        "2f9c114b-c249-42a9-8234-a4e53780e818"
+      ]
+    },
+    "004675b3-9826-4810-ba05-3b3120162ba3": {
+      "Id": "004675b3-9826-4810-ba05-3b3120162ba3",
+      "name": "Masry",
+      "captainId": "e891f333-39df-45d2-a88a-25ee9e9923c1",
+      "players": [
+        "cff2b32a-1db3-481e-b5ce-55039bb57e01",
+        "c6b648e5-9331-40a1-b9b3-1c87743ebb3e",
+        "33e54367-89ef-435d-b0f2-a68bcaa2db8c",
+        "24a16b3a-901f-4cab-85aa-9a09b831c306",
+        "fe02f0bd-f64a-4e50-ae97-46ca4d2ae168",
+        "1e5a0eac-a7a1-43d8-9f4f-9c32e14a4513",
+        "1d746e78-e39e-4b02-9aea-409ea50c08ed",
+        "38597fc7-dd1f-4755-876e-0f7b81d396f2",
+        "63b4027b-04b0-4a9b-a8f8-c6617078303f",
+        "6eee1f5b-b9e7-40fd-961c-794da6f80faf",
+        "e891f333-39df-45d2-a88a-25ee9e9923c1"
+      ]
+    },
+    "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9": {
+      "Id": "34e6b85d-f73a-4cd8-87f2-cbe7b3e472b9",
+      "name": "Smouha",
+      "captainId": "9b77a4b3-046c-49f1-8d9c-c45928ce57bc",
+      "players": [
+        "62d00542-7f6d-4209-ae4c-906dd336b6b8",
+        "5cfe570f-d4b9-4f18-8d47-e92eb3dd2457",
+        "a836423a-7943-459a-ba70-12422e625978",
+        "0685f4ad-58ed-4286-bd3e-48bf1c132d41",
+        "15d075d9-8ce1-49e6-a1ba-c220a6e52e69",
+        "c664ed0f-89b2-4fc4-9bf1-6cd6270883bd",
+        "71c66b38-cfd1-469c-b561-e4dae56a9dae",
+        "8259d1e7-9b1f-4ac7-9fb0-833fc3ac1aac",
+        "ee42d789-9a6e-4e49-8656-be3dc291c2ad",
+        "a26f21f2-55d3-4d81-915b-364671d3fe40",
+        "9b77a4b3-046c-49f1-8d9c-c45928ce57bc"
+      ]
     }
   },
   "matches": {},
-  "stadiums": {},
+  "stadiums": {
+    "d6d66420-1bfa-4100-8d91-173946b7585a": {
+      "id": "d6d66420-1bfa-4100-8d91-173946b7585a",
+      "name": "Cairo Stadium",
+      "address": "Nasr City",
+      "schedule": []
+    },
+    "dcc1a79e-ebd1-4d23-b8a1-8ceabc6e8c16": {
+      "id": "dcc1a79e-ebd1-4d23-b8a1-8ceabc6e8c16",
+      "name": "Petrosport Stadium",
+      "address": "New Cairo",
+      "schedule": []
+    },
+    "d1830c5d-454e-4acd-963a-94fee5bc8d21": {
+      "id": "d1830c5d-454e-4acd-963a-94fee5bc8d21",
+      "name": "Borg El Arab Stadium",
+      "address": "Borg El Arab",
+      "schedule": []
+    },
+    "b1659efd-900b-49ee-9fb1-ab013f4a91ae": {
+      "id": "b1659efd-900b-49ee-9fb1-ab013f4a91ae",
+      "name": "El Salam Stadium",
+      "address": "El Salam City",
+      "schedule": []
+    }
+  },
   "leagues": {},
-  "referees": {}
+  "referees": {
+    "e04ed6a9-f3ab-4e31-bd88-99339f3d59f2": {
+      "Id": "e04ed6a9-f3ab-4e31-bd88-99339f3d59f2",
+      "name": "nagy",
+      "schedule": []
+    },
+    "2532b388-3516-49e5-bf3c-cc6e7846d280": {
+      "Id": "2532b388-3516-49e5-bf3c-cc6e7846d280",
+      "name": "Maarouf",
+      "schedule": []
+    },
+    "1265ccaa-52b0-4f8b-a97d-ac8855767a3a": {
+      "Id": "1265ccaa-52b0-4f8b-a97d-ac8855767a3a",
+      "name": "Ghandour",
+      "schedule": []
+    },
+    "791686b0-dd49-4457-a40e-701a60157210": {
+      "Id": "791686b0-dd49-4457-a40e-701a60157210",
+      "name": "El Bana",
+      "schedule": []
+    },
+    "db364fb3-ee2a-4459-bdcc-c2d2725aed31": {
+      "Id": "db364fb3-ee2a-4459-bdcc-c2d2725aed31",
+      "name": "Ibrahim",
+      "schedule": []
+    }
+  }
 }
