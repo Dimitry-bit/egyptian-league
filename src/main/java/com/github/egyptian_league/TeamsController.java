@@ -1,7 +1,10 @@
 package com.github.egyptian_league;
 
 import com.github.egyptian_league.Models.Player;
+import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
+import com.github.egyptian_league.POJOs.PlayerPojo;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,7 +19,10 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -39,10 +45,47 @@ public class TeamsController implements Initializable {
     private TableView<TeamPojo> TeamsTable;
 
     @FXML
+    private TableView<PlayerPojo> PlayersTable;
+
+    @FXML
+    private TableColumn<PlayerPojo, String> PlayerName;
+
+    @FXML
+    private TableColumn<PlayerPojo, LocalDate> PlayerBirthdate;
+
+    @FXML
+    private TableColumn<PlayerPojo, Position> PlayerPosition;
+
+    @FXML
+    private TableColumn<PlayerPojo, Integer> PlayerShirtNumber;
+
+    @FXML
+    private TableColumn<PlayerPojo, Integer> PlayerAge;
+
+    @FXML
+    private TableColumn<PlayerPojo, Integer> PlayerRank;
+
+    @FXML
     private TextField textTeamName;
 
     @FXML
     private TextField textTeamCaptain;
+
+    public void hookupPlayersTable() {
+        TeamsTable.getSelectionModel().selectedItemProperty().addListener((obs,
+                oldSelection, newSelection) -> {
+            PlayersTable.getItems().clear();
+            if (newSelection == null) {
+                return;
+            }
+
+            List<Player> players = newSelection.getTeam().getPlayers();
+            for (Player p : players) {
+                PlayerPojo pojo = new PlayerPojo(p);
+                PlayersTable.getItems().add(pojo);
+            }
+        });
+    }
 
     public void seedTable() {
         Iterator<Team> teamsIterator = ApplicationRepository.getRepository().getTeamsIterator();
@@ -55,7 +98,7 @@ public class TeamsController implements Initializable {
     @FXML
     public void btnInsert(ActionEvent event) {
         try {
-            if (textTeamName.getText().isBlank() || textTeamCaptain.getText().isBlank()){
+            if (textTeamName.getText().isBlank() || textTeamCaptain.getText().isBlank()) {
                 return;
             }
             if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
@@ -98,11 +141,26 @@ public class TeamsController implements Initializable {
 
         TeamName.setCellFactory(TextFieldTableCell.forTableColumn());
         TeamName.setOnEditCommit(event -> {
-           event.getRowValue().getTeam().setName(event.getNewValue());;
+            event.getRowValue().getTeam().setName(event.getNewValue());
         });
+
         TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
-        
+        TeamCaptain.setOnEditCommit(event -> {
+            event.getRowValue().getTeam().getCaptainId().setName(event.getNewValue());
+        });
+
+        initializePlayerTable();
+        hookupPlayersTable();
         seedTable();
+    }
+
+    private void initializePlayerTable() {
+        PlayerName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        PlayerAge.setCellValueFactory(new PropertyValueFactory<>("age"));
+        PlayerBirthdate.setCellValueFactory(new PropertyValueFactory<>("birthday"));
+        PlayerPosition.setCellValueFactory(new PropertyValueFactory<>("position"));
+        PlayerRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        PlayerShirtNumber.setCellValueFactory(new PropertyValueFactory<>("shirtNumber"));
     }
 
     private void clearInput() {
@@ -111,7 +169,7 @@ public class TeamsController implements Initializable {
     }
 
     @FXML
-    public void ShowError(ActionEvent event){
+    public void ShowError(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Alert!");
         alert.setContentText("Invalid Data");
