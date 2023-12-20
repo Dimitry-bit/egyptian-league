@@ -1,52 +1,37 @@
 package com.github.egyptian_league.GUI;
 
-import com.github.egyptian_league.POJOs.PlayerPojo;
+import java.util.Hashtable;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-import java.time.Year;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import javafx.stage.FileChooser;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+public abstract class TableScene<T> implements Initializable {
 
-abstract class TableScene<T> {
+    @FXML
+    TableView<T> tableView;
+    @FXML
+    HBox inputHBox;
+    @FXML
+    VBox switchVBox;
 
-    DatePicker date;
-    HBox hBox = new HBox();
-    VBox vBox = new VBox();
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
-    ArrayList<Button> horizontalButtons = new ArrayList<>();
+    Hashtable<String, ComboBox<?>> comboBoxes = new Hashtable<>();
 
-    ArrayList<Button> verticalButtons = new ArrayList<>();
-    ArrayList<TableColumn> tableColumns = new ArrayList<>();
-
-    final TableView<T> table = new TableView<>();
-    StackPane stackPane = new StackPane(table);
     abstract void addRow();
 
-    void addButtonToHBox(String name, EventHandler<ActionEvent> event) {
-        addButtonToHBox(name, 100, 50, event);
-    }
-
-
-    void addButtonToHBox(String name, int width, int height, EventHandler<ActionEvent> event) {
-
-       table.setEditable(true);
+    Button createButton(String name, int width, int height, HBox hBox, VBox vBox, EventHandler<ActionEvent> event) {
         Button button = new Button();
 
         button.setText(name);
@@ -54,168 +39,104 @@ abstract class TableScene<T> {
         button.setMaxHeight(height);
         button.setOnAction(event);
 
-        hBox.getChildren().add(button);
-        horizontalButtons.add(button);
-    }
-    void addButtonToVBox(String name, EventHandler<ActionEvent> event) {
-        addButtonToVBox(name, 100, 50, event);
-    }
-    void addButtonToVBox(String name, int width, int height, EventHandler<ActionEvent> event) {
+        if (hBox != null) {
+            hBox.getChildren().add(button);
+        }
 
-        Button button = new Button();
+        if (vBox != null) {
+            vBox.getChildren().add(button);
+        }
 
-        button.setText(name);
-        button.setMaxWidth(width);
-        button.setMaxHeight(height);
-        button.setOnAction(event);
-        vBox.getChildren().add(button);
-        verticalButtons.add(button);
+        return button;
     }
 
-    void addTextField(String textIn) {
+    TextField createTextField(String label, int width, int height, HBox hBox, VBox vBox) {
         TextField text = new TextField();
 
-        text.setPromptText(textIn);
-        text.setMaxWidth(100);
-        textFields.put(textIn, text);
-        hBox.getChildren().add(text);
+        text.setPromptText(label);
+        text.setMaxWidth(width);
+        text.setMaxHeight(height);
+
+        textFields.put(label, text);
+
+        if (hBox != null) {
+            hBox.getChildren().add(text);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(vBox);
+        }
+
+        return text;
     }
 
-    <C> void addColumn(String columnName, Class<C> c) {
-        TableColumn<T, C> column = new TableColumn<>(columnName);
+    DatePicker createDatePicker(String label, int width, int height, HBox hBox, VBox vBox) {
+        DatePicker datePicker = new DatePicker();
+
+        datePicker.setMaxWidth(width);
+        datePicker.setMaxHeight(height);
+
+        datePickers.put(label, datePicker);
+
+        if (hBox != null) {
+            hBox.getChildren().add(datePicker);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(datePicker);
+        }
+
+        return datePicker;
+    }
+
+    <K, V> TableColumn<K, V> createTableColumn(String columnName, Class<V> c, TableView<K> tableView) {
+        TableColumn<K, V> column = new TableColumn<>(columnName);
 
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
-        column.setEditable(true);
-        table.getColumns().add(column);
-    }
-    Scene showScene() {
-        table.setLayoutX(100);
+        tableView.getColumns().add(column);
 
-        // hBox.getChildren().add(date);
-        hBox.setMaxWidth(table.getPrefWidth());
-        hBox.setLayoutY(400);
-        hBox.setLayoutX(0);
-        vBox.setLayoutX(800);
-        vBox.setLayoutY(0);
-        stackPane.setBackground(new Background(new BackgroundFill(Color.BLACK, null, null)));
-
-        ScrollPane scrollPane = new ScrollPane(table);
-        AnchorPane anchorP = new AnchorPane(scrollPane, stackPane, vBox, hBox);
-
-        anchorP.setPrefWidth(450);
-        anchorP.setPrefHeight(500);
-
-        return new Scene(new Group(anchorP), 1000, 1000,Color.GREEN);
+        return column;
     }
 
-    void addDate(String label) {
-        date = new DatePicker();
-        datePickers.put(label, date);
-        hBox.getChildren().add(date);
+    <V> ComboBox<V> createComboBox(String label, V[] values, int width, int height, HBox hBox, VBox vBox) {
+        ComboBox<V> comboBox = new ComboBox<>();
 
-        // Label l = new Label(label);
-        // EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-        // public void handle(ActionEvent e) {
-        // LocalDate i = date.getValue();
-        // l.setText("Date :" + i);
-        // }
-        // };
-    }
+        comboBox.setPromptText(label);
+        comboBox.setMaxWidth(width);
+        comboBox.setMaxHeight(height);
 
-    void clearInput() {
-        for (TextField textField : textFields.values()) {
-            textField.clear();
+        for (V v : values) {
+            comboBox.getItems().add(v);
         }
+
+        comboBoxes.put(label, comboBox);
+
+        if (hBox != null) {
+            hBox.getChildren().add(comboBox);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(comboBox);
+        }
+
+        return comboBox;
     }
 
-    void addDeleteButton(String buttonLabel) {
-        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                table.getItems().remove(table.getSelectionModel().getSelectedItem());
-            }
-        });
-    }
-
-    void addInsertButton(String buttonLabel) {
-        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
+    Button addInsertButton(String label) {
+        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e) {
                 addRow();
             }
         });
     }
 
-    void addswitchButtontomatch(String buttonLabel) {
-        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-
-                stage.setScene(switchSceneToMatch());
+    Button addDeleteButton(String label) {
+        return createButton(label, 100, 30, inputHBox, null, new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent e) {
+                tableView.getItems().remove(tableView.getSelectionModel().getSelectedItem());
             }
         });
     }
-    void addswitchButtontoplayer(String buttonLabel) {
-        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-
-           Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(switchSceneToPlayer());
-
-            }
-        });
-    }
-    void addswitchButtontoLeague(String buttonLabel) {
-        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-
-                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                stage.setScene(switchSceneToLeague());
-
-            }
-        });
-    }
-    void addswitchButtontoTeams(String buttonLabel) {
-        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                Parent root= null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/TeamsPage.fxml"));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                Scene scene=new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        });
-    }
-    void addswitchButtontoHomePAge(String buttonLabel) {
-        addButtonToVBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                Parent root= null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Stage     stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                Scene scene=new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-            }
-        });
-    }
-    Scene switchSceneToMatch() {
-     return   MatchTableScene.getInstance().showScene();
-
-    }
-    Scene switchSceneToPlayer() {
-        return PlayerTableScene.getplayer_table_scene().showScene();
-    }
-    Scene switchSceneToLeague() {
-        return LeagueTableScene.getLeage_table_scene().showScene();
-    }
-
 }

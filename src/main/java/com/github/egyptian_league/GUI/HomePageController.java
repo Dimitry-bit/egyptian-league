@@ -27,21 +27,24 @@ public class HomePageController {
     }
 
     @FXML
-    public void switchToPlayerPage(ActionEvent event) {
+    public void switchToPlayerPage(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/PlayersPage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(PlayerTableScene.getplayer_table_scene().showScene());
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
         stage.show();
     }
     @FXML
     public void switchToLeaguesPage(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(LeagueTableScene.getLeage_table_scene().showScene());
-        stage.show();
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        stage.setScene(LeagueTableScene.getLeage_table_scene().showScene());
+//        stage.show();
     }
+
     @FXML
     public void switchToMatchPage(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(MatchTableScene.getInstance().switchSceneToMatch());
-        stage.show();
+//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//        stage.setScene(MatchTableScene.getInstance().switchSceneToMatch());
+//        stage.show();
     }
 }
