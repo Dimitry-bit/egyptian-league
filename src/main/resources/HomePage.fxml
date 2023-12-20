@@ -32,6 +32,16 @@
                   <Font size="15.0" />
                </font>
             </Button>
+            <Button mnemonicParsing="false" onAction="#switchToStadiumPage" prefHeight="30.0" prefWidth="100.0" text="Stadium">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button layoutX="500.0" layoutY="142.0" mnemonicParsing="false" onAction="#switchToRefereePage" prefHeight="30.0" prefWidth="100.0" text="Referees">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </children>

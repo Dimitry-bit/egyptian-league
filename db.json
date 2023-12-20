@@ -1,54 +1,1535 @@
 {
   "players": {
-    "f063f2d8-4f7c-4771-b024-60bc4fd6fa54": {
-      "Id": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
-      "name": "Test Captain 2",
-      "teamId": "081424e9-ab77-4439-877c-3ee13fdbbadb",
-      "birthday": "2004-01-08",
+    "d9dd2444-16e3-41f0-94b8-120921ab3562": {
+      "Id": "d9dd2444-16e3-41f0-94b8-120921ab3562",
+      "name": "Taha",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1991-09-04",
+      "position": 1,
+      "shirtNumber": 11
+    },
+    "f16a7061-fe0e-4829-8fbb-35424bffb99d": {
+      "Id": "f16a7061-fe0e-4829-8fbb-35424bffb99d",
+      "name": "Nasser",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1997-02-08",
+      "position": 2,
+      "shirtNumber": 10
+    },
+    "4272f486-dae2-48de-9526-e8273c4ffc51": {
+      "Id": "4272f486-dae2-48de-9526-e8273c4ffc51",
+      "name": "Bayoumi",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "2000-04-07",
+      "position": 2,
+      "shirtNumber": 8
+    },
+    "8e2f3cf5-dd44-4c63-8cb9-db3f541b40d5": {
+      "Id": "8e2f3cf5-dd44-4c63-8cb9-db3f541b40d5",
+      "name": "Ghanam",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1997-03-12",
+      "position": 2,
+      "shirtNumber": 27
+    },
+    "7d3e2d4a-d987-4847-86ac-9058a752ab7a": {
+      "Id": "7d3e2d4a-d987-4847-86ac-9058a752ab7a",
+      "name": "Lhezeuo",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "2001-11-28",
+      "position": 3,
+      "shirtNumber": 42
+    },
+    "5d558477-3197-4766-bc2f-0fb53775fb21": {
+      "Id": "5d558477-3197-4766-bc2f-0fb53775fb21",
+      "name": "Gaber",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1996-01-05",
+      "position": 2,
+      "shirtNumber": 37
+    },
+    "f399eae0-cb1a-4394-b1c5-50f4c9574cbc": {
+      "Id": "f399eae0-cb1a-4394-b1c5-50f4c9574cbc",
+      "name": "Othman",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "2004-01-04",
+      "position": 1,
+      "shirtNumber": 46
+    },
+    "edd25d9e-d538-4d71-a866-2e0c4a9d12b1": {
+      "Id": "edd25d9e-d538-4d71-a866-2e0c4a9d12b1",
+      "name": "Fil",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1992-12-13",
+      "position": 1,
+      "shirtNumber": 6
+    },
+    "ac6087c1-b0e2-4136-a4f3-8b57a9f682b9": {
+      "Id": "ac6087c1-b0e2-4136-a4f3-8b57a9f682b9",
+      "name": "Nagguez",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1992-10-28",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "2d0ab53d-f12c-4ba2-8539-8c6e76e97f46": {
+      "Id": "2d0ab53d-f12c-4ba2-8539-8c6e76e97f46",
+      "name": "Awad",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1991-09-30",
       "position": 0,
       "shirtNumber": 1
     },
-    "a8c35c67-e453-4c0b-8a74-89ceedba2ea5": {
-      "Id": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
-      "name": "Test Captain",
-      "teamId": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
-      "birthday": "2004-01-08",
+    "6a205a8f-b6e2-4deb-a222-436fd171f082": {
+      "Id": "6a205a8f-b6e2-4deb-a222-436fd171f082",
+      "name": "Makrona",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "2002-09-06",
+      "position": 3,
+      "shirtNumber": 38
+    },
+    "daf11d59-0742-46c0-a92f-a6b36529b98c": {
+      "Id": "daf11d59-0742-46c0-a92f-a6b36529b98c",
+      "name": "Elagouz",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1993-05-04",
+      "position": 2,
+      "shirtNumber": 22
+    },
+    "919f790e-3926-4dc3-8306-68f4923fedf5": {
+      "Id": "919f790e-3926-4dc3-8306-68f4923fedf5",
+      "name": "Basem",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1988-10-27",
+      "position": 1,
+      "shirtNumber": 2
+    },
+    "751cdd7d-b472-4956-a5c3-6db30959d0dc": {
+      "Id": "751cdd7d-b472-4956-a5c3-6db30959d0dc",
+      "name": "Hamdy",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1995-03-15",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "ab5299a4-009a-4270-9abc-600fd12a6675": {
+      "Id": "ab5299a4-009a-4270-9abc-600fd12a6675",
+      "name": "Kalosha",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1998-12-07",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "6ff827c6-d22c-419e-a0ec-59909c8c0367": {
+      "Id": "6ff827c6-d22c-419e-a0ec-59909c8c0367",
+      "name": "Dieng",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1997-10-16",
+      "position": 2,
+      "shirtNumber": 23
+    },
+    "1dcc8ac9-29ee-42f8-9ef4-7e3ee342dc69": {
+      "Id": "1dcc8ac9-29ee-42f8-9ef4-7e3ee342dc69",
+      "name": "Yasser",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1993-02-10",
+      "position": 1,
+      "shirtNumber": 6
+    },
+    "5d06671b-1935-4c97-873d-7018b5a49461": {
+      "Id": "5d06671b-1935-4c97-873d-7018b5a49461",
+      "name": "Desoky",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1997-12-18",
+      "position": 1,
+      "shirtNumber": 3
+    },
+    "d5e866b6-6f82-43aa-b215-f6bd44fd168f": {
+      "Id": "d5e866b6-6f82-43aa-b215-f6bd44fd168f",
+      "name": "Obama",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1995-05-26",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "e8221a81-b65d-4997-8e22-d39e5d8d8c21": {
+      "Id": "e8221a81-b65d-4997-8e22-d39e5d8d8c21",
+      "name": "Fatouh",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1998-03-21",
+      "position": 1,
+      "shirtNumber": 13
+    },
+    "a0498954-1dc8-4feb-a90f-78ee9a12f6fb": {
+      "Id": "a0498954-1dc8-4feb-a90f-78ee9a12f6fb",
+      "name": "Zizo",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1996-01-10",
+      "position": 3,
+      "shirtNumber": 25
+    },
+    "1c2ff930-6047-40d2-a27f-d4b6f2e0e9d1": {
+      "Id": "1c2ff930-6047-40d2-a27f-d4b6f2e0e9d1",
+      "name": "Mathlouthi",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1992-07-25",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "3afdcb4d-fc4a-4693-8846-9446a797886a": {
+      "Id": "3afdcb4d-fc4a-4693-8846-9446a797886a",
+      "name": "Mido",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1993-11-30",
+      "position": 1,
+      "shirtNumber": 34
+    },
+    "18fff50b-a340-428d-b0ba-d367417a0f78": {
+      "Id": "18fff50b-a340-428d-b0ba-d367417a0f78",
+      "name": "Gad",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1997-05-22",
+      "position": 0,
+      "shirtNumber": 27
+    },
+    "1629b11e-dfe1-4ff8-8d4a-1bac2704ea24": {
+      "Id": "1629b11e-dfe1-4ff8-8d4a-1bac2704ea24",
+      "name": "Gomaa",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1993-08-01",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "5555746b-b6d1-46f5-95cc-d4f624f7549d": {
+      "Id": "5555746b-b6d1-46f5-95cc-d4f624f7549d",
+      "name": "Roka",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1993-07-10",
+      "position": 2,
+      "shirtNumber": 12
+    },
+    "30a31dd2-84e0-48a7-8f42-6cf3e7df7a8f": {
+      "Id": "30a31dd2-84e0-48a7-8f42-6cf3e7df7a8f",
+      "name": "Shakshak",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "2000-04-06",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "9400f50f-dd7e-49e2-91d9-456367edc7eb": {
+      "Id": "9400f50f-dd7e-49e2-91d9-456367edc7eb",
+      "name": "Guenaoui",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1998-08-02",
+      "position": 3,
+      "shirtNumber": 23
+    },
+    "37b9d53b-0d64-4764-bf02-9660bb1683d8": {
+      "Id": "37b9d53b-0d64-4764-bf02-9660bb1683d8",
+      "name": "Haggag",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1997-10-01",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "1a9d3ea1-db60-4952-bbfe-1b6b9785fc67": {
+      "Id": "1a9d3ea1-db60-4952-bbfe-1b6b9785fc67",
+      "name": "Maleg",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1994-10-01",
+      "position": 3,
+      "shirtNumber": 15
+    },
+    "b1e7177e-8bb1-48bf-97d4-d095192a0b0e": {
+      "Id": "b1e7177e-8bb1-48bf-97d4-d095192a0b0e",
+      "name": "Morsi",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1992-01-01",
+      "position": 3,
+      "shirtNumber": 17
+    },
+    "f973b905-5089-40a6-8c6c-4d9a800967f4": {
+      "Id": "f973b905-5089-40a6-8c6c-4d9a800967f4",
+      "name": "Afsha",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1996-03-06",
+      "position": 2,
+      "shirtNumber": 19
+    },
+    "001ee0ba-3a08-4c28-8348-40714bdc40f9": {
+      "Id": "001ee0ba-3a08-4c28-8348-40714bdc40f9",
+      "name": "Adel",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "2001-05-01",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "ab227714-86f3-4f90-a112-4e38051a2029": {
+      "Id": "ab227714-86f3-4f90-a112-4e38051a2029",
+      "name": "Nahas",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "2002-02-21",
+      "position": 3,
+      "shirtNumber": 42
+    },
+    "527c28a0-f446-4d32-a365-e5451ab88fdf": {
+      "Id": "527c28a0-f446-4d32-a365-e5451ab88fdf",
+      "name": "Balaha",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1996-06-21",
+      "position": 3,
+      "shirtNumber": 8
+    },
+    "46003dac-90a9-469e-8233-a9b006552e4c": {
+      "Id": "46003dac-90a9-469e-8233-a9b006552e4c",
+      "name": "AbdelHalim",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1995-01-01",
+      "position": 2,
+      "shirtNumber": 17
+    },
+    "b624e3c7-b4d6-476f-9bc6-e85f39f6c021": {
+      "Id": "b624e3c7-b4d6-476f-9bc6-e85f39f6c021",
+      "name": "Khashab",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1998-07-26",
+      "position": 1,
+      "shirtNumber": 26
+    },
+    "6bc563f6-0b17-4f1e-9687-3e7cf2dd5d57": {
+      "Id": "6bc563f6-0b17-4f1e-9687-3e7cf2dd5d57",
+      "name": "Dowidar",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1999-02-07",
+      "position": 1,
+      "shirtNumber": 30
+    },
+    "0c7ffc13-fe78-49e9-9489-c05870616c70": {
+      "Id": "0c7ffc13-fe78-49e9-9489-c05870616c70",
+      "name": "Etouga",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "2001-09-18",
+      "position": 3,
+      "shirtNumber": 37
+    },
+    "47ecb9f0-bed1-4ca8-b32c-0f3a633c4bdf": {
+      "Id": "47ecb9f0-bed1-4ca8-b32c-0f3a633c4bdf",
+      "name": "Toure",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1994-08-04",
+      "position": 2,
+      "shirtNumber": 7
+    },
+    "f5940b5c-96c4-4d41-8e68-62ccd934d51a": {
+      "Id": "f5940b5c-96c4-4d41-8e68-62ccd934d51a",
+      "name": "Maaloul",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1990-01-01",
+      "position": 1,
+      "shirtNumber": 21
+    },
+    "bc80add5-fa7e-4abc-973e-86014eae9dc2": {
+      "Id": "bc80add5-fa7e-4abc-973e-86014eae9dc2",
+      "name": "Jelassi",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1994-02-07",
+      "position": 2,
+      "shirtNumber": 14
+    },
+    "26834dfa-e4f2-4cd3-8e72-985815f21105": {
+      "Id": "26834dfa-e4f2-4cd3-8e72-985815f21105",
+      "name": "fawzi",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1993-07-10",
       "position": 0,
       "shirtNumber": 1
+    },
+    "d5398835-f2d2-4f07-a76f-3ad1cdd1f0fd": {
+      "Id": "d5398835-f2d2-4f07-a76f-3ad1cdd1f0fd",
+      "name": "Wahid",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1994-06-19",
+      "position": 1,
+      "shirtNumber": 33
+    },
+    "8337077f-4a2f-4be7-96b6-5e0503124038": {
+      "Id": "8337077f-4a2f-4be7-96b6-5e0503124038",
+      "name": "Mohammed",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "2002-09-01",
+      "position": 1,
+      "shirtNumber": 26
+    },
+    "a02f7220-6e14-4dfc-a728-5ae4fe5028df": {
+      "Id": "a02f7220-6e14-4dfc-a728-5ae4fe5028df",
+      "name": "Ajayi",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1996-01-25",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "9e6540f7-d198-4812-afc0-6a2eb68a04be": {
+      "Id": "9e6540f7-d198-4812-afc0-6a2eb68a04be",
+      "name": "Faisal",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1999-03-04",
+      "position": 2,
+      "shirtNumber": 32
+    },
+    "a50d4a31-e2c5-4cb9-b56a-34fd3267d419": {
+      "Id": "a50d4a31-e2c5-4cb9-b56a-34fd3267d419",
+      "name": "Ramadan",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1997-01-23",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "b93cf752-0ac0-4fa5-bebb-9112ab243593": {
+      "Id": "b93cf752-0ac0-4fa5-bebb-9112ab243593",
+      "name": "Makhlof",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1998-01-01",
+      "position": 2,
+      "shirtNumber": 6
+    },
+    "d5293b5b-fba0-4eb5-b013-829575407c34": {
+      "Id": "d5293b5b-fba0-4eb5-b013-829575407c34",
+      "name": "Abdullah",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1985-07-13",
+      "position": 2,
+      "shirtNumber": 19
+    },
+    "1e29f429-06c3-41e6-a8f2-e09701836b7a": {
+      "Id": "1e29f429-06c3-41e6-a8f2-e09701836b7a",
+      "name": "Tau",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1994-05-13",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "1c548e82-20b4-4392-8ef6-d5d4070b1547": {
+      "Id": "1c548e82-20b4-4392-8ef6-d5d4070b1547",
+      "name": "Ashour",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1998-02-20",
+      "position": 2,
+      "shirtNumber": 22
+    },
+    "b951d487-b8cd-4bc8-bf61-e673652595a2": {
+      "Id": "b951d487-b8cd-4bc8-bf61-e673652595a2",
+      "name": "Soliman",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "1984-07-08",
+      "position": 0,
+      "shirtNumber": 1
+    },
+    "8ec39a5e-e575-4bd4-82f5-08a0408da677": {
+      "Id": "8ec39a5e-e575-4bd4-82f5-08a0408da677",
+      "name": "Shabrawy",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1994-12-15",
+      "position": 3,
+      "shirtNumber": 7
+    },
+    "c21ca1cd-f390-479f-970d-d5e456d6fb5b": {
+      "Id": "c21ca1cd-f390-479f-970d-d5e456d6fb5b",
+      "name": "Sabeha",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1999-09-09",
+      "position": 1,
+      "shirtNumber": 13
+    },
+    "e032c90d-aac2-44c2-9dc9-32e7d8925c09": {
+      "Id": "e032c90d-aac2-44c2-9dc9-32e7d8925c09",
+      "name": "Karti",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1997-07-23",
+      "position": 2,
+      "shirtNumber": 18
+    },
+    "fcacbfe3-1a6b-43d1-87d3-b5052e370ff3": {
+      "Id": "fcacbfe3-1a6b-43d1-87d3-b5052e370ff3",
+      "name": "rafik",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1992-10-28",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "bff02897-a642-4ef8-add2-df45325d52fd": {
+      "Id": "bff02897-a642-4ef8-add2-df45325d52fd",
+      "name": "Mijahed",
+      "teamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "birthday": "2001-08-20",
+      "position": 1,
+      "shirtNumber": 31
+    },
+    "8aa803fa-1448-4c30-82ee-21192ef3d664": {
+      "Id": "8aa803fa-1448-4c30-82ee-21192ef3d664",
+      "name": "Samy",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1992-05-31",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "87f07bbe-2764-45c1-beeb-9c2e13341ce5": {
+      "Id": "87f07bbe-2764-45c1-beeb-9c2e13341ce5",
+      "name": "Shenawy",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1988-12-18",
+      "position": 0,
+      "shirtNumber": 1
+    },
+    "eefdbf1c-57cb-4ed5-8d69-c61aacbabb2b": {
+      "Id": "eefdbf1c-57cb-4ed5-8d69-c61aacbabb2b",
+      "name": "Deghmowm",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1998-12-02",
+      "position": 2,
+      "shirtNumber": 18
+    },
+    "a1861075-8c28-4a06-ad96-b4b63735a4d0": {
+      "Id": "a1861075-8c28-4a06-ad96-b4b63735a4d0",
+      "name": "Shahat",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1992-06-21",
+      "position": 3,
+      "shirtNumber": 14
+    },
+    "64dc1e1a-8111-420a-b476-103748e5bb15": {
+      "Id": "64dc1e1a-8111-420a-b476-103748e5bb15",
+      "name": "Arafat",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "1993-05-26",
+      "position": 1,
+      "shirtNumber": 24
+    },
+    "f82e46a0-2354-4340-979d-865c13a1fc7b": {
+      "Id": "f82e46a0-2354-4340-979d-865c13a1fc7b",
+      "name": "Greisha",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1997-01-01",
+      "position": 3,
+      "shirtNumber": 26
+    },
+    "bb246bc1-9a54-4beb-9284-f658ed0f24c0": {
+      "Id": "bb246bc1-9a54-4beb-9284-f658ed0f24c0",
+      "name": "Wensh",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1995-06-01",
+      "position": 1,
+      "shirtNumber": 28
+    },
+    "ebcce8f3-ddf7-498c-acbb-dcbf11316d8d": {
+      "Id": "ebcce8f3-ddf7-498c-acbb-dcbf11316d8d",
+      "name": "Chibi",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1993-01-21",
+      "position": 1,
+      "shirtNumber": 15
+    },
+    "38fbac6f-cd4f-4129-b784-49c1c08f0e09": {
+      "Id": "38fbac6f-cd4f-4129-b784-49c1c08f0e09",
+      "name": "Rizk",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1990-01-01",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "fd379475-3c2f-490c-bf85-88f26140812a": {
+      "Id": "fd379475-3c2f-490c-bf85-88f26140812a",
+      "name": "Atef",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1998-03-21",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "15691713-245e-40d5-afef-bf44b5cf24d8": {
+      "Id": "15691713-245e-40d5-afef-bf44b5cf24d8",
+      "name": "Shifo",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1985-07-01",
+      "position": 1,
+      "shirtNumber": 29
+    },
+    "3457dee7-a34f-4a44-85a3-7d7cfbc52c06": {
+      "Id": "3457dee7-a34f-4a44-85a3-7d7cfbc52c06",
+      "name": "Donga",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1996-04-06",
+      "position": 2,
+      "shirtNumber": 8
+    },
+    "0fb4182d-9328-4e78-9a24-9bfffd9e4b5f": {
+      "Id": "0fb4182d-9328-4e78-9a24-9bfffd9e4b5f",
+      "name": "Moussa",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1988-04-11",
+      "position": 1,
+      "shirtNumber": 8
+    },
+    "9e4c2aef-131a-46cf-a67c-fa1b8311dae0": {
+      "Id": "9e4c2aef-131a-46cf-a67c-fa1b8311dae0",
+      "name": "Kahraba",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1994-04-13",
+      "position": 3,
+      "shirtNumber": 7
+    },
+    "5651419c-866e-41bd-9938-13e72e02138f": {
+      "Id": "5651419c-866e-41bd-9938-13e72e02138f",
+      "name": "Wagdy",
+      "teamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "birthday": "2002-03-04",
+      "position": 3,
+      "shirtNumber": 23
+    },
+    "e8dc5c4c-753a-41ea-bab3-b4df0710f3ec": {
+      "Id": "e8dc5c4c-753a-41ea-bab3-b4df0710f3ec",
+      "name": "Shikabala",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1986-03-05",
+      "position": 3,
+      "shirtNumber": 10
+    },
+    "0e769d45-1581-4cb5-8db9-6c894fece4f7": {
+      "Id": "0e769d45-1581-4cb5-8db9-6c894fece4f7",
+      "name": "Attia",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1998-12-03",
+      "position": 2,
+      "shirtNumber": 15
+    },
+    "84d03469-7a91-49ac-a16e-e7d05f454737": {
+      "Id": "84d03469-7a91-49ac-a16e-e7d05f454737",
+      "name": "Genish",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1987-07-09",
+      "position": 0,
+      "shirtNumber": 16
+    },
+    "ba2f033d-7c87-4d74-9866-4c185356c4d7": {
+      "Id": "ba2f033d-7c87-4d74-9866-4c185356c4d7",
+      "name": "Elsayed",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "1992-03-01",
+      "position": 0,
+      "shirtNumber": 29
+    },
+    "91d453f7-0ef3-4842-970b-4f4857c76fdf": {
+      "Id": "91d453f7-0ef3-4842-970b-4f4857c76fdf",
+      "name": "Hany",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1996-01-25",
+      "position": 1,
+      "shirtNumber": 30
+    },
+    "43039112-6d84-462c-b188-acbc63e58e42": {
+      "Id": "43039112-6d84-462c-b188-acbc63e58e42",
+      "name": "Eraki",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1996-10-09",
+      "position": 1,
+      "shirtNumber": 7
+    },
+    "1fd8f88d-6a11-414d-a412-cd166794010e": {
+      "Id": "1fd8f88d-6a11-414d-a412-cd166794010e",
+      "name": "Tawfik",
+      "teamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "birthday": "1997-11-08",
+      "position": 1,
+      "shirtNumber": 8
+    },
+    "aaab05c1-832b-49d1-b5cc-3b38d6513a0b": {
+      "Id": "aaab05c1-832b-49d1-b5cc-3b38d6513a0b",
+      "name": "Mayele",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1994-06-24",
+      "position": 3,
+      "shirtNumber": 9
+    },
+    "980abef3-425e-4f0b-a60d-71c582d79b54": {
+      "Id": "980abef3-425e-4f0b-a60d-71c582d79b54",
+      "name": "Jaziri",
+      "teamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "birthday": "1993-02-12",
+      "position": 3,
+      "shirtNumber": 30
+    },
+    "0bc54458-a8da-4516-9abe-940cd5e01e33": {
+      "Id": "0bc54458-a8da-4516-9abe-940cd5e01e33",
+      "name": "Dabash",
+      "teamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "birthday": "1990-11-25",
+      "position": 1,
+      "shirtNumber": 4
+    },
+    "a7c19129-e0ce-448b-bb22-2b4f2aa3aac4": {
+      "Id": "a7c19129-e0ce-448b-bb22-2b4f2aa3aac4",
+      "name": "Gabr",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1989-01-09",
+      "position": 1,
+      "shirtNumber": 5
+    },
+    "e0885b69-b97c-4fe9-a62b-119f0ae73305": {
+      "Id": "e0885b69-b97c-4fe9-a62b-119f0ae73305",
+      "name": "Zaazaa",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "2001-06-23",
+      "position": 2,
+      "shirtNumber": 37
+    },
+    "138834ab-c6bb-47ae-aabf-0353040c4334": {
+      "Id": "138834ab-c6bb-47ae-aabf-0353040c4334",
+      "name": "barry",
+      "teamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "birthday": "1991-09-27",
+      "position": 3,
+      "shirtNumber": 3
+    },
+    "c6552938-6b9e-4188-b2c7-3952f50a9f83": {
+      "Id": "c6552938-6b9e-4188-b2c7-3952f50a9f83",
+      "name": "Ngom",
+      "teamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "birthday": "2003-12-04",
+      "position": 2,
+      "shirtNumber": 31
+    },
+    "e71b205e-cf26-4993-a938-fe5e4b855e29": {
+      "Id": "e71b205e-cf26-4993-a938-fe5e4b855e29",
+      "name": "Ekramy",
+      "teamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "birthday": "1983-07-10",
+      "position": 0,
+      "shirtNumber": 22
     }
   },
   "teams": {
-    "5ed1aa05-a960-4226-b82a-4eed6dd17add": {
-      "Id": "5ed1aa05-a960-4226-b82a-4eed6dd17add",
-      "name": "Test Team 4",
-      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
-      "players": []
-    },
-    "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": {
-      "Id": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
-      "name": "Test Team",
-      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+    "30943eec-2516-490a-8ac2-473bef9e8e49": {
+      "Id": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "name": "Masry",
+      "captainId": "9400f50f-dd7e-49e2-91d9-456367edc7eb",
       "players": [
-        "a8c35c67-e453-4c0b-8a74-89ceedba2ea5"
+        "18fff50b-a340-428d-b0ba-d367417a0f78",
+        "43039112-6d84-462c-b188-acbc63e58e42",
+        "0bc54458-a8da-4516-9abe-940cd5e01e33",
+        "0fb4182d-9328-4e78-9a24-9bfffd9e4b5f",
+        "f399eae0-cb1a-4394-b1c5-50f4c9574cbc",
+        "bc80add5-fa7e-4abc-973e-86014eae9dc2",
+        "0e769d45-1581-4cb5-8db9-6c894fece4f7",
+        "eefdbf1c-57cb-4ed5-8d69-c61aacbabb2b",
+        "0c7ffc13-fe78-49e9-9489-c05870616c70",
+        "f82e46a0-2354-4340-979d-865c13a1fc7b",
+        "9400f50f-dd7e-49e2-91d9-456367edc7eb"
       ]
     },
-    "081424e9-ab77-4439-877c-3ee13fdbbadb": {
-      "Id": "081424e9-ab77-4439-877c-3ee13fdbbadb",
-      "name": "Test Team 2",
-      "captainId": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
+    "03a1a07a-4a45-4906-bb71-466a1b4a6baa": {
+      "Id": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "name": "Zamalek",
+      "captainId": "e8dc5c4c-753a-41ea-bab3-b4df0710f3ec",
       "players": [
-        "f063f2d8-4f7c-4771-b024-60bc4fd6fa54"
+        "a0498954-1dc8-4feb-a90f-78ee9a12f6fb",
+        "980abef3-425e-4f0b-a60d-71c582d79b54",
+        "d5e866b6-6f82-43aa-b215-f6bd44fd168f",
+        "3457dee7-a34f-4a44-85a3-7d7cfbc52c06",
+        "5555746b-b6d1-46f5-95cc-d4f624f7549d",
+        "15691713-245e-40d5-afef-bf44b5cf24d8",
+        "bb246bc1-9a54-4beb-9284-f658ed0f24c0",
+        "1c2ff930-6047-40d2-a27f-d4b6f2e0e9d1",
+        "e8221a81-b65d-4997-8e22-d39e5d8d8c21",
+        "2d0ab53d-f12c-4ba2-8539-8c6e76e97f46",
+        "e8dc5c4c-753a-41ea-bab3-b4df0710f3ec"
       ]
     },
-    "0c2e5ed6-86a0-4172-b508-77a5d696d83b": {
-      "Id": "0c2e5ed6-86a0-4172-b508-77a5d696d83b",
-      "name": "Test Team 3",
-      "captainId": "fa66b09e-1627-4ebb-8b20-63d42c02fd56",
-      "players": []
+    "bbb5ba89-31ca-4ab7-a494-8833444a01e2": {
+      "Id": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "name": "Future",
+      "captainId": "527c28a0-f446-4d32-a365-e5451ab88fdf",
+      "players": [
+        "84d03469-7a91-49ac-a16e-e7d05f454737",
+        "919f790e-3926-4dc3-8306-68f4923fedf5",
+        "38fbac6f-cd4f-4129-b784-49c1c08f0e09",
+        "edd25d9e-d538-4d71-a866-2e0c4a9d12b1",
+        "d9dd2444-16e3-41f0-94b8-120921ab3562",
+        "f16a7061-fe0e-4829-8fbb-35424bffb99d",
+        "8e2f3cf5-dd44-4c63-8cb9-db3f541b40d5",
+        "e0885b69-b97c-4fe9-a62b-119f0ae73305",
+        "138834ab-c6bb-47ae-aabf-0353040c4334",
+        "fd379475-3c2f-490c-bf85-88f26140812a",
+        "527c28a0-f446-4d32-a365-e5451ab88fdf"
+      ]
+    },
+    "215d3bae-e2ac-44a5-9978-fc7057c1d437": {
+      "Id": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "name": "Ismaily",
+      "captainId": "5651419c-866e-41bd-9938-13e72e02138f",
+      "players": [
+        "26834dfa-e4f2-4cd3-8e72-985815f21105",
+        "ac6087c1-b0e2-4136-a4f3-8b57a9f682b9",
+        "64dc1e1a-8111-420a-b476-103748e5bb15",
+        "8337077f-4a2f-4be7-96b6-5e0503124038",
+        "5d06671b-1935-4c97-873d-7018b5a49461",
+        "1629b11e-dfe1-4ff8-8d4a-1bac2704ea24",
+        "4272f486-dae2-48de-9526-e8273c4ffc51",
+        "b93cf752-0ac0-4fa5-bebb-9112ab243593",
+        "8ec39a5e-e575-4bd4-82f5-08a0408da677",
+        "b1e7177e-8bb1-48bf-97d4-d095192a0b0e",
+        "5651419c-866e-41bd-9938-13e72e02138f"
+      ]
+    },
+    "216f1e33-014c-4ad0-9ad9-8e1396abf1ac": {
+      "Id": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "name": "Smouha",
+      "captainId": "7d3e2d4a-d987-4847-86ac-9058a752ab7a",
+      "players": [
+        "b951d487-b8cd-4bc8-bf61-e673652595a2",
+        "d5398835-f2d2-4f07-a76f-3ad1cdd1f0fd",
+        "37b9d53b-0d64-4764-bf02-9660bb1683d8",
+        "bff02897-a642-4ef8-add2-df45325d52fd",
+        "3afdcb4d-fc4a-4693-8846-9446a797886a",
+        "5d558477-3197-4766-bc2f-0fb53775fb21",
+        "46003dac-90a9-469e-8233-a9b006552e4c",
+        "9e6540f7-d198-4812-afc0-6a2eb68a04be",
+        "a02f7220-6e14-4dfc-a728-5ae4fe5028df",
+        "6a205a8f-b6e2-4deb-a222-436fd171f082",
+        "7d3e2d4a-d987-4847-86ac-9058a752ab7a"
+      ]
+    },
+    "337dbb2e-5cda-4215-9f52-131884bdcead": {
+      "Id": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "name": "Pyramids",
+      "captainId": "aaab05c1-832b-49d1-b5cc-3b38d6513a0b",
+      "players": [
+        "e71b205e-cf26-4993-a938-fe5e4b855e29",
+        "8aa803fa-1448-4c30-82ee-21192ef3d664",
+        "a7c19129-e0ce-448b-bb22-2b4f2aa3aac4",
+        "ebcce8f3-ddf7-498c-acbb-dcbf11316d8d",
+        "751cdd7d-b472-4956-a5c3-6db30959d0dc",
+        "47ecb9f0-bed1-4ca8-b32c-0f3a633c4bdf",
+        "e032c90d-aac2-44c2-9dc9-32e7d8925c09",
+        "d5293b5b-fba0-4eb5-b013-829575407c34",
+        "a50d4a31-e2c5-4cb9-b56a-34fd3267d419",
+        "001ee0ba-3a08-4c28-8348-40714bdc40f9",
+        "aaab05c1-832b-49d1-b5cc-3b38d6513a0b"
+      ]
+    },
+    "80e3c2f3-5e14-4fcc-a0b1-118f46461f88": {
+      "Id": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "name": "Enppi",
+      "captainId": "1a9d3ea1-db60-4952-bbfe-1b6b9785fc67",
+      "players": [
+        "ba2f033d-7c87-4d74-9866-4c185356c4d7",
+        "c21ca1cd-f390-479f-970d-d5e456d6fb5b",
+        "ab5299a4-009a-4270-9abc-600fd12a6675",
+        "6bc563f6-0b17-4f1e-9687-3e7cf2dd5d57",
+        "b624e3c7-b4d6-476f-9bc6-e85f39f6c021",
+        "30a31dd2-84e0-48a7-8f42-6cf3e7df7a8f",
+        "c6552938-6b9e-4188-b2c7-3952f50a9f83",
+        "daf11d59-0742-46c0-a92f-a6b36529b98c",
+        "fcacbfe3-1a6b-43d1-87d3-b5052e370ff3",
+        "ab227714-86f3-4f90-a112-4e38051a2029",
+        "1a9d3ea1-db60-4952-bbfe-1b6b9785fc67"
+      ]
+    },
+    "ea8fde10-f26f-4dc7-9542-5629ef81734a": {
+      "Id": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "name": "Ahly",
+      "captainId": "87f07bbe-2764-45c1-beeb-9c2e13341ce5",
+      "players": [
+        "f5940b5c-96c4-4d41-8e68-62ccd934d51a",
+        "1fd8f88d-6a11-414d-a412-cd166794010e",
+        "91d453f7-0ef3-4842-970b-4f4857c76fdf",
+        "1dcc8ac9-29ee-42f8-9ef4-7e3ee342dc69",
+        "1c548e82-20b4-4392-8ef6-d5d4070b1547",
+        "f973b905-5089-40a6-8c6c-4d9a800967f4",
+        "6ff827c6-d22c-419e-a0ec-59909c8c0367",
+        "1e29f429-06c3-41e6-a8f2-e09701836b7a",
+        "a1861075-8c28-4a06-ad96-b4b63735a4d0",
+        "9e4c2aef-131a-46cf-a67c-fa1b8311dae0",
+        "87f07bbe-2764-45c1-beeb-9c2e13341ce5"
+      ]
     }
   },
-  "matches": {},
-  "stadiums": {},
+  "matches": {
+    "d7f34905-3c65-4cad-86a2-205b37aad5a7": {
+      "Id": "d7f34905-3c65-4cad-86a2-205b37aad5a7",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-12-21T20:00",
+      "scorers": {}
+    },
+    "9e70f9a4-533e-4457-88fb-422f2601c8b3": {
+      "Id": "9e70f9a4-533e-4457-88fb-422f2601c8b3",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-05-04T20:00",
+      "scorers": {}
+    },
+    "01a3bd86-abde-45b9-8aef-ae81d53c9c6a": {
+      "Id": "01a3bd86-abde-45b9-8aef-ae81d53c9c6a",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-02-10T18:00",
+      "scorers": {}
+    },
+    "e3145c9e-5c1f-4069-bd58-99008bd036df": {
+      "Id": "e3145c9e-5c1f-4069-bd58-99008bd036df",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-03-13T20:00",
+      "scorers": {}
+    },
+    "175e9e38-d0ff-4673-981e-61d72fe72a97": {
+      "Id": "175e9e38-d0ff-4673-981e-61d72fe72a97",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-02-22T20:00",
+      "scorers": {}
+    },
+    "8d20f384-6dcf-451a-be0e-f453777cdc0e": {
+      "Id": "8d20f384-6dcf-451a-be0e-f453777cdc0e",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-04-21T20:00",
+      "scorers": {}
+    },
+    "fa3ec6d6-2f33-447f-a301-4ea51eb26b8a": {
+      "Id": "fa3ec6d6-2f33-447f-a301-4ea51eb26b8a",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-01-29T20:00",
+      "scorers": {}
+    },
+    "adf0e244-cb3f-440e-84db-f0dedf346d21": {
+      "Id": "adf0e244-cb3f-440e-84db-f0dedf346d21",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-12-31T20:00",
+      "scorers": {}
+    },
+    "03495caa-aafb-4656-b739-bac8b8c576e2": {
+      "Id": "03495caa-aafb-4656-b739-bac8b8c576e2",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-03-22T22:00",
+      "scorers": {}
+    },
+    "d78b160c-daf3-478a-bcc8-e8626fc81fcf": {
+      "Id": "d78b160c-daf3-478a-bcc8-e8626fc81fcf",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-01-02T19:00",
+      "scorers": {}
+    },
+    "77020a12-a3aa-487c-9f63-26811c00b2f8": {
+      "Id": "77020a12-a3aa-487c-9f63-26811c00b2f8",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-03-31T21:00",
+      "scorers": {}
+    },
+    "8d2038a2-d7ae-4d97-ac40-4b8613eb4c56": {
+      "Id": "8d2038a2-d7ae-4d97-ac40-4b8613eb4c56",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-01-30T20:00",
+      "scorers": {}
+    },
+    "b68ea6db-555d-4c7c-b22b-a5e9391b834e": {
+      "Id": "b68ea6db-555d-4c7c-b22b-a5e9391b834e",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "f1afef7c-94cb-462e-bdac-72f49edaacb9",
+      "dateTime": "2023-03-02T18:00",
+      "scorers": {}
+    },
+    "a1e98878-5c50-4548-8859-f7f96147df60": {
+      "Id": "a1e98878-5c50-4548-8859-f7f96147df60",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-01-20T20:00",
+      "scorers": {}
+    },
+    "52a7c274-5f03-40f9-a9ff-805d357779b7": {
+      "Id": "52a7c274-5f03-40f9-a9ff-805d357779b7",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-05-03T20:00",
+      "scorers": {}
+    },
+    "f0e03bda-78a7-4165-a75f-35f36ea7bae2": {
+      "Id": "f0e03bda-78a7-4165-a75f-35f36ea7bae2",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-04-02T20:00",
+      "scorers": {}
+    },
+    "110b6e84-25c7-42a4-b952-c033266d22e4": {
+      "Id": "110b6e84-25c7-42a4-b952-c033266d22e4",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-04-11T20:00",
+      "scorers": {}
+    },
+    "faefa7e2-5a07-43e8-ba05-83b4ddfbcc1e": {
+      "Id": "faefa7e2-5a07-43e8-ba05-83b4ddfbcc1e",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-01-18T20:00",
+      "scorers": {}
+    },
+    "368e6cc7-d440-472a-9b4d-5763ec3b5d85": {
+      "Id": "368e6cc7-d440-472a-9b4d-5763ec3b5d85",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-03-03T14:00",
+      "scorers": {}
+    },
+    "29bcdaad-4697-4c6e-9bfc-4a7dcd67b41b": {
+      "Id": "29bcdaad-4697-4c6e-9bfc-4a7dcd67b41b",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-04-12T20:00",
+      "scorers": {}
+    },
+    "6cd5b3b1-177e-4f0d-8db3-96025f90a0b3": {
+      "Id": "6cd5b3b1-177e-4f0d-8db3-96025f90a0b3",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-03-21T20:00",
+      "scorers": {}
+    },
+    "46a6d798-77a8-4225-9e99-52c4fd8d208b": {
+      "Id": "46a6d798-77a8-4225-9e99-52c4fd8d208b",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-02-04T20:00",
+      "scorers": {}
+    },
+    "beaa7055-14ef-4c25-9290-259fa0721c3f": {
+      "Id": "beaa7055-14ef-4c25-9290-259fa0721c3f",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-03-05T20:00",
+      "scorers": {}
+    },
+    "e3dc3e01-5f29-451e-a18d-7b1951fdddb4": {
+      "Id": "e3dc3e01-5f29-451e-a18d-7b1951fdddb4",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-01-20T21:00",
+      "scorers": {}
+    },
+    "78f19d6b-ffa1-4158-847a-6bc4770d06cd": {
+      "Id": "78f19d6b-ffa1-4158-847a-6bc4770d06cd",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-01-27T20:00",
+      "scorers": {}
+    },
+    "6e14deea-08f3-4cfb-96fa-d9fa35afe76e": {
+      "Id": "6e14deea-08f3-4cfb-96fa-d9fa35afe76e",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-01-28T20:00",
+      "scorers": {}
+    },
+    "461d212d-45af-469d-af58-087c97c4f7fa": {
+      "Id": "461d212d-45af-469d-af58-087c97c4f7fa",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-03-21T21:00",
+      "scorers": {}
+    },
+    "0919ecf4-1f10-408e-8c91-e0995980de98": {
+      "Id": "0919ecf4-1f10-408e-8c91-e0995980de98",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-03-14T20:00",
+      "scorers": {}
+    },
+    "49ff2108-7f57-4221-93dd-4a838168d012": {
+      "Id": "49ff2108-7f57-4221-93dd-4a838168d012",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-04-10T20:00",
+      "scorers": {}
+    },
+    "2d9943b5-8c12-4cbd-a8ab-6429f4b39c5f": {
+      "Id": "2d9943b5-8c12-4cbd-a8ab-6429f4b39c5f",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-05-02T20:00",
+      "scorers": {}
+    },
+    "aead5650-7d45-4a3f-89b8-0878935d52bf": {
+      "Id": "aead5650-7d45-4a3f-89b8-0878935d52bf",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "f1afef7c-94cb-462e-bdac-72f49edaacb9",
+      "dateTime": "2023-12-22T18:00",
+      "scorers": {}
+    },
+    "a49fe0ab-4ed8-44eb-b7d4-831c12c692ab": {
+      "Id": "a49fe0ab-4ed8-44eb-b7d4-831c12c692ab",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-03-12T19:00",
+      "scorers": {}
+    },
+    "98e4ecd3-6ca2-4d3d-84db-e3bb2a1ea1d3": {
+      "Id": "98e4ecd3-6ca2-4d3d-84db-e3bb2a1ea1d3",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-01-11T20:00",
+      "scorers": {}
+    },
+    "d7c8aa3b-1943-42a1-987b-3fa08d9cc268": {
+      "Id": "d7c8aa3b-1943-42a1-987b-3fa08d9cc268",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-02-15T20:00",
+      "scorers": {}
+    },
+    "da4e095c-4a02-468e-a8cc-4b25f27c8a69": {
+      "Id": "da4e095c-4a02-468e-a8cc-4b25f27c8a69",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-02-03T20:00",
+      "scorers": {}
+    },
+    "a8bb8fae-12ed-4cb8-8d36-9b8c0d5122fa": {
+      "Id": "a8bb8fae-12ed-4cb8-8d36-9b8c0d5122fa",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-12-23T14:00",
+      "scorers": {}
+    },
+    "a8d3aead-b2d4-4bc7-a8ef-63d3facd0575": {
+      "Id": "a8d3aead-b2d4-4bc7-a8ef-63d3facd0575",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-01-12T20:00",
+      "scorers": {}
+    },
+    "e91bccf0-c464-4132-9e0e-703785000b8a": {
+      "Id": "e91bccf0-c464-4132-9e0e-703785000b8a",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-02-14T20:00",
+      "scorers": {}
+    },
+    "e3f24bba-ebdf-488d-9b1f-3047ec6576fb": {
+      "Id": "e3f24bba-ebdf-488d-9b1f-3047ec6576fb",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-01-03T20:00",
+      "scorers": {}
+    },
+    "72ae96b0-b93d-4424-8019-ce5e9324b16b": {
+      "Id": "72ae96b0-b93d-4424-8019-ce5e9324b16b",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-04-19T20:00",
+      "scorers": {}
+    },
+    "390b982b-313d-430e-94b4-2ea39c36940d": {
+      "Id": "390b982b-313d-430e-94b4-2ea39c36940d",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-03-01T20:00",
+      "scorers": {}
+    },
+    "fcb11a20-8bb0-466f-8fe5-76722dbce82b": {
+      "Id": "fcb11a20-8bb0-466f-8fe5-76722dbce82b",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-03-23T20:00",
+      "scorers": {}
+    },
+    "3229d929-6b91-4fe8-b106-13f57c03a95e": {
+      "Id": "3229d929-6b91-4fe8-b106-13f57c03a95e",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-01-11T21:00",
+      "scorers": {}
+    },
+    "fe6eda66-4963-4032-8c9d-c7a25c9f3d0e": {
+      "Id": "fe6eda66-4963-4032-8c9d-c7a25c9f3d0e",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-12-24T21:00",
+      "scorers": {}
+    },
+    "da15e7e3-e188-4fc3-a8d9-ca4e3d22c2ff": {
+      "Id": "da15e7e3-e188-4fc3-a8d9-ca4e3d22c2ff",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-04-09T20:00",
+      "scorers": {}
+    },
+    "382892ff-ffc4-459f-8084-8bb117dd3caf": {
+      "Id": "382892ff-ffc4-459f-8084-8bb117dd3caf",
+      "homeTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-02-20T20:00",
+      "scorers": {}
+    },
+    "8c30379e-1bea-43d9-b807-7c1a0f7c435a": {
+      "Id": "8c30379e-1bea-43d9-b807-7c1a0f7c435a",
+      "homeTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "awayTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-04-20T20:00",
+      "scorers": {}
+    },
+    "57768753-91a7-4291-b13a-d3bcc09ee22d": {
+      "Id": "57768753-91a7-4291-b13a-d3bcc09ee22d",
+      "homeTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-03-11T20:00",
+      "scorers": {}
+    },
+    "b9aa39ba-3915-409f-a994-2c9c07782096": {
+      "Id": "b9aa39ba-3915-409f-a994-2c9c07782096",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-01-01T20:00",
+      "scorers": {}
+    },
+    "687d40a7-330a-4adc-85cb-34c29dd89a81": {
+      "Id": "687d40a7-330a-4adc-85cb-34c29dd89a81",
+      "homeTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "awayTeamId": "215d3bae-e2ac-44a5-9978-fc7057c1d437",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-01-28T20:00",
+      "scorers": {}
+    },
+    "8bc57e98-b2c1-460a-92e9-9020dcaa44d6": {
+      "Id": "8bc57e98-b2c1-460a-92e9-9020dcaa44d6",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-05-01T18:00",
+      "scorers": {}
+    },
+    "aa35a20f-408e-474c-aec5-fc0a571ee36b": {
+      "Id": "aa35a20f-408e-474c-aec5-fc0a571ee36b",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-04-03T20:00",
+      "scorers": {}
+    },
+    "8ef54584-3a05-4196-bce1-e8e6b0b46d11": {
+      "Id": "8ef54584-3a05-4196-bce1-e8e6b0b46d11",
+      "homeTeamId": "216f1e33-014c-4ad0-9ad9-8e1396abf1ac",
+      "awayTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "dateTime": "2023-03-04T21:00",
+      "scorers": {}
+    },
+    "4650ac6c-b174-49f3-9217-feddae5aeab1": {
+      "Id": "4650ac6c-b174-49f3-9217-feddae5aeab1",
+      "homeTeamId": "03a1a07a-4a45-4906-bb71-466a1b4a6baa",
+      "awayTeamId": "bbb5ba89-31ca-4ab7-a494-8833444a01e2",
+      "stadiumId": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "refereeId": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "dateTime": "2023-01-10T20:00",
+      "scorers": {}
+    },
+    "642647db-d21e-449c-b11f-9dc03a1fdcc3": {
+      "Id": "642647db-d21e-449c-b11f-9dc03a1fdcc3",
+      "homeTeamId": "80e3c2f3-5e14-4fcc-a0b1-118f46461f88",
+      "awayTeamId": "337dbb2e-5cda-4215-9f52-131884bdcead",
+      "stadiumId": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "refereeId": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "dateTime": "2023-04-22T22:00",
+      "scorers": {}
+    },
+    "0ff89d04-80c4-4932-8072-c4ca766e42c0": {
+      "Id": "0ff89d04-80c4-4932-8072-c4ca766e42c0",
+      "homeTeamId": "ea8fde10-f26f-4dc7-9542-5629ef81734a",
+      "awayTeamId": "30943eec-2516-490a-8ac2-473bef9e8e49",
+      "stadiumId": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "refereeId": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "dateTime": "2023-02-05T20:00",
+      "scorers": {}
+    }
+  },
+  "stadiums": {
+    "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0": {
+      "Id": "7fa4a28e-ed85-4c9e-b9a2-edbbba28dcd0",
+      "name": "Petrosport Stadium",
+      "address": "New Cairo",
+      "schedule": [
+        "2023-12-23T14:00",
+        "2023-01-01T20:00",
+        "2023-01-10T20:00",
+        "2023-01-20T21:00",
+        "2023-01-30T20:00",
+        "2023-02-10T18:00",
+        "2023-03-03T14:00",
+        "2023-03-11T20:00",
+        "2023-03-14T20:00",
+        "2023-03-31T21:00",
+        "2023-04-12T20:00",
+        "2023-05-01T18:00"
+      ]
+    },
+    "5ffec57b-d64d-4bb5-8088-2f34ee492efe": {
+      "Id": "5ffec57b-d64d-4bb5-8088-2f34ee492efe",
+      "name": "Cairo Stadium",
+      "address": "Nasr City",
+      "schedule": [
+        "2023-12-21T20:00",
+        "2023-12-31T20:00",
+        "2023-01-12T20:00",
+        "2023-01-27T20:00",
+        "2023-01-28T20:00",
+        "2023-02-05T20:00",
+        "2023-02-20T20:00",
+        "2023-03-01T20:00",
+        "2023-03-05T20:00",
+        "2023-03-22T22:00",
+        "2023-04-03T20:00",
+        "2023-04-10T20:00",
+        "2023-04-20T20:00",
+        "2023-05-02T20:00"
+      ]
+    },
+    "6cc631f8-9610-4bae-81c0-2c061c3d467a": {
+      "Id": "6cc631f8-9610-4bae-81c0-2c061c3d467a",
+      "name": "El Salam Stadium",
+      "address": "El Salam City",
+      "schedule": [
+        "2023-12-24T21:00",
+        "2023-01-02T19:00",
+        "2023-01-11T20:00",
+        "2023-01-18T20:00",
+        "2023-01-20T20:00",
+        "2023-01-29T20:00",
+        "2023-02-03T20:00",
+        "2023-02-22T20:00",
+        "2023-03-04T21:00",
+        "2023-03-12T19:00",
+        "2023-03-21T20:00",
+        "2023-03-23T20:00",
+        "2023-04-02T20:00",
+        "2023-04-11T20:00",
+        "2023-04-22T22:00",
+        "2023-05-04T20:00"
+      ]
+    },
+    "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc": {
+      "Id": "3d627960-e6c3-40fa-8bc0-656a7ef1e4fc",
+      "name": "Borg El Arab Stadium",
+      "address": "Borg El Arab",
+      "schedule": [
+        "2023-12-22T18:00",
+        "2023-01-03T20:00",
+        "2023-01-11T21:00",
+        "2023-01-28T20:00",
+        "2023-02-04T20:00",
+        "2023-02-14T20:00",
+        "2023-02-15T20:00",
+        "2023-03-02T18:00",
+        "2023-03-13T20:00",
+        "2023-03-21T21:00",
+        "2023-04-09T20:00",
+        "2023-04-19T20:00",
+        "2023-04-21T20:00",
+        "2023-05-03T20:00"
+      ]
+    }
+  },
   "leagues": {},
-  "referees": {}
+  "referees": {
+    "f1afef7c-94cb-462e-bdac-72f49edaacb9": {
+      "Id": "f1afef7c-94cb-462e-bdac-72f49edaacb9",
+      "name": "Ghandour",
+      "schedule": [
+        "2023-12-22",
+        "2023-03-02"
+      ]
+    },
+    "ec8cfafa-e2ef-429a-8502-49a5f233eae1": {
+      "Id": "ec8cfafa-e2ef-429a-8502-49a5f233eae1",
+      "name": "Maarouf",
+      "schedule": [
+        "2023-12-23",
+        "2023-01-03",
+        "2023-01-10",
+        "2023-01-20",
+        "2023-01-28",
+        "2023-01-30",
+        "2023-02-14",
+        "2023-02-22",
+        "2023-03-03",
+        "2023-03-13",
+        "2023-03-14",
+        "2023-04-02",
+        "2023-04-09",
+        "2023-04-12",
+        "2023-04-21",
+        "2023-05-04"
+      ]
+    },
+    "a8914326-72b7-4189-bf41-97d6ba5b9ca8": {
+      "Id": "a8914326-72b7-4189-bf41-97d6ba5b9ca8",
+      "name": "nagy",
+      "schedule": [
+        "2023-12-21",
+        "2023-12-31",
+        "2023-01-12",
+        "2023-01-27",
+        "2023-02-04",
+        "2023-02-03",
+        "2023-02-15",
+        "2023-03-01",
+        "2023-03-05",
+        "2023-03-22",
+        "2023-04-03",
+        "2023-04-19",
+        "2023-04-22",
+        "2023-05-03"
+      ]
+    },
+    "4599d1a8-c785-4f5c-87a2-47c67688a99b": {
+      "Id": "4599d1a8-c785-4f5c-87a2-47c67688a99b",
+      "name": "El Bana",
+      "schedule": [
+        "2023-12-24",
+        "2023-01-02",
+        "2023-01-11",
+        "2023-01-18",
+        "2023-01-29",
+        "2023-02-10",
+        "2023-03-04",
+        "2023-03-12",
+        "2023-03-21",
+        "2023-03-23",
+        "2023-04-11",
+        "2023-05-01"
+      ]
+    },
+    "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0": {
+      "Id": "a0cd8d3f-68ff-409a-b2c4-23c8c15680a0",
+      "name": "Ibrahim",
+      "schedule": [
+        "2023-01-01",
+        "2023-01-11",
+        "2023-01-20",
+        "2023-01-28",
+        "2023-02-05",
+        "2023-02-20",
+        "2023-03-11",
+        "2023-03-21",
+        "2023-03-31",
+        "2023-04-10",
+        "2023-04-20",
+        "2023-05-02"
+      ]
+    }
+  }
 }

@@ -13,6 +13,7 @@ public class IteratorUtils {
 
         while (iterator.hasNext()) {
             size++;
+            iterator.next();
         }
 
         return size;

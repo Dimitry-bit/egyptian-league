@@ -16,4 +16,6 @@ module com.github.egyptian_league {
     opens com.github.egyptian_league.Models to javafx.fxml;
     exports com.github.egyptian_league.Json;
     opens com.github.egyptian_league.Json to javafx.fxml;
+    exports com.github.egyptian_league.Seeds;
+    opens com.github.egyptian_league.Seeds to javafx.fxml;
 }

@@ -1,36 +1,42 @@
 package com.github.egyptian_league.GUI;
 
+import java.util.Hashtable;
+import java.util.List;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
+public abstract class TableScene<T> implements Initializable {
 
-abstract class TableScene<T> {
-    DatePicker date;
-    HBox hBox = new HBox();
-    VBox vBox = new VBox();
+    @FXML
+    TableView<T> tableView;
+    @FXML
+    HBox inputHBox;
+    @FXML
+    VBox switchVBox;
+
+    @FXML
+    Button backButton;
+
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
-    ArrayList<Button> horizontalButtons = new ArrayList<>();
-    ArrayList<Button> verticalButtons = new ArrayList<>();
+    Hashtable<String, ComboBox<?>> comboBoxes = new Hashtable<>();
 
-    final TableView<T> table = new TableView<>();
-
-    abstract void addRow();
-
-    void addButtonToHBox(String name, EventHandler<ActionEvent> event) {
-        addButtonToHBox(name, 100, 50, event);
-    }
-
-    void addButtonToHBox(String name, int width, int height, EventHandler<ActionEvent> event) {
+    Button createButton(String name, int width, int height, HBox hBox, VBox vBox, EventHandler<ActionEvent> event) {
         Button button = new Button();
 
         button.setText(name);
@@ -38,78 +44,125 @@ abstract class TableScene<T> {
         button.setMaxHeight(height);
         button.setOnAction(event);
 
-        hBox.getChildren().add(button);
-        horizontalButtons.add(button);
+        if (hBox != null) {
+            hBox.getChildren().add(button);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(button);
+        }
+
+        return button;
     }
 
-    void addTextField(String textIn) {
+    TextField createTextField(String label, int width, int height, HBox hBox, VBox vBox) {
         TextField text = new TextField();
 
-        text.setPromptText(textIn);
-        text.setMaxWidth(100);
-        textFields.put(textIn, text);
-        hBox.getChildren().add(text);
+        text.setPromptText(label);
+        text.setMaxWidth(width);
+        text.setMaxHeight(height);
+
+        textFields.put(label, text);
+
+        if (hBox != null) {
+            hBox.getChildren().add(text);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(vBox);
+        }
+
+        return text;
     }
 
-    <C> void addColumn(String columnName, Class<C> c) {
-        TableColumn<T, C> column = new TableColumn<>(columnName);
+    DatePicker createDatePicker(String label, int width, int height, HBox hBox, VBox vBox) {
+        DatePicker datePicker = new DatePicker();
+
+        datePicker.setMaxWidth(width);
+        datePicker.setMaxHeight(height);
+
+        datePickers.put(label, datePicker);
+
+        if (hBox != null) {
+            hBox.getChildren().add(datePicker);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(datePicker);
+        }
+
+        return datePicker;
+    }
+
+    <K, V> TableColumn<K, V> createTableColumn(String columnName, Class<V> c, TableView<K> tableView) {
+        TableColumn<K, V> column = new TableColumn<>(columnName);
 
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
-        table.getColumns().add(column);
+        tableView.getColumns().add(column);
+
+        return column;
     }
 
-    Scene showScene() {
-        table.setLayoutX(100);
+    <C> void assignColumnOnEditCommit(TableColumn<T, C> column, Callback<TableColumn<T, C>, TableCell<T, C>> callback,
+            EventHandler<CellEditEvent<T, C>> event) {
 
-        // hBox.getChildren().add(date);
-        hBox.setMaxWidth(table.getPrefWidth());
-        hBox.setLayoutY(400);
-        hBox.setLayoutX(0);
-
-        ScrollPane scrollPane = new ScrollPane(table);
-        AnchorPane anchorP = new AnchorPane(scrollPane, table, vBox, hBox);
-
-        anchorP.setPrefWidth(450);
-        anchorP.setPrefHeight(500);
-
-        return new Scene(new Group(anchorP), 1000, 1000);
+        column.setCellFactory(callback);
+        column.setOnEditCommit(event);
     }
 
-    void addDate(String label) {
-        date = new DatePicker();
-        datePickers.put(label, date);
-        hBox.getChildren().add(date);
+    <V> ComboBox<V> createComboBox(String label, V[] values, int width, int height, HBox hBox, VBox vBox) {
+        ComboBox<V> comboBox = new ComboBox<>();
 
-        // Label l = new Label(label);
-        // EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-        // public void handle(ActionEvent e) {
-        // LocalDate i = date.getValue();
-        // l.setText("Date :" + i);
-        // }
-        // };
-    }
+        comboBox.setPromptText(label);
+        comboBox.setMaxWidth(width);
+        comboBox.setMaxHeight(height);
 
-    void clearInput() {
-        for (TextField textField : textFields.values()) {
-            textField.clear();
+        for (V v : values) {
+            comboBox.getItems().add(v);
         }
+
+        comboBoxes.put(label, comboBox);
+
+        if (hBox != null) {
+            hBox.getChildren().add(comboBox);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(comboBox);
+        }
+
+        return comboBox;
     }
 
-    void addDeleteButton(String buttonLabel) {
-        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                table.getItems().remove(table.getSelectionModel().getSelectedItem());
-            }
-        });
-    }
+    <V> ComboBox<V> createComboBox(String label, List<V> values, int width, int height, HBox hBox, VBox vBox) {
+        ComboBox<V> comboBox = new ComboBox<>();
 
-    void addInsertButton(String buttonLabel) {
-        addButtonToHBox(buttonLabel, new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e) {
-                addRow();
-            }
+        comboBox.setPromptText(label);
+        comboBox.setMaxWidth(width);
+        comboBox.setMaxHeight(height);
+
+        for (V v : values) {
+            comboBox.getItems().add(v);
+        }
+
+        comboBoxes.put(label, comboBox);
+
+        if (hBox != null) {
+            hBox.getChildren().add(comboBox);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(comboBox);
+        }
+
+        return comboBox;
+    }
+    
+
+    void addBackButton() {
+        backButton.setOnAction(event -> {
+            HomePageController.s_switchToHomePage(event);
         });
     }
 }

@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import com.github.egyptian_league.ApplicationRepository;
-import com.github.egyptian_league.Json.Annotations.JsonConstructor;
 
 public class Match {
 
-    public final UUID id;
+    public final UUID Id;
 
     private UUID homeTeamId;
     private UUID awayTeamId;
@@ -19,15 +18,22 @@ public class Match {
     private LocalDateTime dateTime;
     private HashMap<UUID, Integer> scorers;
 
-    @JsonConstructor(parameters = { "homeTeamId", "awayTeamId", "stadiumId", "refereeId" })
-    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
-        this.id = UUID.randomUUID();
-        this.dateTime = dateTime;
+    // Needed for Json construction
+    private Match() {
+        Id = null;
+    }
 
+    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
+        this.Id = UUID.randomUUID();
+        this.dateTime = dateTime;
+        scorers = new HashMap<>();
+
+        Team homeTeam = ApplicationRepository.getRepository().getTeamById(homeTeamId);
+        Team awayTeam = ApplicationRepository.getRepository().getTeamById(awayTeamId);
         Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
         Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        boolean isValidMatch = setHomeTeam(homeTeamId)
-                && setAwayTeam(awayTeamId)
+        boolean isValidMatch = setHomeTeam(homeTeam)
+                && setAwayTeam(awayTeam)
                 && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
                 && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
 
@@ -35,20 +41,42 @@ public class Match {
             throw new IllegalArgumentException("Match invalid arguments");
         }
 
-        setReferee(refereeId);
-        setStadiumId(stadiumId);
+        setReferee(referee);
+        setStadium(stadium);
+    }
+
+    public void delete() {
+        Stadium stadium = getStadium();
+        Referee referee = getReferee();
+
+        if (stadium != null) {
+            stadium.removeDateTimeFromSchedule(dateTime);
+        }
+
+        if (referee != null) {
+            referee.removeDateFromSchedule(dateTime.toLocalDate());
+        }
+    }
+
+    public boolean containsTeam(Team team) {
+        return homeTeamId.equals(team.Id) || awayTeamId.equals(team.Id);
     }
 
     public Team getHomeTeam() {
         return ApplicationRepository.getRepository().getTeamById(homeTeamId);
     }
 
-    public boolean setHomeTeam(UUID homeTeamId) {
-        if (!ApplicationRepository.getRepository().containsTeamUUID(homeTeamId)) {
+    public boolean setHomeTeam(Team team) {
+        if (team == null) {
+            this.homeTeamId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsTeam(team)) {
             return false;
         }
 
-        this.homeTeamId = homeTeamId;
+        this.homeTeamId = team.Id;
         return true;
     }
 
@@ -56,12 +84,17 @@ public class Match {
         return ApplicationRepository.getRepository().getTeamById(awayTeamId);
     }
 
-    public boolean setAwayTeam(UUID awayTeamId) {
-        if (!ApplicationRepository.getRepository().containsTeamUUID(awayTeamId)) {
+    public boolean setAwayTeam(Team team) {
+        if (team == null) {
+            this.homeTeamId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsTeam(team)) {
             return false;
         }
 
-        this.awayTeamId = awayTeamId;
+        this.awayTeamId = team.Id;
         return true;
     }
 
@@ -69,9 +102,13 @@ public class Match {
         return ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
     }
 
-    public boolean setStadiumId(UUID stadiumId) {
-        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
-        if ((stadium == null) || !stadium.checkStadiumAvailability(dateTime)) {
+    public boolean setStadium(Stadium stadium) {
+        if (stadium == null) {
+            this.stadiumId = null;
+            return true;
+        }
+
+        if (!stadium.checkStadiumAvailability(dateTime)) {
             return false;
         }
 
@@ -82,7 +119,7 @@ public class Match {
             }
         }
 
-        this.stadiumId = stadiumId;
+        this.stadiumId = stadium.Id;
         stadium.addDateTimeToSchedule(dateTime);
         return true;
     }
@@ -91,9 +128,13 @@ public class Match {
         return ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
     }
 
-    public boolean setReferee(UUID refereeId) {
-        Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        if ((referee == null) || !referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
+    public boolean setReferee(Referee referee) {
+        if (referee == null) {
+            this.refereeId = null;
+            return true;
+        }
+
+        if (!referee.CheckRefereeAvailability(dateTime.toLocalDate())) {
             return false;
         }
 
@@ -104,7 +145,7 @@ public class Match {
             }
         }
 
-        this.refereeId = refereeId;
+        this.refereeId = referee.Id;
         referee.addDateToSchedule(dateTime.toLocalDate());
         return true;
     }
@@ -153,11 +194,27 @@ public class Match {
     // return null;
     // }
 
-    public UUID calcWinnerTeam() {
+    public Team calcWinnerTeam() {
         int homeScore = 0;
         int awayScore = 0;
-        ArrayList<Player> homeTeamPlayers = getHomeTeam().getPlayers();
-        ArrayList<Player> awayTeamPlayers = getAwayTeam().getPlayers();
+
+        Team homeTeam = getHomeTeam();
+        Team awayTeam = getAwayTeam();
+
+        if ((homeTeam == null) && (awayTeam == null)) {
+            return null;
+        }
+
+        if (homeTeam == null) {
+            return awayTeam;
+        }
+
+        if (awayTeam == null) {
+            return homeTeam;
+        }
+
+        ArrayList<Player> homeTeamPlayers = homeTeam.getPlayers();
+        ArrayList<Player> awayTeamPlayers = awayTeam.getPlayers();
 
         for (Player p : homeTeamPlayers) {
             if (scorers.containsKey(p.Id)) {
@@ -175,6 +232,6 @@ public class Match {
             return null;
         }
 
-        return (homeScore > awayScore) ? homeTeamId : awayTeamId;
+        return (homeScore > awayScore) ? homeTeam : awayTeam; 
     }
 }

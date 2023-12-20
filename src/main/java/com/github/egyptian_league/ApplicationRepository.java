@@ -117,7 +117,7 @@ public class ApplicationRepository {
     }
 
     public Player getPlayerByUUID(UUID uuid) {
-        return players.get(uuid);
+        return uuid == null ? null : players.get(uuid);
     }
 
     public Player[] getPlayersByName(String name) {
@@ -134,8 +134,9 @@ public class ApplicationRepository {
         return players.values().iterator();
     }
 
-    public void removePlayer(UUID playerId) {
-        players.remove(playerId);
+    public void removePlayer(Player player) {
+        player.delete();
+        players.remove(player.Id);
     }
 
     // #endregion
@@ -156,7 +157,7 @@ public class ApplicationRepository {
     }
 
     public Team getTeamById(UUID uuid) {
-        return teams.get(uuid);
+        return uuid == null ? null : teams.get(uuid);
     }
 
     public Team[] getTeamsByName(String name) {
@@ -177,8 +178,9 @@ public class ApplicationRepository {
         return teams.put(team.Id, team);
     }
 
-    public void removeTeam(UUID teamId) {
-        teams.remove(teamId);
+    public void removeTeam(Team team) {
+        team.delete();
+        teams.remove(team.Id);
     }
 
     // #endregion
@@ -194,7 +196,7 @@ public class ApplicationRepository {
     }
 
     public Match getMatchByUUID(UUID uuid) {
-        return matches.get(uuid);
+        return uuid == null ? null : matches.get(uuid);
     }
 
     public Iterator<Match> getMatchesIterator() {
@@ -202,11 +204,12 @@ public class ApplicationRepository {
     }
 
     public Match putMatch(Match match) {
-        return matches.put(match.id, match);
+        return matches.put(match.Id, match);
     }
 
-    public void removeMatch(UUID matchId) {
-        matches.remove(matchId);
+    public void removeMatch(Match match) {
+        match.delete();
+        matches.remove(match.Id);
     }
 
     // #endregion
@@ -221,6 +224,11 @@ public class ApplicationRepository {
         return stadiums.containsValue(stadium);
     }
 
+    public boolean containsStadiumName(String name) {
+        String lName = name.toLowerCase();
+        return stadiums.values().stream().anyMatch(stadium -> lName.equals(stadium.getName().toLowerCase()));
+    }
+
     public Stadium[] getStadiumsByName(String name) {
         String lName = name.toLowerCase();
         return stadiums.values().stream()
@@ -228,7 +236,7 @@ public class ApplicationRepository {
     }
 
     public Stadium getStadiumByUUID(UUID uuid) {
-        return stadiums.get(uuid);
+        return uuid == null ? null : stadiums.get(uuid);
     }
 
     public Iterator<Stadium> getStadiumsIterator() {
@@ -236,11 +244,12 @@ public class ApplicationRepository {
     }
 
     public Stadium putStadium(Stadium stadium) {
-        return stadiums.put(stadium.id, stadium);
+        return stadiums.put(stadium.Id, stadium);
     }
 
-    public void removeStadium(UUID stadiumId) {
-        stadiums.remove(stadiumId);
+    public void removeStadium(Stadium stadium) {
+        stadium.delete();
+        stadiums.remove(stadium.Id);
     }
 
     // #endregion
@@ -256,7 +265,7 @@ public class ApplicationRepository {
     }
 
     public League getLeagueByUUID(UUID uuid) {
-        return leagues.get(uuid);
+        return uuid == null ? null : leagues.get(uuid);
     }
 
     public Iterator<League> getLeaguesIterator() {
@@ -289,7 +298,7 @@ public class ApplicationRepository {
     }
 
     public Referee getRefereeByUUID(UUID uuid) {
-        return referees.get(uuid);
+        return uuid == null ? null : referees.get(uuid);
     }
 
     public Referee[] getRefereesByName(String name) {
@@ -302,8 +311,9 @@ public class ApplicationRepository {
         return referees.put(referee.Id, referee);
     }
 
-    public void removeReferee(UUID refereeId) {
-        referees.remove(refereeId);
+    public void removeReferee(Referee referee) {
+        referee.delete();
+        referees.remove(referee.Id);
     }
 
     public Iterator<Referee> getRefereesIterator() {

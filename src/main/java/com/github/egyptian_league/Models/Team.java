@@ -22,6 +22,32 @@ public class Team {
         this.captainId = captainId;
     }
 
+    public void delete() {
+        Player captain = getCaptain();
+        ArrayList<Player> players = getPlayers();
+
+        if (captain != null) {
+            captain.setTeam(null);
+        }
+
+        for (Player p : players) {
+            p.setTeam(null);
+        }
+
+        Iterator<Match> matchesIterator = ApplicationRepository.getRepository().getMatchesIterator();
+        ArrayList<Match> markedForRemoval = new ArrayList<>();
+        while (matchesIterator.hasNext()) {
+            Match match = matchesIterator.next();
+            if (match.containsTeam(this)) {
+                markedForRemoval.add(match);
+            }
+        }
+
+        for (Match m : markedForRemoval) {
+            ApplicationRepository.getRepository().removeMatch(m);
+        }
+    }
+
     public static int calcNumberOfTeams() {
         return ApplicationRepository.getRepository().getNumberOfTeams();
     }
@@ -38,12 +64,17 @@ public class Team {
         return ApplicationRepository.getRepository().getPlayerByUUID(captainId);
     }
 
-    public boolean setCaptainId(UUID captainId) {
-        if (!ApplicationRepository.getRepository().containsPlayerUUID(captainId)) {
+    public boolean setCaptain(Player captain) {
+        if (captain == null) {
+            this.captainId = null;
+            return true;
+        }
+
+        if (!ApplicationRepository.getRepository().containsPlayer(captain)) {
             return false;
         }
 
-        this.captainId = captainId;
+        this.captainId = captain.Id;
         return true;
     }
 
@@ -80,12 +111,17 @@ public class Team {
 
         while (matchesIterator.hasNext()) {
             Match match = matchesIterator.next();
-            UUID winnerTeam = match.calcWinnerTeam();
+
+            if (!match.containsTeam(this)) {
+                continue;
+            }
+
+            Team winnerTeam = match.calcWinnerTeam();
 
             // NOTE: equals() returns false if obj is null, so null check must be done first
             if (winnerTeam == null) {
                 totalPoints += 1;
-            } else if (winnerTeam.equals(Id)) {
+            } else if (winnerTeam.Id.equals(Id)) {
                 totalPoints += 3;
             }
         }
