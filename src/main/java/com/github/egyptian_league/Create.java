@@ -58,7 +58,7 @@ public class Create {
         Player gomaa = new Player("Gomaa", ismaily.Id, LocalDate.of(1993, 8, 1), Position.MIDFIELD, 14);
         Player bayoumi = new Player("Bayoumi", ismaily.Id, LocalDate.of(2000, 4, 7), Position.MIDFIELD, 8);
         Player makhlof = new Player("Makhlof", ismaily.Id, LocalDate.of(1998, 1, 1), Position.MIDFIELD, 6);
-        Player shabrawy = new Player("Shabrawy",ismaily.Id, LocalDate.of(1994, 12, 15), Position.FORWARD, 7);
+        Player shabrawy = new Player("Shabrawy", ismaily.Id, LocalDate.of(1994, 12, 15), Position.FORWARD, 7);
         Player morsi = new Player("Morsi", ismaily.Id, LocalDate.of(1992, 1, 1), Position.FORWARD, 17);
         Player wagdy = new Player("Wagdy", ismaily.Id, LocalDate.of(2002, 3, 4), Position.FORWARD, 23);
         pyramids.setCaptainId(fawzi.Id);
@@ -70,10 +70,10 @@ public class Create {
         Player fil = new Player("Fil", future.Id, LocalDate.of(1992, 12, 13), Position.DEFENDER, 6);
         Player taha = new Player("Taha", future.Id, LocalDate.of(1991, 9, 4), Position.DEFENDER, 11);
         Player nasser = new Player("Nasser", future.Id, LocalDate.of(1997, 2, 8), Position.MIDFIELD, 10);
-        Player ghanam= new Player("Ghanam", future.Id, LocalDate.of(1997, 3, 12), Position.MIDFIELD, 27);
+        Player ghanam = new Player("Ghanam", future.Id, LocalDate.of(1997, 3, 12), Position.MIDFIELD, 27);
         Player zaazaa = new Player("Zaazaa", future.Id, LocalDate.of(2001, 6, 23), Position.MIDFIELD, 37);
-        Player barry= new Player("barry", future.Id, LocalDate.of(1991, 9, 27), Position.FORWARD, 3);
-        Player atef= new Player("Atef", future.Id, LocalDate.of(1998, 3, 21), Position.FORWARD, 30);
+        Player barry = new Player("barry", future.Id, LocalDate.of(1991, 9, 27), Position.FORWARD, 3);
+        Player atef = new Player("Atef", future.Id, LocalDate.of(1998, 3, 21), Position.FORWARD, 30);
         Player balaha = new Player("Balaha", future.Id, LocalDate.of(1996, 6, 21), Position.FORWARD, 8);
         pyramids.setCaptainId(genish.Id);
         ////
