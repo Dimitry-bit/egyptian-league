@@ -30,6 +30,11 @@ public class HomePageController {
         s_switchToMatchPage(event);
     }
 
+    @FXML
+    public void switchToStadiumPage(ActionEvent event) {
+        s_switchToStadiumPage(event);
+    }
+
     public static void s_switchToTeamsPage(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(HomePageController.class.getResource("/TeamsPage.fxml"));
@@ -66,16 +71,21 @@ public class HomePageController {
         }
     }
 
-    public void switchToLeaguesPage(ActionEvent event) {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // stage.setScene(LeagueTableScene.getLeage_table_scene().showScene());
-        // stage.show();
-    }
-
-
     public static void s_switchToMatchPage(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(HomePageController.class.getResource("/MatchesPage.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.err.printf("Error: %s\n", e.getMessage());
+        }
+    }
+
+    public static void s_switchToStadiumPage(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(HomePageController.class.getResource("/StadiumPage.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
