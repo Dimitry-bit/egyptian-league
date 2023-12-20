@@ -22,7 +22,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Players">
+            <Button mnemonicParsing="false" onAction="#switchToPlayerPage" prefHeight="30.0" prefWidth="100.0" text="Players">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#switchToMatchPage" prefHeight="30.0" prefWidth="100.0" text="Matches">
                <font>
                   <Font size="15.0" />
                </font>

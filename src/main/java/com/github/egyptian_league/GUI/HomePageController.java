@@ -28,4 +28,20 @@ public class HomePageController {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    public void switchToPlayerPage(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        PlayerTableScene scene = new PlayerTableScene();
+        stage.setScene(scene.showScene());
+        stage.show();
+    }
+
+    @FXML
+    public void switchToMatchPage(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        MatchTableScene scene = new MatchTableScene();
+        stage.setScene(scene.showScene());
+        stage.show();
+    }
 }
