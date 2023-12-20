@@ -221,6 +221,11 @@ public class ApplicationRepository {
         return stadiums.containsValue(stadium);
     }
 
+    public boolean containsStadiumName(String name) {
+        String lName = name.toLowerCase();
+        return stadiums.values().stream().anyMatch(stadium -> lName.equals(stadium.getName().toLowerCase()));
+    }
+
     public Stadium[] getStadiumsByName(String name) {
         String lName = name.toLowerCase();
         return stadiums.values().stream()
