@@ -5,16 +5,11 @@ import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-
+import javafx.scene.control.ComboBox;
 import java.time.LocalDate;
-public class PlayerTableScene extends TableScene<PlayerPojo> {
+public class PlayerTableScene extends TableScene<PlayerPojo>
     private static final PlayerTableScene player_Table_Scene = new PlayerTableScene();
-
-ComboBox comboBox=new ComboBox();
+    ComboBox comboBox = new ComboBox();
 
     private PlayerTableScene() {
         addTextField("Name");
@@ -22,7 +17,7 @@ ComboBox comboBox=new ComboBox();
         addDate("Birthday");
         addTextField("Age");
         comboBox.setPromptText("Positions");
-        comboBox.getItems().addAll("GOALKEEPER","MIDFIELD","DEFENDER","FORWARD");
+        comboBox.getItems().addAll("GOALKEEPER", "MIDFIELD", "DEFENDER", "FORWARD");
         hBox.getChildren().add(comboBox);
         addTextField("Shirt Number");
         addInsertButton("Insert");
@@ -43,6 +38,7 @@ ComboBox comboBox=new ComboBox();
     public static PlayerTableScene getplayer_table_scene() {
         return player_Table_Scene;
     }
+
     @Override
     public void addRow() {
         String name = textFields.get("Name").getText();
@@ -58,7 +54,8 @@ ComboBox comboBox=new ComboBox();
             if (!ApplicationRepository.getRepository().containsTeamName(teamName)) {
                 // TODO: Show error
                 return;
-            };
+            }
+            ;
             // TODO: Add to repository
             Team[] teams = ApplicationRepository.getRepository().getTeamsByName(teamName);
             Player player = new Player(name, teams[0].Id, birthday, position, shirtNumber);
@@ -73,4 +70,5 @@ ComboBox comboBox=new ComboBox();
     }
 
 
-}
+    }
+

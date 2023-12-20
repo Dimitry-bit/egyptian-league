@@ -1,5 +1,6 @@
 package com.github.egyptian_league.GUI;
 
+import com.github.egyptian_league.POJOs.PlayerPojo;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javafx.stage.FileChooser;
@@ -32,6 +34,7 @@ abstract class TableScene<T> {
     ArrayList<Button> horizontalButtons = new ArrayList<>();
 
     ArrayList<Button> verticalButtons = new ArrayList<>();
+    ArrayList<TableColumn> tableColumns = new ArrayList<>();
 
     final TableView<T> table = new TableView<>();
     StackPane stackPane = new StackPane(table);
@@ -66,7 +69,6 @@ abstract class TableScene<T> {
         button.setMaxWidth(width);
         button.setMaxHeight(height);
         button.setOnAction(event);
-
         vBox.getChildren().add(button);
         verticalButtons.add(button);
     }
@@ -85,9 +87,11 @@ abstract class TableScene<T> {
 
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
+        column.setEditable(true);
+        tableColumns.get(0).setCellFactory(TextFieldTableCell.<PlayerPojo>forTableColumn());
         table.getColumns().add(column);
+        tableColumns.add(column);
     }
-
     Scene showScene() {
         table.setLayoutX(100);
 
@@ -207,7 +211,6 @@ abstract class TableScene<T> {
         });
     }
     Scene switchSceneToMatch() {
-
      return   MatchTableScene.getInstance().showScene();
 
     }
@@ -217,8 +220,5 @@ abstract class TableScene<T> {
     Scene switchSceneToLeague() {
         return LeagueTableScene.getLeage_table_scene().showScene();
     }
-
-
-
 
 }
