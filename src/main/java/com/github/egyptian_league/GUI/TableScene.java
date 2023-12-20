@@ -1,6 +1,7 @@
 package com.github.egyptian_league.GUI;
 
 import java.util.Hashtable;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -132,5 +133,36 @@ public abstract class TableScene<T> implements Initializable {
         }
 
         return comboBox;
+    }
+
+    <V> ComboBox<V> createComboBox(String label, List<V> values, int width, int height, HBox hBox, VBox vBox) {
+        ComboBox<V> comboBox = new ComboBox<>();
+
+        comboBox.setPromptText(label);
+        comboBox.setMaxWidth(width);
+        comboBox.setMaxHeight(height);
+
+        for (V v : values) {
+            comboBox.getItems().add(v);
+        }
+
+        comboBoxes.put(label, comboBox);
+
+        if (hBox != null) {
+            hBox.getChildren().add(comboBox);
+        }
+
+        if (vBox != null) {
+            vBox.getChildren().add(comboBox);
+        }
+
+        return comboBox;
+    }
+    
+
+    void addBackButton() {
+        backButton.setOnAction(event -> {
+            HomePageController.s_switchToHomePage(event);
+        });
     }
 }

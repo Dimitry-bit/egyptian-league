@@ -3,77 +3,230 @@ package com.github.egyptian_league.GUI;
 import com.github.egyptian_league.ApplicationRepository;
 import com.github.egyptian_league.Models.*;
 import com.github.egyptian_league.POJOs.MatchPojo;
-import com.github.egyptian_league.POJOs.PlayerPojo;
+import com.github.egyptian_league.POJOs.ScorersPojo;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.UUID;
+import java.util.Map.Entry;
 
-public class MatchTableScene extends TableScene<Match> {
-    private static final MatchTableScene MATCH_TABLE_SCENE = new MatchTableScene();
-    private MatchTableScene() {
-    }
-    public static MatchTableScene getInstance() {
-        return MATCH_TABLE_SCENE;
-    }
-        @Override
+public class MatchTableScene extends TableScene<MatchPojo> {
+
+    @FXML
+    TableView<ScorersPojo> goalsTableView;
+    @FXML
+    HBox goalsInputHBox;
+
     public void addRow() {
-        String homeTeamText = textFields.get("homeTeam").getText();
-        String AwayTeamText = textFields.get("AwayTeam").getText();
-        String StadiumText = textFields.get("Stadium").getText();
-        String RefereeText = textFields.get("Referee").getText();
-        LocalDate DateText = datePickers.get("Date").getValue();
-        String ScoreText = textFields.get("Score").getText();
+        String homeTeamText = textFields.get("Home Team").getText();
+        String awayTeamText = textFields.get("Away Team").getText();
+        LocalDate date = datePickers.get("Date").getValue();
+
         try {
-            int scoreText = Integer.parseInt(ScoreText);
-            Team[] HOME = ApplicationRepository.getRepository().getTeamsByName(homeTeamText);
-            Team[] AWAY = ApplicationRepository.getRepository().getTeamsByName(AwayTeamText);
-//            Stadium stadium=ApplicationRepository
+            String stadiumText = (String) comboBoxes.get("Stadium").getValue();
+            String refereeText = (String) comboBoxes.get("Referee").getValue();
+            LocalTime time = LocalTime.parse(textFields.get("Time").getText());
 
+            if (stadiumText.isBlank() || refereeText.isBlank()
+                    || homeTeamText.isBlank() || awayTeamText.isBlank() || (date == null)) {
+                return;
+            }
 
-//            Match match = new Match(HOME[0], AWAY[0],);
+            if (!ApplicationRepository.getRepository().containsTeamName(homeTeamText)
+                    || !ApplicationRepository.getRepository().containsTeamName(awayTeamText)) {
+                GuiUtils.showAlert("Input Error", "Home team or away team does not exist.", AlertType.ERROR);
+                return;
+            }
 
+            if (!ApplicationRepository.getRepository().containsStadiumName(stadiumText)) {
+                GuiUtils.showAlert("Input Error", "Stadium does not exit", AlertType.ERROR);
+                return;
+            }
+
+            if (!ApplicationRepository.getRepository().containsRefereeName(refereeText)) {
+                GuiUtils.showAlert("Input Error", "Referee does not exit", AlertType.ERROR);
+                return;
+            }
+
+            LocalDateTime dateTime = LocalDateTime.of(date, time);
+            Team homeTeam = ApplicationRepository.getRepository().getTeamsByName(homeTeamText)[0];
+            Team awayTeam = ApplicationRepository.getRepository().getTeamsByName(awayTeamText)[0];
+            Stadium stadium = ApplicationRepository.getRepository().getStadiumsByName(stadiumText)[0];
+            Referee referee = ApplicationRepository.getRepository().getRefereesByName(refereeText)[0];
+
+            Match match = new Match(homeTeam.Id, awayTeam.Id, stadium.id, referee.Id, dateTime);
+
+            ApplicationRepository.getRepository().putMatch(match);
+
+            tableView.getItems().add(new MatchPojo(match));
+
+            clearInput();
+        } catch (DateTimeParseException e) {
+            GuiUtils.showAlert("Input Error", "Invalid time.", AlertType.ERROR);
         } catch (Exception e) {
-            // TODO: handle exception
-            System.err.printf("Invalid data, %s", e.getMessage());
-            e.printStackTrace();
+            GuiUtils.showAlert("Error", e.getMessage(), AlertType.ERROR);
         }
     }
-    private void seedMatchTableView() {
-        Iterator<Match> MatchIter = ApplicationRepository.getRepository().getMatchesIterator();
-        while (MatchIter.hasNext()) {
-//            tableView.getItems().add(new MatchPojo(MatchIter.next()));
+
+    public void onScorerInsertion() {
+        try {
+            String playerName = (String) comboBoxes.get("Player").getValue();
+            String goalsText = textFields.get("Goals").getText();
+            MatchPojo matchPojo = tableView.getSelectionModel().getSelectedItem();
+
+            if (playerName.isBlank() || goalsText.isBlank() || (matchPojo == null)) {
+                return;
+            }
+
+            int goals = Integer.parseInt(goalsText);
+            if (goals <= 0) {
+                GuiUtils.showAlert("Input Error", "Invalid goals.", AlertType.ERROR);
+                return;
+            }
+
+            Player player = ApplicationRepository.getRepository().getPlayersByName(playerName)[0];
+            matchPojo.getMatch().putGoals(player.Id, goals);
+
+            goalsTableView.getItems().add(new ScorersPojo(player, matchPojo.getMatch()));
+            goalsTableView.refresh();
+            tableView.refresh();
+
+            clearGoalInput();
+        } catch (NumberFormatException e) {
+            GuiUtils.showAlert("Input Error", "Goals is not a number", AlertType.ERROR);
+        } catch (Exception e) {
+            System.err.printf("Error: %s\n", e.getMessage());
+            GuiUtils.showAlert("Error", e.getMessage(), AlertType.ERROR);
+        }
+    }
+
+    public void onMatchSelection(MatchPojo selectedMatch) {
+        goalsTableView.getItems().clear();
+        if (selectedMatch == null) {
+            return;
+        }
+
+        ArrayList<Player> players = selectedMatch.getMatch().getHomeTeam().getPlayers();
+        players.addAll(selectedMatch.getMatch().getAwayTeam().getPlayers());
+        String[] playerNames = new String[players.size()];
+
+        for (int i = 0; i < players.size(); ++i) {
+            playerNames[i] = players.get(i).getName();
+        }
+
+        ComboBox<String> playersComboBox = (ComboBox<String>) comboBoxes.get("Player");
+        playersComboBox.getItems().addAll(playerNames);
+
+        for (Entry<UUID, Integer> e : selectedMatch.getMatch().getScorers().entrySet()) {
+            Player player = ApplicationRepository.getRepository().getPlayerByUUID(e.getKey());
+            goalsTableView.getItems().add(new ScorersPojo(player, selectedMatch.getMatch()));
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        createTextField("HomeTeam1",100, 30, inputHBox, null);
-        createTextField("AwayTeam2",100, 30, inputHBox, null);
-        createTextField("Stadium",100, 30, inputHBox, null);
-        createTextField("Referee",100, 30, inputHBox, null);
-        createDatePicker("Date",100, 30, inputHBox, null);
-        createTextField("Score",100, 30, inputHBox, null);
-        addInsertButton("Insert");
-        addDeleteButton("Delete");
-        addInsertButton("players");
-        createTableColumn("HomeTeam", Team.class,tableView);
-        createTableColumn("AwayTeam", Team.class,tableView);
-        createTableColumn("Stadium", Stadium.class,tableView);
-        createTableColumn("Referee", Referee.class,tableView);
-        createTableColumn("Date", LocalDateTime.class,tableView);
-        createTableColumn("Score", Integer.class,tableView);
+        createTextField("Home Team", 100, 30, inputHBox, null);
+        createTextField("Away Team", 100, 30, inputHBox, null);
 
+        Iterator<Stadium> stadiumsIterator = ApplicationRepository.getRepository().getStadiumsIterator();
+        ArrayList<String> stadiumNames = new ArrayList<>();
+        while (stadiumsIterator.hasNext()) {
+            stadiumNames.add(stadiumsIterator.next().getName());
+        }
+        createComboBox("Stadium", stadiumNames.toArray(String[]::new), 100, 30, inputHBox, null);
+
+        Iterator<Referee> refereeIterator = ApplicationRepository.getRepository().getRefereesIterator();
+        ArrayList<String> refereeNames = new ArrayList<>();
+        while (refereeIterator.hasNext()) {
+            refereeNames.add(refereeIterator.next().getName());
+        }
+        createComboBox("Referee", refereeNames.toArray(String[]::new), 100, 30, inputHBox, null);
+
+        createDatePicker("Date", 100, 30, inputHBox, null);
+        createTextField("Time", 100, 30, inputHBox, null);
+
+        createButton("Insert", 100, 30, inputHBox, null, event -> {
+            addRow();
+        });
+
+        createButton("Delete", 100, 30, inputHBox, null, event -> {
+            MatchPojo pojo = tableView.getSelectionModel().getSelectedItem();
+
+            if (pojo == null) {
+                return;
+            }
+
+            pojo.getMatch().deleteMatch();
+            tableView.getItems().remove(pojo);
+            tableView.getSelectionModel().clearSelection();
+            tableView.refresh();
+        });
+
+        createTableColumn("HomeTeam", String.class, tableView);
+        createTableColumn("AwayTeam", String.class, tableView);
+        createTableColumn("Stadium", String.class, tableView);
+        createTableColumn("Referee", String.class, tableView);
+        createTableColumn("Date", LocalDateTime.class, tableView);
+        createTableColumn("Winner", String.class, tableView);
+
+        createTableColumn("TeamName", String.class, goalsTableView);
+        createTableColumn("PlayerName", String.class, goalsTableView);
+        createTableColumn("PlayerScore", Integer.class, goalsTableView);
+
+        createComboBox("Player", new String[0], 100, 30, goalsInputHBox, null);
+        createTextField("Goals", 100, 30, goalsInputHBox, null);
+
+
+        createButton("Insert", 100, 30, goalsInputHBox, null, event -> {
+            onScorerInsertion();
+        });
+
+        createButton("Delete", 100, 30, goalsInputHBox, null, event -> {
+            ScorersPojo scorersPojo = goalsTableView.getSelectionModel().getSelectedItem();
+            scorersPojo.getMatch().getScorers().remove(scorersPojo.getPlayer().Id);
+            goalsTableView.getItems().remove(scorersPojo);
+            goalsTableView.refresh();
+        });
+
+        addBackButton();
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            onMatchSelection(newSelection);
+        });
+
+        seedMatchTableView();
     }
-    private void clearInput() {
-        textFields.get("HomeTeam1").clear();
-        textFields.get("AwayTeam2").clear();
-        textFields.get("Stadium").clear();
-        textFields.get("Referee").clear();
-        datePickers.get("Date").setValue(null);
-        textFields.get("Score").clear();
 
+    private void clearInput() {
+        textFields.get("Home Team").clear();
+        textFields.get("Away Team").clear();
+        comboBoxes.get("Stadium").getSelectionModel().clearSelection();
+        comboBoxes.get("Referee").getSelectionModel().clearSelection();
+        datePickers.get("Date").setValue(null);
+        textFields.get("Time").clear();
+    }
+
+    private void clearGoalInput() {
+        comboBoxes.get("Player").getSelectionModel().clearSelection();
+        textFields.get("Goals").clear();
+    }
+
+    private void seedMatchTableView() {
+        Iterator<Match> MatchIter = ApplicationRepository.getRepository().getMatchesIterator();
+        while (MatchIter.hasNext()) {
+            tableView.getItems().add(new MatchPojo(MatchIter.next()));
+        }
     }
 }

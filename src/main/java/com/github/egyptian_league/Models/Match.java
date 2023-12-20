@@ -43,6 +43,12 @@ public class Match {
         setStadiumId(stadiumId);
     }
 
+    public void deleteMatch() {
+        getStadium().removeDateTimeFromSchedule(dateTime);
+        getReferee().removeDateFromSchedule(dateTime.toLocalDate());
+        ApplicationRepository.getRepository().removeMatch(id);
+    }
+
     public Team getHomeTeam() {
         return ApplicationRepository.getRepository().getTeamById(homeTeamId);
     }

@@ -25,6 +25,11 @@ public class HomePageController {
         s_switchToPlayerPage(event);
     }
 
+    @FXML
+    public void switchToMatchPage(ActionEvent event) {
+        s_switchToMatchPage(event);
+    }
+
     public static void s_switchToTeamsPage(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(HomePageController.class.getResource("/TeamsPage.fxml"));
@@ -67,9 +72,16 @@ public class HomePageController {
         // stage.show();
     }
 
-    public void switchToMatchPage(ActionEvent event) {
-        // Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // stage.setScene(MatchTableScene.getInstance().switchSceneToMatch());
-        // stage.show();
+
+    public static void s_switchToMatchPage(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(HomePageController.class.getResource("/MatchesPage.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception e) {
+            System.err.printf("Error: %s\n", e.getMessage());
+        }
     }
 }
