@@ -1,5 +1,4 @@
 package com.github.egyptian_league.GUI;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 public class HelloApplication extends Application {

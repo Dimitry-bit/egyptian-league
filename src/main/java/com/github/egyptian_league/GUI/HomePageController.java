@@ -35,6 +35,12 @@ public class HomePageController {
         stage.setScene(PlayerTableScene.getplayer_table_scene().showScene());
         stage.show();
     }
+    @FXML
+    public void switchToLeaguesPage(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(LeagueTableScene.getLeage_table_scene().showScene());
+        stage.show();
+    }
 
     @FXML
     public void switchToMatchPage(ActionEvent event) {

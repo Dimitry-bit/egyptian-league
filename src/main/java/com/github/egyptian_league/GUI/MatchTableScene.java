@@ -22,6 +22,9 @@ public class MatchTableScene extends TableScene<Match> {
         addDeleteButton("Delete");
         addInsertButton("players");
         addswitchButtontoplayer("players");
+        addswitchButtontoHomePAge("home page");
+        addswitchButtontoTeams("teams ");
+        addswitchButtontoLeague("leagues");
         addColumn("HomeTeam", Team.class);
         addColumn("AwayTeam", Team.class);
         addColumn("Stadium", Stadium.class);
