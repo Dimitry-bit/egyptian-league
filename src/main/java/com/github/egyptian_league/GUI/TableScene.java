@@ -22,7 +22,6 @@ import java.util.Hashtable;
 import javafx.stage.FileChooser;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-//import static com.github.egyptian_league.GUI.HelloApplication.stage;
 
 abstract class TableScene<T> {
 
@@ -88,9 +87,7 @@ abstract class TableScene<T> {
         column.setMinWidth(100);
         column.setCellValueFactory(new PropertyValueFactory<>(columnName));
         column.setEditable(true);
-        tableColumns.get(0).setCellFactory(TextFieldTableCell.<PlayerPojo>forTableColumn());
         table.getColumns().add(column);
-        tableColumns.add(column);
     }
     Scene showScene() {
         table.setLayoutX(100);

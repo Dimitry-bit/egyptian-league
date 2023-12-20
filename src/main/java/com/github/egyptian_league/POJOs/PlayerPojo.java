@@ -25,7 +25,7 @@ public class PlayerPojo {
         rank = player.calcRank();
     }
 
-    public String getName() {
+    public String getName(String newValue) {
         return name;
     }
 
