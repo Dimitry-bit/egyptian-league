@@ -82,6 +82,10 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
         createTableColumn("ShirtNumber", Integer.class, tableView);
         createTableColumn("Rank", Integer.class, tableView);
 
+        backButton.setOnAction(event -> {
+            HomePageController.s_switchToHomePage(event);
+        });
+
         seedPlayersTableView();
     }
 

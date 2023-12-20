@@ -25,6 +25,9 @@ public abstract class TableScene<T> implements Initializable {
     @FXML
     VBox switchVBox;
 
+    @FXML
+    Button backButton;
+
     Hashtable<String, TextField> textFields = new Hashtable<>();
     Hashtable<String, DatePicker> datePickers = new Hashtable<>();
     Hashtable<String, ComboBox<?>> comboBoxes = new Hashtable<>();
