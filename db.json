@@ -1,14 +1,54 @@
 {
-  "players": {},
+  "players": {
+    "f063f2d8-4f7c-4771-b024-60bc4fd6fa54": {
+      "Id": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
+      "name": "Test Captain 2",
+      "teamId": "081424e9-ab77-4439-877c-3ee13fdbbadb",
+      "birthday": "2004-01-08",
+      "position": 0,
+      "shirtNumber": 1
+    },
+    "a8c35c67-e453-4c0b-8a74-89ceedba2ea5": {
+      "Id": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+      "name": "Test Captain",
+      "teamId": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
+      "birthday": "2004-01-08",
+      "position": 0,
+      "shirtNumber": 1
+    }
+  },
   "teams": {
+    "5ed1aa05-a960-4226-b82a-4eed6dd17add": {
+      "Id": "5ed1aa05-a960-4226-b82a-4eed6dd17add",
+      "name": "Test Team 4",
+      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+      "players": []
+    },
     "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5": {
+      "Id": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
       "name": "Test Team",
-      "teamID": "f4c25b67-e453-4c0b-8a74-89ceebfa2ea5",
-      "captain": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+      "captainId": "a8c35c67-e453-4c0b-8a74-89ceedba2ea5",
+      "players": [
+        "a8c35c67-e453-4c0b-8a74-89ceedba2ea5"
+      ]
+    },
+    "081424e9-ab77-4439-877c-3ee13fdbbadb": {
+      "Id": "081424e9-ab77-4439-877c-3ee13fdbbadb",
+      "name": "Test Team 2",
+      "captainId": "f063f2d8-4f7c-4771-b024-60bc4fd6fa54",
+      "players": [
+        "f063f2d8-4f7c-4771-b024-60bc4fd6fa54"
+      ]
+    },
+    "0c2e5ed6-86a0-4172-b508-77a5d696d83b": {
+      "Id": "0c2e5ed6-86a0-4172-b508-77a5d696d83b",
+      "name": "Test Team 3",
+      "captainId": "fa66b09e-1627-4ebb-8b20-63d42c02fd56",
       "players": []
     }
   },
   "matches": {},
   "stadiums": {},
-  "leagues": {}
+  "leagues": {},
+  "referees": {}
 }
