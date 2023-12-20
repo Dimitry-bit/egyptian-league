@@ -1,99 +1,62 @@
 package com.github.egyptian_league;
 
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import com.github.egyptian_league.Models.Player;
 import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
-import javafx.fxml.FXML;
-
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.UUID;
 
 public class TeamsController implements Initializable {
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
+    @FXML
+    private TableView<TeamPojo> TeamsTable;
     @FXML
     private TableColumn<TeamPojo, String> TeamName;
-
     @FXML
     private TableColumn<TeamPojo, String> TeamCaptain;
-
     @FXML
     private TableColumn<TeamPojo, Integer> TeamTotalScore;
 
     @FXML
-    private TableView<TeamPojo> TeamsTable;
-
-    @FXML
     private TableView<PlayerPojo> PlayersTable;
-
     @FXML
     private TableColumn<PlayerPojo, String> PlayerName;
-
     @FXML
     private TableColumn<PlayerPojo, LocalDate> PlayerBirthdate;
-
     @FXML
     private TableColumn<PlayerPojo, Position> PlayerPosition;
-
     @FXML
     private TableColumn<PlayerPojo, Integer> PlayerShirtNumber;
-
     @FXML
     private TableColumn<PlayerPojo, Integer> PlayerAge;
-
     @FXML
     private TableColumn<PlayerPojo, Integer> PlayerRank;
 
     @FXML
     private TextField textTeamName;
-
     @FXML
     private TextField textTeamCaptain;
-
-    public void hookupPlayersTable() {
-        TeamsTable.getSelectionModel().selectedItemProperty().addListener((obs,
-                oldSelection, newSelection) -> {
-            PlayersTable.getItems().clear();
-            if (newSelection == null) {
-                return;
-            }
-
-            List<Player> players = newSelection.getTeam().getPlayers();
-            for (Player p : players) {
-                PlayerPojo pojo = new PlayerPojo(p);
-                PlayersTable.getItems().add(pojo);
-            }
-        });
-    }
-
-    public void seedTable() {
-        Iterator<Team> teamsIterator = ApplicationRepository.getRepository().getTeamsIterator();
-        while (teamsIterator.hasNext()) {
-            TeamPojo pojo = new TeamPojo(teamsIterator.next());
-            TeamsTable.getItems().add(pojo);
-        }
-    }
 
     @FXML
     public void btnInsert(ActionEvent event) {
@@ -101,20 +64,17 @@ public class TeamsController implements Initializable {
             if (textTeamName.getText().isBlank() || textTeamCaptain.getText().isBlank()) {
                 return;
             }
+
             if (!ApplicationRepository.getRepository().containsPlayerName(textTeamCaptain.getText())) {
-                ShowError(event);
-                // TODO: Show error
+                showError(event);
                 return;
             }
 
             Player captain = ApplicationRepository.getRepository().getPlayersByName(textTeamCaptain.getText())[0];
-
             Team team = new Team(textTeamName.getText(), captain.Id);
             TeamPojo teamPojo = new TeamPojo(team);
 
-            // TODO: Add to repository
             ApplicationRepository.getRepository().putTeam(team);
-
             TeamsTable.getItems().add(teamPojo);
 
             clearInput();
@@ -125,16 +85,24 @@ public class TeamsController implements Initializable {
         }
     }
 
-    public void SwitchToHomePage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+    @FXML
+    public void switchToHomePage(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/HomePage.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeTeamsTableView();
+        initializePlayersTableView();
+
+        seedTeamsTableView();
+    }
+
+    private void initializeTeamsTableView() {
         TeamName.setCellValueFactory(new PropertyValueFactory<>("TeamName"));
         TeamCaptain.setCellValueFactory(new PropertyValueFactory<>("TeamCaptain"));
         TeamTotalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
@@ -148,13 +116,22 @@ public class TeamsController implements Initializable {
         TeamCaptain.setOnEditCommit(event -> {
             event.getRowValue().getTeam().getCaptainId().setName(event.getNewValue());
         });
-
-        initializePlayerTable();
-        hookupPlayersTable();
-        seedTable();
     }
 
-    private void initializePlayerTable() {
+    private void initializePlayersTableView() {
+        TeamsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            PlayersTable.getItems().clear();
+            if (newSelection == null) {
+                return;
+            }
+
+            List<Player> players = newSelection.getTeam().getPlayers();
+            for (Player p : players) {
+                PlayerPojo pojo = new PlayerPojo(p);
+                PlayersTable.getItems().add(pojo);
+            }
+        });
+
         PlayerName.setCellValueFactory(new PropertyValueFactory<>("name"));
         PlayerAge.setCellValueFactory(new PropertyValueFactory<>("age"));
         PlayerBirthdate.setCellValueFactory(new PropertyValueFactory<>("birthday"));
@@ -163,16 +140,23 @@ public class TeamsController implements Initializable {
         PlayerShirtNumber.setCellValueFactory(new PropertyValueFactory<>("shirtNumber"));
     }
 
+    private void showError(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Alert!");
+        alert.setContentText("Invalid Data");
+        alert.showAndWait();
+    }
+
     private void clearInput() {
         textTeamName.clear();
         textTeamCaptain.clear();
     }
 
-    @FXML
-    public void ShowError(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Alert!");
-        alert.setContentText("Invalid Data");
-        Optional<ButtonType> result = alert.showAndWait();
+    private void seedTeamsTableView() {
+        Iterator<Team> teamsIterator = ApplicationRepository.getRepository().getTeamsIterator();
+        while (teamsIterator.hasNext()) {
+            TeamPojo pojo = new TeamPojo(teamsIterator.next());
+            TeamsTable.getItems().add(pojo);
+        }
     }
 }
