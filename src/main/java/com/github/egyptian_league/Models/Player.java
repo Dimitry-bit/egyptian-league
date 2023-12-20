@@ -23,7 +23,7 @@ public class Player {
     private Position position;
     private int shirtNumber;
 
-    @JsonConstructor(parameters = { "name", "team", "birthday", "position", "shirtNumber" })
+    @JsonConstructor(parameters = { "name", "teamId", "birthday", "position", "shirtNumber" })
     public Player(String name, UUID teamId, LocalDate birthday, Position position, int shirtNumber) {
         this.Id = UUID.randomUUID();
         this.name = name;

@@ -16,8 +16,8 @@ public class TeamPojo {
         TeamCaptain = "";
         TotalScore = team.calcTotalPoints();
 
-        if (team.getCaptainId() != null) {
-            TeamCaptain = team.getCaptainId().getName();
+        if (team.getCaptain() != null) {
+            TeamCaptain = team.getCaptain().getName();
         }
     }
 

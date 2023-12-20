@@ -116,7 +116,7 @@ public class TeamsController implements Initializable {
 
         TeamCaptain.setCellFactory(TextFieldTableCell.forTableColumn());
         TeamCaptain.setOnEditCommit(event -> {
-            event.getRowValue().getTeam().getCaptainId().setName(event.getNewValue());
+            event.getRowValue().getTeam().getCaptain().setName(event.getNewValue());
         });
     }
 

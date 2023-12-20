@@ -34,7 +34,7 @@ public class Team {
         this.name = name;
     }
 
-    public Player getCaptainId() {
+    public Player getCaptain() {
         return ApplicationRepository.getRepository().getPlayerByUUID(captainId);
     }
 
