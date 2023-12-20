@@ -42,6 +42,10 @@ public class Player {
     }
 
     public Team getTeam() {
+        if (teamId == null) {
+            return null;
+        }
+
         return ApplicationRepository.getRepository().getTeamById(teamId);
     }
 
