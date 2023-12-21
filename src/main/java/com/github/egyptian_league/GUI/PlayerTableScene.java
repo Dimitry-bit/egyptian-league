@@ -11,13 +11,19 @@ import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
 public class PlayerTableScene extends TableScene<PlayerPojo> {
+
+    @FXML
+    TextField searchBar;
 
     public void addRow() {
         String name = textFields.get("Name").getText();
@@ -148,10 +154,18 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
                 });
 
         createTableColumn("Rank", Integer.class, tableView);
-        
+
         addBackButton();
 
         seedPlayersTableView();
+
+        FilteredList<PlayerPojo> flPerson = new FilteredList(tableView.getItems(), p -> true);
+
+        tableView.setItems(flPerson);
+
+        searchBar.textProperty().addListener((obs, oldValue, newValue) -> {
+            flPerson.setPredicate(p -> p.getName().toLowerCase().contains(newValue.toLowerCase().trim()));
+        });
     }
 
     private void seedPlayersTableView() {

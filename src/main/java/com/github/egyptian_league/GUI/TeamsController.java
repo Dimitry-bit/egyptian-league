@@ -15,6 +15,7 @@ import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 import com.github.egyptian_league.POJOs.TeamPojo;
 
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,6 +56,9 @@ public class TeamsController implements Initializable {
     private TextField textTeamName;
     @FXML
     private TextField textTeamCaptain;
+
+    @FXML
+    private TextField searchBar;
 
     @FXML
     public void btnInsert(ActionEvent event) {
@@ -112,6 +116,14 @@ public class TeamsController implements Initializable {
         initializePlayersTableView();
 
         seedTeamsTableView();
+
+        FilteredList<TeamPojo> flTeam = new FilteredList(TeamsTable.getItems(), p -> true);
+
+        TeamsTable.setItems(flTeam);
+
+        searchBar.textProperty().addListener((obs, oldValue, newValue) -> {
+            flTeam.setPredicate(p -> p.getTeamName().toLowerCase().contains(newValue.toLowerCase().trim()));
+        });
     }
 
     private void initializeTeamsTableView() {

@@ -20,5 +20,6 @@
             <Font size="15.0" />
          </font>
       </Button>
+      <TextField fx:id="searchBar" alignment="CENTER" promptText="Search Player" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>

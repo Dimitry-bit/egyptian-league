@@ -90,6 +90,7 @@ public class MatchTableScene extends TableScene<MatchPojo> {
 
     public void onScorerInsertion() {
         try {
+            goalsTableView.getItems().clear();
             String playerName = (String) comboBoxes.get("Player").getValue();
             String goalsText = textFields.get("Goals").getText();
             MatchPojo matchPojo = tableView.getSelectionModel().getSelectedItem();
@@ -107,9 +108,11 @@ public class MatchTableScene extends TableScene<MatchPojo> {
             Player player = ApplicationRepository.getRepository().getPlayersByName(playerName)[0];
             matchPojo.getMatch().putGoals(player.Id, goals);
 
-            goalsTableView.getItems().add(new ScorersPojo(player, matchPojo.getMatch()));
-            goalsTableView.refresh();
-            tableView.refresh();
+//            goalsTableView.getItems().add(new ScorersPojo(player, matchPojo.getMatch()));
+//            goalsTableView.refresh();
+//            tableView.refresh();
+
+            refreshScorers(matchPojo);
 
             clearGoalInput();
         } catch (NumberFormatException e) {
@@ -138,11 +141,15 @@ public class MatchTableScene extends TableScene<MatchPojo> {
         }
 
         playersComboBox.getItems().addAll(playerNames);
+        refreshScorers(selectedMatch);
+    }
 
+    private void refreshScorers(MatchPojo selectedMatch) {
         for (Entry<UUID, Integer> e : selectedMatch.getMatch().getScorers().entrySet()) {
             Player player = ApplicationRepository.getRepository().getPlayerByUUID(e.getKey());
             goalsTableView.getItems().add(new ScorersPojo(player, selectedMatch.getMatch()));
         }
+        tableView.refresh();
     }
 
     @Override
