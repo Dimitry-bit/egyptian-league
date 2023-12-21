@@ -11,6 +11,7 @@ import com.github.egyptian_league.Models.Position;
 import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
@@ -161,10 +162,15 @@ public class PlayerTableScene extends TableScene<PlayerPojo> {
 
         FilteredList<PlayerPojo> flPerson = new FilteredList(tableView.getItems(), p -> true);
 
-        tableView.setItems(flPerson);
-
         searchBar.textProperty().addListener((obs, oldValue, newValue) -> {
-            flPerson.setPredicate(p -> p.getName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            if (!newValue.isEmpty()) {
+                tableView.setItems(flPerson);
+                flPerson.setPredicate(p -> p.getName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            }
+            else {
+                flPerson.predicateProperty().set(p -> true);
+                tableView.setItems((ObservableList<PlayerPojo>) flPerson.getSource());
+            }
         });
     }
 
