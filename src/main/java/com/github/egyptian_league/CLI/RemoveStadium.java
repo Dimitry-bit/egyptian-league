@@ -23,12 +23,12 @@ public class RemoveStadium extends MenuItem {
 
         Scanner in = new Scanner(System.in);
 
-        int size = 0;
+
         while (iterator.hasNext()) {
             Stadium stadium = iterator.next();
             Stadiums.add(stadium);
-            size++;
         }
+        int size = Stadiums.size();
 
         boolean isValid = true;
         int choice;
@@ -49,7 +49,7 @@ public class RemoveStadium extends MenuItem {
             else {
                 System.out.println("There are no stadiums found....");
             }
-            System.out.println("x]Back");
+            System.out.println("x] Back");
 
             String eofTerminal = "\033[9999H";
             System.out.print(eofTerminal);
@@ -79,7 +79,7 @@ public class RemoveStadium extends MenuItem {
 
 
             clearCli();
-            System.out.printf("Stadium %s removed Successfully. Press Enter key to continue...\n",Stadiums.get(choice - 1).getName());
+            System.out.printf("%s removed Successfully. Press Enter key to continue...\n",Stadiums.get(choice - 1).getName());
 
             ApplicationRepository.getRepository().removeStadium(Stadiums.get(choice - 1));
 

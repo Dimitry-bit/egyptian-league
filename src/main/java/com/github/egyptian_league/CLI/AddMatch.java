@@ -21,28 +21,6 @@ public class AddMatch extends MenuItem{
         super(name, Back);
     }
 
-
-    /*
-    public Match(UUID homeTeamId, UUID awayTeamId, UUID stadiumId, UUID refereeId, LocalDateTime dateTime) {
-        this.id = UUID.randomUUID();
-        this.dateTime = dateTime;
-
-        Stadium stadium = ApplicationRepository.getRepository().getStadiumByUUID(stadiumId);
-        Referee referee = ApplicationRepository.getRepository().getRefereeByUUID(refereeId);
-        boolean isValidMatch = setHomeTeam(homeTeamId)
-                && setHomeTeam(awayTeamId)
-                && (stadium != null) && stadium.checkStadiumAvailability(dateTime)
-                && (referee != null) && referee.CheckRefereeAvailability(dateTime.toLocalDate());
-
-        if (!isValidMatch) {
-            throw new IllegalArgumentException("Match invalid arguments");
-        }
-
-        setReferee(refereeId);
-        setStadiumId(stadiumId);
-    }
-    */
-
     Scanner in = new Scanner(System.in);
     @Override
     public boolean update() {

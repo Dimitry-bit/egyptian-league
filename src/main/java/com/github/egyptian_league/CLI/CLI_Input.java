@@ -1,5 +1,7 @@
 package com.github.egyptian_league.CLI;
 
+import com.github.egyptian_league.Models.Match;
+
 import java.util.Scanner;
 
 
@@ -42,14 +44,14 @@ public class CLI_Input{
 
         //Update team with submenus
 
-        ChosenTeam chosenTeam = new ChosenTeam("Chosen Team", updateTeam);
+        MenuItem chosenTeam = new ChosenTeam("Chosen Team", updateTeam);
         updateTeam.addSubMenu(chosenTeam);
 
         //Chosen team with submenus
 
         chosenTeam.addSubMenu(new UpdateTeamName("Edit Team's Name",chosenTeam));
 
-        ChoosePlayer choosePlayer = new ChoosePlayer("Player Info", chosenTeam);
+        MenuItem choosePlayer = new ChoosePlayer("Player Info", chosenTeam);
         chosenTeam.addSubMenu(choosePlayer);
 
         //Choose player with submenus
@@ -67,16 +69,31 @@ public class CLI_Input{
 
         // com.github.egyptian_league.Match Menu with Sub menus
 
-        MenuItem addMatch = new AddMatch("Add Match", matchMenu);
-
-        matchMenu.addSubMenu(addMatch);
-        matchMenu.addSubMenu(new UpdateMatch("Update Match",matchMenu));
+        matchMenu.addSubMenu(new AddMatch("Add Match", matchMenu));
+        MenuItem updateMatch = new UpdateMatch("Update Match",matchMenu);
+        matchMenu.addSubMenu(updateMatch);
         matchMenu.addSubMenu(new RemoveMatch("Remove Match",matchMenu));
+
+
+        //Chosen match with submenus
+
+        MenuItem chosenMatch = new ChosenMatch("Chosen Match",updateMatch);
+
+        chosenMatch.addSubMenu(new UpdateMatchTeam("Change Home Team",chosenMatch, true));
+        chosenMatch.addSubMenu(new UpdateMatchTeam("Change Away Team",chosenMatch, false));
+
+        MenuItem updateMatchStadium = new UpdateMatchStadium("Change Stadium",chosenMatch);
+        chosenMatch.addSubMenu(updateMatchStadium);
+
+        chosenMatch.addSubMenu(new UpdateMatchReferee("Change Referee",chosenMatch));
+        chosenMatch.addSubMenu(new UpdateMatchDate("Edit Date",chosenMatch));
+
 
         //Stadiums with submenus
 
         stadiumMenu.addSubMenu(new AddStadium ("Add Stadium", stadiumMenu));
         stadiumMenu.addSubMenu(new RemoveStadium("Remove Stadium",stadiumMenu));
+
 
         //Referees with submenus
         refereeMenu.addSubMenu(new AddReferee ("Add Referee", refereeMenu));

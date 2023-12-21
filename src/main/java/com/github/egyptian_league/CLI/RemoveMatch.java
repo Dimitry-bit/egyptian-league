@@ -47,7 +47,7 @@ public class RemoveMatch extends MenuItem{
 
             if (size != 0) {
                 for (int i = 0; i < size; i++) {
-                    System.out.printf("%d] %s v.s. %s in %s stadium on %s\n",
+                    System.out.printf("%d] %s v.s. %s in %s on %s\n",
                             i + 1,
                             Matches.get(i).getHomeTeam().getName(),
                             Matches.get(i).getAwayTeam().getName(),

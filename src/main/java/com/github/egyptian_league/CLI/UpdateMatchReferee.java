@@ -1,39 +1,35 @@
 package com.github.egyptian_league.CLI;
 
 import com.github.egyptian_league.ApplicationRepository;
-import com.github.egyptian_league.Models.Match;
 import com.github.egyptian_league.Models.Referee;
 import com.github.egyptian_league.Models.Stadium;
-import com.github.egyptian_league.Models.Team;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
 import static com.github.egyptian_league.CLI.CLI_Input.clearCli;
+import static com.github.egyptian_league.CLI.UpdateMatch.CurrentMatch;
 
-public class UpdateMatch extends MenuItem{
-
-    public static Match CurrentMatch;
-
-    public UpdateMatch(String name, MenuItem Back) {
+public class UpdateMatchReferee extends MenuItem {
+    public UpdateMatchReferee(String name, MenuItem Back) {
         super(name, Back);
     }
+
     @Override
     public boolean update() {
-        Iterator<Match> iterator = ApplicationRepository.getRepository().getMatchesIterator();
+        Iterator<Referee> iterator = ApplicationRepository.getRepository().getRefereesIterator();
 
-        ArrayList<Match> Matches = new ArrayList<>();
+        ArrayList<Referee> Referees = new ArrayList<>();
 
         Scanner in = new Scanner(System.in);
 
 
         while (iterator.hasNext()) {
-            Match match = iterator.next();
-            Matches.add(match);
+            Referee referee = iterator.next();
+            Referees.add(referee);
         }
-        int size = Matches.size();
-
+        int size = Referees.size();
 
         boolean isValid = true;
         int choice;
@@ -44,27 +40,19 @@ public class UpdateMatch extends MenuItem{
                 System.out.println("\nInvalid choice. Please enter a number between 1 and " + size);
             }
 
-            System.out.println("\nChoose the match you desire to update:");
+            System.out.println("\nChoose the new referee for the match:");
 
-            if (size != 0) {
-                for (int i = 0; i < size; i++) {
-                    System.out.printf("%d] %s v.s. %s in %s on %s\n",
-                            i + 1,
-                            Matches.get(i).getHomeTeam().getName(),
-                            Matches.get(i).getAwayTeam().getName(),
-                            Matches.get(i).getStadium().getName(),
-                            Matches.get(i).getDateTime());
-                }
+            for (int i = 0; i < size; i++) {
+                System.out.printf("%d] %s\n", i + 1, Referees.get(i).getName());
             }
-            else {
-                System.out.println("There are no matches found....");
-            }
+
             System.out.println("x] Back");
 
             String eofTerminal = "\033[9999H";
             System.out.print(eofTerminal);
 
             System.out.println("Enter your choice: ");
+
 
             String input = in.nextLine();
 
@@ -82,23 +70,25 @@ public class UpdateMatch extends MenuItem{
             }
         }while(!isValid);
 
+        if (choice != 'x') {
+            clearCli();
+            System.out.printf("Refere Updated to %s Successfully. Press Enter key to continue...\n",Referees.get(choice - 1).getName());
 
-        if (choice == 'x'){
+            CurrentMatch.setReferee(Referees.get(choice - 1));
+
+            try
+            {
+                System.in.read();
+                in.nextLine();
+            }
+            catch(Exception e)
+            {}
             back();
             return true;
         }
 
-        CurrentMatch = Matches.get(choice-1);
-
-        currentMenuItem = currentMenuItem.getSubMenus().get(0);
-
-        currentMenuItem.setName("Chosen Match is " + CurrentMatch.getHomeTeam().getName() + " v.s " + CurrentMatch.getAwayTeam().getName());
-
-
+        back();
         return true;
     }
-
-
-
 
 }
