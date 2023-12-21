@@ -50,9 +50,13 @@ public class CLI_Input{
         //Chosen team with submenus
 
         chosenTeam.addSubMenu(new UpdateTeamName("Edit Team's Name",chosenTeam));
+        chosenTeam.addSubMenu(new UpdateTeamCaptain("Change Team's Captain",chosenTeam));
+
 
         MenuItem choosePlayer = new ChoosePlayer("Player Info", chosenTeam);
         chosenTeam.addSubMenu(choosePlayer);
+
+
 
         //Choose player with submenus
 
@@ -65,7 +69,7 @@ public class CLI_Input{
         updatePlayerInfo.addSubMenu(new UpdatePlayerBirthdate("Edit Player's Birthdate", updatePlayerInfo));
         updatePlayerInfo.addSubMenu(new UpdatePlayerPosition("Edit Player's Position",updatePlayerInfo));
         updatePlayerInfo.addSubMenu(new UpdatePlayerTshirt("Edit Player's Tshirt No.", updatePlayerInfo));
-        updatePlayerInfo.addSubMenu(new DeletePlayer("Remove This Player \"WARNING: This is irreversible\"", updatePlayerInfo));
+        updatePlayerInfo.addSubMenu(new DeletePlayer("Remove This Player \"WARNING: This is irreversible\"", choosePlayer));
 
         // com.github.egyptian_league.Match Menu with Sub menus
 

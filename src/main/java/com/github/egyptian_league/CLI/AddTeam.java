@@ -120,7 +120,7 @@ public class AddTeam extends MenuItem{
                     System.out.println("\nInvalid choice. Please enter a number between 1 and " + Position.values().length);
                 }
 
-
+                Position position;
                 for (int j = 0; j < Position.values().length; j++) {
                     // Perform operations with each enum constant
                     System.out.printf("%d] %s\n", j+1, Position.values()[j]);
