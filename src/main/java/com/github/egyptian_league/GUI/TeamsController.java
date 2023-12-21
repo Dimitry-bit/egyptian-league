@@ -15,6 +15,7 @@ import com.github.egyptian_league.Models.Team;
 import com.github.egyptian_league.POJOs.PlayerPojo;
 import com.github.egyptian_league.POJOs.TeamPojo;
 
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -119,10 +120,14 @@ public class TeamsController implements Initializable {
 
         FilteredList<TeamPojo> flTeam = new FilteredList(TeamsTable.getItems(), p -> true);
 
-        TeamsTable.setItems(flTeam);
-
         searchBar.textProperty().addListener((obs, oldValue, newValue) -> {
-            flTeam.setPredicate(p -> p.getTeamName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            if (!newValue.isEmpty()) {
+                TeamsTable.setItems(flTeam);
+                flTeam.setPredicate(t -> t.getTeamName().toLowerCase().contains(newValue.toLowerCase().trim()));
+            } else {
+                flTeam.predicateProperty().set(p -> true);
+                TeamsTable.setItems((ObservableList<TeamPojo>) flTeam.getSource());
+            }
         });
     }
 
