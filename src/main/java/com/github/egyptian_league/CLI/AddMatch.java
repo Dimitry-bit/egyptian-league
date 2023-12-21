@@ -292,9 +292,25 @@ public class AddMatch extends MenuItem{
 
         if (c == 'y' || c == 'Y')
         {
-            ApplicationRepository.getRepository().putMatch(new Match(
-                    Teams.get(HomeChoice-1).Id, Teams.get(AwayChoice-1).Id,
-                    Stadiums.get(StadiumChoice-1).Id, Referees.get(RefereeChoice-1).Id,parsedDate));
+            try {
+                ApplicationRepository.getRepository().putMatch(new Match(
+                        Teams.get(HomeChoice-1).Id, Teams.get(AwayChoice-1).Id,
+                        Stadiums.get(StadiumChoice-1).Id, Referees.get(RefereeChoice-1).Id,parsedDate));
+
+            }
+            catch (IllegalArgumentException e)
+            {
+                System.out.println(e.getMessage());
+                System.out.println("Press Enter key to input a valid match...");
+                try
+                {
+                    System.in.read();
+                    in.nextLine();
+                }
+                catch(Exception ee)
+                {}
+                return true;
+            }
 
             back();
         }

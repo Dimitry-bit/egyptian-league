@@ -78,6 +78,8 @@ public class CLI_Input{
         //Chosen match with submenus
 
         MenuItem chosenMatch = new ChosenMatch("Chosen Match",updateMatch);
+        updateMatch.addSubMenu(chosenMatch);
+
 
         chosenMatch.addSubMenu(new UpdateMatchTeam("Change Home Team",chosenMatch, true));
         chosenMatch.addSubMenu(new UpdateMatchTeam("Change Away Team",chosenMatch, false));

@@ -86,7 +86,6 @@ public class UpdateMatchTeam extends MenuItem {
 
             if (isHome) {
                 System.out.printf("Home Team Updated to %s Successfully. Press Enter key to continue...\n",Teams.get(choice - 1).getName());
-
                 CurrentMatch.setHomeTeam(Teams.get(choice-1));
             }
             else {
@@ -103,6 +102,7 @@ public class UpdateMatchTeam extends MenuItem {
             catch(Exception e)
             {}
             back();
+            currentMenuItem.setName("Chosen Match is " + CurrentMatch.getHomeTeam().getName() + " v.s " + CurrentMatch.getAwayTeam().getName());
             return true;
         }
 
